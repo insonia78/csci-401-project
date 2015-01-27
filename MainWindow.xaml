@@ -9,7 +9,7 @@
         <Label Content="Label" HorizontalAlignment="Left" Height="23" Margin="566,601,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="642,605,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.308,-0.186"/>
         <Label Content="Label" HorizontalAlignment="Left" Height="23" Margin="218,605,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="299,605,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="thomas" HorizontalAlignment="Left" Height="23" Margin="299,605,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="430,648,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.051,-0.498"/>
         <ListBox HorizontalAlignment="Left" Height="328" Margin="33,195,0,0" VerticalAlignment="Top" Width="127">
             <Label Content="Label"/>
