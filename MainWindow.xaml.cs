@@ -20,25 +20,25 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        Board a = new Board();
+        public MainWindow()  
+       {
+        List<List<Board>> lsts = new List<List<Board>>();
+
+        for (int i = 0; i < 5; i++)
         {
-            InitializeComponent();
-            SolidColorBrush defaultBrush = new SolidColorBrush(Colors.White);
-            SolidColorBrush alternateBrush = new SolidColorBrush(Colors.Gray);
-            for (int i = 0; i < 225; i++)
+            lsts.Add(new List<Board>());
+
+            for (int j = 0; j < 5; j++)
             {
-                Grid cell = new Grid();
-                if (i % 15 == 0)
-                {
-                    cell.Background = defaultBrush;
-                    ChessBoard.Children.Add(cell);
-                }
-                else
-                {
-                    cell.Background = alternateBrush;
-                    ChessBoard.Children.Add(cell);
-                }
+                lsts[i].Add(new Board());
             }
+        }
+
+        InitializeComponent();
+
+        lst.ItemsSource = lsts;
+    
         }
     }
 }
