@@ -21,34 +21,32 @@ namespace ConsoleApplication1
             arrow = 40;
             image = System.Drawing.Image.FromFile("Image\\hero.png");
         }
-        public int Life
+        
+        public override int Life
         {
             get { return life; }
             set { life = value; }
         }
-        public int Arrow
+        public override int Arrow
         {
-            get { return arrow;}
-            set { arrow = value;}
+            get { return arrow; }
+            set { arrow = value; }
         }
-        public int State
+        public override int State
         {
             get { return state; }
             set { state = value; }
         }
-        public int Job
+        public override int Job
         {
             get { return job; }
             set { arrow = value; }
         }
-        public Image Image
+        public override Image Image
         {
             get { return image; }
             set { image = value; }
         }
-        public Image getImage()
-        {
-            return image;
-        }
+        
     }
 }

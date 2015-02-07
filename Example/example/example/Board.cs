@@ -8,14 +8,20 @@ using System.Drawing;
 
 namespace ConsoleApplication1
 {
-    public interface Board 
+    public class Board 
     {
-        int Arrow { get; set; }
-        int State { get; set; }
-        int Job { get; set; }
-        Image Image { get; set; }
-        Image getImage();
-        int Life { get; set; }
+        //public Board(){}
+
+        public virtual int Arrow { get; set; }
+        public virtual int State { get; set; }
+        public virtual int Job { get; set; }
+        public virtual Image Image { get; set; }
+        public virtual int Row { get; set; }
+        public virtual int Col { get; set; }        
+        public virtual int Life { get; set; }
+        public virtual Image getImage(int a) { return null; }
+        public virtual bool setTerrain(Board a, int b) { return false; }
+        
          
     }
 }

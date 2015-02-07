@@ -12,14 +12,21 @@ namespace ConsoleApplication1
 {
     public partial class Section : UserControl
     {
-        
+
         private int row,
                     col;
+        private Board board;
+        private int table;
         public Section()
         {
             InitializeComponent();
         }
-        
+        public Section(Board b, int t)
+        {
+            board = b;
+            table = t;
+            InitializeComponent();
+        }
         public int Row
         {
             get { return row; }
@@ -28,11 +35,14 @@ namespace ConsoleApplication1
         public int Col
         {
             get { return col; }
-            set { col = value;}
+            set { col = value; }
         }
         private void Section_Load(object sender, EventArgs e)
         {
-
+            if (table == 2)
+            {
+                board.getImage(table);
+            }
         }
     }
 }

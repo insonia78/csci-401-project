@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApplication1
 {
-    partial class Form1 
+    partial class House
     {
         /// <summary>
         /// Required designer variable.
@@ -28,36 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Panel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // Panel
-            // 
-            this.Panel.Location = new System.Drawing.Point(2, 1);
-            this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(792, 572);
-            this.Panel.TabIndex = 0;
-            this.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Paint);
-            this.Panel.Enter += new System.EventHandler(this.Section_Enter);
-            // 
-            // Form1
+            // House
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(794, 519);
-            this.Controls.Add(this.Panel);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "House";
+            this.Text = "Form3";
+            this.Load += new System.EventHandler(this.House_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel Panel;
-
-
     }
 }

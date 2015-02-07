@@ -36,45 +36,41 @@ namespace ConsoleApplication1
             image = System.Drawing.Image.FromFile("Image\\enemy.jpg");
 
         }
-        public int Row
+        public override int Row
         {
             get { return row; }
             set{row = value;}
         }
-        public int Col
+        public override int Col
         {
             get { return col; }
             set { col = value; }
         }
-        public int Life
+        public override int Life
         {
             get { return life; }
             set { life = value; }
         }
-        public int Arrow
+        public override int Arrow
         {
             get { return arrow;}
             set { arrow = value;}
         }
-        public int State
+        public override int State
         {
             get { return state; }
             set { state = value; }
         }
-        public int Job
+        public override int Job
         {
             get { return job; }
             set { arrow = value; }
         }
-        public Image Image
+        public override Image Image
         {
             get { return image; }
             set { image = value; }
         }
-        public Image getImage()
-        {
-            return image;
-        }
-
+        
     }
 }
