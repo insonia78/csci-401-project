@@ -115,12 +115,15 @@ namespace Reversi
 		/// </summary>
 		private void InitializeComponent()
 		{
-			// 
-			// SquareControl
-			// 
-			this.Name = "SquareControl";
-			this.Size = new System.Drawing.Size(32, 32);
-			this.Paint += new System.Windows.Forms.PaintEventHandler(this.SquareControl_Paint);
+            this.SuspendLayout();
+            // 
+            // SquareControl
+            // 
+            this.Name = "SquareControl";
+            this.Size = new System.Drawing.Size(32, 32);
+            this.Load += new System.EventHandler(this.SquareControl_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.SquareControl_Paint);
+            this.ResumeLayout(false);
 
 		}
 		#endregion
@@ -278,5 +281,10 @@ namespace Reversi
 				}
 			}
 		}
+
+        private void SquareControl_Load(object sender, EventArgs e)
+        {
+
+        }
 	}
 }
