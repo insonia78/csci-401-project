@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace GameBoard
 {
@@ -22,7 +23,11 @@ namespace GameBoard
         private int numPlayers;
         private int numEnemies;
         private readonly Tile[,] boardspaces;
-
+         DispatcherTimer timer = new DispatcherTimer();
+         private int rowtimer;
+         private int coltimer;
+         private int deltaRow;
+         private int deltaCol;
         //accessors and mutators
         public int numberRows
         {
@@ -305,15 +310,24 @@ namespace GameBoard
             {
                 for(int c = 0; c < numCols; c++)
                 {
+                    //timer.Tick -= timer_Tick;
                     if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType() == typeof(GameBoard.Enemy) && boardspaces[r, c].tileCharacter.hasMoved == false)
                     {
+                        rowtimer = r;
+                        coltimer = c;
                         boardspaces[r, c].tileCharacter.hasMoved = true;
+                        
                         enemyMoveAI(r, c);
                         //For some reason, enemeies are all moving in the same direction (or at least when close to each other)
                         //may be because the random number generator is being called too quickly back to back?
                     }
                 }
             }
+        }
+        void timer_Tick(object sender, EventArgs e)
+        {
+            moveCharacter(rowtimer, coltimer, rowtimer + deltaRow, coltimer + deltaCol);
+            
         }
 
         /*
@@ -325,10 +339,14 @@ namespace GameBoard
          */
         public void enemyMoveAI(int row, int col)
         {
+            
             Random rng = new Random();
-            int deltaRow = 1 - rng.Next(0, 3); //Can generate 0, 1, or 2. If 0 generated, 1 - 0 = 1, move down 1. If 1, 1 - 1 = 0, no vertical change. If 2, 1 - 2 = -1, move up 1.
-            int deltaCol = 1 - rng.Next(0, 3); //Similar to the deltaRow rng usage, but controls horizontal movement. If deltaRow & deltaCol both != 0, diagonal movement.
-            moveCharacter(row, col, row + deltaRow, col + deltaCol); 
+            deltaRow = 1 - rng.Next(0, 3); //Can generate 0, 1, or 2. If 0 generated, 1 - 0 = 1, move down 1. If 1, 1 - 1 = 0, no vertical change. If 2, 1 - 2 = -1, move up 1.
+            deltaCol = 1 - rng.Next(0, 3); //Similar to the deltaRow rng usage, but controls horizontal movement. If deltaRow & deltaCol both != 0, diagonal movement.
+            //moveCharacter(rowtimer, coltimer, rowtimer + deltaRow, coltimer + deltaCol);
+           // timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
         }
 
         /*

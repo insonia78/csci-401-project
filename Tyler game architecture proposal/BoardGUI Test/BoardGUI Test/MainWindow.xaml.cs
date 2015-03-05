@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace GameBoard
 {
@@ -20,6 +21,7 @@ namespace GameBoard
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         private Board board = new Board("testmap.txt");
         private Grid[,] cells;
         SolidColorBrush grass = new SolidColorBrush(Colors.Green);
@@ -46,6 +48,7 @@ namespace GameBoard
             board.boardSpace(1, 2).tileCharacter = new Mage(3);
             board.boardSpace(11, 9).tileCharacter = new Enemy();
             board.boardSpace(13, 8).tileCharacter = new Enemy();
+           
             render();
         }
 
@@ -67,6 +70,7 @@ namespace GameBoard
                 {
                     Grid cell = new Grid();
                     cells[r, c] = cell;
+                    
 
                     switch (board.boardSpace(r, c).tileTerrain)
                     {
