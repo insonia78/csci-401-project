@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Board\MoveButton.cs" />
     <Compile Include="Board\setUpBoard.cs" />
     <Compile Include="Board\moveCharacter.cs" />
     <Compile Include="Character.cs" />
@@ -60,7 +61,6 @@
     <Compile Include="tile\enemyTurn.cs" />
     <Compile Include="tile\clearMoveOptions.cs" />
     <Compile Include="Board\moveOptions.cs" />
-    <Compile Include="tile\moveCharacter.cs" />
     <Compile Include="tile\containsCharacter.cs" />
     <Compile Include="tile\Tile.cs" />
     <Compile Include="Enemy.cs" />

@@ -75,6 +75,7 @@ namespace GameBoard
 
         }
 
+        
         /*
          * After any changes to the stat of the board/the contained tiles & characters, or information on the display needs to be updated, this method is called.
          * Clears the UnifRomGrid that displays the board, and then remakes it, placing any characters & buttons as it goes along.

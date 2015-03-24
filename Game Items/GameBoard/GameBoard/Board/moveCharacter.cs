@@ -19,26 +19,43 @@ namespace GameBoard
 {
     partial class MainWindow
     {
+         bool validate = true;
          int row;
          int col;
-        private void moveCharacter(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                row = (sender as Tile).Row;
-                col = (sender as Tile).Col;
-            }
-            catch
-            {
+         int secondRow,
+             secondCol;
+         int firstRow, firstCol;
+         private void moveCharacter(object sender, RoutedEventArgs e)
+         {
+             try
+             {
+                 row = (sender as Tile).Row;
+                 col = (sender as Tile).Col;
+             }
+             catch
+             {
 
-            }
-                    speed = terrain[row, col].Speed;
-                    moveOptions(); 
-                    if(terrain[row,col].GetType() == typeof(GameBoard.Character)) 
-                    {
-                                                
-                    }
-                }
+             }
+             if (validate == true)
+             {
+
+                 Move.IsEnabled = false;
+                 firstRow = row;
+                 firstCol = col;
+                 validate = false;
+
+             }
+             else
+             {
+                 secondRow = row;
+                 secondCol = col;
+                 validate = true;
+                 Move.IsEnabled = true;
+             }
+         }
+                   
+                
+
         }
     }
 

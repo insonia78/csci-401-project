@@ -90,6 +90,11 @@ namespace GameBoard
                 canMoveTo = value;
             }
         }
+        public  virtual ImageBrush Image
+        {
+              get{return null;}
+              set { ;}
+        }
         
         
        

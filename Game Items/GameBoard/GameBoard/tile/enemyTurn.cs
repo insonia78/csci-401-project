@@ -37,7 +37,7 @@ namespace GameBoard
             Random rng = new Random();
             int deltaRow = 1 - rng.Next(0, 3);
             int deltaCol = 1 - rng.Next(0, 3);
-            moveCharacter(row, col, row + deltaRow, col + deltaCol);
+           // moveCharacter(row, col, row + deltaRow, col + deltaCol);
             //teleportation occurs in the enemyTurn() method if it moves to a spot the method hasnt looped to yet
             //could create an array, store enemies in that array in the loops, then move each
         }

@@ -32,10 +32,18 @@ namespace GameBoard
                     switch (table[r, c])
                     {
                          case 1:
-                           
-                            terrain[r, c] = new Mage(r, c);
-                            terrain[r, c].Background = grass;
-                            terrain[r, c].Content = "hero.jpg";
+                             Image img = new Image();
+                            BitmapImage myBitmapImage = new BitmapImage();
+
+// BitmapImage.UriSource must be in a BeginInit/EndInit block
+                            ImageBrush myBrush = new ImageBrush();
+                            myBrush.ImageSource =
+                            new BitmapImage(new Uri("hero.png", UriKind.Relative));
+                            
+                            
+                            terrain[r, c] = new Mage();
+                            terrain[r, c].Background = terrain[r, c].Image;
+                            
                             
                             terrain[r, c].BorderThickness = new Thickness(1);
                            
@@ -50,7 +58,9 @@ namespace GameBoard
                                    break;
 
                     }
-                   
+                    terrain[r, c].Row = r;
+                    terrain[r, c].Col = c;
+                    terrain[r, c].Click += new RoutedEventHandler(moveCharacter);
                     Board.Children.Add(terrain[r, c]);
                     
                     

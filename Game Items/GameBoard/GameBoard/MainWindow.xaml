@@ -22,6 +22,7 @@
                 </ComboBox>
             </Expander>
         </Grid>
+        <Button x:Name="Move" Content="Move" Canvas.Left="50" Canvas.Top="118" Width="145" Height="41" Click="Move_Click"/>
     </Canvas>
 </Window>
 
