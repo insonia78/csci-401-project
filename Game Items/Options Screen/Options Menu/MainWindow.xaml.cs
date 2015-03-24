@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication1
+namespace OptionsMenu
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,10 +23,7 @@ namespace WpfApplication1
         public MainWindow()
         {
             InitializeComponent();
-            //System.Media.SoundPlayer bgm = new System.Media.SoundPlayer(@"C:\Users\Cedric\Google Drive\School Work\Programming\Software Engineering\ConquerRIC\Options\Options Screen\Options Menu\Oranges Kiss.wav");
-            System.Media.SoundPlayer bgm = new System.Media.SoundPlayer(@"C:\Users\Cedric\Google Drive\School Work\Programming\Software Engineering\ConquerRIC\Options\Options Screen\Options Menu\Ice Wizard Boss - Industrial Castle Boss.wav");
-
-            bgm.PlayLooping();
+            Bgm.Play();
         }
 
         private void Title_Bar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -46,16 +43,34 @@ namespace WpfApplication1
 
         private void Sound_Off_Button_Click(object sender, RoutedEventArgs e)
         {
-            //System.Media.SoundPlayer bgm = new System.Media.SoundPlayer(@"C:\Users\Cedric\Google Drive\School Work\Programming\Software Engineering\ConquerRIC\Options\Options Screen\Options Menu\Oranges Kiss.wav");
-            System.Media.SoundPlayer bgm = new System.Media.SoundPlayer(@"C:\Users\Cedric\Google Drive\School Work\Programming\Software Engineering\ConquerRIC\Options\Options Screen\Options Menu\Ice Wizard Boss - Industrial Castle Boss.wav");
-            bgm.Stop();
+            if(!Bgm.IsMuted)
+            {
+                Bgm.IsMuted = true;
+                Style red = Sound_On_Button.Style;
+                Style black = Sound_Off_Button.Style;
+
+                if(Sound_On_Button.Style == red)
+                {
+                    Sound_Off_Button.Style = red;
+                    Sound_On_Button.Style = black;
+                }
+            }
         }
 
         private void Sound_On_Button_Click(object sender, RoutedEventArgs e)
         {
-            //System.Media.SoundPlayer bgm = new System.Media.SoundPlayer(@"C:\Users\Cedric\Google Drive\School Work\Programming\Software Engineering\ConquerRIC\Options\Options Screen\Options Menu\Oranges Kiss.wav");
-            System.Media.SoundPlayer bgm = new System.Media.SoundPlayer(@"C:\Users\Cedric\Google Drive\School Work\Programming\Software Engineering\ConquerRIC\Options\Options Screen\Options Menu\Ice Wizard Boss - Industrial Castle Boss.wav");
-            bgm.PlayLooping();
+            if(Bgm.IsMuted)
+            {
+                Bgm.IsMuted = false;
+                Style red = Sound_Off_Button.Style;
+                Style black = Sound_On_Button.Style;
+
+                if (Sound_Off_Button.Style == red)
+                {
+                    Sound_On_Button.Style = red;
+                    Sound_Off_Button.Style = black;
+                }
+            }
         }
 
         private void Return_Main_Menu_Click(object sender, RoutedEventArgs e)
