@@ -6,18 +6,13 @@ using System.Threading.Tasks;
 
 namespace GameBoard
 {
-    class Player : Character
+    class Mage : Enemy
     {
-        public Player()
+        public Mage (int row,int col):base(10,row,col)
         {
-            hp = 10;
-
-        }
-
-        public Player (int movespeed)
-        {
+           
             hp = 10; 
-            speed = movespeed;
+          //  speed = movespeed;
         }
     }
 }

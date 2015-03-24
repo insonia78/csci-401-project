@@ -15,7 +15,7 @@ namespace GameBoard
             hp = 1;
         }
 
-        public Enemy (int movespeed)
+        public Enemy (int movespeed, int row, int col):base(movespeed,row,col)
         {
             hp = 1; 
             speed = movespeed;

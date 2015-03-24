@@ -89,7 +89,10 @@ namespace WpfApplication2
                             play[i, j].BackgroundImageLayout = ImageLayout.Center;
 
                             play[i, j].Click += new EventHandler(Tyle_Click);
+                            play[i, j].Timer += new EventHandler(timer_Tick);
+
                             host[i, j].Child = play[i, j];
+                   
                            
                             board.Children.Add(host[i, j]);
                              

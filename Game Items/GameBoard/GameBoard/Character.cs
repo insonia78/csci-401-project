@@ -6,12 +6,22 @@ using System.Threading.Tasks;
 
 namespace GameBoard
 {
-    class Character
+    public  class Character : Tile
     {
         private int health;
         private int moveSpeed;
         private Boolean canMoveOnTurn = false;
+        Character aCharacter;
+        public Character(int movespeed,int row,int col):base(movespeed,row,col)
+        {
+            health = 10;
+        }
+        public override Character tileCharacter
+        {
+            get { return aCharacter;}
+            set { aCharacter = value;}
 
+         }
         public int hp
         {
             get
