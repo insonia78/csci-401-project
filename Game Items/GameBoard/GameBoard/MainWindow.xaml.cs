@@ -24,8 +24,9 @@ namespace GameBoard
 
       
         
-        static int boardRow = 15;
-        static int boardCol = 15;        
+         const int boardRow = 15;
+         const int boardCol = 15;
+         Tile[,] terrain = new Tile[15, 15];
         SolidColorBrush grass = new SolidColorBrush(Colors.Green);
         SolidColorBrush mountain = new SolidColorBrush(Colors.Gray);
         SolidColorBrush water = new SolidColorBrush(Colors.Blue);
@@ -45,8 +46,8 @@ namespace GameBoard
            {00, 00, 04, 00, 00, 00, 00, 00, 03, 00, 00, 00,0,0,0},
            {00, 00, 00, 04, 00, 00, 01, 00, 00, 00, 00, 00,0,0,0},
            {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 00, 01, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 1, 00, 00, 00, 00, 00, 00, 00,0,0,0},
+           {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
+           {00, 00, 00, 00, 0, 00, 00, 00, 00, 00, 00, 00,0,0,0},
            {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
            {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
            {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
@@ -61,8 +62,22 @@ namespace GameBoard
             
            
             InitializeComponent();
+            InitializeBoard();
             setUpBoard();
             
+        }
+        public void InitializeBoard()
+        {
+            for (int r = 0; r < boardRow; r++)
+            {
+                for (int c = 0; c < boardCol; c++)
+                {
+                    terrain[r, c] = new Tile();
+                    terrain[r, c].Background = grass;
+                    terrain[r, c].BorderThickness = new Thickness();
+                }
+            }
+
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -72,6 +87,11 @@ namespace GameBoard
         private void Board_Loaded(object sender, RoutedEventArgs e)
         {
 
+
+        }
+
+        private void status_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
 

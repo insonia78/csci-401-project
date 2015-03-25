@@ -42,7 +42,7 @@ namespace GameBoard
         public override ImageBrush Image
         {
             get { return image; }
-            set { ;}
+            set { image = value;}
         }
 
     }

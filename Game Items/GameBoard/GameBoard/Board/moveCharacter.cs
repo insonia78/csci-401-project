@@ -39,7 +39,7 @@ namespace GameBoard
              if (validate == true)
              {
 
-                 Move.IsEnabled = false;
+                 
                  firstRow = row;
                  firstCol = col;
                  validate = false;

@@ -18,7 +18,7 @@ namespace GameBoard
 {
     public partial class MainWindow
     {
-        Tile[,] terrain = new Tile[boardRow, boardCol];
+       
         
         
         public void setUpBoard()
@@ -32,14 +32,7 @@ namespace GameBoard
                     switch (table[r, c])
                     {
                          case 1:
-                             Image img = new Image();
-                            BitmapImage myBitmapImage = new BitmapImage();
-
-// BitmapImage.UriSource must be in a BeginInit/EndInit block
-                            ImageBrush myBrush = new ImageBrush();
-                            myBrush.ImageSource =
-                            new BitmapImage(new Uri("hero.png", UriKind.Relative));
-                            
+                                                         
                             
                             terrain[r, c] = new Mage();
                             terrain[r, c].Background = terrain[r, c].Image;
@@ -50,11 +43,7 @@ namespace GameBoard
 
                             break;
                         default:
-                                   terrain[r, c] = new Tile();
-                                   terrain[r, c].Background = grass;
-                                   terrain[r, c].BorderThickness = new Thickness();
-                                   
-                                   
+                                                              
                                    break;
 
                     }
