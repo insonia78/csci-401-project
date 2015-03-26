@@ -94,6 +94,15 @@ namespace OptionsMenu
         }
 
         /*
+         * This Event starts the BGM over when it finishes playing, causing it to loop.
+         */
+        private void Bgm_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            Bgm.Position = TimeSpan.Zero;
+            Bgm.Play();
+        }
+
+        /*
          * This event returns the player to the main Title Screen.
          */
         private void Return_Main_Menu_Click(object sender, RoutedEventArgs e)
@@ -101,5 +110,7 @@ namespace OptionsMenu
             // shuts down the instance of the wpf application.
             Application.Current.Shutdown();
         }
+
+        
     }
 }

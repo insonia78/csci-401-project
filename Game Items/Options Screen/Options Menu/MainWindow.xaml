@@ -143,6 +143,6 @@
             <Button x:Name="Sound_Off_Button" Content="OFF" Height="55" Style="{DynamicResource ButtonStyle5}" Width="100" Cursor="Hand" ToolTip="Turns sound off" Click="Sound_Off_Button_Click"/>
         </WrapPanel>
         <Button x:Name="Save_Button" Content="SAVE GAME" HorizontalAlignment="Left" Height="55" Margin="170,205,0,0" Style="{DynamicResource ButtonStyle3}" VerticalAlignment="Top" Width="199" Cursor="Hand" BorderBrush="#FF707070" ToolTip="Saves progress made in the game"/>
-        <MediaElement x:Name="Bgm" HorizontalAlignment="Left" Height="100" Margin="26,214,0,0" VerticalAlignment="Top" Width="100" Source="Ice Wizard Boss - Industrial Castle Boss.wav" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="Bgm" HorizontalAlignment="Left" Height="100" Margin="26,214,0,0" VerticalAlignment="Top" Width="100" Source="Jumper.wav" LoadedBehavior="Manual" MediaEnded="Bgm_MediaEnded"/>
     </Grid>
 </Window>
