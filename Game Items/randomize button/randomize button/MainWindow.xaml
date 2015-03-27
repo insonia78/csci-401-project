@@ -3,7 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="400" Width="705">
     <Grid>
-        <Button Content="GenRan" HorizontalAlignment="Left" Margin="120,293,0,0" VerticalAlignment="Top" Width="75" Click="GenRan_Click"/>
+        <Button Content="GenRan" Name="Randomize" HorizontalAlignment="Left" Margin="69,163,0,0" VerticalAlignment="Top" Width="75" Click="GenRan_Click"/>
+        <Button Content="" Name="Hero1" HorizontalAlignment="Left" Margin="69,26,0,0" VerticalAlignment="Top" Width="77" Height="96" Click="Hero1_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="gender neutral.jpg"/>
+            </Button.Background>
+        </Button>
+        <Button Content="" Name="Hero2" HorizontalAlignment="Left" Margin="168,26,0,0" VerticalAlignment="Top" Width="77" Height="96">
+            <Button.Background>
+                <ImageBrush ImageSource="Properties/Resources/gender neutral.jpg"/>
+            </Button.Background>
+        </Button>
+        <Button Content="" Name="Hero3" HorizontalAlignment="Left" Margin="267,26,0,0" VerticalAlignment="Top" Width="77" Height="96">
+            <Button.Background>
+                <ImageBrush ImageSource="Properties/Resources/gender neutral.jpg"/>
+            </Button.Background>
+        </Button>
+        <Button Content="" Name="Hero4" HorizontalAlignment="Left" Margin="370,26,0,0" VerticalAlignment="Top" Width="77" Height="96">
+            <Button.Background>
+                <ImageBrush ImageSource="Properties/Resources/gender neutral.jpg"/>
+            </Button.Background>
+        </Button>
+        <Button Content="" Name="Hero5" HorizontalAlignment="Left" Margin="478,26,0,0" VerticalAlignment="Top" Width="77" Height="96">
+            <Button.Background>
+                <ImageBrush ImageSource="Properties/Resources/gender neutral.jpg"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Confirm" Name="Confirm" HorizontalAlignment="Left" Margin="530,163,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Male" HorizontalAlignment="Left" Margin="135,272,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
+        <Button Content="Female" HorizontalAlignment="Left" Margin="232,272,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
+        <TextBox x:Name="Gender_Choices" HorizontalAlignment="Left" Height="22" Margin="45,272,0,0" TextWrapping="Wrap" Text="Gender" VerticalAlignment="Top" Width="53" Visibility="Hidden"/>
+        <TextBox x:Name="Hero_Name" HorizontalAlignment="Left" Height="21" Margin="45,226,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="53" Visibility="Hidden"/>
 
     </Grid>
 </Window>
