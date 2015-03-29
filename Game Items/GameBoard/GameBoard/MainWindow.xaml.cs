@@ -12,193 +12,370 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace GameBoard
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// Mostly deals with the visual/interface side of the game board.
     /// </summary>
     public partial class MainWindow : Window
     {
-
-      
-        
-         const int boardRow = 15;
-         const int boardCol = 15;
-         Tile[,] terrain = new Tile[15, 15];
-        SolidColorBrush grass = new SolidColorBrush(Colors.Green);
-        SolidColorBrush mountain = new SolidColorBrush(Colors.Gray);
-        SolidColorBrush water = new SolidColorBrush(Colors.Blue);
-        SolidColorBrush swamp = new SolidColorBrush(Colors.Brown);
-        SolidColorBrush black = new SolidColorBrush(Colors.Black);
-        SolidColorBrush red = new SolidColorBrush(Colors.Red);
+        private Grid[,] cells; //2D array of containers to add to the Board uniformGrid to hold the tiles
         SolidColorBrush moveOption = new SolidColorBrush(Colors.Yellow);
 
-        int[,] table = 
-             {
-           {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 00, 02, 02, 00, 00, 00, 03, 00,0,0,0},
-           {00, 00, 00, 04, 00, 02, 02, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 05, 00, 00, 00, 00, 03, 00, 00,0,0,0},
-           {00, 00, 04, 00, 00, 00, 00, 00, 03, 00, 00, 00,0,0,0},
-           {00, 00, 00, 04, 00, 00, 01, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 0, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-           {00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00,0,0,0},
-       };
-             
+        //stores a reference to the location of a Hero when it's selected (need the hero's location even when clicking on buttons for different spaces).
+        private int selectedHeroRow;
+        private int selectedHeroCol;
+
         /*
-         * Initializes the GUI components, creates the cells 2d array, and renders the board/board spaces/characters, etc. for the first time.
+         * Initializes the GUI components, creates the cells 2d array, and sets up the board/tiles/characters, etc.
          */
         public MainWindow()
         {
-            
-           
             InitializeComponent();
-            InitializeBoard();
-            setUpBoard();
+            setupBoard("testmap.txt");
+            selectedHeroRow = 0;
+            selectedHeroCol = 0;
+
+            //For testing purposes, characters added in this way. When the game is at the point where the hero data is taken from the world map, or
+            //is global to the whole program, and setUpBoard() can read positions to add the characters, then they will be added in setUpBoard() rather than here.
+            boardspaces[4, 1].tileCharacter = new Warrior(4,1,4);
+            refreshBoardSpace(4, 1);
+            boardspaces[1, 2].tileCharacter = new Mage(1,2,3);
+            refreshBoardSpace(1, 2);
+            boardspaces[11, 9].tileCharacter = new Enemy_Warrior(11,9,2);
+            refreshBoardSpace(11, 9);
+            boardspaces[13, 8].tileCharacter = new Enemy_Healer(13,8,3);
+            refreshBoardSpace(13, 8);
+            boardspaces[14, 3].tileCharacter = new Enemy_Hunter(14,3,1);
+            refreshBoardSpace(14, 3);
+        }
+
+        /*
+         * Clears, then re-adds the elements to be displayed on the specified space based on the tile's data. Used to remove elements that were added to the space that can't be
+         * removed directly, restoring the tile to the state it's supposed to be in.
+         * 
+         * int r, c = the row, column of the space to refresh.
+         */
+        private void refreshBoardSpace(int r, int c)
+        {
+            cells[r, c].Children.Clear(); //Clear everything that's in the cell, now an empty Grid object
+            ImageBrush backgroundImage;
+
+            boardspaces[r, c].Click -= new RoutedEventHandler(Hero_Click); //Remove the Hero_Click event from the cell in case there is one (from moving characters off a space). Otherwise, sometimes it remains and do bad stuff.
+            boardspaces[r, c].Click += new RoutedEventHandler(Tile_Click); //Add the Tile_Click event to the cell's button in case it isn't already on (will sometimes disappear otherwise).
+
+            backgroundImage = new ImageBrush(boardspaces[r, c].terrainImage.terrainImage);
+            boardspaces[r, c].Background = backgroundImage; //Set the background of the tile button to the terrain image.
+            boardspaces[r, c].BorderThickness = new Thickness(0); //Remove the tile button's border
+            cells[r,c].Children.Add(boardspaces[r, c]); //Add the tile button to the Grid cell
             
-        }
-        public void InitializeBoard()
-        {
-            for (int r = 0; r < boardRow; r++)
+            if (boardspaces[r, c].containsCharacter() == true) //For both heroes and enemies.
             {
-                for (int c = 0; c < boardCol; c++)
+                ImageBrush characterbrush = new ImageBrush(boardspaces[r, c].tileCharacter.characterImage);
+                boardspaces[r,c].tileCharacter.Background = characterbrush; //Character's image added onto character button in the same way the tile's image was
+                boardspaces[r, c].tileCharacter.BorderThickness = new Thickness(0); //Remove the character button's border
+
+                if (boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero)))
                 {
-                    terrain[r, c] = new Tile();
-                    terrain[r, c].Background = grass;
-                    terrain[r, c].BorderThickness = new Thickness();
+                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Hero_Click); //Add Hero_Click event handler to the character button
+                    if (!boardspaces[r, c].tileCharacter.isActive)
+                    {
+                        boardspaces[r, c].tileCharacter.Opacity = 0.5; //Reduce the opacity of the character button if the character is inactive to make the character look faded.
+                    }
+                    else
+                    {
+                        boardspaces[r, c].tileCharacter.Opacity = 1; //If the method comes across a hero whose opacity was lowered previously but is once again active, raise it back to 1
+                    }
                 }
+                else
+                {
+                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Enemy_Click); //Add Enemy_Click event handler to the character button (character but not a hero = enemy)
+                }
+                cells[r, c].Children.Add(boardspaces[r, c].tileCharacter); //Add the character button to the cell (covers the tile button)
             }
-
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
         private void Board_Loaded(object sender, RoutedEventArgs e)
         {
 
 
         }
 
-        private void status_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        
-        /*
-         * After any changes to the stat of the board/the contained tiles & characters, or information on the display needs to be updated, this method is called.
-         * Clears the UnifRomGrid that displays the board, and then remakes it, placing any characters & buttons as it goes along.
-         */
-        
-
-        //Events of test moving buttons being clicked - does not move enemies, doesn't count as a turn, to move the player without changing the board for ease of testing
-        //Will be removed later.
-      /*  private void UpButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectedPlayerRow > 0 && board.boardSpace(selectedPlayerRow - 1, selectedPlayerCol).containsCharacter() == false)
-            {
-                board.moveCharacter(selectedPlayerRow, selectedPlayerCol, selectedPlayerRow - 1, selectedPlayerCol);
-                selectedPlayerRow--;
-                render();
-            }
-        }
-        private void RightButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectedPlayerCol < 19 && board.boardSpace(selectedPlayerRow, selectedPlayerCol + 1).containsCharacter() == false)
-            {
-                board.moveCharacter(selectedPlayerRow, selectedPlayerCol, selectedPlayerRow, selectedPlayerCol + 1);
-                selectedPlayerCol++;
-                render();
-            }
-        }
-        private void LeftButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectedPlayerCol > 0 && board.boardSpace(selectedPlayerRow, selectedPlayerCol - 1).containsCharacter() == false)            
-            {
-                board.moveCharacter(selectedPlayerRow, selectedPlayerCol, selectedPlayerRow, selectedPlayerCol - 1);
-                selectedPlayerCol--;
-                render();
-            }
-        }
-        private void DownButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectedPlayerRow < 19 && board.boardSpace(selectedPlayerRow + 1, selectedPlayerCol).containsCharacter() == false)
-            {
-                board.moveCharacter(selectedPlayerRow, selectedPlayerCol, selectedPlayerRow + 1, selectedPlayerCol);
-                selectedPlayerRow++;
-                render();
-            }
-        }
-        //end of test buttons to be removed.
-        */
         /*
          * When the user clicks on a player character, bring up the interface to select their action/movement
+         * 
+         * Also checks if hero is active, has already moved, etc, to only enable the appropriate buttons.
          */
-       /*
-        private void Player_Click(object sender, RoutedEventArgs e)
+        private void Hero_Click(object sender, RoutedEventArgs e)
         {
-            board.clearMoveOptions(); //set all move options that were previously left as true to false before calculating the current ones.
-
-            //loop through the grid cells/tiles to see which one the user's mouse was over when a player button was clicked - locates which player was selected
-            for (int r = 0; r < board.numberRows; r++)
+            clearMoveOptions(); //If not done here, you can click on one hero to bring up their options, then click on another, the highlighted tiles for the first will remain, and you can move the second.
+            try
             {
-                for (int c = 0; c < board.numberCols; c++)
+                //Get the row and column of the Character button that was clicked (Row and Col are accessors in Character).
+                selectedHeroRow = (sender as Character).Row;
+                selectedHeroCol = (sender as Character).Col;
+            }
+            catch
+            {
+
+            }
+            Tile_Click(boardspaces[selectedHeroRow, selectedHeroCol], e); //Display info on the hero using the Tile_Click event
+            if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.isActive)
+            {
+                End_Turn.IsEnabled = true;
+                Defend.IsEnabled = true;
+                if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasUsedItem == false)
                 {
-                    if (cells[r, c].IsMouseOver)
+                    Use_Item.IsEnabled = true;
+                }
+                else
+                {
+                    Use_Item.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could use an item (activates the item button) and then click one that can't, the item button stays active
+                }
+                if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasAttacked == false)
+                {
+                    Attack.IsEnabled = true;
+                    if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasMoved == false) //Check inside checking if already attacked because character can't move if already attacked.
                     {
-                        selectedPlayerRow = r;
-                        selectedPlayerCol = c;
+                        Move.IsEnabled = true;
+                    }
+                    else
+                    {
+                        Move.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could move (activates the move button) and then click one that can't, the move button stays active
                     }
                 }
+                else
+                {
+                    Defend.IsEnabled = false; //Can't defend after attacking
+                    Attack.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could attack (activates the attack button) and then click one that can't, the attack button stays active
+                }
             }
-            if (!board.boardSpace(selectedPlayerRow, selectedPlayerCol).tileCharacter.hasMoved) //check to make sure the player hasn't already been moved, if not, bring up move options
+            else
             {
-                board.moveOptions(board.boardSpace(selectedPlayerRow, selectedPlayerCol).tileCharacter.speed, selectedPlayerRow, selectedPlayerCol);
+                //Must disable all buttons if inactive because otherwise if you clicked a character that's active and then clicked one that's inactive, the buttons might stay enabled.
+                Move.IsEnabled = false;
+                Attack.IsEnabled = false;
+                Defend.IsEnabled = false;
+                Use_Item.IsEnabled = false;
+                End_Turn.IsEnabled = false;
             }
-            render(); 
         }
-        */
+
+        /*
+         * Currently only to allow clicking on enemies to set off a Tile_Click event.
+         * 
+         * In the future, could be used to select enemies to attack?
+         */
+        private void Enemy_Click(object sender, RoutedEventArgs e)
+        {
+            int row = 0;
+            int col = 0;
+            try
+            {
+                //Get the row and column of the Character button that was clicked (Row and Col are accessors in Character).
+                row = (sender as Character).Row;
+                col = (sender as Character).Col;
+            }
+            catch
+            {
+
+            }
+            Tile_Click(boardspaces[row, col], e); //Display info on the enemy using the Tile_Click event
+        }
+
         /*
          * When a user clicks on one of the buttons to move to a tile, move the player character there, advance the turn if all players have been moved.
          */
-        /*
         private void MoveOption_Click(object sender, RoutedEventArgs e)
         {
-            int newRow = selectedPlayerRow;
-            int newCol = selectedPlayerCol;
-            //loop through the grid cells/tiles to see which one the user's mouse was over when a move button was clicked - locates which space was selected
-            for (int r = 0; r < board.numberRows; r++)
+            int row = 0;
+            int col = 0;
+
+             try
+             {
+                 //Get the row and column of the tile button that was clicked (Row and Col are accessors in Tile).
+                 row = (sender as Tile).Row;
+                 col = (sender as Tile).Col;
+             }
+             catch
+             {
+
+             }
+            //Make sure the selected hero hasn't already moved this turn (mostly not necessary, but for safety against glitches?)
+            if (!boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasMoved) 
             {
-                for (int c = 0; c < board.numberCols; c++)
+                boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasMoved = true;
+                moveCharacter(selectedHeroRow, selectedHeroCol, row, col);
+                //Update position of selected hero row and column in case the user immediately selects another option for the hero (rather than having to click on them again).
+                selectedHeroRow = row;
+                selectedHeroCol = col;
+            }
+            clearMoveOptions();
+            //Disable the move button.
+            Move.IsEnabled = false;
+        }
+
+        /*
+         * If the move button was clicked, find the move options, then show them on the board/give those spaces moveoption_click event handlers.
+         */
+        private void Move_Click(object sender, RoutedEventArgs e)
+        {
+            moveOptions(boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.speed, selectedHeroRow, selectedHeroCol);
+            for (int r = 0; r < numRows; r++)
+            {
+                for (int c = 0; c < numCols; c++)
                 {
-                    if(cells[r, c].IsMouseOver)
+                    if (boardspaces[r, c].isMoveOption) //display buttons for the user to click to chose where to move the selected player.
                     {
-                        newRow = r;
-                        newCol = c;
+                        boardspaces[r, c].Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
+                        boardspaces[r, c].Click += new RoutedEventHandler(MoveOption_Click); //Add a MoveOption_Click event handler to the tile button
+                        //Make a colored border around moveOption spaces to signify which ones they are to the user.
+                        boardspaces[r, c].BorderBrush = moveOption;
+                        boardspaces[r, c].BorderThickness = new Thickness(1);
+                        
                     }
                 }
             }
-            board.moveCharacter(selectedPlayerRow, selectedPlayerCol, newRow, newCol);
-            board.boardSpace(newRow, newCol).tileCharacter.hasMoved = true;
-            if (board.checkAllPlayersMoved())
+        }
+
+        /*
+         * When a Hero is selected that can attack and the attack button is clicked, run the method(s) involved in displaying who they can attack, displaying different abilities, and then
+         * executing that ability, and if an attack and an enemy is selected, set that the hero has attacked and moved to true (hero can't move after attacking), disable buttons for those
+         * and the defend button (can't defend after attacking).
+         */
+        private void Attack_Click(object sender, RoutedEventArgs e)
+        {
+            //NEEDS TO BE ADDED: Attack stuff
+
+            //NEEDS TO BE ADDED: if attack is successful do the following:
+            Attack.IsEnabled = false;
+            Move.IsEnabled = false; //Hero can't move after attacking.
+            boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasAttacked = true;
+            boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasMoved = true;
+            if(!boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.isActive) //Check if hero has moved, used an item, and attacked, if so, the hero's turn is over, is inactive
             {
-                board.nextTurn();
+                refreshBoardSpace(selectedHeroRow, selectedHeroCol); //refresh the character so it appears faded.
+                Defend.IsEnabled = false;
+                End_Turn.IsEnabled = false;
+                //If inactive, the item button is already disabled, and the move and attack were previously disabled in this method when the attack was successful.
             }
-            selectedPlayerRow = newRow;
-            selectedPlayerCol = newCol;
-            board.clearMoveOptions();
-            render();
-            */
+            if (checkAllPlayersInactive())
+            {
+                nextTurn();
+            }
+        }
+
+        /*
+         * For when the defend button is clicked what a hero is selected. Choosing defend adds an Effect object to the hero's list of stat effects that boosts their defense (positive percentage/double)
+         * and lasts for one turn. Then, it ends the hero's turn (last action they can potentially do), fades the hero, and disables their action buttons. Ends the player turn if all heros are done.
+         */
+        private void Defend_Click(object sender, RoutedEventArgs e)
+        {
+            Defend.IsEnabled = false;
+            //NEEDS TO BE ADDED: Add Effect to character stateffect list that boosts defense stat for 1 turn.
+            boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.isActive = false;
+            refreshBoardSpace(selectedHeroRow, selectedHeroCol);
+            End_Turn.IsEnabled = false;
+            Move.IsEnabled = false;
+            Attack.IsEnabled = false;
+            Use_Item.IsEnabled = false;
+            if (checkAllPlayersInactive())
+            {
+                nextTurn();
+            }
+        }
+
+        /*
+         * For when the use item button is clicked for a selected hero. Can be used once per hero per turn. Displays a list of usable items from the player's inventory, and applys the effect
+         * of the selected item to the current hero (If one is selected, if not, list disappears and the button is still available). 
+         * If an item was successfully used, disables the button, sets that the hero has used an item this turn, and checks if the character is still active after using this item. If not,
+         * fades the hero, disables buttons for any otherwise remaining options. Checks if all heroes are inactive, if so, goes to next turn.
+         */
+        private void Use_Item_Click(object sender, RoutedEventArgs e)
+        {
+            //NEEDS TO BE ADDED: Show list of usable items
+
+            //NEEDS TO BE ADDED: if item is selected and used, do the following:
+            Use_Item.IsEnabled = false;
+            boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasUsedItem = true;
+            if (!boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.isActive)
+            {
+                refreshBoardSpace(selectedHeroRow, selectedHeroCol);
+                Defend.IsEnabled = false;
+                End_Turn.IsEnabled = false;
+                //If now inactive, the move and attack buttons are already disabled.
+            }
+            if (checkAllPlayersInactive())
+            {
+                nextTurn();
+            }
+        }
+
+        /*
+         * When the end turn button is clicked for the selected hero. Ends their turn by disabling all buttons for any actions, and setting the hero to inactive.
+         * Refreshs the hero so they appear faded, and then checks if all heroes are now inactive. If so, starts the next turn.
+         */
+        private void End_Turn_Click(object sender, RoutedEventArgs e)
+        {
+            boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.isActive = false;
+            refreshBoardSpace(selectedHeroRow, selectedHeroCol);
+            End_Turn.IsEnabled = false;
+            Move.IsEnabled = false;
+            Attack.IsEnabled = false;
+            Defend.IsEnabled = false;
+            Use_Item.IsEnabled = false;
+            if (checkAllPlayersInactive())
+            {
+                nextTurn();
+            }
+        }
+
+        /*
+         * Immediately ends the player's turn for all heros. nextTurn() resets the inactive, hasMoved, etc properties for each hero, so it doesn't need to be done here.
+         */
+        private void End_Heroes_Turn_Click(object sender, RoutedEventArgs e)
+        {
+            nextTurn();
+        }
+
+        /*
+         * For when the player clicks on any board spaces, brings up info about the tile, and its picture, and displays it on the side (stats location).
+         * If there is a character on the tile, display extra appropriate info for the character (current health, etc).
+         */
+        private void Tile_Click(object sender, RoutedEventArgs e)
+        {
+            int row = 0;
+            int col = 0;
+
+            try
+            {
+                //Get the row and column of the tile button that was clicked (Row and Col are accessors in Tile).
+                row = (sender as Tile).Row;
+                col = (sender as Tile).Col;
+            }
+            catch
+            {
+
+            }
+            Tile_Info_Image.Source = boardspaces[row, col].terrainImage.terrainImage; //Set the image in the tile/stat info pane to the image of the tile.
+            testlabel.Content = "No character";
+            if (boardspaces[row, col].containsCharacter() == true)
+            {
+                Character_Info_Image.Source = boardspaces[row, col].tileCharacter.characterImage;
+                if (boardspaces[row, col].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Enemy)))
+                {
+                    testlabel.Content = "Enemy!";
+                }
+                else if (boardspaces[row, col].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero)))
+                {
+                    testlabel.Content = "Hero";
+                }
+            }
+            else
+                Character_Info_Image.Source = null;
         }
     }
+}

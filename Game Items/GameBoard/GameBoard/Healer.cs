@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace GameBoard
 {
-    class Mage : Hero
+    class Healer : Hero
     {
-
-        public Mage(int r, int c, int charSpeed)
+        public Healer (int r, int c, int movespeed)
         {
             row = r;
             col = c;
-            hp = 10;
-            moveSpeed = charSpeed;
+            hp = 10; 
+            speed = movespeed;
         }
     }
 }

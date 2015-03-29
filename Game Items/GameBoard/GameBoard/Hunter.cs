@@ -6,20 +6,13 @@ using System.Threading.Tasks;
 
 namespace GameBoard
 {
-    class Enemy : Character
+    class Hunter : Hero
     {
-
-        public Enemy()
-        {
-            row = 0;
-            col = 0;
-        }
-
-        public Enemy (int r, int c, int charSpeed)
+        public Hunter(int r, int c, int charSpeed)
         {
             row = r;
             col = c;
-            hp = 1; 
+            hp = 10;
             moveSpeed = charSpeed;
         }
     }
