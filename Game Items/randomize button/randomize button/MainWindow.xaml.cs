@@ -48,7 +48,7 @@ namespace randomize_button
                         gender[i] = male;
                       ///<here is where I am having issues with the picture. I tried to save it to resources like a few pages suggested.
                       ///it saved it to a new folder, not the resources section I need and i cant get it to go to the right resources.
-                        Hero1.Background = Properties.Resources.deadladybug2.jpg;
+                        ///<Hero1.Background = Properties.Resources.deadladybug2.jpg;
                         
                         return gender[i];
                     }
@@ -57,7 +57,7 @@ namespace randomize_button
                         male = false;
                         gender[i] = male;
                         ///<same issue here as the one up above
-                        Hero1.Background =  Properties.Resources.frog.jpg;
+                        ///<Hero1.Background =  Properties.Resources.frog.jpg;
                        
                         return gender[i];
                     }
@@ -78,10 +78,16 @@ namespace randomize_button
         /// from there the person will be able to do their choices.
         private void Hero1_Click(object sender, RoutedEventArgs e)
         {
-            Hero_Name.Visible = true;
-            Gender_Choices.Visible = true;
-            Female.Visible = true;
-            Male.Visible = true;
+            Hero_Name.Visibility = System.Windows.Visibility.Visible;
+            Gender_Choices.Visibility = System.Windows.Visibility.Visible;
+            Female.Visibility = System.Windows.Visibility.Visible;
+            Male.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void Female_Click(object sender, RoutedEventArgs e)
+        {
+            ///<change the image to a female image
+            ///set the array spot to female
         }
     }
 }
