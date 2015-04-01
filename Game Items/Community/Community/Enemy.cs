@@ -8,6 +8,10 @@ namespace Community
 {
     class Enemy : Character
     {
+        /*
+         * TODO:
+         * Create experience-for-kill system.
+         */
         public Enemy()
         {
         }

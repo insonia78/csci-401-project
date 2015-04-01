@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace Community
 {
-    public class Program
+    class Program
     {
         static void Main(string[] args)
         {
             // fields
-            Character test = new Character();   // variable to test the character object.
-            Hero hero = new SoftwareEngineer();
-            // test content of the character object.
-            Console.WriteLine("\n" + test.toString());
+            Character characterTest = new Character();   // variable to test the character class.
+            Hero heroTest = new Hero();                  // variable to test the hero class.
+
+            // test content of the Character and hero object.
+            Console.WriteLine("\n" + heroTest.toString());
 
             // hold the terminal open to view the stats.
             Console.ReadLine();

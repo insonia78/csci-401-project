@@ -7,18 +7,55 @@ using System.Threading.Tasks;
 
 namespace Community
 {
-    public class Character
+    class Character
     {
         // fields
         private String name;
+        private bool canMoveOnTurn;
+        private String bitImage;
+
+        // base stats.
+        // all characters will have the same base stats.
+        private int baseLevel = 1;                  // initial level.
+        private int baseHealth = 100;               // initial health
+        private int baseEnergy = 50;                // initial energy
+        private int baseAttack = 5;                 // initial attack
+        private int baseDefense = 5;                // initial defense
+        private int baseSpeed = 5;                  // initial speed
+        private int baseAttackRange = 1;            // initial attack range
+        private int baseSpecialAttack = 10;         // initial special attack
+        private int baseSpecialDefense = 10;        // initial special defense
+
+        // stat multipliers , increases stats by a set amount for each level.
+        // will differ depending on class setup. can be used injuction with effects.
+        private double healthMulti;
+        private double energyMulti;
+        private double attackMulti;
+        private double defenseMulti;
+        private double speedMulti;
+        private double attackRangeMulti;
+        private double specialAttackMulti;
+        private double specialDefenseMulti;
+
+        // maximum values.
         private int maxHealth;
+        private int maxEnergy;
+        private int maxAttack;
+        private int maxDefense;
+        private int maxSpeed;
+        private int maxAttackRange;
+        private int maxSpecialAttack;
+        private int maxSpecialDefense;
+
+        // current state of stats. (affected by status changing properties.)
         private int currentHealth;
-        private int attack;
-        private int defense;
-        private int speed;
-        private int specialAttack;
-        private int specialDefense;
-        // TODO: bit picture for the map.
+        private int currentEnergy;
+        private int currentAttack;
+        private int currentDefense;
+        private int currentSpeed;
+        private int currentAttackRange;
+        private int currentSpecialAttack;
+        private int currentSpecialDefense;
 
         // constructor
         public Character()
@@ -27,18 +64,47 @@ namespace Community
         }
 
         // initialize the fields.
-        private void Init()
+        public void Init()
         {
             name = "MissingNo";
-            maxHealth = 9999;
-            currentHealth = maxHealth;
-            attack = 99;
-            defense = 99;
-            speed = 99;
-            specialAttack = 9999;
-            specialDefense = 9999;
+            canMoveOnTurn = false;
+            bitImage = "no image chosen.png";
+
+        // stat multipliers , increases stats by a set amount for each stat.
+        healthMulti = 1.0;
+        energyMulti = 1.0;
+        attackMulti = 1.0;
+        defenseMulti = 1.0;
+        speedMulti = 1.0;
+        attackRangeMulti = 1.0;
+        specialAttackMulti = 1.0;
+        specialDefenseMulti = 1.0;
+
+        // maximum values.
+        maxHealth = (int)(baseHealth * healthMulti);
+        maxEnergy = (int)(baseEnergy * energyMulti);
+        maxAttack = (int)(baseAttack * attackMulti);
+        maxDefense = (int)(baseDefense * defenseMulti);
+        maxSpeed = (int)(baseSpeed * speedMulti);
+        maxAttackRange = (int)(baseAttackRange * attackRangeMulti);
+        maxSpecialAttack = (int)(baseSpecialAttack * specialAttackMulti);
+        maxSpecialDefense = (int)(baseSpecialDefense * specialDefenseMulti);
+
+        // current state of stats. (affected by status changing properties.)
+        currentHealth = maxHealth;
+        currentEnergy = maxEnergy;
+        currentAttack = maxAttack;
+        currentDefense = maxDefense;
+        currentSpeed = maxSpeed;
+        currentAttackRange = maxAttackRange;
+        currentSpecialAttack = maxSpecialAttack;
+        currentSpecialDefense = maxSpecialDefense;
         }
 
+        /**********************************************************************
+         * Get and Sets for the character name and the canMoveOnTurn variable.
+         * ********************************************************************
+         */
         // get and set for the name variable.
         public String Name
         {
@@ -52,6 +118,265 @@ namespace Community
             }
         }
 
+        // get and set for the canMoveOnTurn variable.
+        public bool CanMoveOnTurn
+        {
+            get
+            {
+                return canMoveOnTurn;
+            }
+            set
+            {
+                canMoveOnTurn = value;
+            }
+        }
+
+        // get and set for the bitImage variable.
+        public String BitImage
+        {
+            get
+            {
+                return bitImage;
+            }
+            set
+            {
+                bitImage = value;
+            }
+        }
+
+        /**********************************************************************
+         * Gets and sets for the Base Stats of the character.
+         **********************************************************************
+         */
+        // get and set for the baseLevel variable.
+        public int BaseLevel
+        {
+            get
+            {
+                return baseLevel;
+            }
+            set
+            {
+                baseLevel = value;
+            }
+        }
+
+        // get and set for the baseHealth variable.
+        public int BaseHealth
+        {
+            get
+            {
+                return baseHealth;
+            }
+            set
+            {
+                baseHealth = value;
+            }
+        }
+
+        // get and set for the baseEnergy variable.
+        public int BaseEnergy
+        {
+            get
+            {
+                return baseEnergy;
+            }
+            set
+            {
+                baseEnergy = value;
+            }
+        }
+
+        // get and set for the baseAttack variable.
+        public int BaseAttack
+        {
+            get
+            {
+                return baseAttack;
+            }
+            set
+            {
+                baseAttack = value;
+            }
+        }
+
+        // get and set for the baseDefense variable.
+        public int BaseDefense
+        {
+            get
+            {
+                return baseDefense;
+            }
+            set
+            {
+                baseDefense = value;
+            }
+        }
+
+        // get and set for the baseSpeed variable.
+        public int BaseSpeed
+        {
+            get
+            {
+                return baseSpeed;
+            }
+            set
+            {
+                baseSpeed = value;
+            }
+        }
+
+        // get and set for the baseAttackRange variable.
+        public int BaseAttackRange
+        {
+            get
+            {
+                return baseAttackRange;
+            }
+            set
+            {
+                baseAttackRange = value;
+            }
+        }
+
+        // get and set for the baseSpecialAttack variable.
+        public int BaseSpecialAttack
+        {
+            get
+            {
+                return baseSpecialAttack;
+            }
+            set
+            {
+                baseSpecialAttack = value;
+            }
+        }
+
+        // get and set for the baseSpecialDefense variable.
+        public int BaseSpecialDefense
+        {
+            get
+            {
+                return baseSpecialDefense;
+            }
+            set 
+            {
+                baseSpecialDefense = value;
+            }
+        }
+
+        /**********************************************************************
+         * Gets and Sets for the Multiplier Stats.
+         * ********************************************************************
+         */
+        // get and set for the healthMulti variable.
+        public double HealthMulti
+        {
+            get
+            {
+                return healthMulti;
+            }
+            set
+            {
+                healthMulti = value;
+            }
+        }
+
+        // get and set for the energyMulti variable.
+        public double EnergyMulti
+        {
+            get
+            {
+                return energyMulti;
+            }
+            set
+            {
+                energyMulti = value;
+            }
+        }
+
+        // get and set for the attackMulti variable.
+        public double AttackMulti
+        {
+            get
+            {
+                return attackMulti;
+            }
+            set
+            {
+                attackMulti = value;
+            }
+        }
+
+        // get and set for the defenseMulti variable.
+        public double DefenseMulti
+        {
+            get
+            {
+                return defenseMulti;
+            }
+            set
+            {
+                defenseMulti = value;
+            }
+        }
+
+        // get and set for the speedMulti variable.
+        public double SpeedMulti
+        {
+            get
+            {
+                return speedMulti;
+            }
+            set
+            {
+                speedMulti = value;
+            }
+        }
+
+        // get and set for the attackRangeMulti variable.
+        public double AttackRangeMulti
+        {
+            get
+            {
+                return AttackRangeMulti;
+            }
+            set
+            {
+                AttackRangeMulti = value;
+            }
+        }
+
+        // get and set for the specialAttackMulti variable.
+        public double SpecialAttackMulti
+        {
+            get
+            {
+                return specialAttackMulti;
+            }
+            set
+            {
+                specialAttackMulti = value;
+            }
+        }
+
+        // get and set for the specialDefenseMulti variable.
+        public double SpecialDefenseMulti
+        {
+            get
+            {
+                return specialDefenseMulti;
+            }
+            set
+            {
+                specialDefenseMulti = value;
+            }
+        }
+
+        /**********************************************************************
+         * Gets and sets for the Maximum Stats.
+         * ********************************************************************
+         */
         // get and set for the maxHealth variable.
         public int MaxHealth
         {
@@ -65,6 +390,101 @@ namespace Community
             }
         }
 
+        // get and set for the maxEnergy variable.
+        public int MaxEnergy
+        {
+            get
+            {
+                return maxEnergy;
+            }
+            set
+            {
+                maxEnergy = value;
+            }
+        }
+
+        // get and set for the maxAttack variable.
+        public int MaxAttack
+        {
+            get
+            {
+                return maxAttack;
+            }
+            set
+            {
+                maxAttack = value;
+            }
+        }
+
+        // get and set for the maxDefense variable.
+        public int MaxDefense
+        {
+            get
+            {
+                return maxDefense;
+            }
+            set
+            {
+                maxDefense = value;
+            }
+        }
+
+        // get and set for the maxSpeed variable.
+        public int MaxSpeed
+        {
+            get
+            {
+                return maxSpeed;
+            }
+            set
+            {
+                maxSpeed = value;
+            }
+        }
+
+        // get and set for the maxAttackRange variable.
+        public int MaxAttackRange
+        {
+            get
+            {
+                return maxAttackRange;
+            }
+            set
+            {
+                maxAttackRange = value;
+            }
+        }
+
+        // get and set for the maxSpecialAttack variable.
+        public int MaxSpecialAttack
+        {
+            get
+            {
+                return maxSpecialAttack;
+            }
+            set
+            {
+                maxSpecialAttack = value;
+            }
+        }
+
+        // get and set for the maxSpecialDefense variable.
+        public int MaxSpecialDefense
+        {
+            get
+            {
+                return maxSpecialDefense;
+            }
+            set
+            {
+                maxSpecialDefense = value;
+            }
+        }
+
+        /**********************************************************************
+         * Get and sets for the Current Stats.
+         * ********************************************************************
+         */
         // get and set for the currentHealth variable.
         public int CurrentHealth
         {
@@ -78,82 +498,148 @@ namespace Community
             }
         }
 
-        // get and set for the attack variable.
-        public int Attack
+        // get and set for the currentEnergy variable.
+        public int CurrentEnergy
         {
             get
             {
-                return attack;
+                return currentEnergy;
             }
             set
             {
-                attack = value;
+                currentEnergy = value;
             }
         }
 
-        // get and set for the defense variable.
-        public int Defense
+        // get and set for the currentAttack variable.
+        public int CurrentAttack
         {
             get
             {
-                return defense;
+                return currentAttack;
             }
             set
             {
-                defense = value;
+                currentAttack = value;
             }
         }
 
-        // get and set for the speed variable.
-        public int Speed
+        // get and set for the currentDefense variable.
+        public int CurrentDefense
         {
             get
             {
-                return speed;
+                return currentDefense;
             }
             set
             {
-                speed = value;
+                currentDefense = value;
             }
         }
 
-        // get and set for the specialAttack variable.
-        public int SpecialAttack
+        // get and set for the currentSpeed variable.
+        public int CurrentSpeed
         {
             get
             {
-                return specialAttack;
+                return currentSpeed;
             }
             set
             {
-                specialAttack = value;
+                currentSpeed = value;
             }
         }
 
-        // get and set for the specialDefense variable.
-        public int SpecialDefense
+        // get and set for the currentAttackRange variable.
+        public int CurrentAttackRange
         {
             get
             {
-                return specialDefense;
+                return currentAttackRange;
             }
             set
             {
-                specialDefense = value;
+                currentAttackRange = value;
             }
         }
 
+        // get and set for the currentSpecialAttack variable.
+        public int CurrentSpecialAttack
+        {
+            get
+            {
+                return currentSpecialAttack;
+            }
+            set
+            {
+                currentSpecialAttack = value;
+            }
+        }
+
+        // get and set for the currentSpecialDefense variable.
+        public int CurrentSpecialDefense
+        {
+            get
+            {
+                return currentSpecialDefense;
+            }
+            set
+            {
+                currentSpecialDefense = value;
+            }
+        }
+
+        // Prints out the variables for testing purposes.
         public String toString()
         {
-            String stats = ("The Character's stats are:\n\n" +
-                "Name: " + name + "\n" +
-                "Maximum Health: " + maxHealth + "\n" +
-                "Current Health: " + currentHealth + "\n" +
-                "Attack: " + attack + "\n" +
-                "Defense: " + defense + "\n" +
-                "Speed: " + speed + "\n" +
-                "Special Attack: " + specialAttack + "\n" +
-                "Special Defense: " + specialDefense + "\n");
+            String stats = ("The Character " + name + "'s stats are the following:\n" +
+
+                "\nThis character is moveable: " + canMoveOnTurn +
+
+                "\n8-bit picture: " + bitImage + 
+
+                "\n\nBase Stats:\n\n" +
+                "Level: " + baseLevel + "\n" +
+                "Health: " + baseHealth + "\n" +
+                "Energy: " + baseEnergy + "\n" +
+                "Attack: " + baseAttack + "\n" +
+                "Defense: " + baseDefense + "\n" +
+                "Speed: " + baseSpeed + "\n" +
+                "Attack Range: " + baseAttackRange + "\n" +
+                "Special Attack: " + baseSpecialAttack + "\n" +
+                "Special Defense: " + baseSpecialDefense + "\n" +
+                
+                
+                "\n\nMultiplier Stats:\n" +
+                "Health: " + healthMulti + "\n" +
+                "Energy: " + energyMulti + "\n" +
+                "Attack: " + attackMulti + "\n" +
+                "Defense: " + defenseMulti + "\n" +
+                "Speed: " + speedMulti + "\n" +
+                "Attack Range: " + attackRangeMulti + "\n" +
+                "Special Attack: " + specialAttackMulti + "\n" +
+                "Special Defense: " + specialDefenseMulti + 
+                
+                "\n\nMaximum Stats:\n" +
+                "Health: " + maxHealth + "\n" +
+                "Energy: " + maxEnergy + "\n" +
+                "Attack: " + maxAttack + "\n" +
+                "Defense: " + maxDefense + "\n" +
+                "Speed: " + maxSpeed + "\n" +
+                "Max Attack Range: " + maxAttackRange + "\n" +
+                "Attack Range: " + maxAttackRange + "\n" +
+                "Special Attack: " + maxSpecialAttack + "\n" +
+                "Special Defense: " + maxSpecialDefense +
+            
+                "\n\nCurrent Stats:\n" +
+                "Health: " + currentHealth + "\n" +
+                "Energy: " + currentEnergy + "\n" +
+                "Attack: " + currentAttack + "\n" +
+                "Defense: " + currentDefense + "\n" +
+                "Speed: " + currentSpeed + "\n" +
+                "Attack Range: " + currentAttackRange + "\n" +
+                "Special Attack: " + currentSpecialAttack + "\n" +
+                "Special Defense: " + currentSpecialDefense);
 
             return stats;
         }
