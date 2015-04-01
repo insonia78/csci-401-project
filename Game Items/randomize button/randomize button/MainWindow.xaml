@@ -34,7 +34,6 @@
         <Button Content="Female" Name="Female" HorizontalAlignment="Left" Margin="232,272,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
         <TextBox x:Name="Gender_Choices" HorizontalAlignment="Left" Height="22" Margin="45,272,0,0" TextWrapping="Wrap" Text="Gender" VerticalAlignment="Top" Width="53" Visibility="Hidden"/>
         <TextBox x:Name="Hero_Name" HorizontalAlignment="Left" Height="21" Margin="45,226,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="53" Visibility="Hidden"/>
-        <TextBox x:Name="getName" HorizontalAlignment="Left" Height="23" Margin="98,260,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="getName_TextChanged"/>
 
     </Grid>
 </Window>
