@@ -8,19 +8,17 @@ namespace GameBoard
 {
     class Enemy : Character
     {
+        private int health;
 
         public Enemy()
         {
-            row = 0;
-            col = 0;
+            hp = 1;
         }
 
-        public Enemy (int r, int c, int charSpeed)
+        public Enemy (int movespeed, int row, int col):base(movespeed,row,col)
         {
-            row = r;
-            col = c;
             hp = 1; 
-            moveSpeed = charSpeed;
+            speed = movespeed;
         }
     }
 }
