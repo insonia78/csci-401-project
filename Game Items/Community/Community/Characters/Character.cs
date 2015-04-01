@@ -598,7 +598,7 @@ namespace Community
 
                 "\n8-bit picture: " + bitImage + 
 
-                "\n\nBase Stats:\n\n" +
+                "\n\n\nBase Stats:\n\n" +
                 "Level: " + baseLevel + "\n" +
                 "Health: " + baseHealth + "\n" +
                 "Energy: " + baseEnergy + "\n" +
@@ -609,8 +609,7 @@ namespace Community
                 "Special Attack: " + baseSpecialAttack + "\n" +
                 "Special Defense: " + baseSpecialDefense + "\n" +
                 
-                
-                "\n\nMultiplier Stats:\n" +
+                "\n\n\nMultiplier Stats:\n\n" +
                 "Health: " + healthMulti + "\n" +
                 "Energy: " + energyMulti + "\n" +
                 "Attack: " + attackMulti + "\n" +
@@ -620,7 +619,7 @@ namespace Community
                 "Special Attack: " + specialAttackMulti + "\n" +
                 "Special Defense: " + specialDefenseMulti + 
                 
-                "\n\nMaximum Stats:\n" +
+                "\n\n\nMaximum Stats:\n\n" +
                 "Health: " + maxHealth + "\n" +
                 "Energy: " + maxEnergy + "\n" +
                 "Attack: " + maxAttack + "\n" +
@@ -631,7 +630,7 @@ namespace Community
                 "Special Attack: " + maxSpecialAttack + "\n" +
                 "Special Defense: " + maxSpecialDefense +
             
-                "\n\nCurrent Stats:\n" +
+                "\n\n\nCurrent Stats:\n\n" +
                 "Health: " + currentHealth + "\n" +
                 "Energy: " + currentEnergy + "\n" +
                 "Attack: " + currentAttack + "\n" +
