@@ -10,7 +10,8 @@ namespace Community
     {
         public SoftwareEngineer()
         {
-            //Init();
+            base.Init();
+            Init();
         }
 
         private void Init()
@@ -20,6 +21,9 @@ namespace Community
              * initialize with custom stats,
              * pictures, and gender.
              */
+            JobRole = "Software Engineer";
+            AttackMulti = 1.75;
+            BaseAttack = (int)(BaseAttack + (BaseAttack * AttackMulti));
         }
     }
 }

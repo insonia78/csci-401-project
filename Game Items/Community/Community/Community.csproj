@@ -47,14 +47,14 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="FoodServer.cs" />
     <Compile Include="Gardener.cs" />
-    <Compile Include="Hero.cs" />
-    <Compile Include="InformationSecurity.cs" />
-    <Compile Include="NetworkArchitect.cs" />
+    <Compile Include="Heros\Hero.cs" />
+    <Compile Include="Heros\InformationSecurity.cs" />
+    <Compile Include="Heros\NetworkArchitect.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SoftwareEngineer.cs" />
-    <Compile Include="SupportEngineer.cs" />
-    <Compile Include="SystemsAnalyst.cs" />
+    <Compile Include="Heros\SoftwareEngineer.cs" />
+    <Compile Include="Heros\SupportEngineer.cs" />
+    <Compile Include="Heros\SystemsAnalyst.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

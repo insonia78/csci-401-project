@@ -11,6 +11,7 @@ namespace Community
         // fields
         private Boolean male;                       // true for male and false for female.
         private String profileImage;                // image of the hero for the UI.
+        private String jobRole;                         // name of the hero's job.
         
         // base stats for experience.
         private int baseExperience = 0;             // experience earned.
@@ -38,7 +39,7 @@ namespace Community
         {
             male = false;
             profileImage = "no image chosen.png";
-
+            jobRole = "Hero/Heroine";
             currentExperience = baseExperience;
         }
 
@@ -69,6 +70,19 @@ namespace Community
             set
             {
                 profileImage = value;
+            }
+        }
+
+        // get and set for the jobRole variable.
+        public String JobRole
+        {
+            get
+            {
+                return jobRole;
+            }
+            set
+            { 
+                jobRole = value;
             }
         }
 
@@ -129,8 +143,9 @@ namespace Community
         {
             String text;
 
-            text = (base.toString() + 
-                "\n\nThis hero is male: " + male +
+            text = (base.toString() +
+                "\n\nJob Role: " + jobRole +
+                "\nThis hero is male: " + male +
                 "\nProfile image: " + profileImage +
                 "\n\nExperience Stats:\n\n" +
                 "Experience at the beginning of this level: " + baseExperience + "\n" +
