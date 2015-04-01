@@ -8,7 +8,7 @@ namespace GameBoard
 {
     class Hunter : Hero
     {
-        public Hunter(int r, int c, int charSpeed)
+        public Hunter(int r, int c, int charSpeed) : base(r, c, charSpeed)
         {
             row = r;
             col = c;

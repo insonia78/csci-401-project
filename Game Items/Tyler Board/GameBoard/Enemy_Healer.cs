@@ -10,12 +10,13 @@ namespace GameBoard
 {
     class Enemy_Healer : Enemy
     {
-        public Enemy_Healer(int r, int c, int charSpeed)
+        public Enemy_Healer()
         {
-            row = r;
-            col = c;
-            hp = 1;
-            moveSpeed = charSpeed;
+            characterPicture = new BitmapImage(new Uri("Cook.png", UriKind.Relative));
+        }
+
+        public Enemy_Healer(int r, int c, int charSpeed) : base(r, c, charSpeed)
+        {
             characterPicture = new BitmapImage(new Uri("Cook.png", UriKind.Relative));
         }
     }

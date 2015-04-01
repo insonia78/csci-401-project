@@ -13,17 +13,11 @@ namespace GameBoard
 
         public Hero()
         {
-            row = 0;
-            col = 0;
             characterPicture = new BitmapImage(new Uri("hero.png", UriKind.Relative));
         }
 
-        public Hero(int r, int c, int charspeed)
+        public Hero(int r, int c, int charspeed) : base(r ,c, charspeed)
         {
-            row = r;
-            col = c;
-            hp = 10;
-            moveSpeed = charspeed;
             characterPicture = new BitmapImage(new Uri("hero.png", UriKind.Relative));
         }
     }

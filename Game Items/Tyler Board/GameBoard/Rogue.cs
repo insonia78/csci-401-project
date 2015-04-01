@@ -8,7 +8,7 @@ namespace GameBoard
 {
     class Rogue : Hero
     {
-        public Rogue(int r, int c, int charSpeed)
+        public Rogue(int r, int c, int charSpeed) : base(r, c, charSpeed)
         {
             row = r;
             col = c;

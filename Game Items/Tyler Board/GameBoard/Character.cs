@@ -223,7 +223,6 @@ namespace GameBoard
         {
             row = r;
             col = c;
-            health = 10;
             moveSpeed = charSpeed;
             statEffects = new List<Effect>();
         }

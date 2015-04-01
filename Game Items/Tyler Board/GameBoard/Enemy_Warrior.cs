@@ -10,12 +10,14 @@ namespace GameBoard
 {
     class Enemy_Warrior : Enemy
     {
-        public Enemy_Warrior (int r, int c, int charSpeed)
+
+        public Enemy_Warrior()
         {
-            row = r;
-            col = c;
-            hp = 1;
-            moveSpeed = charSpeed;
+            characterPicture = new BitmapImage(new Uri("Campus Police.png", UriKind.Relative));
+        }
+
+        public Enemy_Warrior(int r, int c, int charSpeed) : base(r, c, charSpeed)
+        {
             characterPicture = new BitmapImage(new Uri("Campus Police.png", UriKind.Relative));
         }
     }

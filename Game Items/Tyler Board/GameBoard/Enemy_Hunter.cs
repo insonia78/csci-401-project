@@ -10,12 +10,13 @@ namespace GameBoard
 {
     class Enemy_Hunter : Enemy
     {
-        public Enemy_Hunter (int r, int c, int charSpeed)
+        public Enemy_Hunter()
         {
-            row = r;
-            col = c;
-            hp = 1;
-            moveSpeed = charSpeed;
+            characterPicture = new BitmapImage(new Uri("Gardener.png", UriKind.Relative));
+        }
+
+        public Enemy_Hunter(int r, int c, int charSpeed) : base(r, c, charSpeed)
+        {
             characterPicture = new BitmapImage(new Uri("Gardener.png", UriKind.Relative));
         }
     }

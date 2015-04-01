@@ -63,7 +63,7 @@ namespace GameBoard
             cells[r, c].Children.Clear(); //Clear everything that's in the cell, now an empty Grid object
             ImageBrush backgroundImage;
 
-            boardspaces[r, c].Click -= new RoutedEventHandler(Hero_Click); //Remove the Hero_Click event from the cell in case there is one (from moving characters off a space). Otherwise, sometimes it remains and do bad stuff.
+            boardspaces[r, c].Click -= new RoutedEventHandler(Character_Click); //Remove the Hero_Click event from the cell in case there is one (from moving characters off a space). Otherwise, sometimes it remains and do bad stuff.
             boardspaces[r, c].Click += new RoutedEventHandler(Tile_Click); //Add the Tile_Click event to the cell's button in case it isn't already on (will sometimes disappear otherwise).
 
             backgroundImage = new ImageBrush(boardspaces[r, c].terrainImage.terrainImage);
@@ -79,7 +79,7 @@ namespace GameBoard
 
                 if (boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero)))
                 {
-                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Hero_Click); //Add Hero_Click event handler to the character button
+                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click); //Add Hero_Click event handler to the character button
                     if (!boardspaces[r, c].tileCharacter.isActive)
                     {
                         boardspaces[r, c].tileCharacter.Opacity = 0.5; //Reduce the opacity of the character button if the character is inactive to make the character look faded.
@@ -91,7 +91,7 @@ namespace GameBoard
                 }
                 else
                 {
-                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Enemy_Click); //Add Enemy_Click event handler to the character button (character but not a hero = enemy)
+                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click); //Add Enemy_Click event handler to the character button (character but not a hero = enemy)
                 }
                 cells[r, c].Children.Add(boardspaces[r, c].tileCharacter); //Add the character button to the cell (covers the tile button)
             }
@@ -105,11 +105,11 @@ namespace GameBoard
         }
 
         /*
-         * When the user clicks on a player character, bring up the interface to select their action/movement
+         * When the user clicks on a character, bring up their info, interface to select their action/movement if they're a hero
          * 
          * Also checks if hero is active, has already moved, etc, to only enable the appropriate buttons.
          */
-        private void Hero_Click(object sender, RoutedEventArgs e)
+        private void Character_Click(object sender, RoutedEventArgs e)
         {
             clearMoveOptions(); //If not done here, you can click on one hero to bring up their options, then click on another, the highlighted tiles for the first will remain, and you can move the second.
             try
@@ -122,35 +122,48 @@ namespace GameBoard
             {
 
             }
-            Tile_Click(boardspaces[selectedHeroRow, selectedHeroCol], e); //Display info on the hero using the Tile_Click event
-            if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.isActive)
+            Tile_Click(boardspaces[selectedHeroRow, selectedHeroCol], e); //Display info on the character using the Tile_Click event
+
+            if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero)))
             {
-                End_Turn.IsEnabled = true;
-                Defend.IsEnabled = true;
-                if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasUsedItem == false)
+                if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.isActive)
                 {
-                    Use_Item.IsEnabled = true;
-                }
-                else
-                {
-                    Use_Item.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could use an item (activates the item button) and then click one that can't, the item button stays active
-                }
-                if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasAttacked == false)
-                {
-                    Attack.IsEnabled = true;
-                    if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasMoved == false) //Check inside checking if already attacked because character can't move if already attacked.
+                    End_Turn.IsEnabled = true;
+                    Defend.IsEnabled = true;
+                    if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasUsedItem == false)
                     {
-                        Move.IsEnabled = true;
+                        Use_Item.IsEnabled = true;
                     }
                     else
                     {
-                        Move.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could move (activates the move button) and then click one that can't, the move button stays active
+                        Use_Item.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could use an item (activates the item button) and then click one that can't, the item button stays active
+                    }
+                    if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasAttacked == false)
+                    {
+                        Attack.IsEnabled = true;
+                        if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasMoved == false) //Check inside checking if already attacked because character can't move if already attacked.
+                        {
+                            Move.IsEnabled = true;
+                        }
+                        else
+                        {
+                            Move.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could move (activates the move button) and then click one that can't, the move button stays active
+                        }
+                    }
+                    else
+                    {
+                        Defend.IsEnabled = false; //Can't defend after attacking
+                        Attack.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could attack (activates the attack button) and then click one that can't, the attack button stays active
                     }
                 }
                 else
                 {
-                    Defend.IsEnabled = false; //Can't defend after attacking
-                    Attack.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could attack (activates the attack button) and then click one that can't, the attack button stays active
+                    //Must disable all buttons if inactive because otherwise if you clicked a character that's active and then clicked one that's inactive, the buttons might stay enabled.
+                    Move.IsEnabled = false;
+                    Attack.IsEnabled = false;
+                    Defend.IsEnabled = false;
+                    Use_Item.IsEnabled = false;
+                    End_Turn.IsEnabled = false;
                 }
             }
             else
@@ -162,28 +175,6 @@ namespace GameBoard
                 Use_Item.IsEnabled = false;
                 End_Turn.IsEnabled = false;
             }
-        }
-
-        /*
-         * Currently only to allow clicking on enemies to set off a Tile_Click event.
-         * 
-         * In the future, could be used to select enemies to attack?
-         */
-        private void Enemy_Click(object sender, RoutedEventArgs e)
-        {
-            int row = 0;
-            int col = 0;
-            try
-            {
-                //Get the row and column of the Character button that was clicked (Row and Col are accessors in Character).
-                row = (sender as Character).Row;
-                col = (sender as Character).Col;
-            }
-            catch
-            {
-
-            }
-            Tile_Click(boardspaces[row, col], e); //Display info on the enemy using the Tile_Click event
         }
 
         /*
