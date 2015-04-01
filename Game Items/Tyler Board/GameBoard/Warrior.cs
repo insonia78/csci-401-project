@@ -8,10 +8,12 @@ namespace GameBoard
 {
     class Warrior : Hero
     {
-        public Warrior (int movespeed)
+        public Warrior(int r, int c, int charSpeed)
         {
-            hp = 5; 
-            speed = movespeed;
+            row = r;
+            col = c;
+            hp = 10;
+            moveSpeed = charSpeed;
         }
     }
 }

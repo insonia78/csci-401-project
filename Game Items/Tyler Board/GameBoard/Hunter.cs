@@ -8,10 +8,12 @@ namespace GameBoard
 {
     class Hunter : Hero
     {
-        public Hunter (int movespeed)
+        public Hunter(int r, int c, int charSpeed)
         {
-            hp = 10; 
-            speed = movespeed;
+            row = r;
+            col = c;
+            hp = 10;
+            moveSpeed = charSpeed;
         }
     }
 }

@@ -8,10 +8,13 @@ namespace GameBoard
 {
     class Mage : Hero
     {
-        public Mage (int movespeed)
+
+        public Mage(int r, int c, int charSpeed)
         {
-            hp = 10; 
-            speed = movespeed;
+            row = r;
+            col = c;
+            hp = 10;
+            moveSpeed = charSpeed;
         }
     }
 }

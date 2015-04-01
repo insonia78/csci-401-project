@@ -4,24 +4,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace GameBoard
 {
     /*
-     * The implementation of the game board as a whole, holds a 2d array of Tile objects, and contains methods for manipulating the contents of these tiles 
-     * (their characters, mostly) as well as various other required operations on the board's tiles to make the actions in the game possible 
+     * The implementation of the logical side of the game board as a whole, holds a 2d array of Tile objects, and contains methods for manipulating 
+     * the contents of these tiles (their characters, mostly) as well as various other required operations on the board's tiles to make the actions in the game possible 
      * (advancing turns, making the enemies act, calculating a player's move options, etc). 
      * Also holds other relavent game information such as the number of turns.
      */
-    class Board
+    public partial class MainWindow
     {
         //instance variables
-        private readonly int numRows;
-        private readonly int numCols;
+        private int numRows;
+        private int numCols;
         private int numTurns;
-        private int numPlayers;
+        private int numHeroes;
         private int numEnemies;
-        private readonly Tile[,] boardspaces;
+        private Tile[,] boardspaces;
 
         //accessors and mutators
         public int numberRows
@@ -30,7 +40,7 @@ namespace GameBoard
             {
                 return numRows;
             }
-            set { } //read only
+            set { }
         }
         public int numberCols
         {
@@ -38,21 +48,13 @@ namespace GameBoard
             {
                 return numCols;
             }
-            set { } //read only
+            set { }
         }
-        public Tile[,] BoardSpaces
+        public int heroNumber
         {
             get
             {
-                return boardspaces;
-            }
-            set { } //read only
-        }
-        public int playerNumber
-        {
-            get
-            {
-                return numPlayers;
+                return numHeroes;
             }
             set { }
         }
@@ -77,50 +79,53 @@ namespace GameBoard
         /*
          * Constructor for a blank board, makes a default board of all empty spaces
          */
-        public Board()
+        public void setupBoard()
         {
-            numRows = 20;
-            numCols = 20;
+            numRows = 15;
+            numCols = 15;
             numTurns = 1;
             numEnemies = 0;
-            numPlayers = 5;
+            numHeroes = 5;
             boardspaces = new Tile[numRows, numCols];
+            cells = new Grid[numRows, numCols]; //a 2d array of references to the grid cells that make up the board tiles graphically
+            HeroesCounter.Content = ("Heroes Remaining: " + numHeroes);
             for(int r = 0; r < numRows; r++)
             {
                 for(int c = 0; c < numCols; c++)
                 {
-                    boardspaces[r, c] = new Tile();
+                    boardspaces[r, c] = new Tile(r,c);
+
+                    Grid cell = new Grid(); //Make a new grid object to contain the tile/character objects/buttons, images
+                    cells[r, c] = cell;
+
+                    refreshBoardSpace(r, c); //Draws the space for the first time
+                    Board.Children.Add(cell);
                 }
             }
         }
 
         /*
-         * Constructor for making a board defined in a text file using various characters in the text file to determine the terrain type of each tile.
+         * Constructor for setting up a board defined in a text file using various characters in the text file to determine the terrain type of each tile.
          * The input is read character by character, so the file should not be broken up with spaces or with multiple lines.
          * 0 = grass, 1 = mountain, 2 = water, 3 = swamp, other = defaults to grass. In the code, these are returned as their ascii code numbers, and have to be tested accordingly.
          * If the text file is not found, makes a blank, default board instead.
          * 
          * String mapfile = the name of the text file to read input from (Example: "testmap.txt")
          */
-        public Board(String mapfile)
+        public void setupBoard(String mapfile)
         {
-            numRows = 20;
-            numCols = 20;
+            numRows = 15;
+            numCols = 15;
             numTurns = 1;
             numEnemies = 0;
-            numPlayers = 5;
+            numHeroes = 5;
             boardspaces = new Tile[numRows, numCols];
+            HeroesCounter.Content = ("Heroes Remaining: " + numHeroes);
+            cells = new Grid[numRows, numCols]; //a 2d array of references to the grid cells that make up the board tiles graphically
 
             if(!File.Exists(mapfile))
             {
-                //make a blank board instead
-                for (int r = 0; r < numRows; r++)
-                {
-                    for (int c = 0; c < numCols; c++)
-                    {
-                        boardspaces[r, c] = new Tile();
-                    }
-                }
+                setupBoard();//make a blank board instead
             }
             else
             {
@@ -131,42 +136,35 @@ namespace GameBoard
                     {
                         for (int c = 0; c < numCols; c++)
                         {
-                            input = sr.Read();
+                            input = sr.Read(); //read the next character in the txt file
                             switch (input)
                             {
-                                case 48: //ascii code number for 0, grass
-                                    boardspaces[r, c] = new Tile(0);
+                                case 48: //ascii code number for 0, grass (The StreamReader is reading them in as their ascii values)
+                                    boardspaces[r, c] = new Tile(r,c,0);
                                     break;
                                 case 49: //ascii code number for 1, mountain
-                                    boardspaces[r, c] = new Tile(1);
+                                    boardspaces[r, c] = new Tile(r,c,1);
                                     break;
                                 case 50: //ascii code number for 2, water
-                                    boardspaces[r, c] = new Tile(2);
+                                    boardspaces[r, c] = new Tile(r,c,2);
                                     break;
                                 case 51: //ascii code number for 3, swamp
-                                    boardspaces[r, c] = new Tile(3);
+                                    boardspaces[r, c] = new Tile(r,c,3);
                                     break;
                                 default: //if no input or invalid input found in the file, make a blank grass space instead
-                                    boardspaces[r, c] = new Tile();
+                                    boardspaces[r, c] = new Tile(r,c);
                                     break;
                             }
+
+                            Grid cell = new Grid(); //Make a new grid object to contain the tile/character objects/buttons, images
+                            cells[r, c] = cell;
+
+                            refreshBoardSpace(r, c); //Draws the space for the first time
+                            Board.Children.Add(cell);
                         }
                     }
                 }
             }
-        }
-
-        //methods
-        /*
-         * Returns the tile object at the specified position in the 2d array of tiles, for if you need to access one outside the board method.
-         * int row = the row the tile is in.
-         * int col = the column the tile is in.
-         * 
-         * returns the tile object at the specified position.
-         */
-        public Tile boardSpace(int row, int col)
-        {
-            return boardspaces[row, col];
         }
 
         /*
@@ -180,15 +178,21 @@ namespace GameBoard
          */
         public void moveCharacter(int oldRow, int oldCol, int newRow, int newCol)
         {
-            if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols && boardspaces[newRow, newCol].tileCharacter == null)
+            if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols && boardspaces[newRow, newCol].tileCharacter == null && boardspaces[newRow, newCol].isUnpassable == false)
             {
                 boardspaces[newRow, newCol].tileCharacter = boardspaces[oldRow, oldCol].tileCharacter;
+                //Update the character's row/column information
+                boardspaces[newRow, newCol].tileCharacter.Row = newRow;
+                boardspaces[newRow, newCol].tileCharacter.Col = newCol;
                 boardspaces[oldRow, oldCol].tileCharacter = null;
+                //redraw the two spaces (otherwise the character won't be visible in the new space, and the image will remain in the old space).
+                refreshBoardSpace(oldRow, oldCol);
+                refreshBoardSpace(newRow, newCol);
             }
         }
 
         /*
-         * Algorithm to be used recursively. Takes the position and speed of a character, and checks all adjacent (horizontal / vertical, not diagonal) tiles to see
+         * Recursive algorithm. Takes the position and speed of a character, and checks all adjacent (horizontal / vertical, not diagonal) tiles to see
          * if they can be moved to. If more speed remains, checks those tiles to see what adjacent tiles to that tile can be moved to from there, until speed = 0.
          * Tile can only be moved to if it is within the 2d array's bounds, it isn't "solid/unpassable" terrain, and it contains no character.
          * If a tile can be moved to, the tile's isMoveOption is set to true for use when displaying/adding buttons on the map interface.
@@ -200,13 +204,13 @@ namespace GameBoard
          */
         public void moveOptions(int speed, int row, int col)
         {
-            boardspaces[row, col].isMoveOption = true;
+            boardspaces[row, col].isMoveOption = true; //base case
             if(speed > 0)
             {
                 //up movement
                 if (row - 1 >= 0 && boardspaces[row - 1, col].isUnpassable == false && boardspaces[row - 1, col].tileCharacter == null)
                 {
-                    moveOptions(speed - boardspaces[row - 1, col].requiredMoveSpeed, row - 1, col);
+                    moveOptions(speed - boardspaces[row - 1, col].requiredMoveSpeed, row - 1, col); //Subtract the required movement speed to move through of the next tile from the remaining speed points
                 }
                 //down movement
                 if (row + 1 < numRows && boardspaces[row + 1, col].isUnpassable == false && boardspaces[row + 1, col].tileCharacter == null)
@@ -226,75 +230,6 @@ namespace GameBoard
             }
         }
 
-        public void moveOptions_iterative_test(int speed, int row, int col)
-        {
-            boardspaces[row, col].isMoveOption = true;
-
-            int speedRemaining = speed;
-            //up movement
-            while(speedRemaining > 0)
-            {
-                for(int r = 1; r <= speed; r++)
-                {
-                    if (row - r >= 0 && boardspaces[row - r, col].isUnpassable == false && boardspaces[row - r, col].tileCharacter == null)
-                    {
-                        boardspaces[row - r, col].isMoveOption = true;
-                        speedRemaining = speedRemaining - boardspaces[row - r, col].requiredMoveSpeed;
-                    }
-                    else
-                        speedRemaining = 0;
-                }
-            }
-
-            speedRemaining = speed; // reset
-            //down movement
-            while (speedRemaining > 0)
-            {
-                for (int r = 1; r <= speed; r++)
-                {
-                    if (row + r < numRows && boardspaces[row + r, col].isUnpassable == false && boardspaces[row + r, col].tileCharacter == null)
-                    {
-                        boardspaces[row + r, col].isMoveOption = true;
-                        speedRemaining = speedRemaining - boardspaces[row + r, col].requiredMoveSpeed;
-                    }
-                    else
-                        speedRemaining = 0;
-                }
-            }
-
-            speedRemaining = speed; // reset
-            //left movement
-            while (speedRemaining > 0)
-            {
-                for (int c = 1; c <= speed; c++)
-                {
-                    if (col - c >= 0 && boardspaces[row, col - c].isUnpassable == false && boardspaces[row, col - c].tileCharacter == null)
-                    {
-                        boardspaces[row, col - c].isMoveOption = true;
-                        speedRemaining = speedRemaining - boardspaces[row, col - c].requiredMoveSpeed;
-                    }
-                    else
-                        speedRemaining = 0;
-                }
-            }
-
-            speedRemaining = speed; // reset
-            //right movement
-            while (speedRemaining > 0)
-            {
-                for (int c = 1; c <= speed; c++)
-                {
-                    if (col + c < numCols && boardspaces[row, col + c].isUnpassable == false && boardspaces[row, col + c].tileCharacter == null)
-                    {
-                        boardspaces[row, col + c].isMoveOption = true;
-                        speedRemaining = speedRemaining - boardspaces[row, col + c].requiredMoveSpeed;
-                    }
-                    else
-                        speedRemaining = 0;
-                }
-            }
-        }
-
         /*
          * Loops through the 2d array of board spaces and sets every tile's isMoveOption to false. For use after determining and displaying all move options for a 
          * selected player, clearing all those options afterwards so the variables are ready to display the next player's options.
@@ -305,14 +240,20 @@ namespace GameBoard
             {
                 for(int c = 0; c < numCols; c++)
                 {
-                    boardspaces[r, c].isMoveOption = false;
+                    if (boardspaces[r, c].isMoveOption)
+                    {
+                        boardspaces[r, c].isMoveOption = false;
+                        boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
+                        refreshBoardSpace(r, c);
+                    }
                 }
             }
         }
 
         /*
          * After the user performs all moves/actions, calls the enemyTurn() method, which handles enemy movement/actions/calls to AI, and
-         * resets certain attributes for players/enemies that are only for that specific turn (hasMoved, for example). Also increments the turn counter.
+         * resets certain attributes for players/enemies that are only for that specific turn (hasMoved, for example), and decreases the amount of turns any effects on them will last.
+         * Also increments the turn counter.
          */
         public void nextTurn()
         {
@@ -321,23 +262,22 @@ namespace GameBoard
             {
                 for (int c = 0; c < numCols; c++)
                 {
-                    if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType() == typeof(GameBoard.Enemy))
+                    if (boardspaces[r, c].containsCharacter() == true)
                     {
-                        boardspaces[r, c].tileCharacter.hasMoved = false;
-                    }
-                    if (boardspaces[r, c].containsCharacter() == true && (boardspaces[r, c].tileCharacter.GetType() == typeof(GameBoard.Hero) || boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero))))
-                    {
-                        boardspaces[r, c].tileCharacter.hasMoved = false;
+                        boardspaces[r, c].tileCharacter.decrementEffectDurations();
+                        boardspaces[r, c].tileCharacter.isActive = true;
+                        refreshBoardSpace(r,c);
                     }
                 }
             }
 
             numTurns++;
+            TurnCounter.Content = ("Turn " + turnNumber);
         }
 
         /*
          * Called on by nextTurn(), loops through the 2d board array, finds every remaining enemy, sets hasMoved = true for that enemy (so that if they move down and/or
-         * to the right, the for loops won't encounter those enemies again and moe=ve them again) and then calls the enemyMoveAI method for that enemy to determine 
+         * to the right, the for loops won't encounter those enemies again and move them again) and then calls the enemyMoveAI method for that enemy to determine 
          * where to move them.
          */
         public void enemyTurn()
@@ -346,7 +286,7 @@ namespace GameBoard
             {
                 for(int c = 0; c < numCols; c++)
                 {
-                    if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType() == typeof(GameBoard.Enemy) && boardspaces[r, c].tileCharacter.hasMoved == false)
+                    if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Enemy)) && boardspaces[r, c].tileCharacter.hasMoved == false)
                     {
                         boardspaces[r, c].tileCharacter.hasMoved = true;
                         enemyMoveAI(r, c);
@@ -391,18 +331,18 @@ namespace GameBoard
         }
 
         /*
-         * Loops through the 2d array of board spaces and checks if all player objects (or subclass objects of player) have hasMoved = true, in order to see if 
-         * every player character has moved and the turn can automatically end.
+         * Loops through the 2d array of board spaces and checks if all player objects (or subclass objects of player) have isActive = false, in order to see if 
+         * every player character has taken their turn and the turn can automatically end.
          * 
-         * returns false if any players have not moved, true if they all have.
+         * returns false if any players are active, true if they all have.
          */
-        public bool checkAllPlayersMoved()
+        public bool checkAllPlayersInactive()
         {
             for (int r = 0; r < numRows; r++)
             {
                 for (int c = 0; c < numCols; c++)
                 {
-                    if (boardspaces[r, c].containsCharacter() == true && (boardspaces[r, c].tileCharacter.GetType() == typeof(GameBoard.Hero) || boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero))) && boardspaces[r, c].tileCharacter.hasMoved == false)
+                    if (boardspaces[r, c].containsCharacter() == true && (boardspaces[r, c].tileCharacter.GetType() == typeof(GameBoard.Hero) || boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero))) && boardspaces[r, c].tileCharacter.isActive == true)
                     {
                         return false;
                     }

@@ -8,10 +8,12 @@ namespace GameBoard
 {
     class Boss : Enemy
     {
-        public Boss (int movespeed)
+        public Boss (int r, int c, int charSpeed)
         {
+            row = r;
+            col = c;
             hp = 10; 
-            speed = movespeed;
+            moveSpeed = charSpeed;
         }
     }
 }

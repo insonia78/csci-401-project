@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace GameBoard
 {
-    class Effect
+    public class Effect
     {
         private int duration; //the number of turns the effect lasts for, needs to be decreased each turn.
 
         private int hpChange; //negative applies damage each turn, positive heals each turn.
         private int speedChange;
+        //Positive doubles/"percents" will increase a character's corresponding stat by that percent, and vice versa
+        //For example, a character has 10 attack, and an effect has 0.5 percentAttackChange, they will have 15 attack for a number of turns.
         private double percentAttackChange;
         private double percentSpAttackChange;
         private double percentDefenseChange;
@@ -87,6 +89,9 @@ namespace GameBoard
             percentSpDefenseChange = specialDefense;
         }
 
+        /*
+         * Decreases the amount of turns the effect will remain by one.
+         */
         public void decrement()
         {
             duration--;

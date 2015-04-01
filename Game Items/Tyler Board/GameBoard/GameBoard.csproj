@@ -80,6 +80,9 @@
     <Compile Include="Healer.cs" />
     <Compile Include="Hunter.cs" />
     <Compile Include="Mage.cs" />
+    <Compile Include="mapBuilder.xaml.cs">
+      <DependentUpon>mapBuilder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Rogue.cs" />
     <Compile Include="Terrain.cs" />
     <Compile Include="Warrior.cs" />
@@ -98,6 +101,10 @@
     <Compile Include="Board.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Enemy.cs" />
+    <Page Include="mapBuilder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Hero.cs" />
@@ -123,9 +130,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="d-pad.ico" />

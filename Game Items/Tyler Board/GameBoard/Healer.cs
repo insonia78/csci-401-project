@@ -8,8 +8,10 @@ namespace GameBoard
 {
     class Healer : Hero
     {
-        public Healer (int movespeed)
+        public Healer (int r, int c, int movespeed)
         {
+            row = r;
+            col = c;
             hp = 10; 
             speed = movespeed;
         }

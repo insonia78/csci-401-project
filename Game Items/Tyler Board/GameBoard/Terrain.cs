@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace GameBoard
 {
-    class Terrain
+    public class Terrain
     {
         private ImageSource tileImage;
         
