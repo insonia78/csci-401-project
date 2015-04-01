@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Community
 {
-    class Hero : Character
+    public partial class Hero : Character
     {
         String gender;
         // TODO: 

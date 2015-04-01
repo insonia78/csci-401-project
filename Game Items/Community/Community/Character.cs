@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Community
 {
-    class Character
+    public class Character
     {
         // fields
         private String name;

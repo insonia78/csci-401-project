@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Community
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
             // fields
             Character test = new Character();   // variable to test the character object.
-
+            Hero hero = new SoftwareEngineer();
             // test content of the character object.
             Console.WriteLine("\n" + test.toString());
 

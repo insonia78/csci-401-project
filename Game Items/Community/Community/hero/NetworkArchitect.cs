@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Community
 {
-    class NetworkArchitect : Hero
+    public partial class NetworkArchitect : Hero
     {
         public NetworkArchitect()
         {

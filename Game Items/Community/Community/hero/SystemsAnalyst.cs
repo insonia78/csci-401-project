@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Community
 {
-    class InformationSecurity : Hero
+   public partial  class SystemsAnalyst : Hero
     {
-        public InformationSecurity()
+        public SystemsAnalyst()
         {
             //Init();
         }

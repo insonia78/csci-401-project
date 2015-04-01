@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Community
 {
-    class SoftwareEngineer : Hero
+    public partial class SoftwareEngineer : Hero
     {
         public SoftwareEngineer()
         {
