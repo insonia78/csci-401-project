@@ -11,6 +11,7 @@ namespace randomize_button
     {
         // fields
         private String name;
+        private String herocharacter;
         private int maxHealth;
         private int currentHealth;
         private int attack;
@@ -37,6 +38,7 @@ namespace randomize_button
         private void Init()
         {
             name = "MissingNo";
+            herocharacter = "";
             maxHealth = 9999;
             currentHealth = maxHealth;
             attack = 99;
@@ -56,6 +58,19 @@ namespace randomize_button
             set
             {
                 name = value;
+            }
+        }
+
+        //get and set for character hero class.
+        public String Herocharacter
+        {
+            get
+            {
+                return herocharacter;
+            }
+            set
+            {
+                herocharacter = value;
             }
         }
 

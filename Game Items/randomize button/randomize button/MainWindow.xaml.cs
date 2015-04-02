@@ -24,12 +24,20 @@ namespace randomize_button
     public partial class MainWindow : Window
     {
         int[] heroType = new int[5];
-            String[] name_female = new String[5]{"Sally", "Sammy", "Erica", "Amanda", "Caitlyn"};
+        String[] name_female = new String[20] { "Sally", "Sammy", "Erica", "Amanda", "Caitlyn", "Sandy", "Ashley", "Serena", "Catherine", "Gabby", "Angie", "Lori", "Anna", "Stephanie", "Rachel", "Monica", "LaraCroft", "Rose", "Emily", "Nina" };
             bool[] gender = new bool[5];
-            String[] name_male = new String[5] { "Evan", "Christian", "Joseph", "Bob", "Dylan" };
+            String[] name_male = new String[20] { "Evan", "Christian", "Joseph", "Bob", "Dylan", "Aaron", "Bill", "Chandler", "Joey", "Mark", "Tyler", "Malane", "Thomas", "Cedric", "William", "Devin", "Randy", "Travis", "Leon", "MasterChief" };
             String[] hero_name = new String[5];
             String[] hero_type = new String[5];
-            string name;
+            string name, name2;
+            public bool hero1WasClicked = false;
+            public bool hero2WasClicked = false;
+            public bool hero3WasClicked = false;
+            public bool hero4WasClicked = false;
+            public bool hero5WasClicked = false;
+       
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -88,8 +96,7 @@ namespace randomize_button
             int num;
             int nums;
            
-            for (int i = 0; i < 5; i++)
-            {
+           int i = 0;
                 num = random.Next(1, 6);
                 heroType[i] = num;
 
@@ -140,7 +147,7 @@ namespace randomize_button
                 }
             }
 
-        }
+        
 
         /// <this sets the names for the randomization button
         /// <it sends the names into a common array so they can be accessed for the heros.
@@ -160,32 +167,161 @@ namespace randomize_button
                 heroType[i] = num;
 
 
-                numnum = random.Next(0, 5);
+                numnum = random.Next(0, 21);
                 if (gender[i] == true)
                 {
-
-                    name = name_male[numnum];
-                    hero_name[i] = name;
-                  
-
+                    if (i == 0)
+                    {
+                        name = name_male[numnum];
+                        hero_name[i] = name;
+                    }
+                    else if (i == 1)
+                    {
+                        name2 = name_male[numnum];
+                        if (name2 == hero_name[0])
+                        {
+                            numnum = random.Next(0, 21);
+                            name2 = name_male[numnum];
+                        }
+                        else
+                        {
+                            name = name2;
+                            hero_name[1] = name;
+                        }
+                    }
+                    else if (i == 2)
+                    {
+                        name2 = name_male[numnum];
+                        if (name2 == hero_name[i - 1] || name2 == hero_name[i - 2])
+                        {
+                            numnum = random.Next(0, 21);
+                            name2 = name_male[numnum];
+                        }
+                        else
+                        {
+                            name = name2;
+                            hero_name[2] = name;
+                        }
+                    }
+                    else if (i == 3)
+                    {
+                        name2 = name_male[numnum];
+                        if (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2])
+                        {
+                            numnum = random.Next(0, 21);
+                            name2 = name_male[numnum];
+                        }
+                        else
+                        {
+                            name = name2;
+                            hero_name[3] = name;
+                        }
+                    }
+                    else if (i == 4)
+                    {
+                        name2 = name_male[numnum];
+                        if (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2] || name2 == hero_name[3])
+                        {
+                            numnum = random.Next(0, 21);
+                            name2 = name_male[numnum];
+                        }
+                    }
                 }
-                else
+                else 
                 {
-                    name = name_female[numnum];
-                    hero_name[i] = name;
+
+                    if (i == 0)
+                    {
+                        name = name_female[numnum];
+                        hero_name[i] = name;
+                    }
+
+                    else if (i == 1)
+                    {
+                        name2 = name_female[numnum];
+                        if (name2 == hero_name[0])
+                        {
+                            numnum = random.Next(0, 21);
+                            name2 = name_female[numnum];
+                        }
                     
+                        else
+                        {
+                            name = name2;
+                            hero_name[1] = name;
+                        }
+                    }
+                    else if (i == 2)
+                    {
+                        name2 = name_female[numnum];
+                        if (name2 == hero_name[0] || name2 == hero_name[1])
+                        {
+                            numnum = random.Next(0, 21);
+                            name2 = name_female[numnum];
+                        }
+                        else
+                        {
+                            name = name2;
+                            hero_name[2] = name;
+                        }
+                    }
+                    else if (i == 3)
+                    {
+                        name2 = name_female[numnum];
+                        if (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2])
+                        {
+                            numnum = random.Next(0, 21);
+                            name2 = name_female[numnum];
+                        }
+                        else
+                        {
+                            name = name2;
+                            hero_name[3] = name;
+                        }
+                    }
+                    else if (i == 4)
+                    {
+                        name2 = name_female[numnum];
+                        if (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2] || name2 == hero_name[3])
+                        {
+                            numnum = random.Next(0, 21);
+                            name2 = name_female[numnum];
+                        }
+                        else
+                        {
+                            name = name2;
+                            hero_name[4] = name;
+                        }
+                    }
+                }
 
                 }
-                
             }
+        
 
-        }
+            
+        
 
         ///<this is the start of the randomize button. when you click it, it will call the gender one.
         /// once it calls the gender it will call the hero one. 
         /// after it calls the hero one, it calls the name.
         private void GenRan_Click(object sender, RoutedEventArgs e)
         {
+            ///<does this before it does everything else.
+
+            Hero_Name.Visibility = System.Windows.Visibility.Hidden;
+            HeroNames.Visibility = System.Windows.Visibility.Hidden;
+            HeroChoices.Visibility = System.Windows.Visibility.Hidden;
+            HeroGender.Visibility = System.Windows.Visibility.Hidden;
+            Female.Visibility = System.Windows.Visibility.Hidden;
+            Male.Visibility = System.Windows.Visibility.Hidden;
+            Warrior.Visibility = System.Windows.Visibility.Hidden;
+            Hunter.Visibility = System.Windows.Visibility.Hidden;
+            Healer.Visibility = System.Windows.Visibility.Hidden;
+            Rogue.Visibility = System.Windows.Visibility.Hidden;
+            Mage.Visibility = System.Windows.Visibility.Hidden;
+            Confirm.Visibility = System.Windows.Visibility.Visible;
+
             this.Gender();
             this.Herocharacter();
             this.Name();
@@ -201,10 +337,19 @@ namespace randomize_button
                     case 0 :
                         {
                             characters[i] = new Character();
-                            characters[i].Gender = gender[i];
-                            ///<getting an error at the line below this one, for every case. any help?
+                            characters[i].Gender = gender[i];                         
                             characters[i].Herocharacter = hero_type[i];
                             characters[i].Name = hero_name[i];
+                            Hero1class.Content = hero_type[0];
+                            Hero2class.Content = hero_type[1];
+                            Hero3class.Content = hero_type[2];
+                            Hero4class.Content = hero_type[3];
+                            Hero5class.Content = hero_type[4];
+                            Hero1name.Content = hero_name[0];
+                            Hero2name.Content = hero_name[1];
+                            Hero3name.Content = hero_name[2];
+                            Hero4name.Content = hero_name[3];
+                            Hero5name.Content = hero_name[4];
                             break;
                         }
                     case 1 :
@@ -213,6 +358,16 @@ namespace randomize_button
                             characters[i].Gender = gender[i];
                             characters[i].Herocharacter = hero_type[i];
                             characters[i].Name = hero_name[i];
+                            Hero1class.Content = hero_type[0];
+                            Hero2class.Content = hero_type[1];
+                            Hero3class.Content = hero_type[2];
+                            Hero4class.Content = hero_type[3];
+                            Hero5class.Content = hero_type[4];
+                            Hero1name.Content = hero_name[0];
+                            Hero2name.Content = hero_name[1];
+                            Hero3name.Content = hero_name[2];
+                            Hero4name.Content = hero_name[3];
+                            Hero5name.Content = hero_name[4];
                             break;
                         }
                     case 2 :
@@ -221,6 +376,16 @@ namespace randomize_button
                             characters[i].Gender = gender[i];
                             characters[i].Herocharacter = hero_type[i];
                             characters[i].Name = hero_name[i];
+                            Hero1class.Content = hero_type[0];
+                            Hero2class.Content = hero_type[1];
+                            Hero3class.Content = hero_type[2];
+                            Hero4class.Content = hero_type[3];
+                            Hero5class.Content = hero_type[4];
+                            Hero1name.Content = hero_name[0];
+                            Hero2name.Content = hero_name[1];
+                            Hero3name.Content = hero_name[2];
+                            Hero4name.Content = hero_name[3];
+                            Hero5name.Content = hero_name[4];
                             break;
                         }
                     case 3 :
@@ -229,6 +394,16 @@ namespace randomize_button
                             characters[i].Gender = gender[i];
                             characters[i].Herocharacter = hero_type[i];
                             characters[i].Name = hero_name[i];
+                            Hero1class.Content = hero_type[0];
+                            Hero2class.Content = hero_type[1];
+                            Hero3class.Content = hero_type[2];
+                            Hero4class.Content = hero_type[3];
+                            Hero5class.Content = hero_type[4];
+                            Hero1name.Content = hero_name[0];
+                            Hero2name.Content = hero_name[1];
+                            Hero3name.Content = hero_name[2];
+                            Hero4name.Content = hero_name[3];
+                            Hero5name.Content = hero_name[4];
                             break;
                         }
                     case 4 :
@@ -237,6 +412,16 @@ namespace randomize_button
                             characters[i].Gender = gender[i];
                             characters[i].Herocharacter = hero_type[i];
                             characters[i].Name = hero_name[i];
+                            Hero1class.Content = hero_type[0];
+                            Hero2class.Content = hero_type[1];
+                            Hero3class.Content = hero_type[2];
+                            Hero4class.Content = hero_type[3];
+                            Hero5class.Content = hero_type[4];
+                            Hero1name.Content = hero_name[0];
+                            Hero2name.Content = hero_name[1];
+                            Hero3name.Content = hero_name[2];
+                            Hero4name.Content = hero_name[3];
+                            Hero5name.Content = hero_name[4];
                             break;
                         }
                   
@@ -246,15 +431,25 @@ namespace randomize_button
                                 characters[i] .Gender = gender[i];
                                 characters[i].Herocharacter = hero_type[i];
                                 characters[i].Name = hero_name[i];
+                                Hero1class.Content = hero_type[0];
+                                Hero2class.Content = hero_type[1];
+                                Hero3class.Content = hero_type[2];
+                                Hero4class.Content = hero_type[3];
+                                Hero5class.Content = hero_type[4];
+                                Hero1name.Content = hero_name[0];
+                                Hero2name.Content = hero_name[1];
+                                Hero3name.Content = hero_name[2];
+                                Hero4name.Content = hero_name[3];
+                                Hero5name.Content = hero_name[4];
                                 break;
                             }
                        
                 }
-                MessageBox.Show("this is gender in index " + i +" "+ gender[i].ToString());
+               MessageBox.Show("this is gender in index " + i +" "+ gender[i].ToString());
                MessageBox.Show("this is character in index " + i +" "+characters[i].Gender.ToString());
                MessageBox.Show("this name is in index " + i + " " + characters[i].Name.ToString());
                MessageBox.Show("this is in index " + i + " " + characters[i].ToString());
-             
+               MessageBox.Show("this is hero class in index" + " " + characters[i].Herocharacter.ToString());
             }
 
         }
@@ -265,11 +460,18 @@ namespace randomize_button
         /// from there the person will be able to do their choices.
         private void Hero1_Click(object sender, RoutedEventArgs e)
         {
-            Hero_Name.Visibility = System.Windows.Visibility.Visible;
-            Gender_Choices.Visibility = System.Windows.Visibility.Visible;
-            Female.Visibility = System.Windows.Visibility.Visible;
-            Male.Visibility = System.Windows.Visibility.Visible;
+         
+
+
+            hero1WasClicked = true;
+            IndividualHeros ih = new IndividualHeros();
+            ih.ShowDialog();
         }
+
+      
+
+
+
 
         private void Female_Click(object sender, RoutedEventArgs e)
         {
@@ -281,6 +483,55 @@ namespace randomize_button
         {
 
         }
+
+        private void Hero2_Click_1(object sender, RoutedEventArgs e)       
+            {
+
+                hero2WasClicked = true;
+                IndividualHeros ih = new IndividualHeros();
+                ih.ShowDialog();
+            }
+        
+
+        private void Hero3_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            hero3WasClicked = true;
+
+                IndividualHeros ih = new IndividualHeros();
+                ih.ShowDialog();
+            
+        }
+
+        private void Hero4_Click(object sender, RoutedEventArgs e)
+        {
+
+            hero4WasClicked = true;
+            IndividualHeros ih = new IndividualHeros();
+            ih.ShowDialog();
+        }
+
+
+        private void Hero5_Click(object sender, RoutedEventArgs e)
+        {
+
+            hero5WasClicked = true;
+            IndividualHeros ih = new IndividualHeros();
+            ih.ShowDialog();
+           
+        }
+
+
+ 
+
+        private void Confirm_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+       
+
+       
     }
 }
 
