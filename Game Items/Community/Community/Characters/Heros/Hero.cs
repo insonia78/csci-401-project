@@ -6,12 +6,36 @@ using System.Threading.Tasks;
 
 namespace Community
 {
+    /**************************************************************************
+     * The heros contrast the enemy classes. Heros will be able to gain
+     * experience until they hit the max experience they can earn for their 
+     * current level and then they will be able to level up. Resetting their
+     * max requirement of expereince to level up. For each level increase, the
+     * difference from the max experience and min experience will be greater than 
+     * the previous level.
+     * The hero character will also be able to wear equipment that affects 
+     * their stats for the better or worse. They will be able to place these
+     * equipments are parts of their bodies and can interchange these items
+     * during the Player's time in the world map.
+     * The base and max experience do not change, after leveling up 
+     * they 
+     * ************************************************************************
+     */
+    /**********************************************************************
+     * TODO:
+     * helmet
+     * chest
+     * legs
+     * arms
+     * experience gain system.
+     * ********************************************************************
+     */
     class Hero : Character
     {
         // fields
         private Boolean male;                       // true for male and false for female.
-        private String profileImage;                // image of the hero for the UI.
-        private String jobRole;                         // name of the hero's job.
+        private String characterProfilePicture;     // image of the hero for the UI.
+        private String jobRole;                     // name of the hero's job.
         
         // base stats for experience.
         private int baseExperience = 0;             // experience earned.
@@ -21,24 +45,25 @@ namespace Community
         // current stats.
         private int currentExperience;              // current amount of experience.
 
-        // TODO: 
-        // fields, objects and classes to be created.
-        // image variable
-        // helmet
-        // chest
-        // legs
-        // arms
-
+        // default constructor.
         public Hero()
         {
-            base.Init();
-            Init();
+            InitHero();
         }
 
-        public void Init()
+        // Second constructor.
+        public Hero(int r, int c, int charSpeed)
+        {
+            InitHero();
+            base.Row = r;
+            base.Col = c;
+            base.CurrentSpeed = charSpeed;
+        }
+
+        public void InitHero()
         {
             male = false;
-            profileImage = "no image chosen.png";
+            characterProfilePicture = "Missingno.png";
             jobRole = "Hero/Heroine";
             currentExperience = baseExperience;
         }
@@ -61,15 +86,15 @@ namespace Community
         }
 
         // get and set for the profileImage variable.
-        public String ProfileImage
+        public String CharacterProfilePicture
         {
             get
             {
-                return profileImage;
+                return characterProfilePicture;
             }
             set
             {
-                profileImage = value;
+                characterProfilePicture = value;
             }
         }
 
@@ -137,16 +162,20 @@ namespace Community
                 currentExperience = value;
             }
         }
-
+        /**********************************************************************
+         * Other methods.
+         * ********************************************************************
+         */
         // Prints out the variables for testing purposes.
-        public String toString()
+        public String ToString()
         {
             String text;
 
-            text = (base.toString() +
+            text = (
+                base.ToString() +
                 "\n\nJob Role: " + jobRole +
                 "\nThis hero is male: " + male +
-                "\nProfile image: " + profileImage +
+                "\nProfile image: " + characterProfilePicture +
                 "\n\nExperience Stats:\n\n" +
                 "Experience at the beginning of this level: " + baseExperience + "\n" +
                 "Experience needed to level: " + baseMaxExperience + "\n" +

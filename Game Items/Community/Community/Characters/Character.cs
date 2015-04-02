@@ -7,12 +7,34 @@ using System.Threading.Tasks;
 
 namespace Community
 {
+    /**************************************************************************
+     * This class is the skeleton of every hero and enemy.
+     * each character has base stats that will be the same for all job classes.
+     * Each stat has a multiplier. This multiplier will change the stats of each
+     * job class. They are also their to decide how many points a character will
+     * receive for each stat when they level up as it pertains to their job role.
+     * ************************************************************************
+     */
+    /**************************************************************************
+     * TODO:
+     * build leveling system.
+     * build battle system; 
+     *      taking and receiving damage. death. status effects etc.
+     * ************************************************************************
+     */
     class Character
     {
         // fields
         private String name;
-        private bool canMoveOnTurn;
-        private String bitImage;
+
+        // fields for the game board.
+        private int row;
+        private int col;
+        private bool hasMovedOnTurn = false;
+        private bool hasAttackedOnTurn = false;
+        private bool hasUsedItemOnTurn = false;
+        private bool isActiveOnTurn = true;
+        private String characterPicture;
 
         // base stats.
         // all characters will have the same base stats.
@@ -38,6 +60,7 @@ namespace Community
         private double specialDefenseMulti;
 
         // maximum values.
+        private int maxLevel;
         private int maxHealth;
         private int maxEnergy;
         private int maxAttack;
@@ -48,6 +71,7 @@ namespace Community
         private int maxSpecialDefense;
 
         // current state of stats. (affected by status changing properties.)
+        private int currentLevel;
         private int currentHealth;
         private int currentEnergy;
         private int currentAttack;
@@ -60,15 +84,14 @@ namespace Community
         // constructor
         public Character()
         {
-            Init();
+            InitCharacter();
         }
 
         // initialize the fields.
-        public void Init()
+        public void InitCharacter()
         {
-            name = "MissingNo";
-            canMoveOnTurn = false;
-            bitImage = "no image chosen.png";
+        name = "MissingNo";
+        characterPicture = "Missingno.png";
 
         // stat multipliers , increases stats by a set amount for each stat.
         healthMulti = 1.0;
@@ -81,6 +104,7 @@ namespace Community
         specialDefenseMulti = 1.0;
 
         // maximum values.
+        maxLevel = 99;
         maxHealth = (int)(baseHealth * healthMulti);
         maxEnergy = (int)(baseEnergy * energyMulti);
         maxAttack = (int)(baseAttack * attackMulti);
@@ -91,6 +115,7 @@ namespace Community
         maxSpecialDefense = (int)(baseSpecialDefense * specialDefenseMulti);
 
         // current state of stats. (affected by status changing properties.)
+        currentLevel = baseLevel;
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
         currentAttack = maxAttack;
@@ -118,30 +143,67 @@ namespace Community
             }
         }
 
-        // get and set for the canMoveOnTurn variable.
-        public bool CanMoveOnTurn
+        public virtual int Col
+        {
+            get { return col; }
+            set { col = value; }
+        }
+        public virtual int Row
+        {
+            get { return row; }
+            set { row = value; }
+        }
+
+        public String CharacterPicture
         {
             get
             {
-                return canMoveOnTurn;
+                return characterPicture;
+            }
+            set { characterPicture = value; }
+        }
+
+        public bool HasMovedOnTurn
+        {
+            get
+            {
+                return hasMovedOnTurn;
             }
             set
             {
-                canMoveOnTurn = value;
+                hasMovedOnTurn = value;
+            }
+        }
+        public bool HasAttackedOnTurn
+        {
+            get
+            {
+                return hasAttackedOnTurn;
+            }
+            set
+            {
+                hasAttackedOnTurn = value;
+            }
+        }
+        public bool HasUsedItemOnTurn
+        {
+            get
+            {
+                return hasUsedItemOnTurn;
+            }
+            set
+            {
+                hasUsedItemOnTurn = value;
             }
         }
 
-        // get and set for the bitImage variable.
-        public String BitImage
+        public bool IsActiveOnTurn
         {
             get
             {
-                return bitImage;
+                return isActiveOnTurn;
             }
-            set
-            {
-                bitImage = value;
-            }
+
         }
 
         /**********************************************************************
@@ -339,11 +401,11 @@ namespace Community
         {
             get
             {
-                return AttackRangeMulti;
+                return attackRangeMulti;
             }
             set
             {
-                AttackRangeMulti = value;
+                attackRangeMulti = value;
             }
         }
 
@@ -377,6 +439,19 @@ namespace Community
          * Gets and sets for the Maximum Stats.
          * ********************************************************************
          */
+        // get and set for the maxLevel variable.
+        public int MaxLevel
+        {
+            get
+            {
+                return maxLevel;
+            }
+            set
+            {
+                maxLevel = value;
+            }
+        }
+
         // get and set for the maxHealth variable.
         public int MaxHealth
         {
@@ -485,6 +560,19 @@ namespace Community
          * Get and sets for the Current Stats.
          * ********************************************************************
          */
+        // get and set for the currentLevel variable.
+        public int CurrentLevel
+        {
+            get
+            {
+                return currentLevel;
+            }
+            set
+            {
+                currentLevel = value;
+            }
+        }
+
         // get and set for the currentHealth variable.
         public int CurrentHealth
         {
@@ -589,14 +677,74 @@ namespace Community
             }
         }
 
-        // Prints out the variables for testing purposes.
-        public String toString()
+        /**********************************************************************
+         * Misc. Methods.
+         * ********************************************************************
+         */
+        // returns the status of the turn for the character.
+        public bool IsActive
         {
-            String stats = ("The Character " + name + "'s stats are the following:\n" +
+            get
+            {//If these three are true, then the character is no longer active, 
+             //change before returning the value.
+                if (hasMovedOnTurn && hasAttackedOnTurn && hasUsedItemOnTurn) 
+                    isActiveOnTurn = false;
+                return isActiveOnTurn;
+            }
+            set
+            {
+                isActiveOnTurn = value;
+                hasMovedOnTurn = !value;
+                hasUsedItemOnTurn = !value;
+                hasAttackedOnTurn = !value;
+                //If isActiveOnTurn = true, hasMovedOnTurn, etc. = !true = false.
+                //If we want to set isActive = true, then we're making the character completely 
+                // available for a new turn, so the other variables need to be false
+                //If we're setting isActive to false, we're ending their turn, so the other variables 
+                // should be true for the purposes of the code, whether actually true or not.
+            }
+        }
 
-                "\nThis character is moveable: " + canMoveOnTurn +
+        /**********************************************************************
+         * For taking damage (when another character attacks you).
+         * 
+         * Calculates damage that should be applied to the character based on the 
+         * opponent's attack and special attack stats, and the attack power of the attack they used
+         * Character who's being attacked's defense is used "against" the opponent's attack, 
+         * and their special defense is used against the opponent's special attack.
+         * Checks if health is less than or equal to zero, so
+         * ********************************************************************
+         */
+        public void ReceiveDamage(int opponentAttack, int opponentSpecialAttack, double attackPower)
+        {
+            //Damage calculating formula I made up off the top of my head. 
+            //Almost definitely will need to be replaced/adjusted.
+            int damage = (int)(((opponentAttack / currentDefense + 
+                opponentSpecialAttack / currentSpecialDefense) * attackPower));
 
-                "\n8-bit picture: " + bitImage + 
+            currentHealth = currentHealth - damage;
+
+            if (currentHealth <= 0)
+            {
+                //NEEDS TO BE DONE:
+                //character dies *insert code here*
+                //if hero, can't just set it to null, need it to be stored somewhere.
+            }
+        }
+
+        // Prints out the variables for testing purposes.
+        public String ToString()
+        {
+            String text;
+            
+            text = (
+                "The Character " + name + "'s stats are the following:\n" +
+                "\nCharacter is moveable: " + isActiveOnTurn +
+                "\nCharacter moved this turn: " + hasMovedOnTurn +
+                "\nCharacter attacked this turn: " + hasAttackedOnTurn +
+                "\nCharacter used an item this turn: " + hasUsedItemOnTurn +
+                "\nCharacter is active this turn: " + isActiveOnTurn +
+                "\n8-bit picture: " + characterPicture + 
 
                 "\n\n\nBase Stats:\n\n" +
                 "Level: " + baseLevel + "\n" +
@@ -640,7 +788,7 @@ namespace Community
                 "Special Attack: " + currentSpecialAttack + "\n" +
                 "Special Defense: " + currentSpecialDefense);
 
-            return stats;
+            return text;
         }
     }
 }
