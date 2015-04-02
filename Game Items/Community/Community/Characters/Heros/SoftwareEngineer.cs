@@ -15,19 +15,19 @@ namespace Community
     {
         public SoftwareEngineer(String nam, bool sex)
         {
-            InitSoftwareEngineer(nam, sex);
+            Init(nam, sex);
         }
 
         // Second constructor.
         public SoftwareEngineer(int r, int c, int charSpeed)
         {
-            //InitSoftwareEngineer();
+            //Init();
             Row = r;
             Col = c;
             CurrentSpeed = charSpeed;
         }
 
-        private void InitSoftwareEngineer(String n, bool s)
+        private void Init(String n, bool s)
         {
             Name = n;
             Male = s;
@@ -37,12 +37,12 @@ namespace Community
             if(Male)
             {
                 CharacterProfilePicture = "MaleSoftwareEngineer.png";
-                //CharacterPicture = " "; 
+                CharacterPicture = " "; 
             }
             else
             {
                 CharacterProfilePicture = "FemaleSoftwareEngineer.png";
-                //CharacterPicture = " "; 
+                CharacterPicture = " "; 
             }
 
             /******************************************************************

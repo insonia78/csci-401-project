@@ -30,10 +30,10 @@ namespace Community
         // Constructor.
         public Enemy()
         {
-            InitEnemy();
+            Init();
         }
 
-        public void InitEnemy()
+        public void Init()
         {
             experienceAmountMulti = 1.0;
             currentExperienceAmount = (int)(baseExperienceAmount * experienceAmountMulti);

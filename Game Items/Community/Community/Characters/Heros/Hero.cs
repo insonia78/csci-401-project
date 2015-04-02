@@ -48,19 +48,19 @@ namespace Community
         // default constructor.
         public Hero()
         {
-            InitHero();
+            Init();
         }
 
         // Second constructor.
         public Hero(int r, int c, int charSpeed)
         {
-            InitHero();
+            Init();
             base.Row = r;
             base.Col = c;
             base.CurrentSpeed = charSpeed;
         }
 
-        public void InitHero()
+        public void Init()
         {
             male = false;
             characterProfilePicture = "Missingno.png";

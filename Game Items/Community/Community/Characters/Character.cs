@@ -84,11 +84,11 @@ namespace Community
         // constructor
         public Character()
         {
-            InitCharacter();
+            Init();
         }
 
         // initialize the fields.
-        public void InitCharacter()
+        public void Init()
         {
         name = "MissingNo";
         characterPicture = "Missingno.png";
