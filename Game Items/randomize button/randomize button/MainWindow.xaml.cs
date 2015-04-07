@@ -37,6 +37,17 @@ namespace randomize_button
             public bool hero5WasClicked = false;
        
 
+        public String[] heroTypeArray
+        {
+            get
+            {
+                return hero_type;
+            }
+            set
+            {
+                hero_type = value;
+            }
+        }
 
         public MainWindow()
         {
@@ -464,7 +475,7 @@ namespace randomize_button
 
 
             hero1WasClicked = true;
-            IndividualHeros ih = new IndividualHeros();
+            IndividualHeros ih = new IndividualHeros(this);
             ih.ShowDialog();
         }
 
@@ -488,7 +499,7 @@ namespace randomize_button
             {
 
                 hero2WasClicked = true;
-                IndividualHeros ih = new IndividualHeros();
+                IndividualHeros ih = new IndividualHeros(this);
                 ih.ShowDialog();
             }
         
@@ -498,7 +509,7 @@ namespace randomize_button
 
             hero3WasClicked = true;
 
-                IndividualHeros ih = new IndividualHeros();
+                IndividualHeros ih = new IndividualHeros(this);
                 ih.ShowDialog();
             
         }
@@ -507,7 +518,7 @@ namespace randomize_button
         {
 
             hero4WasClicked = true;
-            IndividualHeros ih = new IndividualHeros();
+            IndividualHeros ih = new IndividualHeros(this);
             ih.ShowDialog();
         }
 
@@ -516,7 +527,7 @@ namespace randomize_button
         {
 
             hero5WasClicked = true;
-            IndividualHeros ih = new IndividualHeros();
+            IndividualHeros ih = new IndividualHeros(this);
             ih.ShowDialog();
            
         }

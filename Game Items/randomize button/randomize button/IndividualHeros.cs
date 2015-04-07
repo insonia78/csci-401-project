@@ -18,19 +18,20 @@ namespace randomize_button
         
         String[] hero_name = new String[5];
         String[] hero_type = new String[5];
+        MainWindow mw;       
         string name, name2;
         string herotype;
         bool h1WasClicked, h2WasClicked, h3WasClicked, h4WasClicked, h5WasClicked;
 
-        MainWindow mw = new MainWindow();
 
 
 
-
-        public IndividualHeros()
+        public IndividualHeros(MainWindow mwi)
         {
            
             InitializeComponent();
+            mw = mwi;
+            hero_type = mw.heroTypeArray;  
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,8 +54,8 @@ namespace randomize_button
             if (h1WasClicked == true)
             {
                 herotype = "Hunter";
-                hero_type[1] = herotype;
-                MessageBox.Show("this is hero class in index" + " " + hero_type[1].ToString());
+                hero_type[0] = herotype;
+                MessageBox.Show("this is hero class in index" + " " + hero_type[0].ToString());
             }
             else
             {
@@ -72,9 +73,9 @@ namespace randomize_button
             h5WasClicked = mw.hero1WasClicked;
             if (h1WasClicked == true)
             {
-                herotype = "Hunter";
-                hero_type[1] = herotype;
-                MessageBox.Show("this is hero class in index" + " " + hero_type[1].ToString());
+                herotype = "Warrior";
+                hero_type[0] = herotype;
+                MessageBox.Show("this is hero class in index" + " " + hero_type[0].ToString());
             }
             else
             {
