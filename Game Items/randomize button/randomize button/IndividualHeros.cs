@@ -39,6 +39,8 @@ namespace randomize_button
             hero_type = mw.heroTypeArray;
             hero_name = mw.heroNameArray;
             gender = mw.heroGenderArray;
+
+            healerHero.MouseEnter += new EventHandler(Healer_MouseOver);
         }
 
         // this is the accept changes button.
@@ -501,7 +503,19 @@ namespace randomize_button
             
         }
 
-       
+        private void heroDescription_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+       private void Healer_MouseOver(object sender, EventArgs e)
+        {
+            heroDescription.Visible = true;
+            heroDescription.Text = "This is the Healer class." +
+                 "Healers have the below average health and the lowest physical defense in the game." +
+                 " Healers only have one basic attack, but their three special attacks allow them to heal their team-mates." +
+                 " A nicely timed heal could make the difference between victory and defeat.";
+        }
         
     }
 }

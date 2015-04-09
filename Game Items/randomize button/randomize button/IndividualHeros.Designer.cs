@@ -125,6 +125,7 @@
             this.heroDescription.Size = new System.Drawing.Size(154, 255);
             this.heroDescription.TabIndex = 7;
             this.heroDescription.Visible = false;
+            this.heroDescription.TextChanged += new System.EventHandler(this.heroDescription_TextChanged);
             // 
             // heroNameChoices
             // 
