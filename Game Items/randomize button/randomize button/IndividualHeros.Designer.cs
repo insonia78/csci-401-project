@@ -125,7 +125,7 @@
             this.heroDescription.Size = new System.Drawing.Size(154, 255);
             this.heroDescription.TabIndex = 7;
             this.heroDescription.Visible = false;
-            this.heroDescription.TextChanged += new System.EventHandler(this.heroDescription_TextChanged);
+            
             // 
             // heroNameChoices
             // 
@@ -182,7 +182,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(164, 20);
             this.textBox1.TabIndex = 13;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_Click);
+            
             // 
             // IndividualHeros
             // 

@@ -102,7 +102,6 @@ namespace randomize_button
                 {
 
                     gender[i] = true;
-                    // name = name_male[i];
 
                     ///<here is where I am having issues with the picture. I tried to save it to resources like a few pages suggested.
                     ///it saved it to a new folder, not the resources section I need and i cant get it to go to the right resources.
@@ -125,12 +124,10 @@ namespace randomize_button
         }
 
 
-
+        //sets the hero classes for the randomize button
         public void Herocharacter()
         {
             Random random = new Random();
-
-
 
             int num;
             int nums;
@@ -276,7 +273,7 @@ namespace randomize_button
                         else
                         {
                             name = name2;
-                            hero_name[1] = name;
+                            hero_name[i] = name;
                         }
                     }
                 }
@@ -467,16 +464,7 @@ namespace randomize_button
 
 
 
-
-
-
-
-        private void getName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-
+        //this is where you select the characters and classes you want individually.
         // here are the five hero images and what happens when you click them
         private void Hero1_Click(object sender, RoutedEventArgs e)
         {
@@ -525,10 +513,49 @@ namespace randomize_button
 
 
 
-
+        //this is what happens when you click the confirm button.
+        //if you have chosen all your characters it will take you to the world map.
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
+            if (hero_name[0] != null && hero_name[1] != null && hero_name[2] != null && hero_name[3] != null && hero_name[4] != null)
+            {
+                MessageBox.Show("here is hero 1.");
+                MessageBox.Show("here is the hero: " + hero_name[0].ToString());
+                MessageBox.Show("here is hero 2.");
+                MessageBox.Show("here is the hero: " + hero_name[1].ToString());
+                MessageBox.Show("here is hero 3.");
+                MessageBox.Show("here is the hero: " + hero_name[2].ToString());
+                MessageBox.Show("here is hero 4.");
+                MessageBox.Show("here is the hero: " + hero_name[3].ToString());
+                MessageBox.Show("here is hero 5.");
+                MessageBox.Show("here is the hero: " + hero_name[4].ToString());
 
+                MessageBox.Show("here is hero 1.");
+                MessageBox.Show("here is the hero: " + hero_type[0].ToString());
+                MessageBox.Show("here is hero 2.");
+                MessageBox.Show("here is the hero: " + hero_type[1].ToString());
+                MessageBox.Show("here is hero 3.");
+                MessageBox.Show("here is the hero: " + hero_type[2].ToString());
+                MessageBox.Show("here is hero 4.");
+                MessageBox.Show("here is the hero: " + hero_type[3].ToString());
+                MessageBox.Show("here is hero 5.");
+                MessageBox.Show("here is the hero: " + hero_type[4].ToString());
+
+                MessageBox.Show("here is hero 1.");
+                MessageBox.Show("here is the hero: " + gender[0].ToString());
+                MessageBox.Show("here is hero 2.");
+                MessageBox.Show("here is the hero: " + gender[1].ToString());
+                MessageBox.Show("here is hero 3.");
+                MessageBox.Show("here is the hero: " + gender[2].ToString());
+                MessageBox.Show("here is hero 4.");
+                MessageBox.Show("here is the hero: " + gender[3].ToString());
+                MessageBox.Show("here is hero 5.");
+                MessageBox.Show("here is the hero: " + gender[4].ToString());
+            } 
+            else
+            {
+                MessageBox.Show("You haven't chosen all your characters yet. Please choose your characters.");
+            }
         }
 
 
