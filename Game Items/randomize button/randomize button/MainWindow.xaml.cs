@@ -36,6 +36,44 @@ namespace randomize_button
         public bool hero4WasClicked = false;
         public bool hero5WasClicked = false;
 
+
+
+
+
+//
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //this is the error area. i'm trying to get the hero class label to be accessed in the other form.
+        //i thought it should have been set up like the other ones, but maybe its slightly different?
+        public string Hero1class
+        {
+            get
+            {
+                return this.Hero1class.Text;
+            }
+            set
+            {
+                this.Hero1class.Text = value;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         //allows the array to be accessed in individual heros class
         public String[] heroTypeArray
         {
@@ -141,45 +179,45 @@ namespace randomize_button
 
             if (nums == 1)
             {
-                hero_type[i] = "warrior";
-                hero_type[i + 1] = "healer";
-                hero_type[i + 2] = "mage";
-                hero_type[i + 3] = "hunter";
-                hero_type[i + 4] = "rogue";
+                hero_type[i] = "Warrior";
+                hero_type[i + 1] = "Healer";
+                hero_type[i + 2] = "Mage";
+                hero_type[i + 3] = "Hunter";
+                hero_type[i + 4] = "Rogue";
             }
             else if (nums == 2)
             {
-                hero_type[i] = "rogue";
-                hero_type[i + 1] = "warrior";
-                hero_type[i + 2] = "healer";
-                hero_type[i + 3] = "mage";
-                hero_type[i + 4] = "hunter";
+                hero_type[i] = "Rogue";
+                hero_type[i + 1] = "Warrior";
+                hero_type[i + 2] = "Healer";
+                hero_type[i + 3] = "Mage";
+                hero_type[i + 4] = "Hunter";
 
 
             }
             else if (nums == 3)
             {
-                hero_type[i] = "hunter";
-                hero_type[i + 1] = "rogue";
-                hero_type[i + 2] = "warrior";
-                hero_type[i + 3] = "healer";
-                hero_type[i + 4] = "mage";
+                hero_type[i] = "Hunter";
+                hero_type[i + 1] = "Rogue";
+                hero_type[i + 2] = "Warrior";
+                hero_type[i + 3] = "Healer";
+                hero_type[i + 4] = "Mage";
             }
             else if (nums == 4)
             {
-                hero_type[i] = "mage";
-                hero_type[i + 1] = "hunter";
-                hero_type[i + 2] = "rogue";
-                hero_type[i + 3] = "warrior";
-                hero_type[i + 4] = "healer";
+                hero_type[i] = "Mage";
+                hero_type[i + 1] = "Hunter";
+                hero_type[i + 2] = "Rogue";
+                hero_type[i + 3] = "Warrior";
+                hero_type[i + 4] = "Healer";
             }
             else
             {
-                hero_type[i] = "healer";
-                hero_type[i + 1] = "mage";
-                hero_type[i + 2] = "hunter";
-                hero_type[i + 3] = "rogue";
-                hero_type[i + 4] = "warrior";
+                hero_type[i] = "Healer";
+                hero_type[i + 1] = "Mage";
+                hero_type[i + 2] = "Hunter";
+                hero_type[i + 3] = "Rogue";
+                hero_type[i + 4] = "Warrior";
             }
         }
 
