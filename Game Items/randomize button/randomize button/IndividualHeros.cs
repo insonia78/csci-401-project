@@ -12,28 +12,16 @@ namespace randomize_button
 {
     public partial class IndividualHeros : Form
     {
-
-
-
-
-
-        int[] heroType = new int[5];
-        
-        bool[] gender = new bool[5];
-        
+        MainWindow mw;
+        int[] heroType = new int[5];        
+        bool[] gender = new bool[5];       
         String[] hero_name = new String[5];
-        String[] hero_type = new String[5];
-        MainWindow mw;       
-     
+        String[] hero_type = new String[5];                   
         string herotype, heronames;
         bool h1WasClicked, h2WasClicked, h3WasClicked, h4WasClicked, h5WasClicked, herogender;
 
-
-
-
         public IndividualHeros(MainWindow mwi)
-        {
-           
+        {          
             InitializeComponent();
             mw = mwi;
             hero_type = mw.heroTypeArray;
