@@ -26,6 +26,8 @@ namespace Community
     {
         // fields
         private String name;
+        private Boolean male;
+        private String jobRole;
 
         // fields for the game board.
         private int row;
@@ -54,7 +56,7 @@ namespace Community
         private double energyMulti;
         private double attackMulti;
         private double defenseMulti;
-        private double speedMulti;
+        private int speedMulti;
         private double attackRangeMulti;
         private double specialAttackMulti;
         private double specialDefenseMulti;
@@ -91,14 +93,16 @@ namespace Community
         public void Init()
         {
         name = "MissingNo";
+        male = false;
         characterPicture = "Missingno.png";
+        jobRole = "Jobless";
 
         // stat multipliers , increases stats by a set amount for each stat.
         healthMulti = 1.0;
         energyMulti = 1.0;
         attackMulti = 1.0;
         defenseMulti = 1.0;
-        speedMulti = 1.0;
+        speedMulti = 1;
         attackRangeMulti = 1.0;
         specialAttackMulti = 1.0;
         specialDefenseMulti = 1.0;
@@ -143,6 +147,23 @@ namespace Community
             }
         }
 
+        /**********************************************************************
+         * Get and sets for the variables.
+         **********************************************************************
+         */
+        // get and set for the male variable.
+        public Boolean Male
+        {
+            get
+            {
+                return male;
+            }
+            set
+            {
+                male = value;
+            }
+        }
+
         public virtual int Col
         {
             get { return col; }
@@ -161,6 +182,19 @@ namespace Community
                 return characterPicture;
             }
             set { characterPicture = value; }
+        }
+
+        // get and set for the jobRole variable.
+        public String JobRole
+        {
+            get
+            {
+                return jobRole;
+            }
+            set
+            {
+                jobRole = value;
+            }
         }
 
         public bool HasMovedOnTurn
@@ -384,7 +418,7 @@ namespace Community
         }
 
         // get and set for the speedMulti variable.
-        public double SpeedMulti
+        public int SpeedMulti
         {
             get
             {
@@ -706,30 +740,73 @@ namespace Community
         }
 
         /**********************************************************************
-         * For taking damage (when another character attacks you).
-         * 
-         * Calculates damage that should be applied to the character based on the 
-         * opponent's attack and special attack stats, and the attack power of the attack they used
-         * Character who's being attacked's defense is used "against" the opponent's attack, 
-         * and their special defense is used against the opponent's special attack.
-         * Checks if health is less than or equal to zero, so
+         * lowers the current health points of the character.
+         * 0 being the lowest possible point to subtract to.
          * ********************************************************************
          */
-        public void ReceiveDamage(int opponentAttack, int opponentSpecialAttack, double attackPower)
+        public void DecreaseHealth(int subtrahend)
         {
-            //Damage calculating formula I made up off the top of my head. 
-            //Almost definitely will need to be replaced/adjusted.
-            int damage = (int)(((opponentAttack / currentDefense + 
-                opponentSpecialAttack / currentSpecialDefense) * attackPower));
+            int newHealth = (int)(currentHealth - subtrahend);
 
-            currentHealth = currentHealth - damage;
-
-            if (currentHealth <= 0)
+            if (newHealth < 0)
             {
-                //NEEDS TO BE DONE:
-                //character dies *insert code here*
-                //if hero, can't just set it to null, need it to be stored somewhere.
+                currentHealth = 0;
             }
+            else 
+            {
+                currentHealth = newHealth;
+            }
+        }
+
+        /**********************************************************************
+         * increases the current health points of the character.
+         * their max health being the highest possible point to added to.
+         * ********************************************************************
+         */
+        public void IncreaseHealth(int addend)
+        {
+            int newHealth = currentHealth + addend;
+
+            if (newHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            else
+            {
+                currentHealth = newHealth;
+            }
+        }
+
+        /**********************************************************************
+         * inflict damage to the opponent.
+         * ********************************************************************
+         */
+        public int InitiateAttack()
+        {
+            int attack;
+
+            attack = (int)(currentAttack * 3.75);
+
+            return attack;
+        }
+
+        /**********************************************************************
+         * deflict damage from the opponent.
+         * ********************************************************************
+         */
+        public void PreventAttack(int opponentAttack)
+        {
+            int bestChance = (50 + currentSpeed);
+
+            // checks to see if the attack has landed.
+            Random random = new Random(bestChance);
+            double miss = random.Next();
+
+            if(miss <= bestChance)
+            {
+
+            }
+            
         }
 
         // Prints out the variables for testing purposes.
@@ -739,6 +816,8 @@ namespace Community
             
             text = (
                 "The Character " + name + "'s stats are the following:\n" +
+                "\nThis Character is male: " + male +
+                "\n\nJob Role: " + jobRole +
                 "\nCharacter is moveable: " + isActiveOnTurn +
                 "\nCharacter moved this turn: " + hasMovedOnTurn +
                 "\nCharacter attacked this turn: " + hasAttackedOnTurn +

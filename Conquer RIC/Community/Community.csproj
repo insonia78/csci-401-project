@@ -59,6 +59,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Characters\Abilities\" />
+    <Folder Include="Characters\Heros\Body\" />
+    <Folder Include="Items\Equipable\Armors\" />
+    <Folder Include="Items\Equipable\Weapons\" />
+    <Folder Include="Items\List of Items Available\" />
+    <Folder Include="Items\Usable\Buffs\" />
+    <Folder Include="Items\Usable\Recovery\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

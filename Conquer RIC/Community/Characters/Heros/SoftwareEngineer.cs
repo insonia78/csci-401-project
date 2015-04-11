@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Community
 {
-    /**********************************************************************
+    /**************************************************************************
          * TODO:
          * Job-specific abilities
          * ********************************************************************
@@ -48,14 +48,14 @@ namespace Community
              * stat progression unique to this job role.
              * ****************************************************************
              */
-            HealthMulti = 2.50;
+            HealthMulti = 3.00;
             EnergyMulti = 1.50;
-            AttackMulti = 1.75;
+            AttackMulti = 2.00;
             DefenseMulti = 3.00;
-            SpeedMulti = 1.00;
+            SpeedMulti = 1;
             AttackRangeMulti = 1.00;
             SpecialAttackMulti = 2.00;
-            SpecialDefenseMulti = 3.00;
+            SpecialDefenseMulti = 2.00;
 
             /******************************************************************
              * stats initialized after multipliers applied.

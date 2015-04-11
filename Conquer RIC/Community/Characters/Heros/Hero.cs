@@ -33,9 +33,8 @@ namespace Community
     class Hero : Character
     {
         // fields
-        private Boolean male;                       // true for male and false for female.
+        
         private String characterProfilePicture;     // image of the hero for the UI.
-        private String jobRole;                     // name of the hero's job.
         
         // base stats for experience.
         private int baseExperience = 0;             // experience earned.
@@ -62,27 +61,8 @@ namespace Community
 
         public void Init()
         {
-            male = false;
             characterProfilePicture = "Missingno.png";
-            jobRole = "Hero/Heroine";
             currentExperience = baseExperience;
-        }
-
-        /**********************************************************************
-         * Get and sets for the variables.
-         **********************************************************************
-         */
-        // get and set for the male variable.
-        public Boolean Male
-        {
-            get
-            {
-                return male;
-            }
-            set
-            {
-                male = value;
-            }
         }
 
         // get and set for the profileImage variable.
@@ -95,19 +75,6 @@ namespace Community
             set
             {
                 characterProfilePicture = value;
-            }
-        }
-
-        // get and set for the jobRole variable.
-        public String JobRole
-        {
-            get
-            {
-                return jobRole;
-            }
-            set
-            { 
-                jobRole = value;
             }
         }
 
@@ -173,8 +140,6 @@ namespace Community
 
             text = (
                 base.ToString() +
-                "\n\nJob Role: " + jobRole +
-                "\nThis hero is male: " + male +
                 "\nProfile image: " + characterProfilePicture +
                 "\n\nExperience Stats:\n\n" +
                 "Experience at the beginning of this level: " + baseExperience + "\n" +

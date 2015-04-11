@@ -22,10 +22,9 @@ namespace Community
          */
 
         // fields
-        private int baseExperienceAmount = 25;      // least experience given.
+        private int baseExperienceAmount = 1;      // least experience given.
         private double experienceAmountMulti;       // increase amount depending on enemy type.
         private int currentExperienceAmount;        // amount of experience given for the kill.
-        private String enemyType;
 
         // Constructor.
         public Enemy()
@@ -37,7 +36,6 @@ namespace Community
         {
             experienceAmountMulti = 1.0;
             currentExperienceAmount = (int)(baseExperienceAmount * experienceAmountMulti);
-            enemyType = "Enemy";
         }
 
         /**********************************************************************
@@ -83,19 +81,6 @@ namespace Community
             }
         }
 
-        // get and set for the enemyType variable.
-        public String EnemyType
-        {
-            get
-            {
-                return enemyType;
-            }
-            set
-            {
-                enemyType = value;
-            }
-        }
-
         /**********************************************************************
          * Other methods.
          * ********************************************************************
@@ -107,10 +92,9 @@ namespace Community
 
             text = (
                 base.ToString() +
-                "\n\nEnemy Type: " + enemyType +
                 "\nBase experience amount: " + baseExperienceAmount +
                 "\nExperience Amount Multiplier: " + experienceAmountMulti +
-                "\nCurrent Experience Amount: " + currentExperienceAmount);
+                "\nCurrent Experience Amount: " + currentExperienceAmount + "\n");
 
             return text;
         }
