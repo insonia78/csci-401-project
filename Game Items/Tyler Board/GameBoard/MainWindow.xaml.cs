@@ -23,6 +23,7 @@ namespace GameBoard
     {
         private Grid[,] cells; //2D array of containers to add to the Board uniformGrid to hold the tiles
         SolidColorBrush moveOption = new SolidColorBrush(Colors.Yellow);
+        SolidColorBrush attackOption = new SolidColorBrush(Colors.Red);
 
         //stores a reference to the location of a Hero when it's selected (need the hero's location even when clicking on buttons for different spaces).
         private int selectedHeroRow;
@@ -38,12 +39,30 @@ namespace GameBoard
             selectedHeroRow = 0;
             selectedHeroCol = 0;
 
+            //For use in attack.cs, for the damage animation
+            animationSpace = new Rectangle();
+            animationSpace.Height = 40;
+            animationSpace.Width = 60;
+
+            ImageBrush animation = new ImageBrush();
+            spritesheet = new BitmapImage(new Uri("test_explosion_spritesheet.png", UriKind.Relative));
+            animation.ImageSource = spritesheet;
+            animation.AlignmentX = AlignmentX.Left;
+            animation.AlignmentY = AlignmentY.Top;
+            animation.Stretch = Stretch.None;
+            SpriteSheetOffset = new TranslateTransform(0, 0);
+            animation.Transform = SpriteSheetOffset;
+
+            animationSpace.Fill = animation;
+
             //For testing purposes, characters added in this way. When the game is at the point where the hero data is taken from the world map, or
             //is global to the whole program, and setUpBoard() can read positions to add the characters, then they will be added in setUpBoard() rather than here.
             boardspaces[4, 1].tileCharacter = new Warrior(4,1,4);
             refreshBoardSpace(4, 1);
             boardspaces[1, 2].tileCharacter = new Mage(1,2,3);
             refreshBoardSpace(1, 2);
+            boardspaces[5, 5].tileCharacter = new Enemy_Warrior(5, 5, 2);
+            refreshBoardSpace(5, 5);
             boardspaces[11, 9].tileCharacter = new Enemy_Warrior(11,9,2);
             refreshBoardSpace(11, 9);
             boardspaces[13, 8].tileCharacter = new Enemy_Healer(13,8,3);
@@ -97,6 +116,29 @@ namespace GameBoard
             }
         }
 
+        private void displayTileInfo(int row, int col)
+        {
+            Tile_Info_Image.Source = boardspaces[row, col].terrainImage.terrainImage; //Set the image in the tile/stat info pane to the image of the tile.
+            testlabel.Content = "No character";
+            if (boardspaces[row, col].containsCharacter() == true)
+            {
+                Character_Info_Image.Source = boardspaces[row, col].tileCharacter.characterImage;
+                if (boardspaces[row, col].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Enemy)))
+                {
+                    testlabel.Content = "Enemy!";
+                }
+                else if (boardspaces[row, col].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero)))
+                {
+                    testlabel.Content = "Hero";
+                }
+                Health_Label.Content = boardspaces[row, col].tileCharacter.hp;
+                Defense_Label.Content = boardspaces[row, col].tileCharacter.defense;
+                SpDefense_Label.Content = boardspaces[row, col].tileCharacter.specialDefense;
+            }
+            else
+                Character_Info_Image.Source = null;
+        }
+
 
         private void Board_Loaded(object sender, RoutedEventArgs e)
         {
@@ -122,7 +164,7 @@ namespace GameBoard
             {
 
             }
-            Tile_Click(boardspaces[selectedHeroRow, selectedHeroCol], e); //Display info on the character using the Tile_Click event
+            displayTileInfo(selectedHeroRow, selectedHeroCol);
 
             if (boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero)))
             {
@@ -205,6 +247,7 @@ namespace GameBoard
                 selectedHeroCol = col;
             }
             clearMoveOptions();
+            displayTileInfo(row, col);
             //Disable the move button.
             Move.IsEnabled = false;
         }
@@ -229,33 +272,6 @@ namespace GameBoard
                         
                     }
                 }
-            }
-        }
-
-        /*
-         * When a Hero is selected that can attack and the attack button is clicked, run the method(s) involved in displaying who they can attack, displaying different abilities, and then
-         * executing that ability, and if an attack and an enemy is selected, set that the hero has attacked and moved to true (hero can't move after attacking), disable buttons for those
-         * and the defend button (can't defend after attacking).
-         */
-        private void Attack_Click(object sender, RoutedEventArgs e)
-        {
-            //NEEDS TO BE ADDED: Attack stuff
-
-            //NEEDS TO BE ADDED: if attack is successful do the following:
-            Attack.IsEnabled = false;
-            Move.IsEnabled = false; //Hero can't move after attacking.
-            boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasAttacked = true;
-            boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasMoved = true;
-            if(!boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.isActive) //Check if hero has moved, used an item, and attacked, if so, the hero's turn is over, is inactive
-            {
-                refreshBoardSpace(selectedHeroRow, selectedHeroCol); //refresh the character so it appears faded.
-                Defend.IsEnabled = false;
-                End_Turn.IsEnabled = false;
-                //If inactive, the item button is already disabled, and the move and attack were previously disabled in this method when the attack was successful.
-            }
-            if (checkAllPlayersInactive())
-            {
-                nextTurn();
             }
         }
 
@@ -338,6 +354,14 @@ namespace GameBoard
          */
         private void Tile_Click(object sender, RoutedEventArgs e)
         {
+            Move.IsEnabled = false;
+            Attack.IsEnabled = false;
+            Defend.IsEnabled = false;
+            Use_Item.IsEnabled = false;
+            End_Turn.IsEnabled = false;
+            clearMoveOptions();
+            clearAttackOptions();
+
             int row = 0;
             int col = 0;
 
@@ -351,23 +375,10 @@ namespace GameBoard
             {
 
             }
-            Tile_Info_Image.Source = boardspaces[row, col].terrainImage.terrainImage; //Set the image in the tile/stat info pane to the image of the tile.
-            testlabel.Content = "No character";
-            if (boardspaces[row, col].containsCharacter() == true)
-            {
-                Character_Info_Image.Source = boardspaces[row, col].tileCharacter.characterImage;
-                if (boardspaces[row, col].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Enemy)))
-                {
-                    testlabel.Content = "Enemy!";
-                }
-                else if (boardspaces[row, col].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero)))
-                {
-                    testlabel.Content = "Hero";
-                }
-            }
-            else
-                Character_Info_Image.Source = null;
+
+            displayTileInfo(row, col);
         }
+
         private void Map_Maker_Click(object sender, RoutedEventArgs e)
         {
             mapBuilder map_maker = new mapBuilder();

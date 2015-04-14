@@ -26,7 +26,7 @@ namespace GameBoard
 
         public mapBuilder()
         {
-            tileType = 2;
+            tileType = 0;
             numRows = 15;
             numCols = 15;
             cells = new Grid[numRows, numCols];
@@ -47,6 +47,27 @@ namespace GameBoard
                     cell.Children.Add(mapSpaces[r,c]);
                     Map.Children.Add(cell);
                 }
+            }
+            for(int i = 0; i <= 3; i++)
+            {
+                Tile nextTile = new Tile(0, 0, i);
+                ImageBrush backgroundImage;
+                backgroundImage = new ImageBrush(nextTile.terrainImage.terrainImage);
+                nextTile.Background = backgroundImage;
+                nextTile.Click += new RoutedEventHandler(Tile_Type_Click);
+                Tiles.Children.Add(nextTile);
+            }
+        }
+
+        private void Tile_Type_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                tileType = (sender as Tile).tileTerrain;
+            }
+            catch
+            {
+
             }
         }
 
@@ -74,6 +95,17 @@ namespace GameBoard
             mapSpaces[row, col].Background = backgroundImage; //Set the background of the tile button to the terrain image.
             mapSpaces[row, col].BorderThickness = new Thickness(0);
             cells[row, col].Children.Add(mapSpaces[row, col]);
+        }
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            string mapFileName = "testmap.txt";
+
+            if (System.IO.File.Exists(mapFileName))
+            {
+                System.IO.File.Delete(mapFileName);
+            }
+
+            System.IO.FileStream fs = System.IO.File.Create(mapFileName);
         }
     }
 }

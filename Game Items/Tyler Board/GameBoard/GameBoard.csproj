@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Attack.cs" />
     <Compile Include="Boss.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="Enemy_Healer.cs" />

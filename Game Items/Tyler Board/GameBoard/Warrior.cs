@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace GameBoard
 {
@@ -14,6 +16,7 @@ namespace GameBoard
             col = c;
             hp = 10;
             moveSpeed = charSpeed;
+            characterPicture = new BitmapImage(new Uri("Male_Software_Engineer.png", UriKind.Relative));
         }
     }
 }

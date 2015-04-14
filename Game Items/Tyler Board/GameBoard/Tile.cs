@@ -15,6 +15,7 @@ namespace GameBoard
         private int row;
         private int col;
         private bool canMoveTo; //is only true when calculating/displaying a player's move options
+        private int numAttackOption; //is used to differentiate between different groups of tiles a character can cause an area of damage to. 0 = false, any other number is a group of tiles for an attack option
         private readonly bool isSolid; //Used to set whether or not characters can be moved onto the tile
         private readonly int terrainType;  //0 for field, 1 for mountain, 2 for water, ...
         private readonly int speedToMoveThrough; //The amount of speed "points" that a character must "use" by passing onto the tile
@@ -81,6 +82,19 @@ namespace GameBoard
                 canMoveTo = value;
             }
         }
+
+        public int attackOption
+        {
+            get
+            {
+                return numAttackOption;
+            }
+            set
+            {
+                numAttackOption = value;
+            }
+        }
+
         public virtual int Col
         {
             get { return col; }
@@ -106,6 +120,7 @@ namespace GameBoard
             speedToMoveThrough = 1;
             aCharacter = null;
             isSolid = false;
+            numAttackOption = 0;
         }
 
         /*
@@ -122,6 +137,7 @@ namespace GameBoard
             terrainType = terrain;
             tileTerrain_obj = new Terrain(terrain);
             aCharacter = null;
+            numAttackOption = 0;
 
             if (terrain == 1 || terrain == 2) //will probably be changed later depending on actual tiles/tile file format system used later.
                 isSolid = true;

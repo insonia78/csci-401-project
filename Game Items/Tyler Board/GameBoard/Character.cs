@@ -28,6 +28,7 @@ namespace GameBoard
         protected bool hasAttackedOnTurn = false;
         protected bool hasUsedItemOnTurn = false;
         protected bool isActiveOnTurn = true;
+        protected double chosenAttackPower = 0.0;
         protected ImageSource characterPicture;
 
         //accessors/mutators
@@ -211,12 +212,30 @@ namespace GameBoard
             }
         }
 
+        public double selectedAttackPower
+        {
+            get
+            {
+                return chosenAttackPower;
+            }
+            set
+            {
+                chosenAttackPower = value;
+            }
+        }
+
         //Constructor(s)
         public Character()
         {
             row = 0;
             col = 0;
             statEffects = new List<Effect>();
+
+            //Temporary test stats
+            attackStat = 1;
+            specialAttackStat = 1;
+            defenseStat = 1;
+            specialDefenseStat = 1;
         }
 
         public Character(int r, int c, int charSpeed)
@@ -225,6 +244,13 @@ namespace GameBoard
             col = c;
             moveSpeed = charSpeed;
             statEffects = new List<Effect>();
+
+            //Temporary test stats
+            health = 10;
+            attackStat = 1;
+            specialAttackStat = 1;
+            defenseStat = 1;
+            specialDefenseStat = 1;
         }
 
         /*
@@ -354,6 +380,12 @@ namespace GameBoard
         public void applyEffectHealthChange()
         {
             health = health + (int)(health * sumAllEffects_Hp());
+        }
+
+        public virtual Tile[,] Attack1(Tile[,] boardspaces, int numRows, int numCols)
+        {
+            
+            return boardspaces;
         }
     }
 }
