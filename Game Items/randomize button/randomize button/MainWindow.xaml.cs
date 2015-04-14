@@ -36,44 +36,6 @@ namespace randomize_button
         public bool hero4WasClicked = false;
         public bool hero5WasClicked = false;
 
-
-
-
-
-//
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //this is the error area. i'm trying to get the hero class label to be accessed in the other form.
-        //i thought it should have been set up like the other ones, but maybe its slightly different?
-        public string Hero1class
-        {
-            get
-            {
-                return this.Hero1class.Text;
-            }
-            set
-            {
-                this.Hero1class.Text = value;
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
         //allows the array to be accessed in individual heros class
         public String[] heroTypeArray
         {

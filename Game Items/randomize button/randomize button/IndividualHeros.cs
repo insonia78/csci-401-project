@@ -60,8 +60,8 @@ namespace randomize_button
                 MessageBox.Show("hero name is: " + hero_name[0].ToString());
                 MessageBox.Show("this is hero type" + " " + hero_type[0].ToString());
 
-                Hero1class.Content = hero_type[0];
-                Hero1name.Content = hero_name[0];
+                mw.Hero1class.Content = hero_type[0];
+                mw.Hero1name.Content = hero_name[0];
             }
             else if (h2WasClicked == true)
             {
@@ -70,8 +70,8 @@ namespace randomize_button
                 MessageBox.Show("hero name is: " + hero_name[1].ToString());
                 MessageBox.Show("this is hero type" + " " + hero_type[1].ToString());
 
-                Hero1class.Content = hero_type[1];
-                Hero1name.Content = hero_name[1];
+                mw.Hero1class.Content = hero_type[1];
+                mw.Hero1name.Content = hero_name[1];
             }
             else if (h3WasClicked == true)
             {
@@ -80,8 +80,8 @@ namespace randomize_button
                 MessageBox.Show("hero name is: " + hero_name[2].ToString());
                 MessageBox.Show("this is hero type" + " " + hero_type[2].ToString());
 
-                Hero1class.Content = hero_type[2];
-                Hero1name.Content = hero_name[2];
+                mw.Hero1class.Content = hero_type[2];
+                mw.Hero1name.Content = hero_name[2];
             }
             else if (h4WasClicked == true)
             {
@@ -90,8 +90,8 @@ namespace randomize_button
                 MessageBox.Show("hero name is: " + hero_name[3].ToString());
                 MessageBox.Show("this is hero type" + " " + hero_type[3].ToString());
 
-                Hero1class.Content = hero_type[3];
-                Hero1name.Content = hero_name[3];
+                mw.Hero1class.Content = hero_type[3];
+                mw.Hero1name.Content = hero_name[3];
             }
             else if (h5WasClicked == true)
             {
@@ -100,8 +100,8 @@ namespace randomize_button
                 MessageBox.Show("hero name is: " + hero_name[4].ToString());
                 MessageBox.Show("this is hero type" + " " + hero_type[4].ToString());
 
-                Hero1class.Content = hero_type[4];
-                Hero1name.Content = hero_name[4];
+                mw.Hero1class.Content = hero_type[4];
+                mw.Hero1name.Content = hero_name[4];
             }
             h1WasClicked = false;
             h2WasClicked = false;

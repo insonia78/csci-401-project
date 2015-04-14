@@ -30,7 +30,7 @@
             </Button.Background>
         </Button>
         <Button Content="Confirm" Name="Confirm" HorizontalAlignment="Left" Margin="480,158,0,0" VerticalAlignment="Top" Width="75" Click="Confirm_Click"/>
-        <Label x:Name="Hero1class" Content="" HorizontalAlignment="Left" Margin="69,127,0,0" VerticalAlignment="Top" Width="75" Height="31" FontWeight="Bold"/>
+        <Label x:Name="Hero1class" Content="" HorizontalAlignment="Left" Margin="69,127,0,0" VerticalAlignment="Top" Width="77" Height="31" FontWeight="Bold"/>
         <Label x:Name ="Hero2class" Content="" HorizontalAlignment="Left" Margin="168,127,0,0" VerticalAlignment="Top" Width="77" Height="31" FontWeight="Bold"/>
         <Label x:Name ="Hero3class" Content="" HorizontalAlignment="Left" Margin="267,127,0,0" VerticalAlignment="Top" Width="77" Height="31" FontWeight="Bold"/>
         <Label x:Name ="Hero4class" Content="" HorizontalAlignment="Left" Margin="370,127,0,0" VerticalAlignment="Top" Width="77" Height="31" FontWeight="Bold"/>
