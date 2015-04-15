@@ -778,35 +778,65 @@ namespace Community
         }
 
         /**********************************************************************
-         * inflict damage to the opponent.
+         * Checks to see if the Character can hit the other Character.
+         * The attack will be successful if the agressor's attack is greater
+         * than the defender's 
+         * If the Character is successful, The first Character will
+         * inflict damage to the second Character.
          * ********************************************************************
          */
-        public int InitiateAttack()
+
+        // attacking a hero character.
+        public String initiateAttack(Hero aHero)
         {
-            int attack;
+            Random random = new Random(baseAttack);
+            double criticalChance = random.NextDouble();
+            String proposedDamage;
 
-            attack = (int)(currentAttack * 3.75);
+            if ((BattleChance() - aHero.BattleChance()) > 0)
+            {
+                proposedDamage = ((int)(((currentAttack * criticalChance) + currentAttack)) + "");
+            }
+            else
+            {
+                proposedDamage = "miss";
+            }
 
-            return attack;
+            return proposedDamage;
+        }
+
+        // attacking an enemy character
+        public String initiateAttack(Enemy anEnemy)
+        {
+            Random random = new Random(baseAttack);
+            double criticalChance = random.NextDouble();
+            String damage;
+
+            if ((BattleChance() - anEnemy.BattleChance()) > 0)
+            {
+                damage = ((int)(((currentAttack * criticalChance) + currentAttack)) + "");
+                anEnemy.DecreaseHealth(Int32.Parse(damage));
+            }
+            else
+            {
+                damage = "miss";
+            }
+
+            return damage;
         }
 
         /**********************************************************************
-         * deflict damage from the opponent.
+         * Measures the chance to hit or dodge the opponent.
+         * There is a 50 percent chance of hitting the opponent or dodging them.
+         * The Character's speed will boost those chances.
          * ********************************************************************
          */
-        public void PreventAttack(int opponentAttack)
+        private int BattleChance()
         {
-            int bestChance = (50 + currentSpeed);
+            Random random = new Random();
+            int chance = random.Next((50 + currentSpeed), 101);
 
-            // checks to see if the attack has landed.
-            Random random = new Random(bestChance);
-            double miss = random.Next();
-
-            if(miss <= bestChance)
-            {
-
-            }
-            
+            return chance;
         }
 
         // Prints out the variables for testing purposes.
