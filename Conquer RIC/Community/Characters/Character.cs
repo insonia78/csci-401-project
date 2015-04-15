@@ -785,41 +785,20 @@ namespace Community
          * inflict damage to the second Character.
          * ********************************************************************
          */
-
-        // attacking a hero character.
-        public String initiateAttack(Hero aHero)
-        {
-            Random random = new Random(baseAttack);
-            double criticalChance = random.NextDouble();
-            String proposedDamage;
-
-            if ((BattleChance() - aHero.BattleChance()) > 0)
-            {
-                proposedDamage = ((int)(((currentAttack * criticalChance) + currentAttack)) + "");
-            }
-            else
-            {
-                proposedDamage = "miss";
-            }
-
-            return proposedDamage;
-        }
-
-        // attacking an enemy character
-        public String initiateAttack(Enemy anEnemy)
+        public String initiateAttack(Character aCharacter)
         {
             Random random = new Random(baseAttack);
             double criticalChance = random.NextDouble();
             String damage;
 
-            if ((BattleChance() - anEnemy.BattleChance()) > 0)
+            if ((BattleChance() - aCharacter.BattleChance()) > 0)
             {
                 damage = ((int)(((currentAttack * criticalChance) + currentAttack)) + "");
-                anEnemy.DecreaseHealth(Int32.Parse(damage));
+                aCharacter.DecreaseHealth(Int32.Parse(damage));
             }
             else
             {
-                damage = "miss";
+                damage = "MISS";
             }
 
             return damage;
