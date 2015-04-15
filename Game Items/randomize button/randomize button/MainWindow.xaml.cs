@@ -91,14 +91,15 @@ namespace randomize_button
 
 
             int num;
+            int numba;
             for (int i = 0; i < 5; i++)
             {
-                num = random.Next(1, 6);
+                num = random.Next(0, 5);
                 heroType[i] = num;
 
 
-                num = random.Next(1, 3);
-                if (num == 1)
+                numba = random.Next(1, 3);
+                if (numba == 1)
                 {
 
                     gender[i] = true;
@@ -113,8 +114,6 @@ namespace randomize_button
                 {
 
                     gender[i] = false;
-
-
 
                 }
 
@@ -133,13 +132,13 @@ namespace randomize_button
             int nums;
 
             int i = 0;
-            num = random.Next(1, 6);
+            num = random.Next(0, 5);
             heroType[i] = num;
 
 
-            nums = random.Next(1, 6);
+            nums = random.Next(0, 5);
 
-            if (nums == 1)
+            if (nums == 0)
             {
                 hero_type[i] = "Warrior";
                 hero_type[i + 1] = "Healer";
@@ -147,7 +146,7 @@ namespace randomize_button
                 hero_type[i + 3] = "Hunter";
                 hero_type[i + 4] = "Rogue";
             }
-            else if (nums == 2)
+            else if (nums == 1)
             {
                 hero_type[i] = "Rogue";
                 hero_type[i + 1] = "Warrior";
@@ -157,7 +156,7 @@ namespace randomize_button
 
 
             }
-            else if (nums == 3)
+            else if (nums == 2)
             {
                 hero_type[i] = "Hunter";
                 hero_type[i + 1] = "Rogue";
@@ -165,7 +164,7 @@ namespace randomize_button
                 hero_type[i + 3] = "Healer";
                 hero_type[i + 4] = "Mage";
             }
-            else if (nums == 4)
+            else if (nums == 3)
             {
                 hero_type[i] = "Mage";
                 hero_type[i + 1] = "Hunter";
@@ -192,10 +191,13 @@ namespace randomize_button
         public void HeroNames()
         {
             Random random = new Random();
+            
             int numnum;
+            
 
             for (int i = 0; i < 5; i++)
             {
+               
                 heroType[i] = i;
                 numnum = random.Next(0, 20);
 
