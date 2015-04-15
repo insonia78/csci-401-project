@@ -48,6 +48,7 @@ namespace randomize_button
 
         // this is the accept changes button.
         //when a player clicks this button it brings the player back to the main character creation screen.
+        //it places the names and class so the person can see them.
         private void button1_Click(object sender, EventArgs e)
         {
             this.heroNamePlaceHolder();
