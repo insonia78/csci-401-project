@@ -241,7 +241,7 @@ namespace randomize_button
                         else
                         {
                             name = name2;
-                            hero_name[1] = name;
+                            hero_name[i] = name;
                         }
                     }
                 }
