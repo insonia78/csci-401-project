@@ -220,31 +220,29 @@ namespace randomize_button
                     {
                         name2 = name_male[numnum];
 
-                        if (name2 == hero_name[0])
+                        while (name2 == hero_name[0])
                         {
                             numnum = random.Next(0, 20);
                             name2 = name_male[numnum];
-                        }
-                        else
-                        {
                             name = name2;
                             hero_name[i] = name;
                         }
+
+                        hero_name[i] = name2;
                     }
                     else
                     {
                         name2 = name_female[numnum];
 
-                        if (name2 == hero_name[0])
+                        while (name2 == hero_name[0])
                         {
                             numnum = random.Next(0, 20);
                             name2 = name_female[numnum];
-                        }
-                        else
-                        {
                             name = name2;
                             hero_name[i] = name;
                         }
+
+                        hero_name[i] = name2;
                     }
                 }
                 else if (i == 2)
@@ -253,30 +251,28 @@ namespace randomize_button
                     {
                         name2 = name_male[numnum];
 
-                        if (name2 == hero_name[0] || name2 == hero_name[1])
+                        while (name2 == hero_name[0] || name2 == hero_name[1])
                         {
                             numnum = random.Next(0, 20);
                             name2 = name_male[numnum];
-                        }
-                        else
-                        {
                             name = name2;
                             hero_name[i] = name;
                         }
+
+                        hero_name[i] = name2;
                     }
                     else
                     {
                         name2 = name_female[numnum];
-                        if (name2 == hero_name[0] || name2 == hero_name[1])
+                        while (name2 == hero_name[0] || name2 == hero_name[1])
                         {
                             numnum = random.Next(0, 20);
                             name2 = name_female[numnum];
-                        }
-                        else
-                        {
                             name = name2;
                             hero_name[i] = name;
                         }
+
+                        hero_name[i] = name2;
                     }
                 }
                 else if (i == 3)
@@ -285,30 +281,28 @@ namespace randomize_button
                     {
                         name2 = name_male[numnum];
 
-                        if (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2])
+                        while (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2])
                         {
                             numnum = random.Next(0, 20);
                             name2 = name_male[numnum];
-                        }
-                        else
-                        {
                             name = name2;
                             hero_name[i] = name;
                         }
+
+                        hero_name[i] = name2;
                     }
                     else
                     {
                         name2 = name_female[numnum];
-                        if (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2])
+                        while (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2])
                         {
                             numnum = random.Next(0, 20);
                             name2 = name_female[numnum];
-                        }
-                        else
-                        {
                             name = name2;
                             hero_name[i] = name;
                         }
+
+                        hero_name[i] = name2;
                     }
                 }
                 else
@@ -317,30 +311,28 @@ namespace randomize_button
                     {
                         name2 = name_male[numnum];
 
-                        if (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2] || name2 == hero_name[3])
+                        while (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2] || name2 == hero_name[3])
                         {
                             numnum = random.Next(0, 20);
                             name2 = name_male[numnum];
-                        }
-                        else
-                        {
                             name = name2;
                             hero_name[i] = name;
                         }
+
+                        hero_name[i] = name2;
                     }
                     else
                     {
                         name2 = name_female[numnum];
-                        if (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2] || name2 == hero_name[3])
+                        while (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2] || name2 == hero_name[3])
                         {
                             numnum = random.Next(0, 20);
                             name2 = name_female[numnum];
-                        }
-                        else
-                        {
                             name = name2;
                             hero_name[i] = name;
                         }
+
+                        hero_name[i] = name2;
                     }
                 }
             }
