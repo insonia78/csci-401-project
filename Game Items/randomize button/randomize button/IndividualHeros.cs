@@ -18,7 +18,7 @@ namespace randomize_button
         String[] hero_name = new String[5];
         String[] hero_type = new String[5];                   
         string herotype, heronames;
-        bool h1WasClicked, h2WasClicked, h3WasClicked, h4WasClicked, h5WasClicked, herogender;
+        bool h1WasClicked, h2WasClicked, h3WasClicked, h4WasClicked, h5WasClicked, herogender, femaleGenderClicked, maleGenderClicked;
 
         
 
@@ -56,61 +56,82 @@ namespace randomize_button
             if (h1WasClicked == true)
             {
                 
-                MessageBox.Show("these are the hero stats for hero 1");
-                MessageBox.Show("hero gender is: " + gender[0].ToString());
-                MessageBox.Show("hero name is: " + hero_name[0].ToString());
-                MessageBox.Show("this is hero type" + " " + hero_type[0].ToString());
 
-                mw.Hero1class.Content = hero_type[0];
-                mw.Hero1name.Content = hero_name[0];
-            }
-            else if (h2WasClicked == true)
-            {
-                MessageBox.Show("these are the hero stats for hero 2");
-                MessageBox.Show("hero gender is: " + gender[1].ToString());
-                MessageBox.Show("hero name is: " + hero_name[1].ToString());
-                MessageBox.Show("this is hero type" + " " + hero_type[1].ToString());
+                    MessageBox.Show("these are the hero stats for hero 1");
+                    MessageBox.Show("hero gender is: " + gender[0].ToString());
+                    MessageBox.Show("hero name is: " + hero_name[0].ToString());
+                    MessageBox.Show("this is hero type" + " " + hero_type[0].ToString());
 
-                mw.Hero1class.Content = hero_type[1];
-                mw.Hero1name.Content = hero_name[1];
-            }
+                    mw.Hero1class.Content = hero_type[0];
+                    mw.Hero1name.Content = hero_name[0];
+
+                    
+                }
+            
+                else if (h2WasClicked == true)
+                {
+                 
+                        MessageBox.Show("these are the hero stats for hero 2");
+                        MessageBox.Show("hero gender is: " + gender[1].ToString());
+                        MessageBox.Show("hero name is: " + hero_name[1].ToString());
+                        MessageBox.Show("this is hero type" + " " + hero_type[1].ToString());
+
+                        mw.Hero1class.Content = hero_type[1];
+                        mw.Hero1name.Content = hero_name[1];
+
+                     
+                    }
+               
             else if (h3WasClicked == true)
             {
-                MessageBox.Show("these are the hero stats for hero 3");
-                MessageBox.Show("hero gender is: " + gender[2].ToString());
-                MessageBox.Show("hero name is: " + hero_name[2].ToString());
-                MessageBox.Show("this is hero type" + " " + hero_type[2].ToString());
+             
+                    MessageBox.Show("these are the hero stats for hero 3");
+                    MessageBox.Show("hero gender is: " + gender[2].ToString());
+                    MessageBox.Show("hero name is: " + hero_name[2].ToString());
+                    MessageBox.Show("this is hero type" + " " + hero_type[2].ToString());
 
-                mw.Hero1class.Content = hero_type[2];
-                mw.Hero1name.Content = hero_name[2];
-            }
+                    mw.Hero1class.Content = hero_type[2];
+                    mw.Hero1name.Content = hero_name[2];
+
+                 
+                }
+              
             else if (h4WasClicked == true)
             {
-                MessageBox.Show("these are the hero stats for hero 4");
-                MessageBox.Show("hero gender is: " + gender[3].ToString());
-                MessageBox.Show("hero name is: " + hero_name[3].ToString());
-                MessageBox.Show("this is hero type" + " " + hero_type[3].ToString());
+              
+                    MessageBox.Show("these are the hero stats for hero 4");
+                    MessageBox.Show("hero gender is: " + gender[3].ToString());
+                    MessageBox.Show("hero name is: " + hero_name[3].ToString());
+                    MessageBox.Show("this is hero type" + " " + hero_type[3].ToString());
 
-                mw.Hero1class.Content = hero_type[3];
-                mw.Hero1name.Content = hero_name[3];
-            }
-            else if (h5WasClicked == true)
-            {
-                MessageBox.Show("these are the hero stats for hero 5");
-                MessageBox.Show("hero gender is: " + gender[4].ToString());
-                MessageBox.Show("hero name is: " + hero_name[4].ToString());
-                MessageBox.Show("this is hero type" + " " + hero_type[4].ToString());
+                    mw.Hero1class.Content = hero_type[3];
+                    mw.Hero1name.Content = hero_name[3];
 
-                mw.Hero1class.Content = hero_type[4];
-                mw.Hero1name.Content = hero_name[4];
-            }
+               
+                }
+             
+                else if (h5WasClicked == true)
+                {
+                        MessageBox.Show("these are the hero stats for hero 5");
+                        MessageBox.Show("hero gender is: " + gender[4].ToString());
+                        MessageBox.Show("hero name is: " + hero_name[4].ToString());
+                        MessageBox.Show("this is hero type" + " " + hero_type[4].ToString());
+
+                        mw.Hero1class.Content = hero_type[4];
+                        mw.Hero1name.Content = hero_name[4];
+
+                     
+                    }
             h1WasClicked = false;
             h2WasClicked = false;
             h3WasClicked = false;
             h4WasClicked = false;
             h5WasClicked = false;
-            this.Hide();
-        }
+            this.Hide(); 
+
+            }
+            
+        
 
 
         //what happens when you click on the warrior button in the individual character creation screen.
@@ -366,6 +387,8 @@ namespace randomize_button
         //it puts female boolean into the array at the correct location.
         private void maleChoice_Click(object sender, EventArgs e)
         {
+
+            maleGenderClicked = true;
             
             h1WasClicked = mw.hero1WasClicked;
             h2WasClicked = mw.hero2WasClicked;
@@ -415,6 +438,8 @@ namespace randomize_button
         //it puts female boolean into the array at the correct location.
         private void femaleChoice_Click(object sender, EventArgs e)
         {
+            femaleGenderClicked = true;
+            
             h1WasClicked = mw.hero1WasClicked;
             h2WasClicked = mw.hero2WasClicked;
             h3WasClicked = mw.hero3WasClicked;
