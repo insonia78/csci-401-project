@@ -39,6 +39,7 @@ namespace Community
         private bool isActiveOnTurn = true;
         private String pictureFile;
         private Image characterPicture;
+        private String status;
 
         // base stats.
         // all characters will have the same base stats.
@@ -99,6 +100,7 @@ namespace Community
         pictureFile = "Missingno.png";
         characterPicture = Image.FromFile(pictureFile);
         jobRole = "Jobless";
+        status = "AWAKE";
 
         // stat multipliers , increases stats by a set amount for each stat.
         healthMulti = 1.0;
@@ -211,6 +213,19 @@ namespace Community
             set
             {
                 jobRole = value;
+            }
+        }
+
+        // get and set for the status variable.
+        private String Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                status = value;
             }
         }
 
@@ -767,7 +782,7 @@ namespace Community
 
             if (newHealth < 0)
             {
-                currentHealth = 0;
+                KnockOut();
             }
             else 
             {
@@ -795,6 +810,54 @@ namespace Community
         }
 
         /**********************************************************************
+         * This method changes the status of the character.
+         * Changing the status of the character will have various effects 
+         * on the Character.
+         * ********************************************************************
+         */
+        private void StatusChange(String newStatus, int amount)
+        {
+            switch(newStatus)
+            {
+                case "AWAKE":
+                    status = "AWAKE";
+                    currentHealth = amount;
+                    currentEnergy = amount;
+                    characterPicture = Image.FromFile(pictureFile);
+                    break;
+
+                case "KNOCKED OUT":
+                    status = "KNOCKED OUT";
+                    currentHealth = amount;
+                    currentEnergy = amount;
+                    currentAttack = maxAttack;
+                    currentDefense = maxDefense;
+                    currentSpeed = maxSpeed;
+                    currentAttackRange = maxAttackRange;
+                    currentSpecialAttack = maxSpecialAttack;
+                    currentSpecialDefense = maxSpecialDefense;
+                    characterPicture = null;
+                    break;
+
+                default:
+                    Console.WriteLine("Unknown status type. Status will remain the same");
+                    break;
+            }
+        }
+
+        // simple parameterless method to ko characters.
+        public void KnockOut()
+        {
+            StatusChange("KNOCKED OUT", 0);
+        }  
+
+        // simple method to awaken characters until a certain amount of health and energy.
+        public void Awaken(int newAmount)
+        {
+            StatusChange("AWAKE", newAmount);
+        }
+
+        /**********************************************************************
          * Checks to see if the Character can hit the other Character.
          * The attack will be successful if the agressor's attack is greater
          * than the defender's 
@@ -802,18 +865,16 @@ namespace Community
          * inflict damage to the second Character.
          * ********************************************************************
          */
-        public String initiateAttack(Character aCharacter)
+        public String InitiateAttack(Character aCharacter)
         {
-            Random random = new Random(baseAttack);
-            double criticalChance = random.NextDouble();
+            
             String damage;
 
             // if the first characters aim is better than the second characters dodge
             // the attack will go through.
             if ((BattleChance() - aCharacter.BattleChance()) > 0)
             {
-                damage = ((int)(((currentAttack * criticalChance) + currentAttack)) + "");
-                aCharacter.DecreaseHealth(Int32.Parse(damage));
+                damage = BattleDamage(aCharacter);
             }
             else
             {
@@ -821,6 +882,52 @@ namespace Community
             }
 
             return damage;
+        }
+
+        // Battle initiated by a special Attack.
+        public String InitiateSpecialAttack(Character aCharacter)
+        {
+
+            String damage;
+
+            // if the first characters aim is better than the second characters dodge
+            // the attack will go through.
+            if ((BattleChance() - aCharacter.BattleChance()) > 0)
+            {
+                damage = SpecialBattleDamage(aCharacter);
+            }
+            else
+            {
+                damage = "MISS";
+            }
+
+            return damage;
+        }
+
+        // calculates battle damage.
+        private String BattleDamage(Character opponent)
+        {
+            Random random = new Random(baseAttack);
+            double criticalChance = random.NextDouble();
+            String amount;
+
+            amount = ((int)(((currentAttack * criticalChance) + currentAttack) - (opponent.CurrentDefense)) + "");
+            opponent.DecreaseHealth(Int32.Parse(amount));
+
+            return amount;
+        }
+
+        // calculates special battle damage.
+        private String SpecialBattleDamage(Character opponent)
+        {
+            Random random = new Random(baseSpecialAttack);
+            double criticalChance = random.NextDouble();
+            String amount;
+
+            amount = ((int)(((currentSpecialAttack * criticalChance) + currentSpecialAttack) - (opponent.CurrentSpecialDefense)) + "");
+            opponent.DecreaseHealth(Int32.Parse(amount));
+
+            return amount;
         }
 
         /**********************************************************************
@@ -845,7 +952,8 @@ namespace Community
             text = (
                 "The Character " + name + "'s stats are the following:\n" +
                 "\nThis Character is male: " + male +
-                "\n\nJob Role: " + jobRole +
+                "\nJob Role: " + jobRole +
+                "\nStatus: " + status +
                 "\nCharacter is moveable: " + isActiveOnTurn +
                 "\nCharacter moved this turn: " + hasMovedOnTurn +
                 "\nCharacter attacked this turn: " + hasAttackedOnTurn +
