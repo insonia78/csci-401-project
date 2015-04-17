@@ -312,10 +312,8 @@ namespace GameBoard
                 {
                     if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Enemy)) && boardspaces[r, c].tileCharacter.hasMoved == false)
                     {
-                        boardspaces[r, c].tileCharacter.hasMoved = true;
                         enemyMoveAI(r, c);
-                        //For some reason, enemeies are all moving in the same direction (or at least when close to each other)
-                        //may be because the random number generator is being called too quickly back to back?
+                        boardspaces[r, c].tileCharacter.hasMoved = true;
                     }
                 }
             }
@@ -330,10 +328,52 @@ namespace GameBoard
          */
         public void enemyMoveAI(int row, int col)
         {
-            Random rng = new Random();
-            int deltaRow = 1 - rng.Next(0, 3); //Can generate 0, 1, or 2. If 0 generated, 1 - 0 = 1, move down 1. If 1, 1 - 1 = 0, no vertical change. If 2, 1 - 2 = -1, move up 1.
-            int deltaCol = 1 - rng.Next(0, 3); //Similar to the deltaRow rng usage, but controls horizontal movement. If deltaRow & deltaCol both != 0, diagonal movement.
-            moveCharacter(row, col, row + deltaRow, col + deltaCol); 
+            //Random rng = new Random();
+            //int deltaRow = 1 - rng.Next(0, 3); //Can generate 0, 1, or 2. If 0 generated, 1 - 0 = 1, move down 1. If 1, 1 - 1 = 0, no vertical change. If 2, 1 - 2 = -1, move up 1.
+            //int deltaCol = 1 - rng.Next(0, 3); //Similar to the deltaRow rng usage, but controls horizontal movement. If deltaRow & deltaCol both != 0, diagonal movement.
+            //moveCharacter(row, col, row + deltaRow, col + deltaCol); 
+
+            moveOptions(boardspaces[row, col].tileCharacter.speed, row, col);
+
+            //DOESN'T WORK:
+
+            //System.Collections.ArrayList movementOptions = new System.Collections.ArrayList();
+            //int numMovementOptions = 0;
+            //for(int r = 0; r < numRows; r++)
+            //{
+            //    for(int c = 0; c < numCols; c++)
+            //    {
+            //        if (boardspaces[r, c].isMoveOption)
+            //        {
+            //            position[r, c] = boardspaces[r, c];
+            //            movementOptions.Add(boardspaces[r, c]);
+            //            numMovementOptions++;
+            //        }
+            //    }
+            //}
+
+            //Random rng = new Random();
+            //int option = rng.Next(0, numMovementOptions);
+
+            //selectedHeroRow = row;
+            //selectedHeroCol = col;
+
+            //int newRow = (movementOptions[option] as Tile).Row;
+            //int newCol = (movementOptions[option] as Tile).Col;
+            //boardspaces[row, col].tileCharacter.hasMoved = false;
+            //MoveOption_Click(boardspaces[newRow, newCol], null);
+        }
+
+        /*
+         * For tutorial level scripting of animated character movement (when you want to move them to a specific tile)
+         */
+        private void forceMoveCharacter(int oldRow, int oldCol, int newRow, int newCol)
+        {
+            selectedHeroRow = oldRow;
+            selectedHeroCol = oldCol;
+            boardspaces[oldRow, oldCol].tileCharacter.hasMoved = false;
+            MoveOption_Click(boardspaces[newRow, newCol], null);
+            boardspaces[newRow, newCol].tileCharacter.hasMoved = false;
         }
 
         /*

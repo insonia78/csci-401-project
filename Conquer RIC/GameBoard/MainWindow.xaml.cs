@@ -45,6 +45,8 @@ namespace GameBoard
         ArrayList rowPlot = new ArrayList();
         ArrayList colPlot = new ArrayList();
 
+        private bool isTutorial;
+
         /*
          * Initializes the GUI components, creates the cells 2d array, and sets up the board/tiles/characters, etc.
          */
@@ -63,11 +65,11 @@ namespace GameBoard
             refreshBoardSpace(1, 2);
             boardspaces[5, 5].tileCharacter = new Enemy_Warrior(5, 5, 2);
             refreshBoardSpace(5, 5);
-            boardspaces[11, 9].tileCharacter = new Enemy_Warrior(11,9,2);
+            boardspaces[11, 9].tileCharacter = new Enemy_Warrior(11,9,4);
             refreshBoardSpace(11, 9);
             boardspaces[13, 8].tileCharacter = new Enemy_Healer(13,8,3);
             refreshBoardSpace(13, 8);
-            boardspaces[14, 3].tileCharacter = new Enemy_Hunter(14,3,1);
+            boardspaces[14, 3].tileCharacter = new Enemy_Hunter(14,3,2);
             refreshBoardSpace(14, 3);
         }
 
@@ -142,7 +144,6 @@ namespace GameBoard
 
         private void Board_Loaded(object sender, RoutedEventArgs e)
         {
-
 
         }
 
@@ -645,5 +646,6 @@ namespace GameBoard
             mapBuilder map_maker = new mapBuilder();
             map_maker.Show();
         }
+
     }
 }
