@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Community
 {
@@ -33,8 +34,8 @@ namespace Community
     class Hero : Character
     {
         // fields
-        
-        private String characterProfilePicture;     // image of the hero for the UI.
+        private String portraitFile;
+        private Image characterPortrait;     // image of the hero for the UI.
         
         // base stats for experience.
         private int baseExperience = 0;             // experience earned.
@@ -61,20 +62,33 @@ namespace Community
 
         public void Init()
         {
-            characterProfilePicture = "Missingno.png";
+            portraitFile = "MissingnoPortrait.png";
+            characterPortrait = Image.FromFile(portraitFile);
             currentExperience = baseExperience;
         }
 
-        // get and set for the profileImage variable.
-        public String CharacterProfilePicture
+        // get and set for the portraitFile variable.
+        public String PortraitFile
         {
             get
             {
-                return characterProfilePicture;
+                return portraitFile;
+            }
+            set 
+            {
+                portraitFile = value;
+            }
+        }
+        // get and set for the profileImage variable.
+        public Image CharacterPortrait
+        {
+            get
+            {
+                return characterPortrait;
             }
             set
             {
-                characterProfilePicture = value;
+                characterPortrait = value;
             }
         }
 
@@ -140,7 +154,7 @@ namespace Community
 
             text = (
                 base.ToString() +
-                "\nProfile image: " + characterProfilePicture +
+                "\nProfile image: " + portraitFile +
                 "\n\nExperience Stats:\n\n" +
                 "Experience at the beginning of this level: " + baseExperience + "\n" +
                 "Experience needed to level: " + baseMaxExperience + "\n" +

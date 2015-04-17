@@ -13,7 +13,7 @@ namespace Community
             // fields
             //Character characterTest = new Character();  // variable to test the character class.
             //Hero heroTest = new Hero();                 // variable to test the hero class.
-            //Hero hero1 = new SoftwareEngineer("Stuart", true);// variable to test the S.E. class as a Hero.
+            Hero hero1 = new SoftwareEngineer("Stuart", true);// variable to test the S.E. class as a Hero.
             //Hero hero2 = new InformationSecurity("Peter", true);// variable to test the I.S.
             //Hero hero3 = new NetworkArchitect("Tara", false);// variable to test the N.A.
             //Hero hero4 = new SupportEngineer("Melissa", false);// variable to test the S.E.
@@ -23,7 +23,7 @@ namespace Community
             //Enemy villian2 = new FoodServer();// variable to test the F.S.
             //Enemy villian3 = new Gardener();// variable to test the Gardener.
 
-            Enemy raven = new Boss("Dr. Ravenscroft", true);// variable to test the Boss.
+            //Enemy raven = new Boss("Dr. Ravenscroft", true);// variable to test the Boss.
 
             //Enemy enemyTest = new Enemy();              // variable to test the enemy class.
 
@@ -38,7 +38,7 @@ namespace Community
             //Console.WriteLine(enemyTest.ToString());
 
             // test content of the software engineer as a hero.
-            //Console.WriteLine(hero1.ToString());
+            Console.WriteLine(hero1.ToString());
 
             // print test for heroes
            // foreach(Hero index in heroes)
@@ -49,7 +49,7 @@ namespace Community
          //       Console.WriteLine(index.ToString());
 
             // print test for the boss.
-            Console.WriteLine(raven.ToString());
+            //Console.WriteLine(raven.ToString());
 
             // hold the terminal open to view the stats.
             Console.ReadLine();

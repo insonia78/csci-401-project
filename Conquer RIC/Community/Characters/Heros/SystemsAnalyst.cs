@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Community
 {
@@ -31,14 +32,15 @@ namespace Community
             // Picture will be generated depending on the sex.
             if(Male)
             {
-                CharacterProfilePicture = "MaleSystemsAnalyst.png";
-                CharacterPicture = " "; 
+                PortraitFile = "MaleSystemsAnalyst.png";
+                //CharacterPicture = " "; 
             }
             else
             {
-                CharacterProfilePicture = "FemaleSystemsAnalyst.png";
-                CharacterPicture = " "; 
+                PortraitFile = "FemaleSystemsAnalyst.png";
+                //CharacterPicture = " "; 
             }
+            CharacterPortrait = Image.FromFile(PortraitFile);
 
             /******************************************************************
              * stat progression unique to this job role.

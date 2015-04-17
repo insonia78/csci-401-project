@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 
 namespace Community
@@ -36,7 +37,8 @@ namespace Community
         private bool hasAttackedOnTurn = false;
         private bool hasUsedItemOnTurn = false;
         private bool isActiveOnTurn = true;
-        private String characterPicture;
+        private String pictureFile;
+        private Image characterPicture;
 
         // base stats.
         // all characters will have the same base stats.
@@ -94,7 +96,8 @@ namespace Community
         {
         name = "MissingNo";
         male = false;
-        characterPicture = "Missingno.png";
+        pictureFile = "Missingno.png";
+        characterPicture = Image.FromFile(pictureFile);
         jobRole = "Jobless";
 
         // stat multipliers , increases stats by a set amount for each stat.
@@ -175,13 +178,27 @@ namespace Community
             set { row = value; }
         }
 
-        public String CharacterPicture
+        public String PictureFile
+        {
+            get 
+            {
+                return pictureFile;
+            }
+            set 
+            {
+                pictureFile = value;
+            }
+        }
+        public Image CharacterPicture
         {
             get
             {
                 return characterPicture;
             }
-            set { characterPicture = value; }
+            set 
+            { 
+                characterPicture = value; 
+            }
         }
 
         // get and set for the jobRole variable.
@@ -791,6 +808,8 @@ namespace Community
             double criticalChance = random.NextDouble();
             String damage;
 
+            // if the first characters aim is better than the second characters dodge
+            // the attack will go through.
             if ((BattleChance() - aCharacter.BattleChance()) > 0)
             {
                 damage = ((int)(((currentAttack * criticalChance) + currentAttack)) + "");
@@ -832,7 +851,7 @@ namespace Community
                 "\nCharacter attacked this turn: " + hasAttackedOnTurn +
                 "\nCharacter used an item this turn: " + hasUsedItemOnTurn +
                 "\nCharacter is active this turn: " + isActiveOnTurn +
-                "\n8-bit picture: " + characterPicture + 
+                "\n8-bit picture: " + pictureFile + 
 
                 "\n\n\nBase Stats:\n\n" +
                 "Level: " + baseLevel + "\n" +
