@@ -51,6 +51,7 @@ namespace Community
             AttackMulti = 2.25;
             DefenseMulti = 1.75;
             SpeedMulti = 3;
+            AgilityMulti = 3;
             AttackRangeMulti = 1.00;
             SpecialAttackMulti = 2.00;
             SpecialDefenseMulti = 1.50;
@@ -59,37 +60,7 @@ namespace Community
              * stats initialized after multipliers applied.
              * ****************************************************************
              */
-            MaxHealth = (int)(BaseHealth + (BaseHealth * 
-                (HealthMulti * CurrentLevel)));
-            CurrentHealth = MaxHealth;
-
-            MaxEnergy = (int)(BaseEnergy + (BaseEnergy * 
-                (EnergyMulti * CurrentLevel)));
-            CurrentEnergy = MaxEnergy;
-
-            MaxAttack = (int)(BaseAttack + (BaseAttack * 
-                (AttackMulti * CurrentLevel)));
-            CurrentAttack = MaxAttack;
-
-            MaxDefense = (int)(BaseDefense + (BaseDefense * 
-                (DefenseMulti * CurrentLevel)));
-            CurrentDefense = MaxDefense;
-
-            MaxSpeed = (int)(BaseSpeed + (BaseSpeed * 
-                (SpeedMulti * CurrentLevel)));
-            CurrentSpeed = MaxSpeed;
-
-            MaxAttackRange = (int)(BaseAttackRange + (BaseAttackRange * 
-                (AttackRangeMulti * CurrentLevel)));
-            CurrentAttackRange = MaxAttackRange;
-
-            MaxSpecialAttack = (int)(BaseSpecialAttack + (BaseSpecialAttack * 
-                (SpecialAttackMulti * CurrentLevel)));
-            CurrentSpecialAttack = MaxSpecialAttack;
-
-            MaxSpecialDefense = (int)(BaseSpecialDefense + (BaseSpecialDefense * 
-                (SpecialDefenseMulti * CurrentLevel)));
-            CurrentSpecialDefense = MaxSpecialDefense;
+            InstantiateLevel(1);
         }
     }
 }

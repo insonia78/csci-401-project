@@ -27,6 +27,7 @@ namespace Community
             Name = n;
             Male = s;
             JobRole = "Boss";
+
             /******************************************************************
              * stat progression unique to this job role.
              * ****************************************************************
@@ -36,6 +37,7 @@ namespace Community
             AttackMulti = 2.00;
             DefenseMulti = 3.00;
             SpeedMulti = 2;
+            AgilityMulti = 2;
             AttackRangeMulti = 1.00;
             SpecialAttackMulti = 3.00;
             SpecialDefenseMulti = 3.00;
@@ -46,37 +48,7 @@ namespace Community
              * stats initialized after multipliers applied.
              * ****************************************************************
              */
-            MaxHealth = (int)(BaseHealth + (BaseHealth * 
-                (HealthMulti * CurrentLevel)));
-            CurrentHealth = MaxHealth;
-
-            MaxEnergy = (int)(BaseEnergy + (BaseEnergy * 
-                (EnergyMulti * CurrentLevel)));
-            CurrentEnergy = MaxEnergy;
-
-            MaxAttack = (int)(BaseAttack + (BaseAttack * 
-                (AttackMulti * CurrentLevel)));
-            CurrentAttack = MaxAttack;
-
-            MaxDefense = (int)(BaseDefense + (BaseDefense * 
-                (DefenseMulti * CurrentLevel)));
-            CurrentDefense = MaxDefense;
-
-            MaxSpeed = (int)(BaseSpeed + (BaseSpeed * 
-                (SpeedMulti * CurrentLevel)));
-            CurrentSpeed = MaxSpeed;
-
-            MaxAttackRange = (int)(BaseAttackRange + (BaseAttackRange * 
-                (AttackRangeMulti * CurrentLevel)));
-            CurrentAttackRange = MaxAttackRange;
-
-            MaxSpecialAttack = (int)(BaseSpecialAttack + (BaseSpecialAttack * 
-                (SpecialAttackMulti * CurrentLevel)));
-            CurrentSpecialAttack = MaxSpecialAttack;
-
-            MaxSpecialDefense = (int)(BaseSpecialDefense + (BaseSpecialDefense * 
-                (SpecialDefenseMulti * CurrentLevel)));
-            CurrentSpecialDefense = MaxSpecialDefense;
+            InstantiateLevel(1);
         }
     }
 }
