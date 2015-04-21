@@ -49,6 +49,7 @@ namespace GameBoard
         public bool tutorialWasClicked; 
         public bool tutIntroductionExitClicked;
         public bool highlightedFirstClick;
+        public bool tutFirstMoveExitClicked;
 
         /*
          * Initializes the GUI components, creates the cells 2d array, and sets up the board/tiles/characters, etc.
@@ -635,34 +636,66 @@ namespace GameBoard
 
         public void tutorialFirstStep()
         {
+            End_Turn.IsEnabled = false;
+            Move.IsEnabled = false;
+            Attack.IsEnabled = false;
+            Defend.IsEnabled = false;
+            Use_Item.IsEnabled = false;
+
             if (tutIntroductionExitClicked == true)
             {
-
+                
                 //"Clicking on a character allows you to move, attack, defend, or to use items.
                 //"Click on the highlighted square to move that character." ;
                 //this teaches you how to move the character. select the highlighted square.
                 //boolean for if the square highlighted was clicked.
-                // if(highlightedFirstClick == true) {
+
+                TutFirstMoveExit.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMove.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMove.Text = "now that you've clicked on the highlighted tile, see how there are squares that light up? those squares indicate where the character can go." +
                 "for our purposes, i want you to move to the square thats highlighted purple.";
 
+               
+            }
+            this.tutorialFirstStepTwo();
+        }
 
-                End_Turn.IsEnabled = false;
-                Move.IsEnabled = false;
-                Attack.IsEnabled = false;
-                Defend.IsEnabled = false;
-                Use_Item.IsEnabled = false;
 
-                //this.Tutorial_Character_Click();
+        public void tutorialFirstStepTwo()
+        {
+            if (tutFirstMoveExitClicked == true)
+            {
+                this.Character_Click(boardspaces[1, 2].tileCharacter, null);
 
                 //makes the character move to a specific square.
+
+
+                forceMoveCharacter(1, 2, 4, 2);
+
+
                 //checks that its that square.
                 //if not, it reminds them to move the character so they can try again.
             }
-            
-           
-            
+        }
+
+
+        public void tutorialSecondStep()
+        {
+            End_Turn.IsEnabled = false;
+            Move.IsEnabled = false;
+            Attack.IsEnabled = false;
+            Defend.IsEnabled = false;
+            Use_Item.IsEnabled = false;
+
+            if(turnNumber == 2)
+            {
+                TutSecondMove.Visibility = System.Windows.Visibility.Visible;
+                TutSecondMove.Text = "This step will show you what happens when a character needs to defend themselves from a stronger enemy." +
+                    "For this situation, we are showing what will happen if your character can't move to get away." +
+                    "attacking the enemy would result in your character's death, so that isn't a viable option either." +
+                    "The solution to this is the defend button." +
+                    "The defend button will raise the selected hero's defense for one turn.";
+            }
         }
 
 
@@ -674,7 +707,12 @@ namespace GameBoard
             this.tutorialFirstStep();
         }
     
-        
+         private void TutFirstMoveExit_Click(object sender, RoutedEventArgs e)
+        {
+            tutFirstMoveExitClicked = true;
+            TutFirstMove.Visibility = System.Windows.Visibility.Hidden;
+            TutFirstMoveExit.Visibility = System.Windows.Visibility.Hidden;
+        }
         
 
         //
@@ -720,6 +758,8 @@ namespace GameBoard
             mapBuilder map_maker = new mapBuilder();
             map_maker.Show();
         }
+
+       
 
         
 

@@ -30,6 +30,9 @@
         <TextBox x:Name ="TutFirstMove" Height="154" Canvas.Left="688" TextWrapping="Wrap" Canvas.Top="143" Width="173" Visibility="Hidden"/>
         <TextBox x:Name ="TutIntroduction" Height="128" Canvas.Left="260" TextWrapping="Wrap" Text="welcome to the tutorial level. here we will teach you awesome stuff about the game so you can kick ass." Canvas.Top="10" Width="601" Visibility="Hidden"/>
         <Button x:Name= "TutorialIntroductionExit" Content="Exit" Height="28" Canvas.Left="774" Canvas.Top="99" Width="77" Click="TutorialIntroductionExit_Click" Visibility="Hidden"/>
+        <TextBox x:Name ="TutSecondMove" Height="179" Canvas.Left="761" TextWrapping="Wrap" Canvas.Top="205" Width="100" Visibility="Hidden"/>
+        <Button x:Name ="TutFirstMoveExit" Content="Exit" Height="26" Canvas.Left="774" Canvas.Top="271" Width="87" Click="TutFirstMoveExit_Click" Visibility="Hidden"/>
+
     </Canvas>
 </Window>
 
