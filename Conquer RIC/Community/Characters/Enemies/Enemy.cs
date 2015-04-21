@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Community
 {
@@ -13,7 +15,7 @@ namespace Community
      * of that enemy character.
      * ************************************************************************
      */
-    class Enemy : Character
+    public class Enemy : Character
     {
         /**********************************************************************
          * TODO:
@@ -32,10 +34,19 @@ namespace Community
             Init();
         }
 
+        public Enemy(int r, int c) : base(r, c)
+        {
+            Init();
+            row = r;
+            col = c;
+        }
+
         public void Init()
         {
             experienceAmountMulti = 1.0;
             currentExperienceAmount = (int)(baseExperienceAmount * experienceAmountMulti);
+
+            statEffects = new List<Effect>();
         }
 
         /**********************************************************************

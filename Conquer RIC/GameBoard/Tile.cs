@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Community;
 
 namespace GameBoard
 {
@@ -26,7 +27,7 @@ namespace GameBoard
 
         public bool isUnpassable
         {
-            get 
+            get
             {
                 return isSolid;
             }
@@ -105,7 +106,7 @@ namespace GameBoard
             get { return row; }
             set { row = value; }
         }
-        
+
         //Constructors
         /*
          * Makes a "blank" tile, default is grass, no character on it. Initializes canMoveTo  to false, is only true when calculating/displaying a player's move options

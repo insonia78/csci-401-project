@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Collections;
 
 namespace Community
 {
@@ -31,11 +34,10 @@ namespace Community
      * experience gain system.
      * ********************************************************************
      */
-    class Hero : Character
+    public class Hero : Character
     {
         // fields
         private String portraitFile;
-        private Image characterPortrait;     // image of the hero for the UI.
         
         // base stats for experience.
         private int baseExperience = 0;             // experience earned.
@@ -52,19 +54,21 @@ namespace Community
         }
 
         // Second constructor.
-        public Hero(int r, int c, int charSpeed)
+        public Hero(int r, int c) : base(r, c)
         {
             Init();
             base.Row = r;
             base.Col = c;
-            base.CurrentSpeed = charSpeed;
         }
 
         public void Init()
         {
-            portraitFile = "MissingnoPortrait.png";
-            characterPortrait = Image.FromFile(portraitFile);
+            portraitFile = "hero_portrait.png";
+            pictureFile = "hero.png";
+            characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
             currentExperience = baseExperience;
+
+            statEffects = new List<Effect>();
         }
 
         // get and set for the portraitFile variable.
@@ -77,18 +81,6 @@ namespace Community
             set 
             {
                 portraitFile = value;
-            }
-        }
-        // get and set for the profileImage variable.
-        public Image CharacterPortrait
-        {
-            get
-            {
-                return characterPortrait;
-            }
-            set
-            {
-                characterPortrait = value;
             }
         }
 
@@ -143,6 +135,67 @@ namespace Community
                 currentExperience = value;
             }
         }
+
+        public override int[,] Ability1(int[,] boardspaces)
+        {
+            //TEST ATTACK ONLY, will probably be removed later
+            //up
+            this.selectedAttackPower = 1.0;
+
+            if (row - 1 >= 0 && boardspaces[row - 1, col] == 0)
+            {
+                boardspaces[row - 1, col] = 1;
+                if (row - 2 >= 0 && boardspaces[row - 2, col] == 0)
+                {
+                    boardspaces[row - 2, col] = 1;
+                    if (col - 1 >= 0 && boardspaces[row - 2, col - 1] == 0)
+                        boardspaces[row - 2, col - 1] = 1;
+                    if (col + 1 >= 0 && boardspaces[row - 2, col + 1] == 0)
+                        boardspaces[row - 2, col + 1] = 1;
+                }
+            }
+            //down
+            if (row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col] == 0)
+            {
+                boardspaces[row + 1, col] = 2;
+                if (row + 2 < boardspaces.GetLength(0) && boardspaces[row + 2, col] == 0)
+                {
+                    boardspaces[row + 2, col] = 2;
+                    if (col - 1 >= 0 && boardspaces[row + 2, col - 1] == 0)
+                        boardspaces[row + 2, col - 1] = 2;
+                    if (col + 1 < boardspaces.GetLength(1) && boardspaces[row + 2, col + 1] == 0)
+                        boardspaces[row + 2, col + 1] = 2;
+                }
+            }
+            //left
+            if (col - 1 >= 0 && boardspaces[row, col - 1] == 0)
+            {
+                boardspaces[row, col - 1] = 3;
+                if (col - 2 >= 0 && boardspaces[row, col - 2] == 0)
+                {
+                    boardspaces[row, col - 2] = 3;
+                    if (row - 1 >= 0 && boardspaces[row - 1, col - 2] == 0)
+                        boardspaces[row - 1, col - 2] = 3;
+                    if (row + 1 < boardspaces.GetLength(1) && boardspaces[row + 1, col - 2] == 0)
+                        boardspaces[row + 1, col - 2] = 3;
+                }
+            }
+            //right
+            if (col + 1 < boardspaces.GetLength(1) && boardspaces[row, col + 1] == 0)
+            {
+                boardspaces[row, col + 1] = 4;
+                if (col + 2 < boardspaces.GetLength(1) && boardspaces[row, col + 2] == 0)
+                {
+                    boardspaces[row, col + 2] = 4;
+                    if (row - 1 >= 0 && boardspaces[row - 1, col + 2] == 0)
+                        boardspaces[row - 1, col + 2] = 4;
+                    if (row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col + 2] == 0)
+                        boardspaces[row + 1, col + 2] = 4;
+                }
+            }
+            return boardspaces;
+        }
+
         /**********************************************************************
          * Other methods.
          * ********************************************************************

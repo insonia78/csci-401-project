@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Community
 {
-    class Boss : Enemy
+    public class Boss : Enemy
     {
         public Boss(String nam, bool sex)
         {
@@ -14,12 +16,11 @@ namespace Community
         }
 
         // Second constructor.
-        public Boss(int r, int c, int charSpeed)
+        public Boss(int r, int c) : base(r, c)
         {
-            //Init();
+            Init();
             Row = r;
             Col = c;
-            CurrentSpeed = charSpeed;
         }
 
         private void Init(String n, bool s)
@@ -27,6 +28,10 @@ namespace Community
             Name = n;
             Male = s;
             JobRole = "Boss";
+
+            pictureFile = "Ravenscroft.png";
+            characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
+
             /******************************************************************
              * stat progression unique to this job role.
              * ****************************************************************

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Community;
 
 namespace GameBoard
 {
@@ -85,11 +86,9 @@ namespace GameBoard
             numRows = 15;
             numCols = 15;
             numTurns = 1;
-            numEnemies = 0;
             numHeroes = 5;
             boardspaces = new Tile[numRows, numCols];
             cells = new Grid[numRows, numCols]; //a 2d array of references to the grid cells that make up the board tiles graphically
-            HeroesCounter.Content = ("Heroes Remaining: " + numHeroes);
             for(int r = 0; r < numRows; r++)
             {
                 for(int c = 0; c < numCols; c++)
@@ -103,6 +102,9 @@ namespace GameBoard
                     Board.Children.Add(cell);
                 }
             }
+
+            countEnemies();
+            updateCharacterCountDisplay();
         }
 
         /*
@@ -118,10 +120,8 @@ namespace GameBoard
             numRows = 15;
             numCols = 15;
             numTurns = 1;
-            numEnemies = 0;
             numHeroes = 5;
             boardspaces = new Tile[numRows, numCols];
-            HeroesCounter.Content = ("Heroes Remaining: " + numHeroes);
             cells = new Grid[numRows, numCols]; //a 2d array of references to the grid cells that make up the board tiles graphically
 
             if(!File.Exists(mapfile))
@@ -166,6 +166,9 @@ namespace GameBoard
                     }
                 }
             }
+
+            countEnemies();
+            updateCharacterCountDisplay();
         }
 
         /*
@@ -180,7 +183,7 @@ namespace GameBoard
                 {
                     if (boardspaces[r, c].containsCharacter())
                     {
-                        if (boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero)))
+                        if (boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)))
                             mapping[r, c] = 1;
                         else //is an enemy
                             mapping[r, c] = 2;
@@ -290,7 +293,7 @@ namespace GameBoard
                     {
                         boardspaces[r, c].tileCharacter.decrementEffectDurations();
                         boardspaces[r, c].tileCharacter.isActive = true;
-                        refreshBoardSpace(r,c);
+                        boardspaces[r, c].tileCharacter.Opacity = 1;
                     }
                 }
             }
@@ -310,7 +313,7 @@ namespace GameBoard
             {
                 for(int c = 0; c < numCols; c++)
                 {
-                    if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Enemy)) && boardspaces[r, c].tileCharacter.hasMoved == false)
+                    if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy)) && boardspaces[r, c].tileCharacter.hasMoved == false)
                     {
                         enemyMoveAI(r, c);
                         boardspaces[r, c].tileCharacter.hasMoved = true;
@@ -333,7 +336,7 @@ namespace GameBoard
             //int deltaCol = 1 - rng.Next(0, 3); //Similar to the deltaRow rng usage, but controls horizontal movement. If deltaRow & deltaCol both != 0, diagonal movement.
             //moveCharacter(row, col, row + deltaRow, col + deltaCol); 
 
-            moveOptions(boardspaces[row, col].tileCharacter.speed, row, col);
+            moveOptions(boardspaces[row, col].tileCharacter.CurrentSpeed, row, col);
 
             //DOESN'T WORK:
 
@@ -369,8 +372,8 @@ namespace GameBoard
          */
         private void forceMoveCharacter(int oldRow, int oldCol, int newRow, int newCol)
         {
-            selectedHeroRow = oldRow;
-            selectedHeroCol = oldCol;
+            selectedCharacterRow = oldRow;
+            selectedCharacterCol = oldCol;
             boardspaces[oldRow, oldCol].tileCharacter.hasMoved = false;
             MoveOption_Click(boardspaces[newRow, newCol], null);
             boardspaces[newRow, newCol].tileCharacter.hasMoved = false;
@@ -386,12 +389,18 @@ namespace GameBoard
             {
                 for (int c = 0; c < numCols; c++)
                 {
-                    if (boardspaces[r, c].containsCharacter() == true && (boardspaces[r, c].tileCharacter.GetType() == typeof(GameBoard.Enemy) || boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Enemy))))
+                    if (boardspaces[r, c].containsCharacter() == true && (boardspaces[r, c].tileCharacter.GetType() == typeof(Community.Enemy) || boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))))
                     {
                         numEnemies++;
                     }
                 }
             }
+        }
+
+        private void updateCharacterCountDisplay()
+        {
+            HeroesCounter.Content = ("Heroes Remaining: " + numHeroes);
+            EnemyCounter.Content = ("Enemies Remaining: " + numHeroes);
         }
 
         /*
@@ -406,7 +415,7 @@ namespace GameBoard
             {
                 for (int c = 0; c < numCols; c++)
                 {
-                    if (boardspaces[r, c].containsCharacter() == true && (boardspaces[r, c].tileCharacter.GetType() == typeof(GameBoard.Hero) || boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Hero))) && boardspaces[r, c].tileCharacter.isActive == true)
+                    if (boardspaces[r, c].containsCharacter() == true && (boardspaces[r, c].tileCharacter.GetType() == typeof(Community.Hero) || boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero))) && boardspaces[r, c].tileCharacter.isActive == true)
                     {
                         return false;
                     }

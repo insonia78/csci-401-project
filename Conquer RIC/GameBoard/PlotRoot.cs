@@ -8,8 +8,8 @@ namespace GameBoard
         int positionCol;
         public void PlotRoot(int type)
         {
-            int row = selectedHeroRow; positionRow = selectedHeroRow;
-            int col = selectedHeroCol; positionCol = selectedHeroCol;
+            int row = selectedCharacterRow; positionRow = selectedCharacterRow;
+            int col = selectedCharacterCol; positionCol = selectedCharacterCol;
             switch (type)
             {
                 case 0:

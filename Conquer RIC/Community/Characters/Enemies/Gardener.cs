@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Community
 {
-    class Gardener : Enemy
+    public class Gardener : Enemy
     {
+        private int p1;
+        private int p2;
+
         public Gardener()
         {
             Init();
         }
 
         // Second constructor.
-        public Gardener(int r, int c, int charSpeed)
+        public Gardener(int r, int c) : base(r, c)
         {
-            //Init();
-            Row = r;
-            Col = c;
-            CurrentSpeed = charSpeed;
+            Init();
+            row = r;
+            col = c;
         }
 
         private void Init()
@@ -29,6 +33,11 @@ namespace Community
              * ****************************************************************
              */
             JobRole = "Gardener";
+
+            pictureFile = "Gardener.png";
+            characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
+
+            statEffects = new List<Effect>();
 
             HealthMulti = 1.75;
             EnergyMulti = 1.50;

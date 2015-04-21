@@ -22,7 +22,10 @@
         <Button x:Name="Use_Item" Content="Use Item" Canvas.Left="50" Canvas.Top="256" Width="145" Height="41" IsEnabled="False" Click="Use_Item_Click"/>
         <Button x:Name="End_Turn" Content="Wait" Canvas.Left="50" Canvas.Top="302" Width="145" Height="41" IsEnabled="False" Click="End_Turn_Click"/>
         <Button x:Name="End_Heroes_Turn" Content="End Heroes Turn" Canvas.Left="50" Canvas.Top="480" Width="145" Height="41" IsEnabled="True" Click="End_Heroes_Turn_Click"/>
-        <Button x:Name="Test_Attack" Content="Test Attack" Canvas.Left="50" Canvas.Top="390" Width="145" Height="41" IsEnabled="False" Click="Attack1_Click"/>
+        <Button x:Name="Ability1" Content="Ability1" Canvas.Left="50" Canvas.Top="365" Width="63" Height="41" IsEnabled="False" Click="Ability1_Click"/>
+        <Button x:Name="Ability2" Content="Ability2" Canvas.Left="132" Canvas.Top="365" Width="63" Height="41" IsEnabled="False" Click="Ability2_Click"/>
+        <Button x:Name="Ability3" Content="Ability3" Canvas.Left="50" Canvas.Top="411" Width="63" Height="41" IsEnabled="False" Click="Ability3_Click"/>
+        <Button x:Name="Ability4" Content="Ability4" Canvas.Left="132" Canvas.Top="411" Width="63" Height="41" IsEnabled="False" Click="Ability4_Click"/>
         <Image x:Name="Character_Info_Image" Height="100" Canvas.Left="912" Canvas.Top="82" Width="100"/>
         <Button x:Name="Map_Maker" Content="Map Maker" Canvas.Left="1104" Canvas.Top="518" Width="78" Height="41" IsEnabled="True" Click="Map_Maker_Click"/>
         <Grid x:Name="TestGrid" Height="20" Canvas.Left="214" Canvas.Top="53" Width="20"/>

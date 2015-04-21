@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Community
 {
-    class CampusPolice : Enemy
+    public class CampusPolice : Enemy
     {
         public CampusPolice()
         {
@@ -14,12 +16,11 @@ namespace Community
         }
 
         // Second constructor.
-        public CampusPolice(int r, int c, int charSpeed)
+        public CampusPolice(int r, int c) : base(r, c)
         {
-            //Init();
+            Init();
             Row = r;
             Col = c;
-            CurrentSpeed = charSpeed;
         }
 
         private void Init()
@@ -29,6 +30,11 @@ namespace Community
              * ****************************************************************
              */
             JobRole = "Campus Police";
+
+            pictureFile = "Campus Police.png";
+            characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
+
+            statEffects = new List<Effect>();
 
             HealthMulti = 3.00;
             EnergyMulti = 1.50;

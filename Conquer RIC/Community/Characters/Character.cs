@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Collections;
 
 
 namespace Community
@@ -12,7 +15,7 @@ namespace Community
      * This class is the skeleton of every hero and enemy.
      * each character has base stats that will be the same for all job classes.
      * Each stat has a multiplier. This multiplier will change the stats of each
-     * job class. They are also their to decide how many points a character will
+     * job class. They are also there to decide how many points a character will
      * receive for each stat when they level up as it pertains to their job role.
      * ************************************************************************
      */
@@ -23,7 +26,7 @@ namespace Community
      *      taking and receiving damage. death. status effects etc.
      * ************************************************************************
      */
-    class Character
+    public class Character : System.Windows.Controls.Button
     {
         // fields
         private String name;
@@ -31,15 +34,18 @@ namespace Community
         private String jobRole;
 
         // fields for the game board.
-        private int row;
-        private int col;
+        protected int row;
+        protected int col;
         private bool hasMovedOnTurn = false;
         private bool hasAttackedOnTurn = false;
         private bool hasUsedItemOnTurn = false;
         private bool isActiveOnTurn = true;
-        private String pictureFile;
-        private Image characterPicture;
+        protected String pictureFile;
+        protected ImageSource characterPicture;
         private String status;
+        protected List<Effect> statEffects;
+        protected double selectedAttackPower;
+        private bool isSelectedAttackTypeSpecial = false;
 
         // base stats.
         // all characters will have the same base stats.
@@ -92,15 +98,23 @@ namespace Community
             Init();
         }
 
+        public Character(int r, int c)
+        {
+            row = r;
+            col = c;
+        }
+
         // initialize the fields.
         public void Init()
         {
         name = "MissingNo";
         male = false;
         pictureFile = "Missingno.png";
-        characterPicture = Image.FromFile(pictureFile);
+        characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
         jobRole = "Jobless";
         status = "AWAKE";
+
+        statEffects = new List<Effect>();
 
         // stat multipliers , increases stats by a set amount for each stat.
         healthMulti = 1.0;
@@ -191,7 +205,7 @@ namespace Community
                 pictureFile = value;
             }
         }
-        public Image CharacterPicture
+        public ImageSource CharacterPicture
         {
             get
             {
@@ -217,7 +231,7 @@ namespace Community
         }
 
         // get and set for the status variable.
-        private String Status
+        public String Status
         {
             get
             {
@@ -229,7 +243,7 @@ namespace Community
             }
         }
 
-        public bool HasMovedOnTurn
+        public bool hasMoved
         {
             get
             {
@@ -240,7 +254,7 @@ namespace Community
                 hasMovedOnTurn = value;
             }
         }
-        public bool HasAttackedOnTurn
+        public bool hasAttacked
         {
             get
             {
@@ -251,7 +265,7 @@ namespace Community
                 hasAttackedOnTurn = value;
             }
         }
-        public bool HasUsedItemOnTurn
+        public bool hasUsedItem
         {
             get
             {
@@ -743,12 +757,30 @@ namespace Community
             }
         }
 
+        public double AttackPower
+        {
+            get
+            {
+                return selectedAttackPower;
+            }
+            set { }
+        }
+
+        public bool isAttackTypeSpecial
+        {
+            get
+            {
+                return isSelectedAttackTypeSpecial;
+            }
+
+        }
+
         /**********************************************************************
          * Misc. Methods.
          * ********************************************************************
          */
         // returns the status of the turn for the character.
-        public bool IsActive
+        public bool isActive
         {
             get
             {//If these three are true, then the character is no longer active, 
@@ -823,7 +855,7 @@ namespace Community
                     status = "AWAKE";
                     currentHealth = amount;
                     currentEnergy = amount;
-                    characterPicture = Image.FromFile(pictureFile);
+                    characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
                     break;
 
                 case "KNOCKED OUT":
@@ -870,8 +902,8 @@ namespace Community
             
             String damage;
 
-            // if the first characters aim is better than the second characters dodge
-            // the attack will go through.
+             //if the first characters aim is better than the second characters dodge
+             //the attack will go through.
             if ((BattleChance() - aCharacter.BattleChance()) > 0)
             {
                 damage = BattleDamage(aCharacter);
@@ -880,6 +912,8 @@ namespace Community
             {
                 damage = "MISS";
             }
+
+            damage = "10"; //FOR TESTING, REMOVE LATER
 
             return damage;
         }
@@ -900,6 +934,8 @@ namespace Community
             {
                 damage = "MISS";
             }
+
+            damage = "10"; //FOR TESTING, REMOVE LATER
 
             return damage;
         }
@@ -942,6 +978,44 @@ namespace Community
             int chance = random.Next((50 + currentSpeed), 101);
 
             return chance;
+        }
+
+        public virtual int[,] Ability1(int[,] boardspaces)
+        {
+            return boardspaces;
+        }
+
+        public virtual int[,] Ability2(int[,] boardspaces)
+        {
+            return boardspaces;
+        }
+
+        public virtual int[,] Ability3(int[,] boardspaces)
+        {
+            return boardspaces;
+        }
+
+        public virtual int[,] Ability4(int[,] boardspaces)
+        {
+            return boardspaces;
+        }
+
+        /*
+         * Loops through all status effects applied to the character, decrements the amount of turns it will continue to affect their stats, and if 0, removes.
+         * 
+         * Should be ran after every turn.
+         */
+        public void decrementEffectDurations()
+        {
+            foreach (Effect anEffect in statEffects)
+            {
+                anEffect.decrement();
+
+                if (anEffect.turnsLeft <= 0)
+                {
+                    statEffects.Remove(anEffect);
+                }
+            }
         }
 
         // Prints out the variables for testing purposes.

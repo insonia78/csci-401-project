@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,39 +14,66 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Reflection;
+using System.Collections;
+using Community;
 
 namespace GameBoard
 {
     public partial class MainWindow
     {
         private const int numberOfColumns = 3;
-        private const int numberOfFrames = 7;
+        private const int numberOfFrames = 6;
         private const int frameWidth = 20;
         private const int frameHeight = 20;
-        public static readonly TimeSpan TimePerFrame = TimeSpan.FromSeconds(0.1);
+        private DispatcherTimer dispatcherTimer;
+        private TimeSpan TimePerFrame = TimeSpan.FromSeconds(0.1);
         private int currentFrame = 0;
         private ImageSource spritesheet;
         private ImageBrush animation;
         private TranslateTransform SpriteSheetOffset;
         private Rectangle animationSpace;
         private Grid animationContainer;
+        private ArrayList area1 = new ArrayList();
+        private ArrayList area2 = new ArrayList();
+        private ArrayList area3 = new ArrayList();
+        private ArrayList area4 = new ArrayList();
 
         private void clearAttackOptions()
         {
-            for(int r = 0; r < numRows; r++)
+            foreach (Tile space in area1)
             {
-                for(int c = 0; c < numCols; c++)
-                {
-                    if(boardspaces[r,c].attackOption != 0)
-                    {
-                        boardspaces[r,c].attackOption = 0;
-                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(boardspaces[r, c], new object[] { false });
-                        boardspaces[r, c].Click -= new RoutedEventHandler(AttackOption_Click);
-                        boardspaces[r, c].MouseEnter -= new MouseEventHandler(AttackOption_MouseEnter);
-                        boardspaces[r, c].MouseLeave -= new MouseEventHandler(AttackOption_MouseLeave);
-                        refreshBoardSpace(r, c);
-                    }
-                }
+                removeAttackOption(space);
+            }
+            foreach (Tile space in area2)
+            {
+                removeAttackOption(space);
+            }
+            foreach (Tile space in area3)
+            {
+                removeAttackOption(space);
+            }
+            foreach (Tile space in area4)
+            {
+                removeAttackOption(space);
+            }
+            area1.Clear();
+            area2.Clear();
+            area3.Clear();
+            area4.Clear();
+        }
+
+        public void removeAttackOption(Tile space)
+        {
+            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+            space.Click -= new RoutedEventHandler(AttackOption_Click);
+            space.MouseEnter -= new MouseEventHandler(AttackOption_MouseEnter);
+            space.MouseLeave -= new MouseEventHandler(AttackOption_MouseLeave);
+            space.BorderThickness = new Thickness(0);
+            space.Click += new RoutedEventHandler(Tile_Click);
+            if (space.containsCharacter())
+            {
+                space.tileCharacter.Click -= new RoutedEventHandler(AttackOption_Click);
+                space.tileCharacter.Click += new RoutedEventHandler(Character_Click);
             }
         }
 
@@ -54,7 +82,12 @@ namespace GameBoard
          */
         private void Attack_Click(object sender, RoutedEventArgs e)
         {
-            Test_Attack.IsEnabled = true;
+            clearMoveOptions();
+            clearAttackOptions();
+            Ability1.IsEnabled = true;
+            Ability2.IsEnabled = true;
+            Ability3.IsEnabled = true;
+            Ability4.IsEnabled = true;
         }
 
         /*
@@ -64,160 +97,343 @@ namespace GameBoard
          */
         private void AttackOption_Click(object sender, RoutedEventArgs e)
         {
-            int attackArea = -1;
-
-            try
-            {
-                attackArea = (sender as Tile).attackOption;
-            }
-            catch
-            {
-
-            }
-
+            MessageBox.Show("Attack Option Click!");
             //Make sure the selected hero hasn't already attacked this turn (mostly not necessary, but for safety against glitches?)
-            if (!boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasAttacked)
+            if (!boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasAttacked)
             {
-                //Apply damage to enemy/enemies in the area selected based on attacker's and victim's stats.
-                for(int r = 0; r < numRows; r++)
+                if (area1.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
                 {
-                    for(int c = 0; c < numCols; c++)
+                    applyAbilityToArea(area1);
+                }
+                else if (area2.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
+                {
+                    applyAbilityToArea(area2);
+                }
+                else if (area3.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
+                {
+                    applyAbilityToArea(area3);
+                }
+                else if (area4.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
+                {
+                    applyAbilityToArea(area4);
+                }
+                else if (sender.GetType().IsSubclassOf(typeof(Community.Character)))
+                {
+                    if (area1.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
                     {
-                        if(attackArea == boardspaces[r, c].attackOption)
-                        {
-                            int heroAttackStat = boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.attack;
-                            int heroSpAttackStat = boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.specialAttack;
-                            double attackPower = boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.selectedAttackPower;
-                            if (boardspaces[r, c].containsCharacter() && boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(GameBoard.Enemy)))
-                            {
-                                timer.Interval = TimeSpan.FromSeconds(0.2);
-                                timer.Tick += onUpdate;
-                                timer.Start();
-                                damageAnimation(boardspaces[r, c].tileCharacter);
-
-                                //Started writing something to display the amount of damage after the explosion animation, doesn't work the way I want yet.
-
-                                //int oldHealth = boardspaces[r, c].tileCharacter.hp;
-                                //boardspaces[r,c].tileCharacter.damage(heroAttackStat, heroSpAttackStat, attackPower);
-                                //int newHealth = boardspaces[r, c].tileCharacter.hp;
-                                //TextBox damageValue = new TextBox();
-                                //damageValue.Text = Convert.ToString(newHealth - oldHealth);
-                                //boardspaces[r, c].tileCharacter.Content = damageValue;
-
-                            }
-                        }
+                        applyAbilityToArea(area1);
+                    }
+                    else if (area2.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
+                    {
+                        applyAbilityToArea(area2);
+                    }
+                    else if (area3.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
+                    {
+                        applyAbilityToArea(area3);
+                    }
+                    else if (area4.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
+                    {
+                        applyAbilityToArea(area4);
                     }
                 }
             }
 
-            clearAttackOptions();
-            Attack.IsEnabled = false;
-            Move.IsEnabled = false; //Hero can't move after attacking.
-            boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasAttacked = true;
-            boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.hasMoved = true;
-            if(!boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.isActive) //Check if hero has moved, used an item, and attacked, if so, the hero's turn is over, is inactive
+            //clearAttackOptions();
+            boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasAttacked = true;
+            boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasMoved = true;
+            if(!boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive) //Check if hero has moved, used an item, and attacked, if so, the hero's turn is over, is inactive
             {
-                refreshBoardSpace(selectedHeroRow, selectedHeroCol); //refresh the character so it appears faded.
-                Defend.IsEnabled = false;
-                End_Turn.IsEnabled = false;
+                refreshBoardSpace(selectedCharacterRow, selectedCharacterCol); //refresh the character so it appears faded.
                 //If inactive, the item button is already disabled, and the move and attack were previously disabled in this method when the attack was successful.
             }
             if (checkAllPlayersInactive())
             {
                 nextTurn();
             }
+
+            updateAvailableOptionButtons();
         }
 
-        public void Attack1_Click(object sender, RoutedEventArgs e)
+        public void applyAbilityToArea(ArrayList area)
         {
-            boardspaces = boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.Attack1(boardspaces, numRows, numCols); //Determines the different spaces the character can attack
+            foreach(Tile space in area)
+            {
+                String position = space.Row + ", " + space.Col;
+                MessageBox.Show(position + " was attacked.");
+
+                if (space.containsCharacter() && (((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)) || 
+                    ((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))))))
+                {
+                    String damage;
+
+                    if (space.tileCharacter.isAttackTypeSpecial)
+                        damage = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.InitiateSpecialAttack(space.tileCharacter);
+                    else
+                        damage = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.InitiateAttack(space.tileCharacter);
+
+                    if(damage != "MISS")
+                    {
+                        space.tileCharacter.DecreaseHealth(Convert.ToInt32(damage));
+                        attackAnimation(space.tileCharacter, "test_explosion_spritesheet.png");
+                    }
+                    else
+                    {
+                        attackAnimation(space.tileCharacter, "miss_spritesheet.png");
+                    }
+
+                    if (space.tileCharacter.Status == "KNOCKED OUT")
+                    {
+                        if (space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy)))
+                        {
+                            numEnemies--;
+                            updateCharacterCountDisplay();
+                        }
+                        else if (space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)))
+                        {
+                            numHeroes--;
+                            updateCharacterCountDisplay();
+                        }
+
+                        attackAnimation(space, "test_explosion_spritesheet.png");
+                        space.tileCharacter = null;
+                        refreshBoardSpace(space.Row, space.Col);
+                    }
+                }
+            }
+
+            clearAttackOptions();
+        }
+
+        public int[,] mapSolidSpaces()
+        {
+            int[,] solidSpaces = new int[numRows, numCols];
 
             for (int r = 0; r < numRows; r++)
             {
                 for (int c = 0; c < numCols; c++)
                 {
-                    if (boardspaces[r, c].attackOption != 0) //display buttons fof the different spaces the user can attack
-                    {
-                        boardspaces[r, c].Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
-                        boardspaces[r, c].Click += new RoutedEventHandler(AttackOption_Click); //Add a AttackOption_Click event handler to the tile button
-                        boardspaces[r, c].MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
-                        boardspaces[r, c].MouseLeave += new MouseEventHandler(AttackOption_MouseLeave);
-                        //Make a colored border around attackOption spaces to signify which ones they are to the user.
-                        boardspaces[r, c].BorderBrush = attackOption;
-                        boardspaces[r, c].BorderThickness = new Thickness(1);
+                    if (boardspaces[r, c].isUnpassable)
+                        solidSpaces[r, c] = -1;
+                    else
+                        solidSpaces[r, c] = 0;
+                }
+            }
 
+            return solidSpaces;
+        }
+
+        public void decodeAttackAreas(int[,] attackAreas)
+        {
+            //area1.Clear();
+            //area2.Clear();
+            //area3.Clear();
+            //area4.Clear();
+            for (int r = 0; r < numRows; r++)
+            {
+                for (int c = 0; c < numCols; c++)
+                {
+                    switch(attackAreas[r,c])
+                    {
+                        case 1:
+                            area1.Add(boardspaces[r, c]);
+                            break;
+                        case 2:
+                            area2.Add(boardspaces[r, c]);
+                            break;
+                        case 3:
+                            area3.Add(boardspaces[r, c]);
+                            break;
+                        case 4:
+                            area4.Add(boardspaces[r, c]);
+                            break;
                     }
                 }
+            }
+        }
+
+        public void Ability1_Click(object sender, RoutedEventArgs e)
+        {
+            int[,] attackAreas = new int[numRows, numCols];
+            attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability1(mapSolidSpaces()); //Determines the different spaces the character can attack
+            decodeAttackAreas(attackAreas);
+            displayAttackAreas();
+        }
+
+        public void Ability2_Click(object sender, RoutedEventArgs e)
+        {
+            int[,] attackAreas = new int[numRows, numCols];
+            attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability2(mapSolidSpaces()); //Determines the different spaces the character can attack
+            decodeAttackAreas(attackAreas);
+            displayAttackAreas();
+        }
+
+        public void Ability3_Click(object sender, RoutedEventArgs e)
+        {
+            int[,] attackAreas = new int[numRows, numCols];
+            attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability3(mapSolidSpaces()); //Determines the different spaces the character can attack
+            decodeAttackAreas(attackAreas);
+
+            displayAttackAreas();
+        }
+
+        public void Ability4_Click(object sender, RoutedEventArgs e)
+        {
+            int[,] attackAreas = new int[numRows, numCols];
+            attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability4(mapSolidSpaces()); //Determines the different spaces the character can attack
+            decodeAttackAreas(attackAreas);
+            displayAttackAreas();
+        }
+
+        public void displayAttackAreas()
+        {
+            foreach(Tile space in area1)
+            {
+                String position = space.Row + ", " + space.Col;
+                MessageBox.Show(position + " is in area 1.");
+                space.Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
+                if (space.containsCharacter())
+                {
+                    space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
+                    space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
+                }
+                space.Click += new RoutedEventHandler(AttackOption_Click); //Add a AttackOption_Click event handler to the tile button
+                space.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
+                space.MouseLeave += new MouseEventHandler(AttackOption_MouseLeave);
+                //Make a colored border around attackOption spaces to signify which ones they are to the user.
+                space.BorderBrush = attackOption;
+                space.BorderThickness = new Thickness(1);
+            }
+            foreach (Tile space in area2)
+            {
+                String position = space.Row + ", " + space.Col;
+                MessageBox.Show(position + " is in area 2.");
+                space.Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
+                if (space.containsCharacter())
+                {
+                    space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
+                    space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
+                }
+                space.Click += new RoutedEventHandler(AttackOption_Click); //Add a AttackOption_Click event handler to the tile button
+                space.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
+                space.MouseLeave += new MouseEventHandler(AttackOption_MouseLeave);
+                //Make a colored border around attackOption spaces to signify which ones they are to the user.
+                space.BorderBrush = attackOption;
+                space.BorderThickness = new Thickness(1);
+            }
+            foreach (Tile space in area3)
+            {
+                String position = space.Row + ", " + space.Col;
+                MessageBox.Show(position + " is in area 3.");
+                space.Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
+                if (space.containsCharacter())
+                {
+                    space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
+                    space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
+                }
+                space.Click += new RoutedEventHandler(AttackOption_Click); //Add a AttackOption_Click event handler to the tile button
+                space.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
+                space.MouseLeave += new MouseEventHandler(AttackOption_MouseLeave);
+                //Make a colored border around attackOption spaces to signify which ones they are to the user.
+                space.BorderBrush = attackOption;
+                space.BorderThickness = new Thickness(1);
+            }
+            foreach (Tile space in area4)
+            {
+                String position = space.Row + ", " + space.Col;
+                MessageBox.Show(position + " is in area 4.");
+                space.Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
+                if (space.containsCharacter())
+                {
+                    space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
+                    space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
+                }
+                space.Click += new RoutedEventHandler(AttackOption_Click); //Add a AttackOption_Click event handler to the tile button
+                space.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
+                space.MouseLeave += new MouseEventHandler(AttackOption_MouseLeave);
+                //Make a colored border around attackOption spaces to signify which ones they are to the user.
+                space.BorderBrush = attackOption;
+                space.BorderThickness = new Thickness(1);
             }
         }
 
         public void AttackOption_MouseEnter(object sender, MouseEventArgs e)
-        {
-            int attackArea = -1;
-
-            try
             {
-                attackArea = (sender as Tile).attackOption;
+            if(area1.Contains((sender as Tile)))
+            {
+                 foreach(Tile space in area1)
+                 {
+                     typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                 }
             }
-            catch
+            else if(area2.Contains((sender as Tile)))
             {
-
+                 foreach (Tile space in area2)
+                 {
+                     typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                 }
             }
-
-            for (int r = 0; r < numRows; r++)
+            else if(area3.Contains((sender as Tile)))
             {
-                for (int c = 0; c < numCols; c++)
-                {
-                    if (attackArea == boardspaces[r, c].attackOption)
-                    {
-                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(boardspaces[r,c], new object[] { true });
-                    }
-                }
+                 foreach (Tile space in area3)
+                 {
+                     typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                 }
+            }
+            else if (area4.Contains((sender as Tile)))
+            {
+                 foreach (Tile space in area4)
+                 {
+                     typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                 }
             }
         }
 
         public void AttackOption_MouseLeave(object sender, MouseEventArgs e)
         {
-            int attackArea = -1;
-
-            try
+            if (area1.Contains((sender as Tile)))
             {
-                attackArea = (sender as Tile).attackOption;
-            }
-            catch
-            {
-
-            }
-
-            for (int r = 0; r < numRows; r++)
-            {
-                for (int c = 0; c < numCols; c++)
+                foreach (Tile space in area1)
                 {
-                    if (attackArea == boardspaces[r, c].attackOption)
-                    {
-                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(boardspaces[r, c], new object[] { false });
-                    }
+                    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                }
+            }
+            else if (area2.Contains((sender as Tile)))
+            {
+                foreach (Tile space in area2)
+                {
+                    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                }
+            }
+            else if (area3.Contains((sender as Tile)))
+            {
+                foreach (Tile space in area3)
+                {
+                    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                }
+            }
+            else if (area4.Contains((sender as Tile)))
+            {
+                foreach (Tile space in area4)
+                {
+                    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
                 }
             }
         }
 
-        private void damageAnimation(Button space)
+        private void attackAnimation(Button space, String spritesheetSource)
         {
             animationContainer = new Grid();
 
             animationSpace = new Rectangle();
-            animationContainer.Height = 40;
-            animationContainer.Width = 60;
+            animationSpace.Height = 40;
+            animationSpace.Width = 60;
 
             animation = new ImageBrush();
-            spritesheet = new BitmapImage(new Uri("test_explosion_spritesheet.png", UriKind.Relative));
+            spritesheet = new BitmapImage(new Uri(spritesheetSource, UriKind.Relative));
             animation.ImageSource = spritesheet;
 
-            //Is supposed to start in the left/top and cycle through frames, doesn't work yet, so I set it to just be on the biggest explosion frame.
-            //animation.AlignmentX = AlignmentX.Left;
-            //animation.AlignmentY = AlignmentY.Top;
-            animation.AlignmentX = AlignmentX.Center;
-            animation.AlignmentY = AlignmentY.Bottom;
+            animation.AlignmentX = AlignmentX.Left;
+            animation.AlignmentY = AlignmentY.Top;
             animation.Stretch = Stretch.None;
             SpriteSheetOffset = new TranslateTransform(0, 0);
             animation.Transform = SpriteSheetOffset;
@@ -227,33 +443,23 @@ namespace GameBoard
             animationContainer.Height = 20;
             animationContainer.Width = 20;
             space.Content = animationContainer;
+
+            currentFrame = 0;
+            dispatcherTimer.Start();
         }
 
         private void onUpdate(object sender, object e)
         {
-            if (currentFrame < 6)
+            currentFrame++;
+            var column = currentFrame % numberOfColumns;
+            var row = currentFrame / numberOfColumns;
+
+            SpriteSheetOffset.X = -column * frameWidth;
+            SpriteSheetOffset.Y = -row * frameHeight;
+
+            if(currentFrame >= 7)
             {
-                //currentFrame = (currentFrame + 1 + numberOfFrames) % numberOfFrames;
-                var column = currentFrame % numberOfColumns;
-                var row = currentFrame / numberOfColumns;
-
-                SpriteSheetOffset.X = -column * frameWidth;
-                SpriteSheetOffset.Y = -row * frameHeight;
-
-                //animationSpace.Fill = animation;
-                //animationContainer.Children.Clear();
-                //animationContainer.Children.Add(animationSpace);
-                //animationContainer.Height = 20;
-                //animationContainer.Width = 20;
-                //space.Content = animationContainer;
-
-                currentFrame++;
-            }
-            else
-            {
-                currentFrame = 0;
-                timer.Stop();
-                timer.Tick -= onUpdate;
+                dispatcherTimer.Stop();
             }
         }
 

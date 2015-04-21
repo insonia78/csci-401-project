@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Collections;
 
 namespace Community
 {
@@ -12,7 +15,7 @@ namespace Community
          * Job-specific abilities
          * ********************************************************************
          */
-    class SoftwareEngineer : Hero
+    public class SoftwareEngineer : Hero
     {
         public SoftwareEngineer(String nam, bool sex)
         {
@@ -20,12 +23,11 @@ namespace Community
         }
 
         // Second constructor.
-        public SoftwareEngineer(int r, int c, int charSpeed)
+        public SoftwareEngineer(int r, int c) : base(r, c)
         {
-            //Init();
+            Init(null, true);
             Row = r;
             Col = c;
-            CurrentSpeed = charSpeed;
         }
 
         private void Init(String n, bool s)
@@ -37,15 +39,19 @@ namespace Community
             // Picture will be generated depending on the sex.
             if(Male)
             {
-                PortraitFile = "MaleSoftwareEngineer.png";
+                PortraitFile = "Male_Software_Engineer_portrait.png";
+                pictureFile = "Male_Software_Engineer.png";
                 //CharacterPicture = " "; 
             }
             else
             {
-                PortraitFile = "FemaleSoftwareEngineer.png";
+                PortraitFile = "Female_Software_Engineer_portrait.png";
+                pictureFile = "Female_Software_Engineer.png";
                 //CharacterPicture = " "; 
             }
-            CharacterPortrait = Image.FromFile(PortraitFile);
+            characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
+
+            statEffects = new List<Effect>();
 
             /******************************************************************
              * stat progression unique to this job role.

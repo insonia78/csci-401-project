@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Collections;
 
 namespace Community
 {
-    class InformationSecurity : Hero
+    public class InformationSecurity : Hero
     {
         public InformationSecurity(String nam, bool sex)
         {
@@ -15,12 +18,11 @@ namespace Community
         }
 
         // Second constructor.
-        public InformationSecurity(int r, int c, int charSpeed)
+        public InformationSecurity(int r, int c) : base(r, c)
         {
-            //Init();
+            Init(null, true);
             Row = r;
             Col = c;
-            CurrentSpeed = charSpeed;
         }
 
         private void Init(String n, bool s)
@@ -32,15 +34,19 @@ namespace Community
             // Picture will be generated depending on the sex.
             if(Male)
             {
-                PortraitFile = "MaleInformationSecurity.png";
+                PortraitFile = "Male_Information_Security_portrait.png";
+                pictureFile = "Male_Information_Security.png";
                 //CharacterPicture = " "; 
             }
             else
             {
-                PortraitFile = "FemaleInformationSecurity.png";
+                PortraitFile = "Female_Information_Security_portrait.png";
+                pictureFile = "Female_Information_Security.png";
                 //CharacterPicture = " "; 
             }
-            CharacterPortrait = Image.FromFile(PortraitFile);
+            CharacterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
+
+            statEffects = new List<Effect>();
 
             /******************************************************************
              * stat progression unique to this job role.
