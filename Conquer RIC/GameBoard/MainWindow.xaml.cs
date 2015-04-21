@@ -46,6 +46,9 @@ namespace GameBoard
         ArrayList colPlot = new ArrayList();
 
         private bool isTutorial;
+        public bool tutorialWasClicked; 
+        public bool tutIntroductionExitClicked;
+        public bool highlightedFirstClick;
 
         /*
          * Initializes the GUI components, creates the cells 2d array, and sets up the board/tiles/characters, etc.
@@ -610,6 +613,77 @@ namespace GameBoard
             nextTurn();
         }
 
+        //
+        //
+        //
+        //
+        //
+        //
+
+
+
+
+        public void TutorialLevel_Click(object sender, RoutedEventArgs e)
+        {
+            tutorialWasClicked = true;
+            TutFirstMove.IsEnabled = false;
+            TutIntroduction.IsEnabled = false;
+            //pop up dialog box introducing people to the tutorial level
+            TutIntroduction.Visibility = System.Windows.Visibility.Visible;
+            TutorialIntroductionExit.Visibility = System.Windows.Visibility.Visible;  
+        }
+
+        public void tutorialFirstStep()
+        {
+            if (tutIntroductionExitClicked == true)
+            {
+
+                //"Clicking on a character allows you to move, attack, defend, or to use items.
+                //"Click on the highlighted square to move that character." ;
+                //this teaches you how to move the character. select the highlighted square.
+                //boolean for if the square highlighted was clicked.
+                // if(highlightedFirstClick == true) {
+                TutFirstMove.Visibility = System.Windows.Visibility.Visible;
+                TutFirstMove.Text = "now that you've clicked on the highlighted tile, see how there are squares that light up? those squares indicate where the character can go." +
+                "for our purposes, i want you to move to the square thats highlighted purple.";
+
+
+                End_Turn.IsEnabled = false;
+                Move.IsEnabled = false;
+                Attack.IsEnabled = false;
+                Defend.IsEnabled = false;
+                Use_Item.IsEnabled = false;
+
+                //this.Tutorial_Character_Click();
+
+                //makes the character move to a specific square.
+                //checks that its that square.
+                //if not, it reminds them to move the character so they can try again.
+            }
+            
+           
+            
+        }
+
+
+        public void TutorialIntroductionExit_Click(object sender, RoutedEventArgs e)
+        {
+            tutIntroductionExitClicked = true;
+            TutIntroduction.Visibility = System.Windows.Visibility.Hidden;
+            TutorialIntroductionExit.Visibility = System.Windows.Visibility.Hidden;
+            this.tutorialFirstStep();
+        }
+    
+        
+        
+
+        //
+        //
+        //
+        //
+        //
+        //
+
         /*
          * For when the player clicks on any board spaces, brings up info about the tile, and its picture, and displays it on the side (stats location).
          * If there is a character on the tile, display extra appropriate info for the character (current health, etc).
@@ -646,6 +720,10 @@ namespace GameBoard
             mapBuilder map_maker = new mapBuilder();
             map_maker.Show();
         }
+
+        
+
+       
 
     }
 }

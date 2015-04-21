@@ -26,6 +26,10 @@
         <Image x:Name="Character_Info_Image" Height="100" Canvas.Left="912" Canvas.Top="82" Width="100"/>
         <Button x:Name="Map_Maker" Content="Map Maker" Canvas.Left="1104" Canvas.Top="518" Width="78" Height="41" IsEnabled="True" Click="Map_Maker_Click"/>
         <Grid x:Name="TestGrid" Height="20" Canvas.Left="214" Canvas.Top="53" Width="20"/>
+        <Button x:Name ="TutorialLevel" Content="Tutorial" Height="20" Canvas.Left="195" Canvas.Top="53" Width="65" Click="TutorialLevel_Click"/>
+        <TextBox x:Name ="TutFirstMove" Height="154" Canvas.Left="688" TextWrapping="Wrap" Canvas.Top="143" Width="173" Visibility="Hidden"/>
+        <TextBox x:Name ="TutIntroduction" Height="128" Canvas.Left="260" TextWrapping="Wrap" Text="welcome to the tutorial level. here we will teach you awesome stuff about the game so you can kick ass." Canvas.Top="10" Width="601" Visibility="Hidden"/>
+        <Button x:Name= "TutorialIntroductionExit" Content="Exit" Height="28" Canvas.Left="774" Canvas.Top="99" Width="77" Click="TutorialIntroductionExit_Click" Visibility="Hidden"/>
     </Canvas>
 </Window>
 
