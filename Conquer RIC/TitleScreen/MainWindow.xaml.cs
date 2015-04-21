@@ -23,29 +23,17 @@ namespace TitleScreen
         public MainWindow()
         {
             InitializeComponent();
+            bgm.Play();
         }
-
-       // private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            BlackOut.Visibility = Visibility.Visible;
-            LeaveGamePopUp.Visibility = Visibility.Visible;
-            LeaveGameLabel.Visibility = Visibility.Visible;
-            LeaveGameOkButton.Visibility = Visibility.Visible;
-            LeaveGameCancelButton.Visibility = Visibility.Visible;
+            EnterLeaveGame();
         }
 
         private void XButton_Click(object sender, RoutedEventArgs e)
         {
-            BlackOut.Visibility = Visibility.Visible;
-            LeaveGamePopUp.Visibility = Visibility.Visible;
-            LeaveGameLabel.Visibility = Visibility.Visible;
-            LeaveGameOkButton.Visibility = Visibility.Visible;
-            LeaveGameCancelButton.Visibility = Visibility.Visible;
+            EnterLeaveGame();
         }
 
         private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
@@ -54,6 +42,11 @@ namespace TitleScreen
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void TitleBarButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
@@ -71,6 +64,7 @@ namespace TitleScreen
 
         private void LeaveGameCancelButton_Click(object sender, RoutedEventArgs e)
         {
+            bgm.Volume = 0.5;
             LeaveGameCancelButton.Visibility = Visibility.Hidden;
             LeaveGameOkButton.Visibility = Visibility.Hidden;
             LeaveGameLabel.Visibility = Visibility.Hidden;
@@ -78,10 +72,20 @@ namespace TitleScreen
             BlackOut.Visibility = Visibility.Hidden;
         }
 
-        private void BGM_MediaEnded(object sender, RoutedEventArgs e)
+        private void bgm_MediaEnded(object sender, RoutedEventArgs e)
         {
-            BGM.Position = TimeSpan.Zero;
-            BGM.Play();
+            bgm.Position = TimeSpan.Zero;
+            bgm.Play();
+        }
+
+        private void EnterLeaveGame()
+        {
+            BlackOut.Visibility = Visibility.Visible;
+            LeaveGamePopUp.Visibility = Visibility.Visible;
+            LeaveGameLabel.Visibility = Visibility.Visible;
+            LeaveGameOkButton.Visibility = Visibility.Visible;
+            LeaveGameCancelButton.Visibility = Visibility.Visible;
+            bgm.Volume = 0.2;
         }
     }
 }
