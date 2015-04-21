@@ -50,14 +50,17 @@ namespace Community
         // base stats.
         // all characters will have the same base stats.
         private int baseLevel = 1;                  // initial level.
+        private double baseExperienceRate = 10.0;   // rate at which the hero earns experience.
         private int baseHealth = 100;               // initial health
         private int baseEnergy = 50;                // initial energy
         private int baseAttack = 5;                 // initial attack
         private int baseDefense = 5;                // initial defense
         private int baseSpeed = 5;                  // initial speed
+        private int baseAgility = 5;                // initial agility
         private int baseAttackRange = 1;            // initial attack range
         private int baseSpecialAttack = 10;         // initial special attack
         private int baseSpecialDefense = 10;        // initial special defense
+        private int baseLevelCap = 10;              // last level that can be achieved.
 
         // stat multipliers , increases stats by a set amount for each level.
         // will differ depending on class setup. can be used injuction with effects.
@@ -65,7 +68,8 @@ namespace Community
         private double energyMulti;
         private double attackMulti;
         private double defenseMulti;
-        private int speedMulti;
+        private int    speedMulti;
+        private double agilityMulti;
         private double attackRangeMulti;
         private double specialAttackMulti;
         private double specialDefenseMulti;
@@ -77,6 +81,7 @@ namespace Community
         private int maxAttack;
         private int maxDefense;
         private int maxSpeed;
+        private int maxAgility;
         private int maxAttackRange;
         private int maxSpecialAttack;
         private int maxSpecialDefense;
@@ -88,6 +93,7 @@ namespace Community
         private int currentAttack;
         private int currentDefense;
         private int currentSpeed;
+        private int currentAgility;
         private int currentAttackRange;
         private int currentSpecialAttack;
         private int currentSpecialDefense;
@@ -122,20 +128,22 @@ namespace Community
         attackMulti = 1.0;
         defenseMulti = 1.0;
         speedMulti = 1;
+        agilityMulti = 1.0;
         attackRangeMulti = 1.0;
         specialAttackMulti = 1.0;
         specialDefenseMulti = 1.0;
 
         // maximum values.
         maxLevel = 99;
-        maxHealth = (int)(baseHealth * healthMulti);
-        maxEnergy = (int)(baseEnergy * energyMulti);
-        maxAttack = (int)(baseAttack * attackMulti);
-        maxDefense = (int)(baseDefense * defenseMulti);
-        maxSpeed = (int)(baseSpeed * speedMulti);
-        maxAttackRange = (int)(baseAttackRange * attackRangeMulti);
-        maxSpecialAttack = (int)(baseSpecialAttack * specialAttackMulti);
-        maxSpecialDefense = (int)(baseSpecialDefense * specialDefenseMulti);
+        maxHealth = 9999;
+        maxEnergy = 999;
+        maxAttack = 99;
+        maxDefense = 99;
+        maxSpeed = 99;
+        maxAgility = 99;
+        maxAttackRange = 9;
+        maxSpecialAttack = 999;
+        maxSpecialDefense = 999;
 
         // current state of stats. (affected by status changing properties.)
         currentLevel = baseLevel;
@@ -303,6 +311,19 @@ namespace Community
             }
         }
 
+        // get and set for the baseMaxExperienceRate variable.
+        public double BaseExperienceRate
+        {
+            get
+            {
+                return baseExperienceRate;
+            }
+            set
+            {
+                baseExperienceRate = value;
+            }
+        }
+
         // get and set for the baseHealth variable.
         public int BaseHealth
         {
@@ -368,6 +389,19 @@ namespace Community
             }
         }
 
+        // get and set for the baseAgility variable.
+        public int BaseAgility
+        {
+            get 
+            {
+                return baseAgility;
+            }
+            set
+            {
+                baseAgility = value;
+            }
+        }
+
         // get and set for the baseAttackRange variable.
         public int BaseAttackRange
         {
@@ -404,6 +438,19 @@ namespace Community
             set 
             {
                 baseSpecialDefense = value;
+            }
+        }
+
+        // get and set for the baseLevelCap variable.
+        public int BaseLevelCap
+        {
+            get
+            {
+                return baseLevelCap;
+            }
+            set
+            {
+                baseLevelCap = value;
             }
         }
 
@@ -473,6 +520,19 @@ namespace Community
             set
             {
                 speedMulti = value;
+            }
+        }
+
+        // get and set for the agilityMulti variable.
+        public double AgilityMulti
+        {
+            get
+            {
+                return agilityMulti;
+            }
+            set
+            {
+                agilityMulti = value;
             }
         }
 
@@ -597,6 +657,19 @@ namespace Community
             }
         }
 
+        // get and set for the maxAgility variable.
+        public int MaxAgility
+        {
+            get
+            {
+                return maxAgility;
+            }
+            set
+            {
+                maxAgility = value;
+            }
+        }
+
         // get and set for the maxAttackRange variable.
         public int MaxAttackRange
         {
@@ -715,6 +788,19 @@ namespace Community
             set
             {
                 currentSpeed = value;
+            }
+        }
+
+        // get and set for the currentAgility variable.
+        public int CurrentAgility
+        {
+            get
+            {
+                return currentAgility;
+            }
+            set
+            {
+                currentAgility = value;
             }
         }
 
@@ -864,7 +950,7 @@ namespace Community
                     currentEnergy = amount;
                     currentAttack = maxAttack;
                     currentDefense = maxDefense;
-                    currentSpeed = maxSpeed;
+                    currentAgility = maxAgility;
                     currentAttackRange = maxAttackRange;
                     currentSpecialAttack = maxSpecialAttack;
                     currentSpecialDefense = maxSpecialDefense;
@@ -975,7 +1061,7 @@ namespace Community
         private int BattleChance()
         {
             Random random = new Random();
-            int chance = random.Next((50 + currentSpeed), 101);
+            int chance = random.Next((50 + currentAgility), 101);
 
             return chance;
         }
@@ -1018,6 +1104,51 @@ namespace Community
             }
         }
 
+        /**********************************************************************
+         * This method will instantiate this characters max variables 
+         * depending on the level that is chosen for this character.
+         * ********************************************************************
+         */
+        public void InstantiateLevel(int aLevel)
+        {
+            maxLevel = aLevel;
+            currentLevel = aLevel;
+
+            maxHealth = (int)(baseHealth + (baseHealth *
+                (healthMulti * currentLevel)));
+            currentHealth = maxHealth;
+
+            maxEnergy = (int)(baseEnergy + (baseEnergy *
+                (energyMulti * currentLevel)));
+            currentEnergy = maxEnergy;
+
+            maxAttack = (int)(baseAttack + (baseAttack *
+                (attackMulti * currentLevel)));
+            currentAttack = maxAttack;
+
+            maxDefense = (int)(baseDefense + (baseDefense *
+                (defenseMulti * currentLevel)));
+            currentDefense = maxDefense;
+
+            maxSpeed = (baseSpeed * (speedMulti));
+            currentSpeed = maxSpeed;
+
+            maxAgility = (int)(baseAgility + (baseAgility *
+                (agilityMulti * currentLevel)));
+            currentAgility = maxAgility;
+
+            maxAttackRange = (int)(baseAttackRange * attackRangeMulti);
+            currentAttackRange = maxAttackRange;
+
+            maxSpecialAttack = (int)(baseSpecialAttack + (baseSpecialAttack *
+                (specialAttackMulti * currentLevel)));
+            currentSpecialAttack = maxSpecialAttack;
+
+            maxSpecialDefense = (int)(baseSpecialDefense + (baseSpecialDefense *
+                (specialDefenseMulti * currentLevel)));
+            currentSpecialDefense = maxSpecialDefense;
+        }
+
         // Prints out the variables for testing purposes.
         public String ToString()
         {
@@ -1042,6 +1173,7 @@ namespace Community
                 "Attack: " + baseAttack + "\n" +
                 "Defense: " + baseDefense + "\n" +
                 "Speed: " + baseSpeed + "\n" +
+                "Agility: " + baseAgility + "\n" +
                 "Attack Range: " + baseAttackRange + "\n" +
                 "Special Attack: " + baseSpecialAttack + "\n" +
                 "Special Defense: " + baseSpecialDefense + "\n" +
@@ -1052,6 +1184,7 @@ namespace Community
                 "Attack: " + attackMulti + "\n" +
                 "Defense: " + defenseMulti + "\n" +
                 "Speed: " + speedMulti + "\n" +
+                "Agility: " + baseAgility + "\n" +
                 "Attack Range: " + attackRangeMulti + "\n" +
                 "Special Attack: " + specialAttackMulti + "\n" +
                 "Special Defense: " + specialDefenseMulti + 
@@ -1062,6 +1195,7 @@ namespace Community
                 "Attack: " + maxAttack + "\n" +
                 "Defense: " + maxDefense + "\n" +
                 "Speed: " + maxSpeed + "\n" +
+                "Agility: " + baseAgility + "\n" +
                 "Max Attack Range: " + maxAttackRange + "\n" +
                 "Attack Range: " + maxAttackRange + "\n" +
                 "Special Attack: " + maxSpecialAttack + "\n" +
@@ -1073,6 +1207,7 @@ namespace Community
                 "Attack: " + currentAttack + "\n" +
                 "Defense: " + currentDefense + "\n" +
                 "Speed: " + currentSpeed + "\n" +
+                "Agility: " + baseAgility + "\n" +
                 "Attack Range: " + currentAttackRange + "\n" +
                 "Special Attack: " + currentSpecialAttack + "\n" +
                 "Special Defense: " + currentSpecialDefense);
