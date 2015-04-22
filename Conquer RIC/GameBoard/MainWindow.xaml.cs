@@ -69,14 +69,18 @@ namespace GameBoard
 
             //For testing purposes, characters added in this way. When the game is at the point where the hero data is taken from the world map, or
             //is global to the whole program, and setUpBoard() can read positions to add the characters, then they will be added in setUpBoard() rather than here.
-            boardspaces[4, 1].tileCharacter = new SoftwareEngineer(4,1);
-            refreshBoardSpace(4, 1);
+            boardspaces[5, 3].tileCharacter = new SoftwareEngineer(5,3);
+            refreshBoardSpace(5, 3);
             boardspaces[1, 2].tileCharacter = new SystemsAnalyst(1,2);
             refreshBoardSpace(1, 2);
+            boardspaces[2, 2].tileCharacter = new SystemsAnalyst(2, 2);
+            refreshBoardSpace(2, 2);
             boardspaces[5, 5].tileCharacter = new CampusPolice(5, 5);
             refreshBoardSpace(5, 5);
             boardspaces[6, 5].tileCharacter = new CampusPolice(6, 5);
             refreshBoardSpace(6, 5);
+            boardspaces[5, 1].tileCharacter = new CampusPolice(5, 1);
+            refreshBoardSpace(5, 1);
             boardspaces[11, 9].tileCharacter = new CampusPolice(11,9);
             refreshBoardSpace(11, 9);
             boardspaces[13, 8].tileCharacter = new FoodServer(13,8);
@@ -97,6 +101,8 @@ namespace GameBoard
             ImageBrush backgroundImage;
 
             boardspaces[r, c].Click -= new RoutedEventHandler(Character_Click); //Remove the Hero_Click event from the cell in case there is one (from moving characters off a space). Otherwise, sometimes it remains and do bad stuff.
+            boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
+            boardspaces[r, c].Click -= new RoutedEventHandler(AttackOption_Click);
             boardspaces[r, c].Click += new RoutedEventHandler(Tile_Click); //Add the Tile_Click event to the cell's button in case it isn't already on (will sometimes disappear otherwise).
 
             backgroundImage = new ImageBrush(boardspaces[r, c].terrainImage.terrainImage);
@@ -189,7 +195,6 @@ namespace GameBoard
         private void MoveOption_Click(object sender, RoutedEventArgs e)
         {
 
-
             try
             {
                 //Get the row and column of the tile button that was clicked (Row and Col are accessors in Tile).
@@ -212,8 +217,8 @@ namespace GameBoard
 
                 String display = "";
                 int i = 0;
-                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasMoved = true;
 
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasMoved = true;
 
                 timer.Interval = TimeSpan.FromSeconds(0.2);
 
@@ -585,16 +590,6 @@ namespace GameBoard
             End_Heroes_Turn.IsEnabled = true;
         }
 
-        //
-        //
-        //
-        //
-        //
-        //
-
-
-
-
         public void TutorialLevel_Click(object sender, RoutedEventArgs e)
         {
             tutorialWasClicked = true;
@@ -686,19 +681,13 @@ namespace GameBoard
         }
         
 
-        //
-        //
-        //
-        //
-        //
-        //
-
         /*
          * For when the player clicks on any board spaces, brings up info about the tile, and its picture, and displays it on the side (stats location).
          * If there is a character on the tile, display extra appropriate info for the character (current health, etc).
          */
         private void Tile_Click(object sender, RoutedEventArgs e)
         {
+            //MessageBox.Show("Tile click");
             disableAllOptionButtons();
             clearMoveOptions();
             clearAttackOptions();

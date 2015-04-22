@@ -211,9 +211,16 @@ namespace GameBoard
                 //Update the character's row/column information
                 boardspaces[newRow, newCol].tileCharacter.Row = newRow;
                 boardspaces[newRow, newCol].tileCharacter.Col = newCol;
+
+                boardspaces[oldRow, oldCol].tileCharacter.Click -= new RoutedEventHandler(Character_Click);
+                boardspaces[oldRow, oldCol].tileCharacter.Click -= new RoutedEventHandler(AttackOption_Click);
+                boardspaces[oldRow, oldCol].tileCharacter.Click -= new RoutedEventHandler(MoveOption_Click);
+
                 boardspaces[oldRow, oldCol].tileCharacter = null;
                 //redraw the two spaces (otherwise the character won't be visible in the new space, and the image will remain in the old space).
                 refreshBoardSpace(oldRow, oldCol);
+                boardspaces[oldRow, oldCol].Click -= new RoutedEventHandler(Tile_Click); //Tiles were picking up an extra Tile_Click event listener when characters
+                //moved onto them 
                 refreshBoardSpace(newRow, newCol);
             }
         }
@@ -235,22 +242,22 @@ namespace GameBoard
             if(speed > 0)
             {
                 //up movement
-                if (row - 1 >= 0 && boardspaces[row - 1, col].isUnpassable == false && boardspaces[row - 1, col].tileCharacter == null)
+                if (row - 1 >= 0 && boardspaces[row - 1, col].isUnpassable == false && !boardspaces[row - 1, col].containsCharacter())
                 {
                     moveOptions(speed - boardspaces[row - 1, col].requiredMoveSpeed, row - 1, col); //Subtract the required movement speed to move through of the next tile from the remaining speed points
                 }
                 //down movement
-                if (row + 1 < numRows && boardspaces[row + 1, col].isUnpassable == false && boardspaces[row + 1, col].tileCharacter == null)
+                if (row + 1 < numRows && boardspaces[row + 1, col].isUnpassable == false && !boardspaces[row + 1, col].containsCharacter())
                 {
                     moveOptions(speed - boardspaces[row + 1, col].requiredMoveSpeed, row + 1, col);
                 }
                 //left movement
-                if (col - 1 >= 0 && boardspaces[row, col - 1].isUnpassable == false && boardspaces[row, col - 1].tileCharacter == null)
+                if (col - 1 >= 0 && boardspaces[row, col - 1].isUnpassable == false && !boardspaces[row, col - 1].containsCharacter())
                 {
                     moveOptions(speed - boardspaces[row, col - 1].requiredMoveSpeed, row, col - 1);
                 }
                 //right movement
-                if (col + 1 < numCols && boardspaces[row, col + 1].isUnpassable == false && boardspaces[row, col + 1].tileCharacter == null)
+                if (col + 1 < numCols && boardspaces[row, col + 1].isUnpassable == false && !boardspaces[row, col + 1].containsCharacter())
                 {
                     moveOptions(speed - boardspaces[row, col + 1].requiredMoveSpeed, row, col + 1);
                 }
@@ -271,7 +278,14 @@ namespace GameBoard
                     {
                         boardspaces[r, c].isMoveOption = false;
                         boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
-                        refreshBoardSpace(r, c);
+                        //refreshBoardSpace(r, c);
+                        boardspaces[r, c].BorderThickness = new Thickness(0);
+                        //boardspaces[r, c].Click += new RoutedEventHandler(Tile_Click);   //Removed 4/21, delete if it's awhile later and caused no bugs
+
+                        if(boardspaces[r,c].containsCharacter())
+                        {
+                            boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click);
+                        }
                     }
                 }
             }
@@ -300,6 +314,10 @@ namespace GameBoard
 
             numTurns++;
             TurnCounter.Content = ("Turn " + turnNumber);
+
+            //Make sure there's no leftover move/attack events on the board (caused bugs occassionally without this).
+            clearMoveOptions();
+            clearAttackOptions();
         }
 
         /*
@@ -331,40 +349,7 @@ namespace GameBoard
          */
         public void enemyMoveAI(int row, int col)
         {
-            //Random rng = new Random();
-            //int deltaRow = 1 - rng.Next(0, 3); //Can generate 0, 1, or 2. If 0 generated, 1 - 0 = 1, move down 1. If 1, 1 - 1 = 0, no vertical change. If 2, 1 - 2 = -1, move up 1.
-            //int deltaCol = 1 - rng.Next(0, 3); //Similar to the deltaRow rng usage, but controls horizontal movement. If deltaRow & deltaCol both != 0, diagonal movement.
-            //moveCharacter(row, col, row + deltaRow, col + deltaCol); 
-
-            moveOptions(boardspaces[row, col].tileCharacter.CurrentSpeed, row, col);
-
-            //DOESN'T WORK:
-
-            //System.Collections.ArrayList movementOptions = new System.Collections.ArrayList();
-            //int numMovementOptions = 0;
-            //for(int r = 0; r < numRows; r++)
-            //{
-            //    for(int c = 0; c < numCols; c++)
-            //    {
-            //        if (boardspaces[r, c].isMoveOption)
-            //        {
-            //            position[r, c] = boardspaces[r, c];
-            //            movementOptions.Add(boardspaces[r, c]);
-            //            numMovementOptions++;
-            //        }
-            //    }
-            //}
-
-            //Random rng = new Random();
-            //int option = rng.Next(0, numMovementOptions);
-
-            //selectedHeroRow = row;
-            //selectedHeroCol = col;
-
-            //int newRow = (movementOptions[option] as Tile).Row;
-            //int newCol = (movementOptions[option] as Tile).Col;
-            //boardspaces[row, col].tileCharacter.hasMoved = false;
-            //MoveOption_Click(boardspaces[newRow, newCol], null);
+            //moveOptions(boardspaces[row, col].tileCharacter.CurrentSpeed, row, col);
         }
 
         /*

@@ -27,7 +27,7 @@
         <Button x:Name="Ability3" Content="Ability3" Canvas.Left="50" Canvas.Top="411" Width="63" Height="41" IsEnabled="False" Click="Ability3_Click"/>
         <Button x:Name="Ability4" Content="Ability4" Canvas.Left="132" Canvas.Top="411" Width="63" Height="41" IsEnabled="False" Click="Ability4_Click"/>
         <Image x:Name="Character_Info_Image" Height="100" Canvas.Left="912" Canvas.Top="82" Width="100"/>
-        <Button x:Name="Map_Maker" Content="Map Maker" Canvas.Left="1104" Canvas.Top="518" Width="78" Height="41" IsEnabled="True" Click="Map_Maker_Click"/>
+        <Button x:Name="Map_Maker" Content="Map Maker" Canvas.Left="934" Canvas.Top="518" Width="78" Height="41" IsEnabled="True" Click="Map_Maker_Click"/>
         <Grid x:Name="TestGrid" Height="20" Canvas.Left="214" Canvas.Top="53" Width="20"/>
         <Button x:Name ="TutorialLevel" Content="Tutorial" Height="20" Canvas.Left="195" Canvas.Top="53" Width="65" Click="TutorialLevel_Click"/>
         <TextBox x:Name ="TutFirstMove" Height="154" Canvas.Left="688" TextWrapping="Wrap" Canvas.Top="143" Width="173" Visibility="Hidden"/>

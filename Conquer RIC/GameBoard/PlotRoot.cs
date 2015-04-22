@@ -14,50 +14,27 @@ namespace GameBoard
             {
                 case 0:
                     {
-                        
-                        
-                        
-                        
-                            positioCol_LessThenEqualTo_moveToCol();
-                            
-                                        break;
-
+                        positioCol_LessThenEqualTo_moveToCol();
+                        break;
                     }
                 case 1:
                     {
-                        
-                        
-                            positioCol_MoreThenEqualTo_moveToCol();
-
-                                          break;
-
+                        positioCol_MoreThenEqualTo_moveToCol();
+                        break;
                     }
                 case 2:
                     {
-                        
-                        
-                            positioRow_LessThenEqualTo_moveToRow();
-
-                        
-
+                        positioRow_LessThenEqualTo_moveToRow();
                         break;
                     }
                 case 3:
                 {
-                   
-                   
                     positioRow_MoreThenEqualTo_moveToRow();
-
-                    
-
-                        break;
+                    break;
                 }
                 case 4:
                 {
                     positionCol_lessEqual_moveToCol_And_positionRow_LessEqual_MovetoRow();
-                    
-                    
-                    
                     break;
                 }
                 case 5:
@@ -433,11 +410,6 @@ namespace GameBoard
                     rowPlot.Add(positionRow);
                     colPlot.Add(positionCol);
             }
-
-                
-            
-
-
         }
         /// <summary>
         /// ////////case 5
@@ -575,11 +547,7 @@ namespace GameBoard
                 rowPlot.Add(positionRow);
                 colPlot.Add(positionCol);
             }
-
-
-
-
-
+            refreshBoardSpace(6, 5);
         }
         /// <summary>
         /// /////////case 6

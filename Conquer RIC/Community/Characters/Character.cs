@@ -999,8 +999,6 @@ namespace Community
                 damage = "MISS";
             }
 
-            damage = "10"; //FOR TESTING, REMOVE LATER
-
             return damage;
         }
 
@@ -1021,7 +1019,6 @@ namespace Community
                 damage = "MISS";
             }
 
-            damage = "10"; //FOR TESTING, REMOVE LATER
 
             return damage;
         }

@@ -97,7 +97,12 @@ namespace GameBoard
          */
         private void AttackOption_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Attack Option Click!");
+            //MessageBox.Show("Attack Option Click!");
+            //MessageBox.Show(sender.ToString());
+
+            //if (sender.GetType().IsSubclassOf(typeof(Community.Character)))
+                //MessageBox.Show("Clicked on a character");
+
             //Make sure the selected hero hasn't already attacked this turn (mostly not necessary, but for safety against glitches?)
             if (!boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasAttacked)
             {
@@ -138,7 +143,6 @@ namespace GameBoard
                 }
             }
 
-            //clearAttackOptions();
             boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasAttacked = true;
             boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasMoved = true;
             if(!boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive) //Check if hero has moved, used an item, and attacked, if so, the hero's turn is over, is inactive
@@ -158,8 +162,8 @@ namespace GameBoard
         {
             foreach(Tile space in area)
             {
-                String position = space.Row + ", " + space.Col;
-                MessageBox.Show(position + " was attacked.");
+                //String position = space.Row + ", " + space.Col;
+                //MessageBox.Show(position + " was attacked.");
 
                 if (space.containsCharacter() && (((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)) || 
                     ((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))))))
@@ -272,7 +276,6 @@ namespace GameBoard
             int[,] attackAreas = new int[numRows, numCols];
             attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability3(mapSolidSpaces()); //Determines the different spaces the character can attack
             decodeAttackAreas(attackAreas);
-
             displayAttackAreas();
         }
 
@@ -288,11 +291,12 @@ namespace GameBoard
         {
             foreach(Tile space in area1)
             {
-                String position = space.Row + ", " + space.Col;
-                MessageBox.Show(position + " is in area 1.");
+                //String position = space.Row + ", " + space.Col;
+                //MessageBox.Show(position + " is in area 1.");
                 space.Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
                 if (space.containsCharacter())
                 {
+                    space.tileCharacter.Click -= new RoutedEventHandler(Tile_Click);
                     space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
                     space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
                 }
@@ -305,11 +309,12 @@ namespace GameBoard
             }
             foreach (Tile space in area2)
             {
-                String position = space.Row + ", " + space.Col;
-                MessageBox.Show(position + " is in area 2.");
+                //String position = space.Row + ", " + space.Col;
+                //MessageBox.Show(position + " is in area 2.");
                 space.Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
                 if (space.containsCharacter())
                 {
+                    space.tileCharacter.Click -= new RoutedEventHandler(Tile_Click);
                     space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
                     space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
                 }
@@ -322,11 +327,12 @@ namespace GameBoard
             }
             foreach (Tile space in area3)
             {
-                String position = space.Row + ", " + space.Col;
-                MessageBox.Show(position + " is in area 3.");
+                //String position = space.Row + ", " + space.Col;
+                //MessageBox.Show(position + " is in area 3.");
                 space.Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
                 if (space.containsCharacter())
                 {
+                    space.tileCharacter.Click -= new RoutedEventHandler(Tile_Click);
                     space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
                     space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
                 }
@@ -339,11 +345,12 @@ namespace GameBoard
             }
             foreach (Tile space in area4)
             {
-                String position = space.Row + ", " + space.Col;
-                MessageBox.Show(position + " is in area 4.");
+                //String position = space.Row + ", " + space.Col;
+                //MessageBox.Show(position + " is in area 4.");
                 space.Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
                 if (space.containsCharacter())
                 {
+                    space.tileCharacter.Click -= new RoutedEventHandler(Tile_Click);
                     space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
                     space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
                 }
