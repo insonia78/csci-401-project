@@ -73,8 +73,6 @@ namespace GameBoard
             refreshBoardSpace(5, 3);
             boardspaces[1, 2].tileCharacter = new SystemsAnalyst(1,2);
             refreshBoardSpace(1, 2);
-            boardspaces[2, 2].tileCharacter = new SystemsAnalyst(2, 2);
-            refreshBoardSpace(2, 2);
             boardspaces[5, 5].tileCharacter = new CampusPolice(5, 5);
             refreshBoardSpace(5, 5);
             boardspaces[6, 5].tileCharacter = new CampusPolice(6, 5);
@@ -597,7 +595,7 @@ namespace GameBoard
             TutIntroduction.IsEnabled = false;
             //pop up dialog box introducing people to the tutorial level
             TutIntroduction.Visibility = System.Windows.Visibility.Visible;
-            TutorialIntroductionExit.Visibility = System.Windows.Visibility.Visible;  
+            TutorialIntroductionExit.Visibility = System.Windows.Visibility.Visible;
         }
 
         public void tutorialFirstStep()
@@ -636,11 +634,25 @@ namespace GameBoard
                 //makes the character move to a specific square.
 
 
-                forceMoveCharacter(1, 2, 4, 2);
+                //forceMoveCharacter(1, 2, 4, 2);
 
 
                 //checks that its that square.
                 //if not, it reminds them to move the character so they can try again.
+
+                Move_Click(boardspaces[1, 2].tileCharacter, null);
+                for (int r = 0; r < numRows; r++)
+                {
+                    for (int c = 0; c < numCols; c++)
+                    {
+                        if (boardspaces[r, c].isMoveOption && (r != 4 || c != 2))
+                        {
+                            boardspaces[r, c].isMoveOption = false;
+                            boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
+                        }
+                    }
+                }
+                boardspaces[4, 2].BorderBrush = new SolidColorBrush(Colors.Purple);
             }
         }
 

@@ -143,14 +143,44 @@ namespace GameBoard
                                 case 48: //ascii code number for 0, grass (The StreamReader is reading them in as their ascii values)
                                     boardspaces[r, c] = new Tile(r,c,0);
                                     break;
-                                case 49: //ascii code number for 1, mountain
+                                case 49: //ascii code  for 3, swamp
+                                    boardspaces[r, c] = new Tile(r,c,3);
+                                    break;
+                                case 52: //Tile_Color1 character: 4
+                                    boardspaces[r, c] = new Tile(r, c, 4);
+                                    break;
+                                case 53: //Tile_Color2 charnumber for 1, mountain
                                     boardspaces[r, c] = new Tile(r,c,1);
                                     break;
                                 case 50: //ascii code number for 2, water
                                     boardspaces[r, c] = new Tile(r,c,2);
                                     break;
-                                case 51: //ascii code number for 3, swamp
-                                    boardspaces[r, c] = new Tile(r,c,3);
+                                case 51: //ascii code numberacter: 5
+                                    boardspaces[r, c] = new Tile(r, c, 5);
+                                    break;
+                                case 54: //Tile_Color3 character: 6
+                                    boardspaces[r, c] = new Tile(r, c, 6);
+                                    break;
+                                case 55: //Tile_Textured character: 7
+                                    boardspaces[r, c] = new Tile(r, c, 7);
+                                    break;
+                                case 56: //Tile_Texture2 character: 8
+                                    boardspaces[r, c] = new Tile(r, c, 8);
+                                    break;
+                                case 57: //Tile_Texture3 character: 9
+                                    boardspaces[r, c] = new Tile(r, c, 9);
+                                    break;
+                                case 65: //Wall_Horizontal character: A
+                                    boardspaces[r, c] = new Tile(r, c, 10);
+                                    break;
+                                case 66: //Wall_Horizontal2 character: B
+                                    boardspaces[r, c] = new Tile(r, c, 11);
+                                    break;
+                                case 67: //Wall_Horizontal_Texture character: C
+                                    boardspaces[r, c] = new Tile(r, c, 12);
+                                    break;
+                                case 68: //Wall_Horizontal_Texture2 character: D
+                                    boardspaces[r, c] = new Tile(r, c, 13);
                                     break;
                                 default: //if no input or invalid input found in the file, make a blank grass space instead
                                     boardspaces[r, c] = new Tile(r,c);

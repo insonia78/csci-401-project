@@ -34,7 +34,7 @@ namespace Community
              */
             JobRole = "Gardener";
 
-            pictureFile = "Gardener.png";
+            pictureFile = "Enemies/Gardener.png";
             characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
 
             statEffects = new List<Effect>();

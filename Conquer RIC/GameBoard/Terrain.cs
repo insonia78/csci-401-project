@@ -31,19 +31,19 @@ namespace GameBoard
             switch (tileType)
             {
                 case 0: //for grass
-                    tileImage = new BitmapImage(new Uri("grass.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/grass.png", UriKind.Relative));
                     break;
                 case 1: //for mountain
-                    tileImage = new BitmapImage(new Uri("mountain.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/mountain.png", UriKind.Relative));
                     break;
                 case 2: //for water
-                    tileImage = new BitmapImage(new Uri("water.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/water.png", UriKind.Relative));
                     break;
                 case 3: //for swamp
-                    tileImage = new BitmapImage(new Uri("swamp.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/swamp.png", UriKind.Relative));
                     break;
                 default:
-                    tileImage = new BitmapImage(new Uri("grass.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/grass.png", UriKind.Relative));
                     break;
             }
         }

@@ -29,7 +29,7 @@ namespace Community
             Male = s;
             JobRole = "Boss";
 
-            pictureFile = "Ravenscroft.png";
+            pictureFile = "Enemies/Ravenscroft.png";
             characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
 
             /******************************************************************

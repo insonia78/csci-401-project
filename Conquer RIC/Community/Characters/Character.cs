@@ -115,7 +115,7 @@ namespace Community
         {
         name = "MissingNo";
         male = false;
-        pictureFile = "Missingno.png";
+        pictureFile = "Heroes/Missingno.png";
         characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
         jobRole = "Jobless";
         status = "AWAKE";

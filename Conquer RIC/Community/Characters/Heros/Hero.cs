@@ -70,7 +70,7 @@ namespace Community
         public void Init()
         {
             portraitFile = "hero_portrait.png";
-            pictureFile = "hero.png";
+            pictureFile = "Heroes/hero.png";
             characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
             currentExperience = baseExperience;
 

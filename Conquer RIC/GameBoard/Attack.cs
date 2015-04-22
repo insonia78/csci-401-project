@@ -73,7 +73,10 @@ namespace GameBoard
             if (space.containsCharacter())
             {
                 space.tileCharacter.Click -= new RoutedEventHandler(AttackOption_Click);
+                space.tileCharacter.MouseEnter -= new MouseEventHandler(AttackOption_MouseEnter);
+                space.tileCharacter.MouseEnter -= new MouseEventHandler(AttackOption_MouseLeave);
                 space.tileCharacter.Click += new RoutedEventHandler(Character_Click);
+                typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { false });
             }
         }
 
@@ -106,21 +109,24 @@ namespace GameBoard
             //Make sure the selected hero hasn't already attacked this turn (mostly not necessary, but for safety against glitches?)
             if (!boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasAttacked)
             {
-                if (area1.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
+                if (sender.GetType() == typeof(GameBoard.Tile))
                 {
-                    applyAbilityToArea(area1);
-                }
-                else if (area2.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
-                {
-                    applyAbilityToArea(area2);
-                }
-                else if (area3.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
-                {
-                    applyAbilityToArea(area3);
-                }
-                else if (area4.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
-                {
-                    applyAbilityToArea(area4);
+                    if (area1.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
+                    {
+                        applyAbilityToArea(area1);
+                    }
+                    else if (area2.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
+                    {
+                        applyAbilityToArea(area2);
+                    }
+                    else if (area3.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
+                    {
+                        applyAbilityToArea(area3);
+                    }
+                    else if (area4.Contains(boardspaces[(sender as Tile).Row, (sender as Tile).Col]))
+                    {
+                        applyAbilityToArea(area4);
+                    }
                 }
                 else if (sender.GetType().IsSubclassOf(typeof(Community.Character)))
                 {
@@ -228,10 +234,6 @@ namespace GameBoard
 
         public void decodeAttackAreas(int[,] attackAreas)
         {
-            //area1.Clear();
-            //area2.Clear();
-            //area3.Clear();
-            //area4.Clear();
             for (int r = 0; r < numRows; r++)
             {
                 for (int c = 0; c < numCols; c++)
@@ -299,6 +301,8 @@ namespace GameBoard
                     space.tileCharacter.Click -= new RoutedEventHandler(Tile_Click);
                     space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
                     space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
+                    space.tileCharacter.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
+                    space.tileCharacter.MouseLeave += new MouseEventHandler(AttackOption_MouseLeave);
                 }
                 space.Click += new RoutedEventHandler(AttackOption_Click); //Add a AttackOption_Click event handler to the tile button
                 space.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
@@ -317,6 +321,8 @@ namespace GameBoard
                     space.tileCharacter.Click -= new RoutedEventHandler(Tile_Click);
                     space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
                     space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
+                    space.tileCharacter.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
+                    space.tileCharacter.MouseLeave += new MouseEventHandler(AttackOption_MouseLeave);
                 }
                 space.Click += new RoutedEventHandler(AttackOption_Click); //Add a AttackOption_Click event handler to the tile button
                 space.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
@@ -335,6 +341,8 @@ namespace GameBoard
                     space.tileCharacter.Click -= new RoutedEventHandler(Tile_Click);
                     space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
                     space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
+                    space.tileCharacter.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
+                    space.tileCharacter.MouseLeave += new MouseEventHandler(AttackOption_MouseLeave);
                 }
                 space.Click += new RoutedEventHandler(AttackOption_Click); //Add a AttackOption_Click event handler to the tile button
                 space.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
@@ -353,6 +361,8 @@ namespace GameBoard
                     space.tileCharacter.Click -= new RoutedEventHandler(Tile_Click);
                     space.tileCharacter.Click -= new RoutedEventHandler(Character_Click);
                     space.tileCharacter.Click += new RoutedEventHandler(AttackOption_Click);
+                    space.tileCharacter.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
+                    space.tileCharacter.MouseLeave += new MouseEventHandler(AttackOption_MouseLeave);
                 }
                 space.Click += new RoutedEventHandler(AttackOption_Click); //Add a AttackOption_Click event handler to the tile button
                 space.MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
@@ -364,65 +374,165 @@ namespace GameBoard
         }
 
         public void AttackOption_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (sender.GetType() == typeof(GameBoard.Tile))
             {
-            if(area1.Contains((sender as Tile)))
-            {
-                 foreach(Tile space in area1)
-                 {
-                     typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
-                 }
+                if (area1.Contains((sender as Tile)))
+                {
+                    foreach (Tile space in area1)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                        if(space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { true });
+                    }
+                }
+                else if (area2.Contains((sender as Tile)))
+                {
+                    foreach (Tile space in area2)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { true });
+                    }
+                }
+                else if (area3.Contains((sender as Tile)))
+                {
+                    foreach (Tile space in area3)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { true });
+                    }
+                }
+                else if (area4.Contains((sender as Tile)))
+                {
+                    foreach (Tile space in area4)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { true });
+                    }
+                }
             }
-            else if(area2.Contains((sender as Tile)))
+            else if (sender.GetType().IsSubclassOf(typeof(Community.Character)))
             {
-                 foreach (Tile space in area2)
-                 {
-                     typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
-                 }
-            }
-            else if(area3.Contains((sender as Tile)))
-            {
-                 foreach (Tile space in area3)
-                 {
-                     typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
-                 }
-            }
-            else if (area4.Contains((sender as Tile)))
-            {
-                 foreach (Tile space in area4)
-                 {
-                     typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
-                 }
+                if (area1.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
+                {
+                    foreach (Tile space in area1)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { true });
+                    }
+                }
+                else if (area2.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
+                {
+                    foreach (Tile space in area2)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { true });
+                    }
+                }
+                else if (area3.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
+                {
+                    foreach (Tile space in area3)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { true });
+                    }
+                }
+                else if (area4.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
+                {
+                    foreach (Tile space in area4)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { true });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { true });
+                    }
+                }
             }
         }
 
         public void AttackOption_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (area1.Contains((sender as Tile)))
+            if (sender.GetType() == typeof(GameBoard.Tile))
             {
-                foreach (Tile space in area1)
+                if (area1.Contains((sender as Tile)))
                 {
-                    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                    foreach (Tile space in area1)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { false });
+                    }
+                }
+                else if (area2.Contains((sender as Tile)))
+                {
+                    foreach (Tile space in area2)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { false });
+                    }
+                }
+                else if (area3.Contains((sender as Tile)))
+                {
+                    foreach (Tile space in area3)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { false });
+                    }
+                }
+                else if (area4.Contains((sender as Tile)))
+                {
+                    foreach (Tile space in area4)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { false });
+                    }
                 }
             }
-            else if (area2.Contains((sender as Tile)))
+            else if (sender.GetType().IsSubclassOf(typeof(Community.Character)))
             {
-                foreach (Tile space in area2)
+                if (area1.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
                 {
-                    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                    foreach (Tile space in area1)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { false });
+                    }
                 }
-            }
-            else if (area3.Contains((sender as Tile)))
-            {
-                foreach (Tile space in area3)
+                else if (area2.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
                 {
-                    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                    foreach (Tile space in area2)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { false });
+                    }
                 }
-            }
-            else if (area4.Contains((sender as Tile)))
-            {
-                foreach (Tile space in area4)
+                else if (area3.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
                 {
-                    typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                    foreach (Tile space in area3)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { false });
+                    }
+                }
+                else if (area4.Contains(boardspaces[(sender as Character).Row, (sender as Character).Col]))
+                {
+                    foreach (Tile space in area4)
+                    {
+                        typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space, new object[] { false });
+                        if (space.containsCharacter())
+                            typeof(Button).GetMethod("set_IsPressed", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(space.tileCharacter, new object[] { false });
+                    }
                 }
             }
         }

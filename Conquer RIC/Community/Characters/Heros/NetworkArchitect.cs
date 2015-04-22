@@ -35,13 +35,13 @@ namespace Community
             if(Male)
             {
                 PortraitFile = "Male_Network_Architect_portrait.png";
-                pictureFile = "Male_Network_Architect.png";
+                pictureFile = "Heroes/Network_Architect_MALE.png";
                 //CharacterPicture = " "; 
             }
             else
             {
                 PortraitFile = "Male_Network_Architect_portrait.png";
-                pictureFile = "Female_Network_Architect.png";
+                pictureFile = "Heroes/Network_Architect_FEMALE.png";
                 //CharacterPicture = " "; 
             }
             characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
