@@ -25,6 +25,7 @@ namespace TitleScreen
         {
             InitializeComponent();
             bgm.Play();
+            
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -108,7 +109,8 @@ namespace TitleScreen
             CharacterCreation.CharacterCreationPage create = 
                 new CharacterCreation.CharacterCreationPage((Window)this);
 
-
+            NavigationService navi = NavigationService.GetNavigationService(this);
+            navi.Navigate(create);
         }
     }
 }

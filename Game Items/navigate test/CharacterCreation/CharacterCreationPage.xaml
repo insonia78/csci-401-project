@@ -841,7 +841,7 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <Frame Source="creationPage.xaml" />
+        <Frame x:Name="createPage" />
         <Rectangle x:Name="BGPanel" HorizontalAlignment="Left" Height="675" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="1090" RadiusX="5" RadiusY="5" StrokeThickness="2">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

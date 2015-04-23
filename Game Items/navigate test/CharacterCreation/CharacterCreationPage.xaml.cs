@@ -25,7 +25,6 @@ namespace CharacterCreation
         public CharacterCreationPage(Window title)
         {
             main = title;
-            NavigationService navigation = NavigationService.GetNavigationService(this);
             InitializeComponent();
         }
 
