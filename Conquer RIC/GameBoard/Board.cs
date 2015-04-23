@@ -247,9 +247,11 @@ namespace GameBoard
                                     switch (sr.Read())
                                     {
                                         case 49: //1
+                                            hero1.CharacterPicture = new BitmapImage(new Uri("pictures/heroes/network_architecture_male.png", UriKind.Relative));
                                             boardspaces[r, c].tileCharacter = hero1;
                                             break;
                                         case 50: //2
+                                            hero2.CharacterPicture = new BitmapImage(new Uri("pictures/heroes/network_architecture_male.png", UriKind.Relative));
                                             boardspaces[r, c].tileCharacter = hero2;
                                             break;
                                         case 51: //3
@@ -349,6 +351,17 @@ namespace GameBoard
 
             return aTile;
         }
+
+        //private ImageSource assignHeroPicture(Hero aHero)
+        //{
+        //    if(aHero.GetType().IsSubclassOf(typeof(Community.SystemsAnalyst)))
+        //    {
+        //        if (aHero.Male == true)
+        //            new BitmapImage(new Uri("pictures/heroes/system_analyst_male.png", UriKind.Relative));
+
+        //    }
+        //    return characterImage;
+        //}
 
         /*
          * Creates a 2d array of primitive data referring to the location of different characters and whether
