@@ -1,8 +1,9 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace GameBoard
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
         int positionRow;
         int positionCol;
