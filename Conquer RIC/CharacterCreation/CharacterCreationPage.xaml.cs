@@ -381,6 +381,12 @@ namespace CharacterCreation
                         }
                 }
             }
+            heroOneSlot.Source = heroes[0].CharacterPortrait;
+            heroTwoSlot.Source = heroes[1].CharacterPortrait;
+            heroThreeSlot.Source = heroes[2].CharacterPortrait;
+            heroFourSlot.Source = heroes[3].CharacterPortrait;
+            heroFiveSlot.Source = heroes[4].CharacterPortrait;
+
             nameLabelOne.Content = heroes[0].Name;
             nameLabelTwo.Content = heroes[1].Name;
             nameLabelThree.Content = heroes[2].Name;
@@ -490,12 +496,12 @@ namespace CharacterCreation
             HeroOneHighlight.Opacity = 1;
         }
 
-        private void HeroOneSlot_MouseEnter(object sender, MouseEventArgs e)
+        private void heroOneSlot_MouseEnter(object sender, MouseEventArgs e)
         {
             HeroOneHighlight.Opacity = .15;
         }
 
-        private void HeroOneSlot_MouseLeave(object sender, MouseEventArgs e)
+        private void heroOneSlot_MouseLeave(object sender, MouseEventArgs e)
         {
             HeroOneHighlight.Opacity = 1;
         }
@@ -520,12 +526,12 @@ namespace CharacterCreation
             HeroTwoHighlight.Opacity = 1;
         }
 
-        private void HeroTwoSlot_MouseEnter(object sender, MouseEventArgs e)
+        private void heroTwoSlot_MouseEnter(object sender, MouseEventArgs e)
         {
             HeroTwoHighlight.Opacity = .15;
         }
 
-        private void HeroTwoSlot_MouseLeave(object sender, MouseEventArgs e)
+        private void heroTwoSlot_MouseLeave(object sender, MouseEventArgs e)
         {
             HeroTwoHighlight.Opacity = 1;
         }
@@ -560,12 +566,12 @@ namespace CharacterCreation
             HeroThreeHighlight.Opacity = 1;
         }
 
-        private void HeroThreeSlot_MouseEnter(object sender, MouseEventArgs e)
+        private void heroThreeSlot_MouseEnter(object sender, MouseEventArgs e)
         {
             HeroThreeHighlight.Opacity = .15;
         }
 
-        private void HeroThreeSlot_MouseLeave(object sender, MouseEventArgs e)
+        private void heroThreeSlot_MouseLeave(object sender, MouseEventArgs e)
         {
             HeroThreeHighlight.Opacity = 1;
         }
@@ -600,12 +606,12 @@ namespace CharacterCreation
             HeroFourHighlight.Opacity = 1;
         }
 
-        private void HeroFourSlot_MouseEnter(object sender, MouseEventArgs e)
+        private void heroFourSlot_MouseEnter(object sender, MouseEventArgs e)
         {
             HeroFourHighlight.Opacity = .15;
         }
 
-        private void HeroFourSlot_MouseLeave(object sender, MouseEventArgs e)
+        private void heroFourSlot_MouseLeave(object sender, MouseEventArgs e)
         {
             HeroFourHighlight.Opacity = 1;
         }
@@ -640,12 +646,12 @@ namespace CharacterCreation
             HeroFiveHighlight.Opacity = 1;
         }
 
-        private void HeroFiveSlot_MouseEnter(object sender, MouseEventArgs e)
+        private void heroFiveSlot_MouseEnter(object sender, MouseEventArgs e)
         {
             HeroFiveHighlight.Opacity = .15;
         }
 
-        private void HeroFiveSlot_MouseLeave(object sender, MouseEventArgs e)
+        private void heroFiveSlot_MouseLeave(object sender, MouseEventArgs e)
         {
             HeroFiveHighlight.Opacity = 1;
         }
@@ -669,11 +675,6 @@ namespace CharacterCreation
         {
             CustomizeWindowGrid.Visibility = Visibility.Hidden;
             BlackOut.Visibility = Visibility.Hidden;
-        }
-
-        private void HeroOneSlot_Click(object sender, RoutedEventArgs e)
-        {
-            CustomAppear();
         }
 
         private void HeroOneFrame_Click(object sender, RoutedEventArgs e)
@@ -706,11 +707,6 @@ namespace CharacterCreation
             CustomAppear();
         }
 
-        private void HeroTwoSlot_Click(object sender, RoutedEventArgs e)
-        {
-            CustomAppear();
-        }
-
         private void HeroThreeHighlight_Click(object sender, RoutedEventArgs e)
         {
             CustomAppear();
@@ -722,11 +718,6 @@ namespace CharacterCreation
         }
 
         private void HeroThreeFrame_Click(object sender, RoutedEventArgs e)
-        {
-            CustomAppear();
-        }
-
-        private void HeroThreeSlot_Click(object sender, RoutedEventArgs e)
         {
             CustomAppear();
         }
@@ -746,11 +737,6 @@ namespace CharacterCreation
             CustomAppear();
         }
 
-        private void HeroFourSlot_Click(object sender, RoutedEventArgs e)
-        {
-            CustomAppear();
-        }
-
         private void HeroFiveHighlight_Click(object sender, RoutedEventArgs e)
         {
             CustomAppear();
@@ -762,11 +748,6 @@ namespace CharacterCreation
         }
 
         private void HeroFiveFrame_Click(object sender, RoutedEventArgs e)
-        {
-            CustomAppear();
-        }
-
-        private void HeroFiveSlot_Click(object sender, RoutedEventArgs e)
         {
             CustomAppear();
         }

@@ -39,13 +39,13 @@ namespace Community
             // Picture will be generated depending on the sex.
             if(Male)
             {
-                PortraitFile = "Male_Software_Engineer_portrait.png";
+                PortraitFile = "./MaleSoftwareEngineer.png";
                 PictureFile = "Heroes/Software_Engineer_MALE.png";
                 //CharacterPicture = " "; 
             }
             else
             {
-                PortraitFile = "Female_Software_Engineer_portrait.png";
+                PortraitFile = "FemaleSoftwareEngineer.png";
                 PictureFile = "Heroes/Software_Engineer_FEMALE.png";
                 //CharacterPicture = " "; 
             }
