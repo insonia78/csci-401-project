@@ -105,6 +105,12 @@
   <ItemGroup>
     <Resource Include="MAP.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Community\Community.csproj">
+      <Project>{6b393a92-6353-48da-bfd2-a176dbcaa288}</Project>
+      <Name>Community</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
