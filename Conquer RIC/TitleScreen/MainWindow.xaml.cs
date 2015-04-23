@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CharacterCreation;
 
 namespace TitleScreen
 {
@@ -24,6 +25,7 @@ namespace TitleScreen
         {
             InitializeComponent();
             bgm.Play();
+            
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -100,6 +102,14 @@ namespace TitleScreen
             BlackOut.Visibility = Visibility.Visible;
             LeaveGameGrid.Visibility = Visibility.Visible;
             bgm.Volume = 0.2;
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            CharacterCreation.CharacterCreationPage create = 
+                new CharacterCreation.CharacterCreationPage((Window)this, bgm);
+
+            startTitle.NavigationService.Navigate(create);
         }
     }
 }

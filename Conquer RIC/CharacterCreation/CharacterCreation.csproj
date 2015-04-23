@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{66EDFB4A-DC40-493B-A095-BF42ED5F6814}</ProjectGuid>
+    <ProjectGuid>{15CFF3E6-1B3B-467D-83B6-3E46A1EE39D2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TitleScreen</RootNamespace>
-    <AssemblyName>TitleScreen</AssemblyName>
+    <RootNamespace>CharacterCreation</RootNamespace>
+    <AssemblyName>CharacterCreation</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -53,17 +53,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="CharacterCreationPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="CharacterCreationPage.xaml.cs">
+      <DependentUpon>CharacterCreationPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -94,17 +93,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ConquerRIC Title.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Anchor_Smash_icon.png" />
-    <Content Include="Winter Bliss.wav" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CharacterCreation\CharacterCreation.csproj">
-      <Project>{15cff3e6-1b3b-467d-83b6-3e46a1ee39d2}</Project>
-      <Name>CharacterCreation</Name>
-    </ProjectReference>
+    <Resource Include="Silhouette Portrait.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
