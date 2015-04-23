@@ -140,85 +140,123 @@ namespace GameBoard
                             input = sr.Read(); //read the next character in the txt file
                             switch (input)
                             {
-                                case 48: //ascii code number for 0, grass (The StreamReader is reading them in as their ascii values)
-                                    boardspaces[r, c] = new Tile(r, c, 0);
-                                    break;
-                                case 49: //ascii code number for 1, mountain
-                                    boardspaces[r, c] = new Tile(r, c, 1);
-                                    break;
-                                case 52: //ascii code number for 2, water
-                                    boardspaces[r, c] = new Tile(r, c, 2);
-                                    break;
-                                case 53: //ascii code for 3, swamp
-                                    boardspaces[r, c] = new Tile(r, c, 3);
-                                    break;
-                                case 50: //Tile_Color1 character: 4
-                                    boardspaces[r, c] = new Tile(r, c, 4);
-                                    break;
-                                case 51: //Tile_Color2 character: 5
-                                    boardspaces[r, c] = new Tile(r, c, 5);
-                                    break;
-                                case 54: //Tile_Color3 character: 6
-                                    boardspaces[r, c] = new Tile(r, c, 6);
-                                    break;
-                                case 55: //Tile_Textured character: 7
-                                    boardspaces[r, c] = new Tile(r, c, 7);
-                                    break;
-                                case 56: //Tile_Texture2 character: 8
-                                    boardspaces[r, c] = new Tile(r, c, 8);
-                                    break;
-                                case 57: //Tile_Texture3 character: 9
-                                    boardspaces[r, c] = new Tile(r, c, 9);
-                                    break;
+                                //SPECIAL CASES ONLY handled here, all others handled in the setTileByInput() method
+
+                                //Tile images to be placed over another image, a "Ground level" image (need to put a ground tile underneath a wall, otherwise it has transparent sides)
+                                //The next input character after these special characters defines the background/underlying image
                                 case 65: //Wall_Horizontal character: A
-                                    boardspaces[r, c] = new Tile(r, c, 10);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
                                 case 66: //Wall_Horizontal2 character: B
-                                    boardspaces[r, c] = new Tile(r, c, 11);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal2.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
                                 case 67: //Wall_Horizontal_Texture character: C
-                                    boardspaces[r, c] = new Tile(r, c, 12);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal_Texture.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
                                 case 68: //Wall_Horizontal_Texture2 character: D
-                                    boardspaces[r, c] = new Tile(r, c, 13);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal_Texture2.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
                                 case 69: //Wall_Verticle character: E
-                                    boardspaces[r, c] = new Tile(r, c, 14);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Veticle.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
                                 case 70: //Wall_Verticle2 character: F
-                                    boardspaces[r, c] = new Tile(r, c, 15);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Verticle2.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
-                                case 71: //Wall_Verticle_Texture2 character: G
-                                    boardspaces[r, c] = new Tile(r, c, 16);
+                                case 71: //Wall_Verticle_Texture character: G
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Verticle_Texture.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
-                                case 72: //Wall_Verticle_Texture character: H
-                                    boardspaces[r, c] = new Tile(r, c, 17);
+                                case 72: //Wall_Verticle_Texture2 character: H
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Verticle_Texture2.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
                                 case 73: //Books character: I
-                                    boardspaces[r, c] = new Tile(r, c, 18);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Books.png", UriKind.Relative)));
+                                    boardspaces[r, c].requiredMoveSpeed = 2;
                                     break;
                                 case 74: //Chair character: J
-                                    boardspaces[r, c] = new Tile(r, c, 19);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Chair.png", UriKind.Relative)));
+                                    boardspaces[r, c].requiredMoveSpeed = 2;
                                     break;
                                 case 75: //Desk character: K
-                                    boardspaces[r, c] = new Tile(r, c, 20);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Desk.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
                                 case 76: //Old_Computer character: L
-                                    boardspaces[r, c] = new Tile(r, c, 21);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Old_Computer.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
                                 case 77: //Student no face character: M
-                                    boardspaces[r, c] = new Tile(r, c, 22);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Student no face.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
                                 case 78: //Student character: N
-                                    boardspaces[r, c] = new Tile(r, c, 23);
+                                    boardspaces[r,c] = setTileByInput(sr.Read());
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Student.png", UriKind.Relative)));
+                                    boardspaces[r, c].isUnpassable = true;
                                     break;
-                                //Special input characters that cause something extra to be done for a space:
-                                case 79: //Add Hero1 position character: O
-                                    boardspaces[r, c] = new Tile(r, c, 17);
+                                case 79: //character O: special character, signifies that a hero will be placed on the next tile
+                                    boardspaces[r, c] = setTileByInput(sr.Read());
+                                    switch (sr.Read())
+                                    {
+                                        case 49: //1
+                                            boardspaces[r, c].tileCharacter = hero1;
+                                            break;
+                                        case 50: //2
+                                            boardspaces[r, c].tileCharacter = hero2;
+                                            break;
+                                        case 51: //3
+                                            boardspaces[r, c].tileCharacter = hero3;
+                                            break;
+                                        case 52: //4
+                                            boardspaces[r, c].tileCharacter = hero4;
+                                            break;
+                                        case 53: //5
+                                            boardspaces[r, c].tileCharacter = hero5;
+                                            break;
+                                    }
                                     break;
-
-                                default: //if no input or invalid input found in the file, make a blank grass space instead
-                                    boardspaces[r, c] = new Tile(r, c);
+                                case 80: //character P: special character, signifies a enemy will be placed
+                                    boardspaces[r, c] = setTileByInput(sr.Read());
+                                    switch (sr.Read())
+                                    {
+                                        case 49: //1, police
+                                            boardspaces[r, c].tileCharacter = new CampusPolice(r, c);
+                                            break;
+                                        case 50: //2, cook
+                                            boardspaces[r, c].tileCharacter = new FoodServer(r, c);
+                                            break;
+                                        case 51: //3, gardener
+                                            boardspaces[r, c].tileCharacter = new Gardener(r,c);
+                                            break;
+                                        case 52: //4, boss
+                                            boardspaces[r, c].tileCharacter = new Boss(r,c);
+                                            break;
+                                    }
+                                    break;
+                                default:
+                                    boardspaces[r,c] = setTileByInput(input); //If not a special character, determine what tile in the setTileByInput() method
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                             }
 
@@ -234,6 +272,93 @@ namespace GameBoard
 
             countEnemies();
             updateCharacterCountDisplay();
+        }
+
+        private Tile setTileByInput(int input)
+        {
+            Tile aTile;
+            switch (input)
+            {
+                case 48: //ascii code number for 0, grass (The StreamReader is reading them in as their ascii values)
+                    aTile = new Tile(0, 0, 0);
+                    break;
+                case 49: //ascii code number for 1, mountain
+                    aTile = new Tile(0, 0, 1);
+                    break;
+                case 52: //ascii code number for 2, water
+                    aTile = new Tile(0, 0, 2);
+                    break;
+                case 53: //ascii code for 3, swamp
+                    aTile = new Tile(0, 0, 3);
+                    break;
+                case 50: //Tile_Color1 character: 4
+                    aTile = new Tile(0, 0, 4);
+                    break;
+                case 51: //Tile_Color2 character: 5
+                    aTile = new Tile(0, 0, 5);
+                    break;
+                case 54: //Tile_Color3 character: 6
+                    aTile = new Tile(0, 0, 6);
+                    break;
+                case 55: //Tile_Textured character: 7
+                    aTile = new Tile(0, 0, 7);
+                    break;
+                case 56: //Tile_Texture2 character: 8
+                    aTile = new Tile(0, 0, 8);
+                    break;
+                case 57: //Tile_Texture3 character: 9
+                    aTile = new Tile(0, 0, 9);
+                    break;
+                //Tile images to be placed over another image, a "Ground level" image (need to put a ground tile underneath a wall, otherwise it has transparent sides)
+                case 65: //Wall_Horizontal character: A
+                    aTile = new Tile(0, 0, 10);
+                    break;
+                case 66: //Wall_Horizontal2 character: B
+                    aTile = new Tile(0, 0, 11);
+                    break;
+                case 67: //Wall_Horizontal_Texture character: C
+                    aTile = new Tile(0, 0, 12);
+                    break;
+                case 68: //Wall_Horizontal_Texture2 character: D
+                    aTile = new Tile(0, 0, 13);
+                    break;
+                case 69: //Wall_Verticle character: E
+                    aTile = new Tile(0, 0, 14);
+                    break;
+                case 70: //Wall_Verticle2 character: F
+                    aTile = new Tile(0, 0, 15);
+                    break;
+                case 71: //Wall_Verticle_Texture2 character: G
+                    aTile = new Tile(0, 0, 16);
+                    break;
+                case 72: //Wall_Verticle_Texture character: H
+                    aTile = new Tile(0, 0, 17);
+                    break;
+                case 73: //Books character: I
+                    aTile = new Tile(0, 0, 18);
+                    break;
+                case 74: //Chair character: J
+                    aTile = new Tile(0, 0, 19);
+                    break;
+                case 75: //Desk character: K
+                    aTile = new Tile(0, 0, 20);
+                    break;
+                case 76: //Old_Computer character: L
+                    aTile = new Tile(0, 0, 21);
+                    break;
+                case 77: //Student no face character: M
+                    aTile = new Tile(0, 0, 22);
+                    break;
+                case 78: //Student character: N
+                    aTile = new Tile(0, 0, 23);
+                    break;
+
+                default: //if no input or invalid input found in the file, make a blank grass space instead
+                    aTile = new Tile(0, 0);
+                    break;
+            }
+
+            return aTile;
         }
 
         /*
