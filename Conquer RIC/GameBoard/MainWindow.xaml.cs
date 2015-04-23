@@ -28,6 +28,13 @@ namespace GameBoard
         SolidColorBrush moveOption = new SolidColorBrush(Colors.Yellow);
         SolidColorBrush attackOption = new SolidColorBrush(Colors.Red);
 
+        //The input heroes:
+        private Hero hero1;
+        private Hero hero2;
+        private Hero hero3;
+        private Hero hero4;
+        private Hero hero5;
+
         //stores a reference to the location of a Character when it's selected (need the characters's location even when clicking on buttons for different spaces).
         private int selectedCharacterRow;
         private int selectedCharacterCol;
@@ -46,11 +53,13 @@ namespace GameBoard
         ArrayList rowPlot = new ArrayList();
         ArrayList colPlot = new ArrayList();
 
+        //For tutorial
         private bool isTutorial;
         public bool tutorialWasClicked; 
         public bool tutIntroductionExitClicked;
         public bool highlightedFirstClick;
         public bool tutFirstMoveExitClicked;
+        public bool hero1move1;
 
         /*
          * Initializes the GUI components, creates the cells 2d array, and sets up the board/tiles/characters, etc.
@@ -85,6 +94,26 @@ namespace GameBoard
             refreshBoardSpace(13, 8);
             boardspaces[14, 3].tileCharacter = new Gardener(14,3);
             refreshBoardSpace(14, 3);
+        }
+
+        public MainWindow(String levelFile, Hero hero_1, Hero hero_2, Hero hero_3, Hero hero_4, Hero hero_5)
+        {
+            InitializeComponent();
+
+            hero1 = hero_1;
+            hero2 = hero_2;
+            hero3 = hero_3;
+            hero4 = hero_4;
+            hero5 = hero_5;
+
+            setupBoard(levelFile);
+            selectedCharacterRow = 0;
+            selectedCharacterCol = 0;
+
+            //For attack animation
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += onUpdate;
+            dispatcherTimer.Interval = TimePerFrame;
         }
 
         /*
@@ -588,6 +617,11 @@ namespace GameBoard
             End_Heroes_Turn.IsEnabled = true;
         }
 
+        //
+        //
+        //
+        //
+        //
         public void TutorialLevel_Click(object sender, RoutedEventArgs e)
         {
             tutorialWasClicked = true;
@@ -608,7 +642,7 @@ namespace GameBoard
 
             if (tutIntroductionExitClicked == true)
             {
-                
+               
                 //"Clicking on a character allows you to move, attack, defend, or to use items.
                 //"Click on the highlighted square to move that character." ;
                 //this teaches you how to move the character. select the highlighted square.
@@ -619,16 +653,14 @@ namespace GameBoard
                 TutFirstMove.Text = "now that you've clicked on the highlighted tile, see how there are squares that light up? those squares indicate where the character can go." +
                 "for our purposes, i want you to move to the square thats highlighted purple.";              
             }
-            End_Turn.IsEnabled = false;
-            Move.IsEnabled = false;
-            Attack.IsEnabled = false;
-            Defend.IsEnabled = false;
-            Use_Item.IsEnabled = false;
+        
         }
 
 
         public void tutorialFirstStepTwo()
         {
+
+
             if (tutFirstMoveExitClicked == true)
             {
                 this.Character_Click(boardspaces[1, 2].tileCharacter, null);
@@ -636,7 +668,6 @@ namespace GameBoard
                 //makes the character move to a specific square.
 
 
-                
 
 
                 //checks that its that square.
@@ -652,10 +683,68 @@ namespace GameBoard
                             boardspaces[r, c].isMoveOption = false;
                             boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
                         }
+                        hero1move1 = true;                       
                     }
                 }
-                boardspaces[4, 2].BorderBrush = new SolidColorBrush(Colors.Purple);
+                End_Turn.IsEnabled = false;
+                Attack.IsEnabled = false;
+                Defend.IsEnabled = false;
+                Use_Item.IsEnabled = false;
             }
+            boardspaces[4, 2].BorderBrush = new SolidColorBrush(Colors.Purple);
+        }
+
+        //sees if the hero has moved to the specified place.
+        //it doesnt work yet. this stuff pops up before the hero moves...
+        public void hero1MoveCheck()
+        {
+            if (boardspaces[4, 2].containsCharacter() == true)
+            {
+                TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Visible;
+                TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
+                TutFirstMoveWaitText.Text = "Now that the character has moved to its new location, we need to end the character's turn. to do this, press the Wait Button.";
+            }
+            MessageBox.Show("why wont you work?");
+        }
+                
+        //moves hero 2 to a specific spot.
+        //follows the same format as the first, just a different place.
+        public void tutorialFirstStepThree() {
+                Move_Click(boardspaces[5, 3].tileCharacter, null);
+                for (int r = 0; r < numRows; r++)
+                {
+                    for (int c = 0; c < numCols; c++)
+                    {
+                        if (boardspaces[r, c].isMoveOption && (r != 7 || c != 1))
+                        {
+                            boardspaces[r, c].isMoveOption = false;
+                            boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
+                        }
+                    }
+                }
+             
+            }
+
+
+        //makes the hero wait at the spot they are at in the tutorial level
+        public void makeHeroWait()
+        {
+            
+            if (hero1move1 == true)
+            {
+                End_Turn.IsEnabled = true;
+                Attack.IsEnabled = false;
+                Defend.IsEnabled = false;
+                Use_Item.IsEnabled = false;
+            }
+            else
+            {
+                End_Turn.IsEnabled = false;
+                Attack.IsEnabled = false;
+                Defend.IsEnabled = false;
+                Use_Item.IsEnabled = false;
+            }
+   
         }
 
 
@@ -681,6 +770,8 @@ namespace GameBoard
         //forces the enemy to move a certain way for turn 1.
         public void tutorialEnemyMoveOne()
         {
+            if(tutorialWasClicked == true && turnNumber == 2)
+            {
           //values won't be null, just not sure where I want them to move yet.
            
             //forceMoveCharacter(5, 5, null, null);
@@ -689,6 +780,7 @@ namespace GameBoard
             //forceMoveCharacter(11, 9, null, null);
             //forceMoveCharacter(13, 8, null, null);
             //forceMoveCharacter(14, 3, null, null);
+        }
         }
 
         //forces the enemy to move a certain way for turn 2.
@@ -716,7 +808,19 @@ namespace GameBoard
             TutFirstMoveExit.Visibility = System.Windows.Visibility.Hidden;
             this.tutorialFirstStepTwo();
         }
+
+         private void TutFirstMoveWaitTextExit_Click(object sender, RoutedEventArgs e)
+         {
+             TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Hidden;
+             TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Hidden;
+             this.makeHeroWait();
+         }
         
+        //
+        //
+        //
+        //
+        //
 
         /*
          * For when the player clicks on any board spaces, brings up info about the tile, and its picture, and displays it on the side (stats location).
@@ -815,6 +919,8 @@ namespace GameBoard
             mapBuilder map_maker = new mapBuilder();
             map_maker.Show();
         }
+
+      
 
        
 
