@@ -66,6 +66,58 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Rectangle HorizontalAlignment="Left" Height="645" Margin="10,10,0,0" Grid.RowSpan="2" Stroke="#FF170D0D" StrokeThickness="2" VerticalAlignment="Top" Width="1082" Grid.ColumnSpan="9" Fill="#FF6E8D79" RadiusX="5" RadiusY="5"/>
+        <Rectangle x:Name="CharacterRectangle1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="160" Margin="205,97,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="119" StrokeThickness="3" RadiusX="5" RadiusY="5">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFCD2525" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="CharacterRectangle2" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="160" Margin="39,95,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="119" StrokeThickness="3" RadiusX="5" RadiusY="5" Grid.Column="3">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFCD2525" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="CharacterRectangle3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="160" Margin="39,95,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="119" StrokeThickness="3" RadiusX="5" RadiusY="5" Grid.Column="6">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFCD2525" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="CharacterRectangle4" HorizontalAlignment="Left" Height="160" Margin="35,95,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="119" StrokeThickness="3" RadiusX="5" RadiusY="5" Grid.Column="8">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFCD2525" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="CharacterRectangle5" HorizontalAlignment="Left" Height="160" Margin="184,95,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="119" StrokeThickness="3" RadiusX="5" RadiusY="5" Grid.Column="8">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFCD2525" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Rectangle x:Name="CharacterInnerRectangle1" Grid.ColumnSpan="3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="142" Margin="216,105,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="98" StrokeThickness="3" RadiusX="5" RadiusY="5"/>
+        <Rectangle x:Name="CharacterInnerRectangle2" Grid.ColumnSpan="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="142" Margin="7,105,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="98" StrokeThickness="3" RadiusX="5" RadiusY="5" Grid.Column="4"/>
+        <Rectangle x:Name="CharacterInnerRectangle3" Grid.ColumnSpan="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="142" Margin="50,105,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="98" StrokeThickness="3" RadiusX="5" RadiusY="5" Grid.Column="6"/>
+        <Rectangle x:Name="CharacterInnerRectangle4" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="142" Margin="45,105,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="98" StrokeThickness="3" RadiusX="5" RadiusY="5" Grid.Column="8"/>
+        <Rectangle x:Name="CharacterInnerRectangle5" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="142" Margin="194,105,0,0" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="98" StrokeThickness="3" RadiusX="5" RadiusY="5" Grid.Column="8"/>
+
+        <Image x:Name="imageCharacter1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="125" Margin="217,112,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="100"/>
+        <Image x:Name="imageCharacter2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="125" Margin="10,112,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="100" Grid.Column="4"/>
+        <Image x:Name="imageCharacter3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="125" Margin="48,112,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="100" Grid.Column="6"/>
+        <Image x:Name="imageCharacter4" HorizontalAlignment="Left" Height="125" Margin="43,112,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="100" Grid.Column="8"/>
+        <Image x:Name="imageCharacter5" HorizontalAlignment="Left" Height="125" Margin="197,112,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="100" Grid.Column="8"/>
         <Rectangle x:Name="TitleBar_Copy" HorizontalAlignment="Left" Height="42" Margin="35,27,0,0"  Stroke="Black" VerticalAlignment="Top" Width="925" StrokeThickness="2" MouseDown="TitleBar_MouseDown" Cursor="Hand" Grid.ColumnSpan="9" Grid.Row="1">
 
             <Rectangle.Fill>
@@ -84,11 +136,11 @@
         <Button x:Name="btnClark" Content="LVL 4" HorizontalAlignment="Left" Margin="99,262,0,0" VerticalAlignment="Top" Width="182" Background="#FFE04F4F" Height="101" Opacity="0.4" Grid.Row="1" FontSize="60" Click="btnClark_Click" Grid.Column="8"/>
         <Button x:Name="btnCraigLee" Content="LVL 3" HorizontalAlignment="Left" Margin="99,373,0,0" VerticalAlignment="Top" Width="193" Background="#FFE04F4F" Height="185" Opacity="0.4" Grid.Row="1" FontSize="60" Click="btnCraigLee_Click" Grid.Column="8"/>
 
-        <Button x:Name="btnCharacter1" Grid.ColumnSpan="3" Content="Character1" HorizontalAlignment="Left" Margin="206,95,0,0" VerticalAlignment="Top" Width="119" Grid.RowSpan="2" Height="162" MouseEnter="btnCharacter1_MouseEnter"/>
-        <Button x:Name="btnCharacter2" Content="Character2" Grid.Column="3" HorizontalAlignment="Left" Margin="39,95,0,0" VerticalAlignment="Top" Width="119" Grid.RowSpan="2" Height="162" Grid.ColumnSpan="3" MouseEnter="btnCharacter2_MouseEnter_1"/>
-        <Button x:Name="btnCharacter3" Content="Character3" Grid.Column="6" HorizontalAlignment="Left" Margin="39,95,0,0" VerticalAlignment="Top" Width="119" Grid.RowSpan="2" Height="162" MouseEnter="btnCharacter3_MouseEnter" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnCharacter4" Content="Character4" Grid.Column="8" HorizontalAlignment="Left" Margin="35,95,0,0" VerticalAlignment="Top" Width="119" Grid.RowSpan="2" Height="162" MouseEnter="btnCharacter4_MouseEnter"/>
-        <Button x:Name="btnCharacter5" Content="Character5" Grid.Column="8" HorizontalAlignment="Left" Margin="184,95,0,0" VerticalAlignment="Top" Width="119" RenderTransformOrigin="0.387,1.318" Grid.RowSpan="2" Height="162" MouseEnter="btnCharacter5_MouseEnter"/>
+        <Button x:Name="btnCharacter1" Grid.ColumnSpan="3" Content="Character1" HorizontalAlignment="Left" Margin="206,95,0,0" VerticalAlignment="Top" Width="119" Grid.RowSpan="2" Height="162" MouseEnter="btnCharacter1_MouseEnter" Opacity="0"/>
+        <Button x:Name="btnCharacter2" Content="Character2" Grid.Column="3" HorizontalAlignment="Left" Margin="39,95,0,0" VerticalAlignment="Top" Width="119" Grid.RowSpan="2" Height="162" Grid.ColumnSpan="3" MouseEnter="btnCharacter2_MouseEnter_1" Opacity="0"/>
+        <Button x:Name="btnCharacter3" Content="Character3" Grid.Column="6" HorizontalAlignment="Left" Margin="39,95,0,0" VerticalAlignment="Top" Width="119" Grid.RowSpan="2" Height="162" MouseEnter="btnCharacter3_MouseEnter" Grid.ColumnSpan="2" Opacity="0"/>
+        <Button x:Name="btnCharacter4" Content="Character4" Grid.Column="8" HorizontalAlignment="Left" Margin="35,95,0,0" VerticalAlignment="Top" Width="119" Grid.RowSpan="2" Height="162" MouseEnter="btnCharacter4_MouseEnter" Opacity="0"/>
+        <Button x:Name="btnCharacter5" Content="Character5" Grid.Column="8" HorizontalAlignment="Left" Margin="184,95,0,0" VerticalAlignment="Top" Width="119" RenderTransformOrigin="0.387,1.318" Grid.RowSpan="2" Height="162" MouseEnter="btnCharacter5_MouseEnter" Opacity="0"/>
 
         <ListBox x:Name="lstCharacterStats"  HorizontalAlignment="Left" Height="272" Margin="217,242,0,0" Grid.Row="1" VerticalAlignment="Top" Width="188" Background="#FFF9F6F6" BorderThickness="4" Grid.ColumnSpan="5" Visibility="Hidden"/>
         <Ellipse x:Name="TitleBarButt" HorizontalAlignment="Left" Height="42" Margin="293,27,0,0" Stroke="#FF170D0D" VerticalAlignment="Top" Width="48" StrokeThickness="2" RenderTransformOrigin="-1.883,0.693" MouseDown="TitleBarButt_MouseDown" Cursor="Hand" Grid.Column="8" Grid.Row="1">
@@ -136,8 +188,7 @@
         <ListBox x:Name ="lstCharacterstats3" HorizontalAlignment="Left" Height="272" Margin="59,242,0,0" Grid.Row="1" VerticalAlignment="Top" Width="188" Grid.ColumnSpan="3" Background="#FFF9F6F6" BorderThickness="5" Grid.Column="6" Visibility="Hidden"/>
         <ListBox x:Name="lstCharacterstats4" Grid.Column="8" HorizontalAlignment="Left" Height="272" Margin="50,242,0,0" Grid.Row="1" VerticalAlignment="Top" Width="188" Background="#FFF9F6F6" BorderThickness="5" Visibility="Hidden"/>
         <ListBox x:Name="lstCharacterStats5" Grid.Column="8" HorizontalAlignment="Right" Height="272" Margin="0,242,84,0" Grid.Row="1" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.622,-0.353" BorderThickness="5" Background="#FFF9F6F6" Visibility="Hidden"/>
-        <Image x:Name="imageTEST" Grid.Column="6" HorizontalAlignment="Left" Height="433" Margin="88,190,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="490" Grid.ColumnSpan="3"/>
-        <Image x:Name="imgTEST" HorizontalAlignment="Left" Height="482" Margin="191,112,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="678" Grid.ColumnSpan="9"/>
+        <Image x:Name="imageTEST" Grid.Column="6" HorizontalAlignment="Left" Height="433" Margin="83,163,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="490" Grid.ColumnSpan="3"/>
 
     </Grid>
 
