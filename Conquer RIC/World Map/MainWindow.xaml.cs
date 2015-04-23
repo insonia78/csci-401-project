@@ -76,11 +76,11 @@ namespace World_Map
         for(i = 0; i<h.Length; i++){
         setOfHeroes[i] = h[i];
         }
-        character1image.Source = chosenHeroes[0].CharacterPicture;
-        character2image.Source = chosenHeroes[1].CharacterPicture;
-        character3image.Source = chosenHeroes[2].CharacterPicture;
-        character4image.Source = chosenHeroes[3].CharacterPicture;
-        character5image.Source = chosenHeroes[4].CharacterPicture;
+        character1image.Source = setOfHeroes[0].CharacterPicture;
+        character2image.Source = setOfHeroes[1].CharacterPicture;
+        character3image.Source = setOfHeroes[2].CharacterPicture;
+        character4image.Source = setOfHeroes[3].CharacterPicture;
+        character5image.Source = setOfHeroes[4].CharacterPicture;
         //test.Source = chosenHeroes[0].CharacterPicture;
         //testIMAGE.Source = chosenHeroes[1].CharacterPicture;
     }
@@ -385,6 +385,11 @@ namespace World_Map
        private void XButton_Click(object sender, RoutedEventArgs e)
        {
            Application.Current.Shutdown();
+       }
+
+       private void btnLibrary_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+       {
+
        }
        /********************************************FORMAT CUSTOM WINDOW***********************************************************/
     }
