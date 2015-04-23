@@ -617,11 +617,13 @@ namespace GameBoard
                 TutFirstMoveExit.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMove.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMove.Text = "now that you've clicked on the highlighted tile, see how there are squares that light up? those squares indicate where the character can go." +
-                "for our purposes, i want you to move to the square thats highlighted purple.";
-
-               
+                "for our purposes, i want you to move to the square thats highlighted purple.";              
             }
-            this.tutorialFirstStepTwo();
+            End_Turn.IsEnabled = false;
+            Move.IsEnabled = false;
+            Attack.IsEnabled = false;
+            Defend.IsEnabled = false;
+            Use_Item.IsEnabled = false;
         }
 
 
@@ -634,7 +636,7 @@ namespace GameBoard
                 //makes the character move to a specific square.
 
 
-                //forceMoveCharacter(1, 2, 4, 2);
+                
 
 
                 //checks that its that square.
@@ -676,7 +678,27 @@ namespace GameBoard
             }
         }
 
+        //forces the enemy to move a certain way for turn 1.
+        public void tutorialEnemyMoveOne()
+        {
+          //values won't be null, just not sure where I want them to move yet.
+           
+            //forceMoveCharacter(5, 5, null, null);
+            //forceMoveCharacter(6, 5, null, null);
+            //forceMoveCharacter(5, 1, null, null);
+            //forceMoveCharacter(11, 9, null, null);
+            //forceMoveCharacter(13, 8, null, null);
+            //forceMoveCharacter(14, 3, null, null);
+        }
 
+        //forces the enemy to move a certain way for turn 2.
+        public void tutorialEnemyMoveTwo()
+        {
+
+        }
+
+        //exits the tutorial text.
+        //calls the next step in the tutorial
         public void TutorialIntroductionExit_Click(object sender, RoutedEventArgs e)
         {
             tutIntroductionExitClicked = true;
@@ -685,11 +707,14 @@ namespace GameBoard
             this.tutorialFirstStep();
         }
     
+        //exits the first move tutorial text.
+        //calls the second step in the tutorial.
          private void TutFirstMoveExit_Click(object sender, RoutedEventArgs e)
         {
             tutFirstMoveExitClicked = true;
             TutFirstMove.Visibility = System.Windows.Visibility.Hidden;
             TutFirstMoveExit.Visibility = System.Windows.Visibility.Hidden;
+            this.tutorialFirstStepTwo();
         }
         
 
