@@ -141,21 +141,21 @@ namespace GameBoard
                             switch (input)
                             {
                                 case 48: //ascii code number for 0, grass (The StreamReader is reading them in as their ascii values)
-                                    boardspaces[r, c] = new Tile(r,c,0);
+                                    boardspaces[r, c] = new Tile(r, c, 0);
                                     break;
-                                case 49: //ascii code  for 3, swamp
-                                    boardspaces[r, c] = new Tile(r,c,3);
+                                case 49: //ascii code number for 1, mountain
+                                    boardspaces[r, c] = new Tile(r, c, 1);
                                     break;
-                                case 52: //Tile_Color1 character: 4
+                                case 52: //ascii code number for 2, water
+                                    boardspaces[r, c] = new Tile(r, c, 2);
+                                    break;
+                                case 53: //ascii code for 3, swamp
+                                    boardspaces[r, c] = new Tile(r, c, 3);
+                                    break;
+                                case 50: //Tile_Color1 character: 4
                                     boardspaces[r, c] = new Tile(r, c, 4);
                                     break;
-                                case 53: //Tile_Color2 charnumber for 1, mountain
-                                    boardspaces[r, c] = new Tile(r,c,1);
-                                    break;
-                                case 50: //ascii code number for 2, water
-                                    boardspaces[r, c] = new Tile(r,c,2);
-                                    break;
-                                case 51: //ascii code numberacter: 5
+                                case 51: //Tile_Color2 character: 5
                                     boardspaces[r, c] = new Tile(r, c, 5);
                                     break;
                                 case 54: //Tile_Color3 character: 6
@@ -182,8 +182,43 @@ namespace GameBoard
                                 case 68: //Wall_Horizontal_Texture2 character: D
                                     boardspaces[r, c] = new Tile(r, c, 13);
                                     break;
+                                case 69: //Wall_Verticle character: E
+                                    boardspaces[r, c] = new Tile(r, c, 14);
+                                    break;
+                                case 70: //Wall_Verticle2 character: F
+                                    boardspaces[r, c] = new Tile(r, c, 15);
+                                    break;
+                                case 71: //Wall_Verticle_Texture2 character: G
+                                    boardspaces[r, c] = new Tile(r, c, 16);
+                                    break;
+                                case 72: //Wall_Verticle_Texture character: H
+                                    boardspaces[r, c] = new Tile(r, c, 17);
+                                    break;
+                                case 73: //Books character: I
+                                    boardspaces[r, c] = new Tile(r, c, 18);
+                                    break;
+                                case 74: //Chair character: J
+                                    boardspaces[r, c] = new Tile(r, c, 19);
+                                    break;
+                                case 75: //Desk character: K
+                                    boardspaces[r, c] = new Tile(r, c, 20);
+                                    break;
+                                case 76: //Old_Computer character: L
+                                    boardspaces[r, c] = new Tile(r, c, 21);
+                                    break;
+                                case 77: //Student no face character: M
+                                    boardspaces[r, c] = new Tile(r, c, 22);
+                                    break;
+                                case 78: //Student character: N
+                                    boardspaces[r, c] = new Tile(r, c, 23);
+                                    break;
+                                //Special input characters that cause something extra to be done for a space:
+                                case 79: //Add Hero1 position character: O
+                                    boardspaces[r, c] = new Tile(r, c, 17);
+                                    break;
+
                                 default: //if no input or invalid input found in the file, make a blank grass space instead
-                                    boardspaces[r, c] = new Tile(r,c);
+                                    boardspaces[r, c] = new Tile(r, c);
                                     break;
                             }
 

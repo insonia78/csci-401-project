@@ -1,8 +1,8 @@
-﻿<Window x:Class="CharacterCreation.MainWindow"
+﻿<Page x:Class="CharacterCreation.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="694.588" Width="1110.448" WindowStartupLocation="CenterOwner" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Icon="Anchor_Smash_icon.png" Topmost="True">
-    <Window.Resources>
+        Title="MainWindow" Height="694.588" Width="1110.448" Background="{x:Null}">
+    <Page.Resources>
         <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -834,7 +834,7 @@
         		</Setter.Value>
         	</Setter>
         </Style>
-    </Window.Resources>
+    </Page.Resources>
     <Grid>
         <Rectangle x:Name="BGPanel" HorizontalAlignment="Left" Height="675" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="1090" RadiusX="5" RadiusY="5" StrokeThickness="2">
             <Rectangle.Fill>
@@ -972,4 +972,4 @@
             <Button x:Name="CustomizeXButton" Content="X" HorizontalAlignment="Left" Height="45" Margin="861,0,0,0" Style="{DynamicResource ButtonStyle36}" VerticalAlignment="Top" Width="50" Foreground="White" Cursor="Hand" FontFamily="Verdana" FontSize="20" Click="CustomizeXButton_Click"/>
         </Grid>
     </Grid>
-</Window>
+</Page>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{66EDFB4A-DC40-493B-A095-BF42ED5F6814}</ProjectGuid>
+    <ProjectGuid>{E239F97D-9361-41F9-B7EF-10CD9654AAFB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TitleScreen</RootNamespace>
-    <AssemblyName>TitleScreen</AssemblyName>
+    <RootNamespace>ConquerRic</RootNamespace>
+    <AssemblyName>ConquerRic</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -65,15 +65,8 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Page1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Page1.xaml.cs">
-      <DependentUpon>Page1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -101,16 +94,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ConquerRIC Title.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Anchor_Smash_icon.png" />
-    <Content Include="Winter Bliss.wav" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CharacterCreation\CharacterCreation.csproj">
       <Project>{15cff3e6-1b3b-467d-83b6-3e46a1ee39d2}</Project>
       <Name>CharacterCreation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TitleScreen\TitleScreen.csproj">
+      <Project>{66edfb4a-dc40-493b-a095-bf42ed5f6814}</Project>
+      <Name>TitleScreen</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

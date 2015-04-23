@@ -19,7 +19,7 @@ namespace TitleScreen
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
         public MainWindow()
         {
@@ -49,32 +49,32 @@ namespace TitleScreen
 
         private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void TitleBarButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void LeftTitleBarPatch_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void RightTitleBarPatch_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Minimized;
+            //WindowState = WindowState.Minimized;
         }
 
         private void LeaveGameOkButton_Click(object sender, RoutedEventArgs e)
@@ -105,10 +105,17 @@ namespace TitleScreen
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            CharacterCreation.CharacterCreationPage create = 
-                new CharacterCreation.CharacterCreationPage((Window)this);
+            //CharacterCreation.CharacterCreationPage create = 
+            //    new CharacterCreation.CharacterCreationPage((Window)this);
+            //NavigationService navi = new NavigationService;
+            //navi.Navigate(create);
 
+            //CharacterCreation.MainWindow charCreateScreen = new CharacterCreation.MainWindow(this);
+            //App.Current.MainWindow = charCreateScreen;
+            //charCreateScreen.Show();
+            //this.Close();
 
+            this.NavigationService.Navigate(new CharacterCreation.MainWindow());
         }
     }
 }

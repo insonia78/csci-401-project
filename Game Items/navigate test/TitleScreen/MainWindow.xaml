@@ -1,8 +1,8 @@
-﻿<Window x:Name="Conquer_RIC" x:Class="TitleScreen.MainWindow"
+﻿<Page x:Name="Conquer_RIC" x:Class="TitleScreen.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Conquer RIC" Height="694.588" Width="1110.448" WindowStartupLocation="CenterScreen" Background="{x:Null}" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None" Icon="Anchor_Smash_icon.png">
-    <Window.Resources>
+        Title="Conquer RIC" Height="694.588" Width="1110.448" Background="{x:Null}">
+    <Page.Resources>
         <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -240,7 +240,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Window.Resources>
+    </Page.Resources>
     <Grid>
         <Frame x:Name="startTitle" />
         <Rectangle x:Name="BGPanel" Fill="White" HorizontalAlignment="Left" Height="675" Margin="10,10,0,0" Stroke="#FF0E0C0C" VerticalAlignment="Top" Width="1090" RadiusX="5" RadiusY="5" StrokeThickness="2"/>
@@ -312,4 +312,4 @@
         </Grid>
         <MediaElement x:Name="bgm" Margin="98,574,1012,121" Stretch="Fill" Source="Winter Bliss.wav" LoadedBehavior="Manual" MediaEnded="bgm_MediaEnded"/>
     </Grid>
-</Window>
+</Page>

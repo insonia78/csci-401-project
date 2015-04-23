@@ -28,6 +28,13 @@ namespace GameBoard
         SolidColorBrush moveOption = new SolidColorBrush(Colors.Yellow);
         SolidColorBrush attackOption = new SolidColorBrush(Colors.Red);
 
+        //The input heroes:
+        private Hero hero1;
+        private Hero hero2;
+        private Hero hero3;
+        private Hero hero4;
+        private Hero hero5;
+
         //stores a reference to the location of a Character when it's selected (need the characters's location even when clicking on buttons for different spaces).
         private int selectedCharacterRow;
         private int selectedCharacterCol;
@@ -46,6 +53,7 @@ namespace GameBoard
         ArrayList rowPlot = new ArrayList();
         ArrayList colPlot = new ArrayList();
 
+        //For tutorial
         private bool isTutorial;
         public bool tutorialWasClicked; 
         public bool tutIntroductionExitClicked;
@@ -86,6 +94,26 @@ namespace GameBoard
             refreshBoardSpace(13, 8);
             boardspaces[14, 3].tileCharacter = new Gardener(14,3);
             refreshBoardSpace(14, 3);
+        }
+
+        public MainWindow(String levelFile, Hero hero_1, Hero hero_2, Hero hero_3, Hero hero_4, Hero hero_5)
+        {
+            InitializeComponent();
+
+            hero1 = hero_1;
+            hero2 = hero_2;
+            hero3 = hero_3;
+            hero4 = hero_4;
+            hero5 = hero_5;
+
+            setupBoard(levelFile);
+            selectedCharacterRow = 0;
+            selectedCharacterCol = 0;
+
+            //For attack animation
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += onUpdate;
+            dispatcherTimer.Interval = TimePerFrame;
         }
 
         /*

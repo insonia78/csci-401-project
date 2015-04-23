@@ -19,10 +19,15 @@ namespace CharacterCreation
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
+
+        //Window main;
+
         public MainWindow()
         {
+            //main = title;
+            //NavigationService navigation = NavigationService.GetNavigationService(this);
             InitializeComponent();
         }
 
@@ -41,32 +46,32 @@ namespace CharacterCreation
 
         private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void TitleBarButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void LeftTitleBarPatch_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void RightTitleBarPatch_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            //this.DragMove();
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Minimized;
+            //WindowState = WindowState.Minimized;
         }
 
         private void XButton_Click(object sender, RoutedEventArgs e)
