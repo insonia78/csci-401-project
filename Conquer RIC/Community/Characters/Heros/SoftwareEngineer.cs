@@ -40,16 +40,17 @@ namespace Community
             if(Male)
             {
                 PortraitFile = "Male_Software_Engineer_portrait.png";
-                pictureFile = "Heroes/Software_Engineer_MALE.png";
+                PictureFile = "Heroes/Software_Engineer_MALE.png";
                 //CharacterPicture = " "; 
             }
             else
             {
                 PortraitFile = "Female_Software_Engineer_portrait.png";
-                pictureFile = "Heroes/Software_Engineer_FEMALE.png";
+                PictureFile = "Heroes/Software_Engineer_FEMALE.png";
                 //CharacterPicture = " "; 
             }
-            characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
+            characterPicture = new BitmapImage(new Uri(PictureFile, UriKind.Relative));
+            CharacterPortrait = new BitmapImage(new Uri(PortraitFile, UriKind.Relative));
 
             statEffects = new List<Effect>();
 
