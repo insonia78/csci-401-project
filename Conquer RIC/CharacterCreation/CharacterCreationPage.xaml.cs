@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Community;
 
 namespace CharacterCreation
 {
@@ -22,7 +23,8 @@ namespace CharacterCreation
     {
         // fields
         Window main;    // reference titleScreen components.
-        MediaElement music;
+        MediaElement music; // to be passed to the world map.
+
 
         int[] heroType = new int[5];
         String[] name_female = new String[20] { "Sally", "Sammy", "Erica", "Amanda", "Caitlyn", "Sandy", 
@@ -35,7 +37,9 @@ namespace CharacterCreation
                                               "William", "Devin", "Randy", "Travis", "Leon", "MasterChief" };
         String[] hero_name = new String[5];
         String[] hero_type = new String[5];
+
         string name, name2;
+
         public bool hero1WasClicked = false;
         public bool hero2WasClicked = false;
         public bool hero3WasClicked = false;
@@ -99,6 +103,90 @@ namespace CharacterCreation
         {
             BlackOut.Visibility = Visibility.Visible;
             CustomizeWindowGrid.Visibility = Visibility.Visible;
+        }
+
+        /// <the Boolean Gender() creates a random number generator that determines if the  heros are male or female. it puts them into the array
+        public void Gender()
+        {
+            Random random = new Random();
+            int num;    // represents job role
+            int numba;  // represents gender
+
+            for (int i = 0; i < 5; i++)
+            {
+                num = random.Next(0, 5);
+                heroType[i] = num;
+
+                numba = random.Next(1, 3);
+
+                if (numba == 1)
+                {
+                    gender[i] = true;
+                    ///<here is where I am having issues with the picture. I tried to save it to resources like a few pages suggested.
+                    ///it saved it to a new folder, not the resources section I need and i cant get it to go to the right resources.
+                    ///<Hero1.Background = Properties.Resources.deadladybug2.jpg;
+                }
+                else
+                {
+                    gender[i] = false;
+                }
+            }
+        }
+
+        //sets the hero classes for the randomize button
+        public void Herocharacter()
+        {
+            Random random = new Random();
+
+            int num;
+            int nums;
+
+            int i = 0;
+            num = random.Next(0, 5);
+            heroType[i] = num;
+
+            nums = random.Next(0, 5);
+
+            if (nums == 0)
+            {
+                hero_type[i] = "Warrior";
+                hero_type[i + 1] = "Healer";
+                hero_type[i + 2] = "Mage";
+                hero_type[i + 3] = "Hunter";
+                hero_type[i + 4] = "Rogue";
+            }
+            else if (nums == 1)
+            {
+                hero_type[i] = "Rogue";
+                hero_type[i + 1] = "Warrior";
+                hero_type[i + 2] = "Healer";
+                hero_type[i + 3] = "Mage";
+                hero_type[i + 4] = "Hunter";
+            }
+            else if (nums == 2)
+            {
+                hero_type[i] = "Hunter";
+                hero_type[i + 1] = "Rogue";
+                hero_type[i + 2] = "Warrior";
+                hero_type[i + 3] = "Healer";
+                hero_type[i + 4] = "Mage";
+            }
+            else if (nums == 3)
+            {
+                hero_type[i] = "Mage";
+                hero_type[i + 1] = "Hunter";
+                hero_type[i + 2] = "Rogue";
+                hero_type[i + 3] = "Warrior";
+                hero_type[i + 4] = "Healer";
+            }
+            else
+            {
+                hero_type[i] = "Healer";
+                hero_type[i + 1] = "Mage";
+                hero_type[i + 2] = "Hunter";
+                hero_type[i + 3] = "Rogue";
+                hero_type[i + 4] = "Warrior";
+            }
         }
 
         private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
