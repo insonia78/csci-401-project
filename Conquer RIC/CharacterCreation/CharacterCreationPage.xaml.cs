@@ -36,7 +36,7 @@ namespace CharacterCreation
                                               "Chandler", "Joey", "Mark", "Tyler", "Malane", "Thomas", "Cedric", 
                                               "William", "Devin", "Randy", "Travis", "Leon", "MasterChief" };
         String[] hero_name = new String[5];
-        String[] hero_type = new String[5];
+        String[] job_type = new String[5];
 
         string name, name2;
 
@@ -54,15 +54,15 @@ namespace CharacterCreation
         }
 
         //allows the array to be accessed in individual heros class
-        public String[] heroTypeArray
+        public String[] jobTypeArray
         {
             get
             {
-                return hero_type;
+                return job_type;
             }
             set
             {
-                hero_type = value;
+                job_type = value;
             }
         }
 
@@ -135,58 +135,287 @@ namespace CharacterCreation
 
         //sets the hero classes for the randomize button
         public void Herocharacter()
+            /*
+             * 1 of 5 different assortments of heroes.
+             */
         {
             Random random = new Random();
 
-            int num;
-            int nums;
+            int num;    // roles of heroes.
+            int nums;   // combination choice.
 
             int i = 0;
             num = random.Next(0, 5);
-            heroType[i] = num;
+            heroType[i] = num; // not sure where this is going.
 
             nums = random.Next(0, 5);
 
             if (nums == 0)
             {
-                hero_type[i] = "Warrior";
-                hero_type[i + 1] = "Healer";
-                hero_type[i + 2] = "Mage";
-                hero_type[i + 3] = "Hunter";
-                hero_type[i + 4] = "Rogue";
+                job_type[i] = "Software Engineer";
+                job_type[i + 1] = "Support Engineer";
+                job_type[i + 2] = "Systems Analyst";
+                job_type[i + 3] = "Network Architect";
+                job_type[i + 4] = "Information Security";
             }
             else if (nums == 1)
             {
-                hero_type[i] = "Rogue";
-                hero_type[i + 1] = "Warrior";
-                hero_type[i + 2] = "Healer";
-                hero_type[i + 3] = "Mage";
-                hero_type[i + 4] = "Hunter";
+                job_type[i] = "Information Security";
+                job_type[i + 1] = "Software Engineer";
+                job_type[i + 2] = "Support Engineer";
+                job_type[i + 3] = "Systems Analyst";
+                job_type[i + 4] = "Network Architect";
             }
             else if (nums == 2)
             {
-                hero_type[i] = "Hunter";
-                hero_type[i + 1] = "Rogue";
-                hero_type[i + 2] = "Warrior";
-                hero_type[i + 3] = "Healer";
-                hero_type[i + 4] = "Mage";
+                job_type[i] = "Network Architect";
+                job_type[i + 1] = "Information Security";
+                job_type[i + 2] = "Software Engineer";
+                job_type[i + 3] = "Support Engineer";
+                job_type[i + 4] = "Systems Analyst";
             }
             else if (nums == 3)
             {
-                hero_type[i] = "Mage";
-                hero_type[i + 1] = "Hunter";
-                hero_type[i + 2] = "Rogue";
-                hero_type[i + 3] = "Warrior";
-                hero_type[i + 4] = "Healer";
+                job_type[i] = "Systems Analyst";
+                job_type[i + 1] = "Network Architect";
+                job_type[i + 2] = "Information Security";
+                job_type[i + 3] = "Software Engineer";
+                job_type[i + 4] = "Support Engineer";
             }
             else
             {
-                hero_type[i] = "Healer";
-                hero_type[i + 1] = "Mage";
-                hero_type[i + 2] = "Hunter";
-                hero_type[i + 3] = "Rogue";
-                hero_type[i + 4] = "Warrior";
+                job_type[i] = "Support Engineer";
+                job_type[i + 1] = "Systems Analyst";
+                job_type[i + 2] = "Network Architect";
+                job_type[i + 3] = "Information Security";
+                job_type[i + 4] = "Software Engineer";
             }
+        }
+
+        //this sets the names for the randomization button
+        //it sends the names into a common array so they can be accessed for the heros.
+        //false are females.
+        //<true are males.
+        public void HeroNames()
+        {
+            Random random = new Random();
+
+            int numnum;
+
+
+            for (int i = 0; i < 5; i++)
+            {
+
+                heroType[i] = i;
+                numnum = random.Next(0, 20);
+
+                if (i == 0)
+                {
+                    if (gender[i] == true)
+                    {
+                        name = name_male[numnum];
+                        hero_name[i] = name;
+                    }
+                    else
+                    {
+                        name = name_female[numnum];
+                        hero_name[i] = name;
+                    }
+                }
+                else if (i == 1)
+                {
+                    if (gender[i] == true)
+                    {
+                        name2 = name_male[numnum];
+
+                        while (name2 == hero_name[0])
+                        {
+                            numnum = random.Next(0, 20);
+                            name2 = name_male[numnum];
+                            name = name2;
+                            hero_name[i] = name;
+                        }
+
+                        hero_name[i] = name2;
+                    }
+                    else
+                    {
+                        name2 = name_female[numnum];
+
+                        while (name2 == hero_name[0])
+                        {
+                            numnum = random.Next(0, 20);
+                            name2 = name_female[numnum];
+                            name = name2;
+                            hero_name[i] = name;
+                        }
+
+                        hero_name[i] = name2;
+                    }
+                }
+                else if (i == 2)
+                {
+                    if (gender[i] == true)
+                    {
+                        name2 = name_male[numnum];
+
+                        while (name2 == hero_name[0] || name2 == hero_name[1])
+                        {
+                            numnum = random.Next(0, 20);
+                            name2 = name_male[numnum];
+                            name = name2;
+                            hero_name[i] = name;
+                        }
+
+                        hero_name[i] = name2;
+                    }
+                    else
+                    {
+                        name2 = name_female[numnum];
+                        while (name2 == hero_name[0] || name2 == hero_name[1])
+                        {
+                            numnum = random.Next(0, 20);
+                            name2 = name_female[numnum];
+                            name = name2;
+                            hero_name[i] = name;
+                        }
+
+                        hero_name[i] = name2;
+                    }
+                }
+                else if (i == 3)
+                {
+                    if (gender[i] == true)
+                    {
+                        name2 = name_male[numnum];
+
+                        while (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2])
+                        {
+                            numnum = random.Next(0, 20);
+                            name2 = name_male[numnum];
+                            name = name2;
+                            hero_name[i] = name;
+                        } 
+                        hero_name[i] = name2;
+                    }
+                    else
+                    {
+                        name2 = name_female[numnum];
+                        while (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2])
+                        {
+                            numnum = random.Next(0, 20);
+                            name2 = name_female[numnum];
+                            name = name2;
+                            hero_name[i] = name;
+                        }
+                        hero_name[i] = name2;
+                    }
+                }
+                else
+                {
+                    if (gender[i] == true)
+                    {
+                        name2 = name_male[numnum];
+
+                        while (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2] || name2 == hero_name[3])
+                        {
+                            numnum = random.Next(0, 20);
+                            name2 = name_male[numnum];
+                            name = name2;
+                            hero_name[i] = name;
+                        }
+                        hero_name[i] = name2;
+                    }
+                    else
+                    {
+                        name2 = name_female[numnum];
+                        while (name2 == hero_name[0] || name2 == hero_name[1] || name2 == hero_name[2] || name2 == hero_name[3])
+                        {
+                            numnum = random.Next(0, 20);
+                            name2 = name_female[numnum];
+                            name = name2;
+                            hero_name[i] = name;
+                        }
+                        hero_name[i] = name2;
+                    }
+                }
+            }
+        }
+
+        public void placeCharacter()
+        {
+            Hero[] heroes = new Hero[5];
+            for (int i = 0; i < 5; i++)
+            {
+                switch (job_type[i])
+                {
+                    case "Software Engineer":
+                        {
+                            heroes[i] = new SoftwareEngineer(hero_name[i], gender[i]);
+                            break;
+                        }
+                    case "Support Engineer":
+                        {
+                            heroes[i] = new SupportEngineer(hero_name[i], gender[i]);
+                            break;
+                        }
+                    case "Systems Analyst":
+                        {
+                            heroes[i] = new SystemsAnalyst(hero_name[i], gender[i]);
+                            break;
+                        }
+                    case "Network Architect":
+                        {
+                            heroes[i] = new NetworkArchitect(hero_name[i], gender[i]);
+                            break;
+                        }
+                    case "Information Security":
+                        {
+                            heroes[i] = new InformationSecurity(hero_name[i], gender[i]);
+                            break;
+                        }
+
+                    default:
+                        {
+                            break;
+                        }
+                }
+            }
+            heroOneSlot.Source = heroes[0].CharacterPortrait;
+            heroTwoSlot.Source = heroes[1].CharacterPortrait;
+            heroThreeSlot.Source = heroes[2].CharacterPortrait;
+            heroFourSlot.Source = heroes[3].CharacterPortrait;
+            heroFiveSlot.Source = heroes[4].CharacterPortrait;
+
+            nameLabelOne.Content = heroes[0].Name;
+            nameLabelTwo.Content = heroes[1].Name;
+            nameLabelThree.Content = heroes[2].Name;
+            nameLabelFour.Content = heroes[3].Name;
+            nameLabelFive.Content = heroes[4].Name;
+
+            genderLabelOne.Content = heroes[0].Male;
+            genderLabelTwo.Content = heroes[1].Male;
+            genderLabelThree.Content = heroes[2].Male;
+            genderLabelFour.Content = heroes[3].Male;
+            genderLabelFive.Content = heroes[4].Male;
+
+            jobLabelOne.Content = heroes[0].JobRole;
+            jobLabelTwo.Content = heroes[1].JobRole;
+            jobLabelThree.Content = heroes[2].JobRole;
+            jobLabelFour.Content = heroes[3].JobRole;
+            jobLabelFive.Content = heroes[4].JobRole;
+        }
+
+        ///<this is the start of the randomize button. when you click it, it will call the gender one.
+        /// once it calls the gender it will call the hero one. 
+        /// after it calls the hero one, it calls the name.
+        private void RandomButton_Click(object sender, RoutedEventArgs e)
+        {
+            ///<does this before it does everything else.this.Gender();
+            Gender();
+            HeroNames();
+            Herocharacter();
+            placeCharacter();
         }
 
         private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
@@ -267,12 +496,12 @@ namespace CharacterCreation
             HeroOneHighlight.Opacity = 1;
         }
 
-        private void HeroOneSlot_MouseEnter(object sender, MouseEventArgs e)
+        private void heroOneSlot_MouseEnter(object sender, MouseEventArgs e)
         {
             HeroOneHighlight.Opacity = .15;
         }
 
-        private void HeroOneSlot_MouseLeave(object sender, MouseEventArgs e)
+        private void heroOneSlot_MouseLeave(object sender, MouseEventArgs e)
         {
             HeroOneHighlight.Opacity = 1;
         }
@@ -297,12 +526,12 @@ namespace CharacterCreation
             HeroTwoHighlight.Opacity = 1;
         }
 
-        private void HeroTwoSlot_MouseEnter(object sender, MouseEventArgs e)
+        private void heroTwoSlot_MouseEnter(object sender, MouseEventArgs e)
         {
             HeroTwoHighlight.Opacity = .15;
         }
 
-        private void HeroTwoSlot_MouseLeave(object sender, MouseEventArgs e)
+        private void heroTwoSlot_MouseLeave(object sender, MouseEventArgs e)
         {
             HeroTwoHighlight.Opacity = 1;
         }
@@ -337,12 +566,12 @@ namespace CharacterCreation
             HeroThreeHighlight.Opacity = 1;
         }
 
-        private void HeroThreeSlot_MouseEnter(object sender, MouseEventArgs e)
+        private void heroThreeSlot_MouseEnter(object sender, MouseEventArgs e)
         {
             HeroThreeHighlight.Opacity = .15;
         }
 
-        private void HeroThreeSlot_MouseLeave(object sender, MouseEventArgs e)
+        private void heroThreeSlot_MouseLeave(object sender, MouseEventArgs e)
         {
             HeroThreeHighlight.Opacity = 1;
         }
@@ -377,12 +606,12 @@ namespace CharacterCreation
             HeroFourHighlight.Opacity = 1;
         }
 
-        private void HeroFourSlot_MouseEnter(object sender, MouseEventArgs e)
+        private void heroFourSlot_MouseEnter(object sender, MouseEventArgs e)
         {
             HeroFourHighlight.Opacity = .15;
         }
 
-        private void HeroFourSlot_MouseLeave(object sender, MouseEventArgs e)
+        private void heroFourSlot_MouseLeave(object sender, MouseEventArgs e)
         {
             HeroFourHighlight.Opacity = 1;
         }
@@ -417,12 +646,12 @@ namespace CharacterCreation
             HeroFiveHighlight.Opacity = 1;
         }
 
-        private void HeroFiveSlot_MouseEnter(object sender, MouseEventArgs e)
+        private void heroFiveSlot_MouseEnter(object sender, MouseEventArgs e)
         {
             HeroFiveHighlight.Opacity = .15;
         }
 
-        private void HeroFiveSlot_MouseLeave(object sender, MouseEventArgs e)
+        private void heroFiveSlot_MouseLeave(object sender, MouseEventArgs e)
         {
             HeroFiveHighlight.Opacity = 1;
         }
@@ -446,11 +675,6 @@ namespace CharacterCreation
         {
             CustomizeWindowGrid.Visibility = Visibility.Hidden;
             BlackOut.Visibility = Visibility.Hidden;
-        }
-
-        private void HeroOneSlot_Click(object sender, RoutedEventArgs e)
-        {
-            CustomAppear();
         }
 
         private void HeroOneFrame_Click(object sender, RoutedEventArgs e)
@@ -483,11 +707,6 @@ namespace CharacterCreation
             CustomAppear();
         }
 
-        private void HeroTwoSlot_Click(object sender, RoutedEventArgs e)
-        {
-            CustomAppear();
-        }
-
         private void HeroThreeHighlight_Click(object sender, RoutedEventArgs e)
         {
             CustomAppear();
@@ -499,11 +718,6 @@ namespace CharacterCreation
         }
 
         private void HeroThreeFrame_Click(object sender, RoutedEventArgs e)
-        {
-            CustomAppear();
-        }
-
-        private void HeroThreeSlot_Click(object sender, RoutedEventArgs e)
         {
             CustomAppear();
         }
@@ -523,11 +737,6 @@ namespace CharacterCreation
             CustomAppear();
         }
 
-        private void HeroFourSlot_Click(object sender, RoutedEventArgs e)
-        {
-            CustomAppear();
-        }
-
         private void HeroFiveHighlight_Click(object sender, RoutedEventArgs e)
         {
             CustomAppear();
@@ -543,9 +752,256 @@ namespace CharacterCreation
             CustomAppear();
         }
 
-        private void HeroFiveSlot_Click(object sender, RoutedEventArgs e)
+        private void jobLabelOne_Click(object sender, RoutedEventArgs e)
         {
             CustomAppear();
+        }
+
+        private void genderLabelOne_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void nameLabelOne_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void nameLabelTwo_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void genderLabelTwo_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void jobLabelTwo_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void nameLabelThree_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void genderLabelThree_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void jobLabelThree_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void nameLabelFour_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void genderLabelFour_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void jobLabelFour_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void nameLabelFive_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void genderLabelFive_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void jobLabelFive_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAppear();
+        }
+
+        private void nameLabelOne_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroOneHighlight.Opacity = .15;
+        }
+
+        private void nameLabelOne_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroOneHighlight.Opacity = 1;
+        }
+
+        private void genderLabelOne_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroOneHighlight.Opacity = .15;
+        }
+
+        private void genderLabelOne_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroOneHighlight.Opacity = 1;
+
+        }
+
+        private void jobLabelOne_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroOneHighlight.Opacity = .15;
+
+        }
+
+        private void jobLabelOne_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroOneHighlight.Opacity = 1;
+
+        }
+
+        private void nameLabelTwo_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroTwoHighlight.Opacity = .15;
+
+        }
+
+        private void nameLabelTwo_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroTwoHighlight.Opacity = 1;
+
+        }
+
+        private void genderLabelTwo_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroTwoHighlight.Opacity = .15;
+
+        }
+
+        private void genderLabelTwo_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroTwoHighlight.Opacity = 1;
+
+        }
+
+        private void jobLabelTwo_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroTwoHighlight.Opacity = .15;
+
+        }
+
+        private void jobLabelTwo_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroTwoHighlight.Opacity = 1;
+
+        }
+
+        private void nameLabelThree_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroThreeHighlight.Opacity = .15;
+
+        }
+
+        private void nameLabelThree_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroThreeHighlight.Opacity = 1;
+
+        }
+
+        private void genderLabelThree_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroThreeHighlight.Opacity = .15;
+
+        }
+
+        private void genderLabelThree_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroThreeHighlight.Opacity = 1;
+
+        }
+
+        private void jobLabelThree_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroThreeHighlight.Opacity = .15;
+
+        }
+
+        private void jobLabelThree_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroThreeHighlight.Opacity = 1;
+
+        }
+
+        private void nameLabelFour_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroFourHighlight.Opacity = .15;
+
+        }
+
+        private void nameLabelFour_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroFourHighlight.Opacity = 1;
+
+        }
+
+        private void genderLabelFour_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroFourHighlight.Opacity = .15;
+
+        }
+
+        private void genderLabelFour_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroFourHighlight.Opacity = 1;
+
+        }
+
+        private void jobLabelFour_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroFourHighlight.Opacity = .15;
+
+        }
+
+        private void jobLabelFour_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroFourHighlight.Opacity = 1;
+
+        }
+
+        private void nameLabelFive_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroFiveHighlight.Opacity = .15;
+
+        }
+
+        private void nameLabelFive_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroFiveHighlight.Opacity = 1;
+
+        }
+
+        private void genderLabelFive_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroFiveHighlight.Opacity = .15;
+
+        }
+
+        private void genderLabelFive_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroFiveHighlight.Opacity = 1;
+
+        }
+
+        private void jobLabelFive_MouseEnter(object sender, MouseEventArgs e)
+        {
+            HeroFiveHighlight.Opacity = .15;
+
+        }
+
+        private void jobLabelFive_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HeroFiveHighlight.Opacity = 1;
+
         }
     }
 }
