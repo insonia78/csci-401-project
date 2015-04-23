@@ -34,17 +34,17 @@ namespace Community
             // Picture will be generated depending on the sex.
             if(Male)
             {
-                PortraitFile = "Male_Network_Architect_portrait.png";
-                PictureFile = "Heroes/Network_Architect_MALE.png";
+                PortraitFile = "/Pictures/MaleNetworkArchitect.png";
+                PictureFile = "/Heroes/Network_Architecture_MALE.png";
                 //CharacterPicture = " "; 
             }
             else
             {
-                PortraitFile = "Male_Network_Architect_portrait.png";
-                PictureFile = "Heroes/Network_Architect_FEMALE.png";
+                PortraitFile = "/Pictures/FemaleNetworkArchitect.png";
+                PictureFile = "/Heroes/Network_Architecture_FEMALE.png";
                 //CharacterPicture = " "; 
             }
-            characterPicture = new BitmapImage(new Uri(PictureFile, UriKind.Relative));
+            CharacterPicture = new BitmapImage(new Uri(PictureFile, UriKind.Relative));
             CharacterPortrait = new BitmapImage(new Uri(PortraitFile, UriKind.Relative));
 
             statEffects = new List<Effect>();

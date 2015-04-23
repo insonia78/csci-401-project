@@ -34,14 +34,14 @@ namespace Community
             // Picture will be generated depending on the sex.
             if(Male)
             {
-                PortraitFile = "Male_Support_Engineer_portrait.png";
-                PictureFile = "Heroes/Support_Engineer_MALE.png";
+                PortraitFile = "/Pictures/MaleSupportEngineer.png";
+                PictureFile = "/Heroes/Support_Engineer_MALE.png";
                 //CharacterPicture = " "; 
             }
             else
             {
-                PortraitFile = "Female_Support_Engineer_portrait.png";
-                PictureFile = "Heroes/Support_Engineer_FEMALE.png";
+                PortraitFile = "/Pictures/FemaleSupportEngineer.png";
+                PictureFile = "/Heroes/Support_Engineer_FEMALE.png";
                 //CharacterPicture = " "; 
             }
             CharacterPicture = new BitmapImage(new Uri(PictureFile, UriKind.Relative));
