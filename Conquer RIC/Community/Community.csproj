@@ -81,6 +81,31 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pictures\FemaleInformationSecurity.png" />
+    <Content Include="Pictures\FemaleNetworkArchitect.png" />
+    <Content Include="Pictures\FemaleSoftwareEngineer.png" />
+    <Content Include="Pictures\FemaleSupportEngineer.png" />
+    <Content Include="Pictures\FemaleSystemsAnalyst.png" />
+    <Content Include="Pictures\MaleInformationSecurity.png" />
+    <Content Include="Pictures\MaleNetworkArchitect.png" />
+    <Content Include="Pictures\MaleSoftwareEngineer.png" />
+    <Content Include="Pictures\MaleSupportEngineer.png" />
+    <Content Include="Pictures\MaleSystemsAnalyst.png" />
+    <Content Include="Pictures\Missingno.png" />
+    <Content Include="Pictures\MissingnoPortrait.png" />
+    <Content Include="Resources\Heroes\Information_Security_FEMALE.png" />
+    <Content Include="Resources\Heroes\Information_Security_MALE.png" />
+    <Content Include="Resources\Heroes\Network_Architecture_FEMALE.png" />
+    <Content Include="Resources\Heroes\Network_Architecture_MALE.png" />
+    <Content Include="Resources\Heroes\Neutral.png" />
+    <Content Include="Resources\Heroes\Software_Engineer_FEMALE.png" />
+    <Content Include="Resources\Heroes\Software_Engineer_MALE.png" />
+    <Content Include="Resources\Heroes\Support_Engineer_FEMALE.png" />
+    <Content Include="Resources\Heroes\Support_Engineer_MALE.png" />
+    <Content Include="Resources\Heroes\System_Anaylst_FEMALE.png" />
+    <Content Include="Resources\Heroes\System_Anaylst_MALE.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

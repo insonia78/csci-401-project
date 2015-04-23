@@ -839,6 +839,291 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ButtonStyle37" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="nameLabelOne" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle38" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="genderLabelOne" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle39" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="jobLabelOne" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle40" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="nameLabelTwo" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle41" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="genderLabelTwo" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle42" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="jobLabelTwo" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle43" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="nameLabelThree" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle44" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="genderLabelThree" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle45" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="jobLabelThree" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle46" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="nameLabelFour" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle47" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="genderLabelFour" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle48" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="jobLabelFour" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle49" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="NameLabelFive" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle50" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="genderLabelFive" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle51" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Label x:Name="jobLabelFive" Content="" FontSize="16" FontFamily="SketchFlow Print"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Grid>
         <Frame x:Name="createPage" />
@@ -894,28 +1179,54 @@
             <Button x:Name="MinimizeButton" Content="___" HorizontalAlignment="Left" Height="42" Style="{DynamicResource ButtonStyle1}" VerticalAlignment="Top" Width="50" FontFamily="Cooper Black" FontWeight="Bold" Cursor="Hand" Click="MinimizeButton_Click"/>
             <Button x:Name="XButton" Content="X" HorizontalAlignment="Left" Height="42" Margin="50,0,0,0" Style="{DynamicResource ButtonStyle2}" VerticalAlignment="Top" Width="50" FontFamily="Verdana" FontSize="20" Foreground="White" Cursor="Hand" Click="XButton_Click"/>
         </Grid>
-        <Button x:Name="HeroOneHighlight" Content="" HorizontalAlignment="Left" Height="444" Margin="55,83,0,0" Style="{DynamicResource ButtonStyle22}" VerticalAlignment="Top" Width="197" Cursor="Hand" MouseEnter="HeroOneHighlight_MouseEnter" MouseLeave="HeroOneHighlight_MouseLeave" Click="HeroOneHighlight_Click"/>
-        <Button x:Name="HeroTwoHighlight" Content="" HorizontalAlignment="Left" Height="444" Margin="252,83,0,0" Style="{DynamicResource ButtonStyle23}" VerticalAlignment="Top" Width="197" Cursor="Hand" MouseEnter="HeroTwoHighlight_MouseEnter" MouseLeave="HeroTwoHighlight_MouseLeave" Click="HeroTwoHighlight_Click" />
-        <Button x:Name="HeroThreeHighlight" Content="" HorizontalAlignment="Left" Height="444" Margin="449,83,0,0" Style="{DynamicResource ButtonStyle24}" VerticalAlignment="Top" Width="197" Cursor="Hand" MouseEnter="HeroThreeHighlight_MouseEnter" MouseLeave="HeroThreeHighlight_MouseLeave" Click="HeroThreeHighlight_Click"/>
-        <Button x:Name="HeroFourHighlight" Content="" HorizontalAlignment="Left" Height="444" Margin="646,83,0,0" Style="{DynamicResource ButtonStyle25}" VerticalAlignment="Top" Width="197" MouseEnter="HeroFourHighlight_MouseEnter" MouseLeave="HeroFourHighlight_MouseLeave" Cursor="Hand" Click="HeroFourHighlight_Click"/>
-        <Button x:Name="HeroFiveHighlight" Content="" HorizontalAlignment="Left" Height="444" Margin="843,83,0,0" Style="{DynamicResource ButtonStyle26}" VerticalAlignment="Top" Width="197" Cursor="Hand" MouseEnter="HeroFiveHighlight_MouseEnter" MouseLeave="HeroFiveHighlight_MouseLeave" Click="HeroFiveHighlight_Click"/>
-        <Button x:Name="HeroOneAura" Content="" HorizontalAlignment="Left" Height="374" Margin="64,109,0,0" Style="{DynamicResource ButtonStyle13}" VerticalAlignment="Top" Width="180" MouseEnter="HeroOneAura_MouseEnter" MouseLeave="HeroOneAura_MouseLeave" Cursor="Hand" Click="HeroOneAura_Click"/>
-        <Button x:Name="HeroTwoAura" Content="" HorizontalAlignment="Left" Height="374" Margin="262,109,0,0" Style="{DynamicResource ButtonStyle15}" VerticalAlignment="Top" Width="180" Cursor="Hand" MouseEnter="HeroTwoAura_MouseEnter" MouseLeave="HeroTwoAura_MouseLeave" Click="HeroTwoAura_Click"/>
-        <Button x:Name="HeroThreeAura" Content="" HorizontalAlignment="Left" Height="374" Margin="459,109,0,0" Style="{DynamicResource ButtonStyle17}" VerticalAlignment="Top" Width="180" Cursor="Hand" MouseEnter="HeroThreeAura_MouseEnter" MouseLeave="HeroThreeAura_MouseLeave" Click="HeroThreeAura_Click"/>
-        <Button x:Name="HeroFourAura" Content="" HorizontalAlignment="Left" Height="374" Margin="656,109,0,0" Style="{DynamicResource ButtonStyle19}" VerticalAlignment="Top" Width="180" Cursor="Hand" MouseEnter="HeroFourAura_MouseEnter" MouseLeave="HeroFourAura_MouseLeave" Click="HeroFourAura_Click"/>
-        <Button x:Name="HeroFiveAura" Content="" HorizontalAlignment="Left" Height="374" Margin="858,109,0,0" Style="{DynamicResource ButtonStyle21}" VerticalAlignment="Top" Width="175" Cursor="Hand" MouseEnter="HeroFiveAura_MouseEnter" MouseLeave="HeroFiveAura_MouseLeave" Click="HeroFiveAura_Click"/>
-        <Button x:Name="HeroOneFrame" Content="" HorizontalAlignment="Left" Height="146" Margin="82,129,0,0" Style="{DynamicResource ButtonStyle12}" VerticalAlignment="Top" Width="144" Cursor="Hand" MouseEnter="HeroOneFrame_MouseEnter" MouseLeave="HeroOneFrame_MouseLeave" Click="HeroOneFrame_Click"/>
-        <Button x:Name="HeroOneSlot" Content="" HorizontalAlignment="Left" Height="126" Margin="97,140,0,0" Style="{DynamicResource ButtonStyle7}" VerticalAlignment="Top" Width="114" Cursor="Hand" MouseEnter="HeroOneSlot_MouseEnter" MouseLeave="HeroOneSlot_MouseLeave" Click="HeroOneSlot_Click"/>
-        <Button x:Name="HeroTwoFrame" Content="" HorizontalAlignment="Left" Height="146" Margin="281,129,0,0" Style="{DynamicResource ButtonStyle14}" VerticalAlignment="Top" Width="144" Cursor="Hand" MouseEnter="HeroTwoFrame_MouseEnter" MouseLeave="HeroTwoFrame_MouseLeave" Click="HeroTwoFrame_Click"/>
-        <Button x:Name="HeroThreeFrame" Content="" HorizontalAlignment="Left" Height="146" Margin="480,129,0,0" Style="{DynamicResource ButtonStyle16}" VerticalAlignment="Top" Width="144" Cursor="Hand" MouseEnter="HeroThreeFrame_MouseEnter" MouseLeave="HeroThreeFrame_MouseLeave" Click="HeroThreeFrame_Click"/>
-        <Button x:Name="HeroFourFrame" Content="" HorizontalAlignment="Left" Height="146" Margin="678,129,0,0" Style="{DynamicResource ButtonStyle18}" VerticalAlignment="Top" Width="144" Cursor="Hand" MouseEnter="HeroFourFrame_MouseEnter" MouseLeave="HeroFourFrame_MouseLeave" Click="HeroFourFrame_Click"/>
-        <Button x:Name="HeroFiveFrame" Content="" HorizontalAlignment="Left" Height="146" Margin="874,129,0,0" Style="{DynamicResource ButtonStyle20}" VerticalAlignment="Top" Width="144" Cursor="Hand" MouseEnter="HeroFiveFrame_MouseEnter" MouseLeave="HeroFiveFrame_MouseLeave" Click="HeroFiveFrame_Click"/>
-        <Button x:Name="HeroTwoSlot" Content="" HorizontalAlignment="Left" Height="126" Margin="295,140,0,0" Style="{DynamicResource ButtonStyle8}" VerticalAlignment="Top" Width="114" Cursor="Hand" MouseEnter="HeroTwoSlot_MouseEnter" MouseLeave="HeroTwoSlot_MouseLeave" Click="HeroTwoSlot_Click"/>
-        <Button x:Name="HeroThreeSlot" Content="" HorizontalAlignment="Left" Height="126" Margin="495,140,0,0" Style="{DynamicResource ButtonStyle9}" VerticalAlignment="Top" Width="114" Cursor="Hand" MouseEnter="HeroThreeSlot_MouseEnter" MouseLeave="HeroThreeSlot_MouseLeave" Click="HeroThreeSlot_Click"/>
-        <Button x:Name="HeroFiveSlot" Content="" HorizontalAlignment="Left" Height="126" Margin="889,140,0,0" Style="{DynamicResource ButtonStyle11}" VerticalAlignment="Top" Width="114" Cursor="Hand" MouseEnter="HeroFiveSlot_MouseEnter" MouseLeave="HeroFiveSlot_MouseLeave" Click="HeroFiveSlot_Click"/>
-        <Button x:Name="HeroFourSlot" Content="" HorizontalAlignment="Left" Height="126" Margin="693,140,0,0" Style="{DynamicResource ButtonStyle10}" VerticalAlignment="Top" Width="114" Cursor="Hand" MouseEnter="HeroFourSlot_MouseEnter" MouseLeave="HeroFourSlot_MouseLeave" Click="HeroFourSlot_Click"/>
-        <Button x:Name="RandomButton" Content="Generate a Party" HorizontalAlignment="Left" Height="100" Margin="64,551,0,0" Style="{DynamicResource ButtonStyle5}" VerticalAlignment="Top" Width="180" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="22"/>
+        <Grid x:Name="char2Grid" Margin="252,83,661,168">
+            <Button x:Name="HeroTwoHighlight" Content="" HorizontalAlignment="Left" Height="444" Style="{DynamicResource ButtonStyle23}" VerticalAlignment="Top" Width="197" Cursor="Hand" MouseEnter="HeroTwoHighlight_MouseEnter" MouseLeave="HeroTwoHighlight_MouseLeave" Click="HeroTwoHighlight_Click" />
+            <Button x:Name="HeroTwoAura" Content="" HorizontalAlignment="Left" Height="374" Margin="10,26,0,0" Style="{DynamicResource ButtonStyle15}" VerticalAlignment="Top" Width="180" Cursor="Hand" MouseEnter="HeroTwoAura_MouseEnter" MouseLeave="HeroTwoAura_MouseLeave" Click="HeroTwoAura_Click"/>
+            <Button x:Name="HeroTwoFrame" Content="" HorizontalAlignment="Left" Height="146" Margin="29,46,0,0" Style="{DynamicResource ButtonStyle14}" VerticalAlignment="Top" Width="144" Cursor="Hand" MouseEnter="HeroTwoFrame_MouseEnter" MouseLeave="HeroTwoFrame_MouseLeave" Click="HeroTwoFrame_Click"/>
+            <Button x:Name="jobLabelTwo" Content="" HorizontalAlignment="Left" Height="44" Margin="10,285,0,0" Style="{DynamicResource ButtonStyle42}" VerticalAlignment="Top" Width="180" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="jobLabelTwo_Click" MouseEnter="jobLabelTwo_MouseEnter" MouseLeave="jobLabelTwo_MouseLeave"/>
+            <Button x:Name="nameLabelTwo" Content="" HorizontalAlignment="Left" Height="44" Margin="12,197,0,0" Style="{DynamicResource ButtonStyle40}" VerticalAlignment="Top" Width="177" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="nameLabelTwo_Click" MouseEnter="nameLabelTwo_MouseEnter" MouseLeave="nameLabelTwo_MouseLeave"/>
+            <Button x:Name="genderLabelTwo" Content="" HorizontalAlignment="Left" Height="44" Margin="12,241,0,0" Style="{DynamicResource ButtonStyle41}" VerticalAlignment="Top" Width="177" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="genderLabelTwo_Click" MouseEnter="genderLabelTwo_MouseEnter" MouseLeave="genderLabelTwo_MouseLeave"/>
+            <Image x:Name="heroTwoSlot" HorizontalAlignment="Left" Height="120" Margin="42,61,0,0" VerticalAlignment="Top" Width="120" Stretch="Fill" Source="Silhouette Portrait.png" MouseEnter="heroTwoSlot_MouseEnter" MouseLeave="heroTwoSlot_MouseLeave"/>
+        </Grid>
+        <Button x:Name="RandomButton" Content="Randomize" HorizontalAlignment="Left" Height="100" Margin="64,551,0,0" Style="{DynamicResource ButtonStyle5}" VerticalAlignment="Top" Width="180" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="22" IsDefault="True" Click="RandomButton_Click"/>
         <Button x:Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Left" Height="100" Margin="858,551,0,0" Style="{DynamicResource ButtonStyle6}" VerticalAlignment="Top" Width="175" FontFamily="Segoe UI Symbol" FontSize="22" Cursor="Hand"/>
+        <Grid x:Name="char1Grid" Margin="55,83,858,168">
+            <Button x:Name="HeroOneHighlight" Content="" HorizontalAlignment="Left" Height="444" Style="{DynamicResource ButtonStyle22}" VerticalAlignment="Top" Width="197" Cursor="Hand" MouseEnter="HeroOneHighlight_MouseEnter" MouseLeave="HeroOneHighlight_MouseLeave" Click="HeroOneHighlight_Click"/>
+            <Button x:Name="HeroOneAura" HorizontalAlignment="Left" Height="374" Margin="9,26,0,0" Style="{DynamicResource ButtonStyle13}" VerticalAlignment="Top" Width="180" MouseEnter="HeroOneAura_MouseEnter" MouseLeave="HeroOneAura_MouseLeave" Cursor="Hand" Click="HeroOneAura_Click"/>
+            <Button x:Name="HeroOneFrame" Content="" HorizontalAlignment="Left" Height="146" Margin="27,46,0,0" Style="{DynamicResource ButtonStyle12}" VerticalAlignment="Top" Width="144" Cursor="Hand" MouseEnter="HeroOneFrame_MouseEnter" MouseLeave="HeroOneFrame_MouseLeave" Click="HeroOneFrame_Click"/>
+            <Image x:Name="heroOneSlot" HorizontalAlignment="Left" Height="120" Margin="39,61,0,0" VerticalAlignment="Top" Width="120" Source="Silhouette Portrait.png" Stretch="Fill" MouseEnter="heroOneSlot_MouseEnter" MouseLeave="heroOneSlot_MouseLeave"/>
+            <Button x:Name="jobLabelOne" Content="" HorizontalAlignment="Left" Height="44" Margin="9,285,0,0" Style="{DynamicResource ButtonStyle39}" VerticalAlignment="Top" Width="180" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="jobLabelOne_Click" MouseEnter="jobLabelOne_MouseEnter" MouseLeave="jobLabelOne_MouseLeave"/>
+            <Button x:Name="genderLabelOne" Content="" HorizontalAlignment="Left" Height="44" Margin="9,241,0,0" Style="{DynamicResource ButtonStyle38}" VerticalAlignment="Top" Width="177" Click="genderLabelOne_Click" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" MouseEnter="genderLabelOne_MouseEnter" MouseLeave="genderLabelOne_MouseLeave"/>
+            <Button x:Name="nameLabelOne" Content="" HorizontalAlignment="Left" Height="44" Margin="9,197,0,0" Style="{DynamicResource ButtonStyle37}" VerticalAlignment="Top" Width="177" Click="nameLabelOne_Click" Cursor="Hand" MouseEnter="nameLabelOne_MouseEnter" MouseLeave="nameLabelOne_MouseLeave"/>
+        </Grid>
+        <Grid x:Name="char3Grid" Margin="449,83,464,168">
+            <Button x:Name="HeroThreeHighlight" Content="" HorizontalAlignment="Left" Height="444" Style="{DynamicResource ButtonStyle24}" VerticalAlignment="Top" Width="197" Cursor="Hand" MouseEnter="HeroThreeHighlight_MouseEnter" MouseLeave="HeroThreeHighlight_MouseLeave" Click="HeroThreeHighlight_Click"/>
+            <Button x:Name="HeroThreeAura" Content="" HorizontalAlignment="Left" Height="374" Margin="10,26,0,0" Style="{DynamicResource ButtonStyle17}" VerticalAlignment="Top" Width="180" Cursor="Hand" MouseEnter="HeroThreeAura_MouseEnter" MouseLeave="HeroThreeAura_MouseLeave" Click="HeroThreeAura_Click"/>
+            <Button x:Name="HeroThreeFrame" Content="" HorizontalAlignment="Left" Height="146" Margin="31,46,0,0" Style="{DynamicResource ButtonStyle16}" VerticalAlignment="Top" Width="144" Cursor="Hand" MouseEnter="HeroThreeFrame_MouseEnter" MouseLeave="HeroThreeFrame_MouseLeave" Click="HeroThreeFrame_Click"/>
+            <Button x:Name="jobLabelThree" Content="" HorizontalAlignment="Left" Height="44" Margin="9,285,0,0" Style="{DynamicResource ButtonStyle45}" VerticalAlignment="Top" Width="180" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="jobLabelThree_Click" MouseEnter="jobLabelThree_MouseEnter" MouseLeave="jobLabelThree_MouseLeave"/>
+            <Button x:Name="nameLabelThree" Content="" HorizontalAlignment="Left" Height="44" Margin="12,197,0,0" Style="{DynamicResource ButtonStyle43}" VerticalAlignment="Top" Width="177" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="nameLabelThree_Click" MouseEnter="nameLabelThree_MouseEnter" MouseLeave="nameLabelThree_MouseLeave"/>
+            <Button x:Name="genderLabelThree" Content="" HorizontalAlignment="Left" Height="44" Margin="13,241,0,0" Style="{DynamicResource ButtonStyle44}" VerticalAlignment="Top" Width="177" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="genderLabelThree_Click" MouseEnter="genderLabelThree_MouseEnter" MouseLeave="genderLabelThree_MouseLeave"/>
+            <Image x:Name="heroThreeSlot" HorizontalAlignment="Left" Height="120" Margin="44,61,0,0" VerticalAlignment="Top" Width="120" Source="Silhouette Portrait.png" Stretch="Fill" MouseEnter="heroThreeSlot_MouseEnter" MouseLeave="heroThreeSlot_MouseLeave"/>
+
+        </Grid>
+        <Grid x:Name="char4Grid" Margin="646,83,267,168">
+            <Button x:Name="HeroFourHighlight" Content="" HorizontalAlignment="Left" Height="444" Style="{DynamicResource ButtonStyle25}" VerticalAlignment="Top" Width="197" MouseEnter="HeroFourHighlight_MouseEnter" MouseLeave="HeroFourHighlight_MouseLeave" Cursor="Hand" Click="HeroFourHighlight_Click"/>
+            <Button x:Name="HeroFourAura" Content="" HorizontalAlignment="Left" Height="374" Margin="10,26,0,0" Style="{DynamicResource ButtonStyle19}" VerticalAlignment="Top" Width="180" Cursor="Hand" MouseEnter="HeroFourAura_MouseEnter" MouseLeave="HeroFourAura_MouseLeave" Click="HeroFourAura_Click"/>
+            <Button x:Name="HeroFourFrame" Content="" HorizontalAlignment="Left" Height="146" Margin="32,46,0,0" Style="{DynamicResource ButtonStyle18}" VerticalAlignment="Top" Width="144" Cursor="Hand" MouseEnter="HeroFourFrame_MouseEnter" MouseLeave="HeroFourFrame_MouseLeave" Click="HeroFourFrame_Click"/>
+            <Button x:Name="jobLabelFour" Content="" HorizontalAlignment="Left" Height="44" Margin="10,285,0,0" Style="{DynamicResource ButtonStyle48}" VerticalAlignment="Top" Width="180" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="jobLabelFour_Click" MouseEnter="jobLabelFour_MouseEnter" MouseLeave="jobLabelFour_MouseLeave"/>
+            <Button x:Name="nameLabelFour" Content="" HorizontalAlignment="Left" Height="44" Margin="10,197,0,0" Style="{DynamicResource ButtonStyle46}" VerticalAlignment="Top" Width="177" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="nameLabelFour_Click" MouseEnter="nameLabelFour_MouseEnter" MouseLeave="nameLabelFour_MouseLeave"/>
+            <Button x:Name="genderLabelFour" Content="" HorizontalAlignment="Left" Height="44" Margin="12,241,0,0" Style="{DynamicResource ButtonStyle47}" VerticalAlignment="Top" Width="177" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="genderLabelFour_Click" MouseEnter="genderLabelFour_MouseEnter" MouseLeave="genderLabelFour_MouseLeave"/>
+            <Image x:Name="heroFourSlot" HorizontalAlignment="Left" Height="120" Margin="46,61,0,0" VerticalAlignment="Top" Width="120" Source="Silhouette Portrait.png" Stretch="Fill" MouseEnter="heroFourSlot_MouseEnter" MouseLeave="heroFourSlot_MouseLeave"/>
+        </Grid>
+        <Grid x:Name="char5Grid" Margin="843,83,70,168">
+            <Button x:Name="HeroFiveHighlight" Content="" HorizontalAlignment="Left" Height="444" Style="{DynamicResource ButtonStyle26}" VerticalAlignment="Top" Width="197" Cursor="Hand" MouseEnter="HeroFiveHighlight_MouseEnter" MouseLeave="HeroFiveHighlight_MouseLeave" Click="HeroFiveHighlight_Click"/>
+            <Button x:Name="HeroFiveAura" Content="" HorizontalAlignment="Left" Height="374" Margin="15,26,0,0" Style="{DynamicResource ButtonStyle21}" VerticalAlignment="Top" Width="175" Cursor="Hand" MouseEnter="HeroFiveAura_MouseEnter" MouseLeave="HeroFiveAura_MouseLeave" Click="HeroFiveAura_Click"/>
+            <Button x:Name="HeroFiveFrame" Content="" HorizontalAlignment="Left" Height="146" Margin="31,46,0,0" Style="{DynamicResource ButtonStyle20}" VerticalAlignment="Top" Width="144" Cursor="Hand" MouseEnter="HeroFiveFrame_MouseEnter" MouseLeave="HeroFiveFrame_MouseLeave" Click="HeroFiveFrame_Click"/>
+            <Button x:Name="jobLabelFive" Content="" HorizontalAlignment="Left" Height="44" Margin="15,285,0,0" Style="{DynamicResource ButtonStyle51}" VerticalAlignment="Top" Width="175" FontFamily="Segoe UI Symbol" FontSize="16" Cursor="Hand" Click="jobLabelFive_Click" MouseEnter="jobLabelFive_MouseEnter" MouseLeave="jobLabelFive_MouseLeave"/>
+            <Button x:Name="nameLabelFive" Content="" HorizontalAlignment="Left" Height="44" Margin="15,197,0,0" Style="{DynamicResource ButtonStyle49}" VerticalAlignment="Top" Width="177" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="nameLabelFive_Click" MouseEnter="nameLabelFive_MouseEnter" MouseLeave="nameLabelFive_MouseLeave"/>
+            <Button x:Name="genderLabelFive" Content="" HorizontalAlignment="Left" Height="44" Margin="15,241,0,0" Style="{DynamicResource ButtonStyle50}" VerticalAlignment="Top" Width="177" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="16" Click="genderLabelFive_Click" MouseEnter="genderLabelFive_MouseEnter" MouseLeave="genderLabelFive_MouseLeave"/>
+            <Image x:Name="heroFiveSlot" HorizontalAlignment="Left" Height="120" Margin="45,61,0,0" VerticalAlignment="Top" Width="120" Source="Silhouette Portrait.png" Stretch="Fill" MouseEnter="heroFiveSlot_MouseEnter" MouseLeave="heroFiveSlot_MouseLeave"/>
+        </Grid>
         <Rectangle x:Name="BlackOut" HorizontalAlignment="Left" Height="675" Margin="10,10,0,0" RadiusY="5" RadiusX="5" Stroke="#FF0E0C0C" StrokeThickness="0" VerticalAlignment="Top" Width="1090" Fill="#CC000000" Visibility="Hidden"/>
         <Grid x:Name="LeaveGameGrid" Margin="329,163,354,263" Visibility="Hidden">
             <Rectangle x:Name="LeaveGamePopUp" HorizontalAlignment="Left" Height="269" RadiusY="5" RadiusX="5" Stroke="#FF0E0C0C" StrokeThickness="2" VerticalAlignment="Top" Width="427" Visibility="Visible">

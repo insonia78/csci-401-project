@@ -52,7 +52,7 @@ namespace World_Map
 
             //Fill in array of heroes with testers
             SoftwareEngineer Malane = new SoftwareEngineer("Malane", true);
-            NetworkArchitect Cedric = new NetworkArchitect("Cerdic", true);
+            NetworkArchitect Cedric = new NetworkArchitect("Cedric", true);
             InformationSecurity Tom = new InformationSecurity("Tom", true);
             SystemsAnalyst Tyler = new SystemsAnalyst("Tyler", true);
             SupportEngineer Sandy = new SupportEngineer("Sandy", false);
@@ -74,8 +74,15 @@ namespace World_Map
         //Gives setOfHeroes array with passed array of Characters 
         int i;
         for(i = 0; i<h.Length; i++){
-        setOfHeroes[i] = h[i]; 
-        }  
+        setOfHeroes[i] = h[i];
+        }
+        character1image.Source = setOfHeroes[0].CharacterPicture;
+        character2image.Source = setOfHeroes[1].CharacterPicture;
+        character3image.Source = setOfHeroes[2].CharacterPicture;
+        character4image.Source = setOfHeroes[3].CharacterPicture;
+        character5image.Source = setOfHeroes[4].CharacterPicture;
+        //test.Source = chosenHeroes[0].CharacterPicture;
+        //testIMAGE.Source = chosenHeroes[1].CharacterPicture;
     }
 
     /***************************************************CHARACTERS***************************************************************/
@@ -88,8 +95,14 @@ namespace World_Map
             lstCharacterStats.Items.Clear();
             lstCharacterStats.Visibility = System.Windows.Visibility.Visible;
             lstCharacterStats.Items.Add(setOfHeroes[0].ToStringScreen());//(setOfHeroes[0].ToStringScreen());
-            imageTEST.Source = setOfHeroes[0].CharacterPicture;//new BitmapImage(new Uri(@"/Pictures/FemaleInformationSecurity.png", UriKind.Relative));
+           //    imageTEST.Source = setOfHeroes[0].CharacterPicture;//new BitmapImage(new Uri(@"/Pictures/FemaleInformationSecurity.png", UriKind.Relative));
            // imageTEST.Source = setOfHeroes[0].CharacterPortrait;
+
+            portrait1.Source = setOfHeroes[0].CharacterPortrait;
+
+
+            portrait1.Visibility = System.Windows.Visibility.Visible;
+            portraitoutter1.Visibility = System.Windows.Visibility.Visible;
         }
         
         //Mouse enters button 2/Character 2
@@ -100,6 +113,12 @@ namespace World_Map
             lstCharacterstats2.Items.Clear();
             lstCharacterstats2.Visibility = System.Windows.Visibility.Visible;
             lstCharacterstats2.Items.Add(setOfHeroes[1].ToStringScreen());
+            PortraitImage2.Source = setOfHeroes[1].CharacterPortrait;
+
+            portraitoutter2.Visibility = System.Windows.Visibility.Visible;
+
+
+            PortraitImage2.Visibility = System.Windows.Visibility.Visible;
 
         }
 
@@ -111,7 +130,12 @@ namespace World_Map
             lstCharacterstats3.Items.Clear();
             lstCharacterstats3.Visibility = System.Windows.Visibility.Visible;
             lstCharacterstats3.Items.Add(setOfHeroes[2].ToStringScreen());
- 
+            PortraitImage3.Source = setOfHeroes[2].CharacterPortrait;
+
+            portraitoutter3.Visibility = System.Windows.Visibility.Visible;
+
+
+            PortraitImage3.Visibility = System.Windows.Visibility.Visible;
         }
 
         //Mouse enters button 4/Character 4
@@ -122,6 +146,11 @@ namespace World_Map
             lstCharacterstats4.Items.Clear();
             lstCharacterstats4.Visibility = System.Windows.Visibility.Visible;
             lstCharacterstats4.Items.Add(setOfHeroes[3].ToStringScreen());
+            PortraitImage4.Source = setOfHeroes[3].CharacterPortrait;
+            portraitoutter4.Visibility = System.Windows.Visibility.Visible;
+
+
+            PortraitImage4.Visibility = System.Windows.Visibility.Visible;
         }
         //Mouse enters button 5/Character 5
         //Status from previous run cleared
@@ -131,6 +160,12 @@ namespace World_Map
             lstCharacterStats5.Items.Clear();
             lstCharacterStats5.Visibility = System.Windows.Visibility.Visible;
             lstCharacterStats5.Items.Add(setOfHeroes[4].ToStringScreen());
+            PortraitImage5.Source = setOfHeroes[4].CharacterPortrait;
+
+            portraitoutter5.Visibility = System.Windows.Visibility.Visible;
+
+
+            PortraitImage5.Visibility = System.Windows.Visibility.Visible;
         }
 
         //When mouse leaves the Character button(s) set's the Character(s) status visibility to hidden
@@ -142,6 +177,18 @@ namespace World_Map
             lstCharacterstats3.Visibility = System.Windows.Visibility.Hidden;
             lstCharacterstats4.Visibility = System.Windows.Visibility.Hidden;
             lstCharacterStats5.Visibility = System.Windows.Visibility.Hidden;
+
+            portraitoutter1.Visibility = System.Windows.Visibility.Hidden;
+            portraitoutter2.Visibility = System.Windows.Visibility.Hidden;
+            portraitoutter3.Visibility = System.Windows.Visibility.Hidden;
+            portraitoutter4.Visibility = System.Windows.Visibility.Hidden;
+            portraitoutter5.Visibility = System.Windows.Visibility.Hidden;
+
+            portrait1.Visibility = System.Windows.Visibility.Hidden;
+            PortraitImage2.Visibility = System.Windows.Visibility.Hidden;
+            PortraitImage3.Visibility = System.Windows.Visibility.Hidden;
+            PortraitImage4.Visibility = System.Windows.Visibility.Hidden;
+            PortraitImage5.Visibility = System.Windows.Visibility.Hidden;
 
         }
 
@@ -338,6 +385,11 @@ namespace World_Map
        private void XButton_Click(object sender, RoutedEventArgs e)
        {
            Application.Current.Shutdown();
+       }
+
+       private void btnLibrary_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+       {
+
        }
        /********************************************FORMAT CUSTOM WINDOW***********************************************************/
     }
