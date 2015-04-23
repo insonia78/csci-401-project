@@ -103,6 +103,10 @@
       <Project>{6b393a92-6353-48da-bfd2-a176dbcaa288}</Project>
       <Name>Community</Name>
     </ProjectReference>
+    <ProjectReference Include="..\World Map\World Map.csproj">
+      <Project>{e4acf6b2-efe7-42c3-8454-048e3d9a85e3}</Project>
+      <Name>World Map</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

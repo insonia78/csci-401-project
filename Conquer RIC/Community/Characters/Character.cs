@@ -1237,5 +1237,32 @@ namespace Community
 
             return text;
         }
+
+        public String ToStringScreen()
+        {
+            String text;
+            String gender;
+            if (male == true)
+            {
+                gender = "Male";
+            }
+            else { gender = "Female"; }
+            text = (
+                name + "'s stats are the following:\n" +
+                "\nThis Character is: " + gender +
+                "\nJob Role: " + jobRole +
+                "\nLevel: " + baseLevel + "\n" +
+                "Health: " + maxHealth + "\n" +
+                "Energy: " + maxEnergy + "\n" +
+                "Attack: " + maxAttack + "\n" +
+                "Defense: " + maxDefense + "\n" +
+                "Speed: " + maxSpeed + "\n" +
+                "Agility: " + baseAgility + "\n" +
+                "Max Attack Range: " + maxAttackRange + "\n" +
+                "Attack Range: " + maxAttackRange + "\n" +
+                "Special Attack: " + maxSpecialAttack + "\n" +
+                "Special Defense: " + maxSpecialDefense);
+            return text;
+        }
     }
 }

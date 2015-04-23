@@ -110,6 +110,10 @@
       <Project>{6b393a92-6353-48da-bfd2-a176dbcaa288}</Project>
       <Name>Community</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GameBoard\GameBoard.csproj">
+      <Project>{31f79e3e-bb2e-4530-af51-709185429662}</Project>
+      <Name>GameBoard</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pictures\FemaleInformationSecurity.png" />

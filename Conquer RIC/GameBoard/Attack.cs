@@ -19,7 +19,7 @@ using Community;
 
 namespace GameBoard
 {
-    public partial class MainWindow
+    public partial class MainWindow : Page
     {
         private const int numberOfColumns = 3;
         private const int numberOfFrames = 6;

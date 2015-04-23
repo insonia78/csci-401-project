@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Community;
+using World_Map;
 
 namespace CharacterCreation
 {
@@ -37,6 +38,8 @@ namespace CharacterCreation
                                               "William", "Devin", "Randy", "Travis", "Leon", "MasterChief" };
         String[] hero_name = new String[5];
         String[] job_type = new String[5];
+
+        Hero[] heroes;
 
         string name, name2;
 
@@ -344,7 +347,7 @@ namespace CharacterCreation
 
         public void placeCharacter()
         {
-            Hero[] heroes = new Hero[5];
+            heroes = new Hero[5];
             for (int i = 0; i < 5; i++)
             {
                 switch (job_type[i])
@@ -1002,6 +1005,14 @@ namespace CharacterCreation
         {
             HeroFiveHighlight.Opacity = 1;
 
+        }
+
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        {
+            World_Map.MainWindow map =
+                new World_Map.MainWindow(heroes);
+
+            this.NavigationService.Navigate(map);
         }
     }
 }

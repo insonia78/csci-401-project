@@ -22,7 +22,7 @@ namespace GameBoard
     /// Interaction logic for MainWindow.xaml
     /// Mostly deals with the visual/interface side of the game board.
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
         private Grid[,] cells; //2D array of containers to add to the Board uniformGrid to hold the tiles
         SolidColorBrush moveOption = new SolidColorBrush(Colors.Yellow);
@@ -98,15 +98,15 @@ namespace GameBoard
             refreshBoardSpace(14, 3);
         }
 
-        public MainWindow(String levelFile, Hero hero_1, Hero hero_2, Hero hero_3, Hero hero_4, Hero hero_5)
+        public MainWindow(String levelFile, Hero[] heroes)
         {
             InitializeComponent();
 
-            hero1 = hero_1;
-            hero2 = hero_2;
-            hero3 = hero_3;
-            hero4 = hero_4;
-            hero5 = hero_5;
+            hero1 = heroes[0];
+            hero2 = heroes[1];
+            hero3 = heroes[2];
+            hero4 = heroes[3];
+            hero5 = heroes[4];
 
             setupBoard(levelFile);
             selectedCharacterRow = 0;
@@ -927,6 +927,11 @@ namespace GameBoard
             Defend.IsEnabled = false;
             Use_Item.IsEnabled = false;
             End_Turn.IsEnabled = false;
+        }
+
+        private void XButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         private void Map_Maker_Click(object sender, RoutedEventArgs e)

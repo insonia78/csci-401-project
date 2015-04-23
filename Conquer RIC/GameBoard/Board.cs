@@ -24,7 +24,7 @@ namespace GameBoard
      * (advancing turns, making the enemies act, calculating a player's move options, etc). 
      * Also holds other relavent game information such as the number of turns.
      */
-    public partial class MainWindow
+    public partial class MainWindow : Page
     {
         //instance variables
         private int numRows;

@@ -13,13 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Community;
+using GameBoard;
 
 namespace World_Map
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
         //Variables to determine whether a level is locked or unlocked
         //New game will only have the cafeteria and library unlocked
@@ -30,18 +31,18 @@ namespace World_Map
         private bool clarkUnlocked = false;
         private bool gaigeUnlocked = false;
 
+        Window main;    // reference titleScreen components.
+        MediaElement music; // to be passed to the world map.
+
         //Testing an array of heroes before it officially gets passed from either the character creation or board game.
         Hero [] chosenHeroes = new Hero[5];
         Hero[] setOfHeroes = new Hero[5];
 
-
         public MainWindow()
         {
             InitializeComponent();
-
             //Sets the level/campus building's hoverOver status
             buildingSetUp();
-
             //Apply all five buttons to the MouseLeave event handler
             //When a the mouse leaves one of the five character buttons the button should be set to hidden
             btnCharacter1.MouseLeave += character_MouseLeave;
@@ -49,10 +50,10 @@ namespace World_Map
             btnCharacter3.MouseLeave += character_MouseLeave;
             btnCharacter4.MouseLeave += character_MouseLeave;
             btnCharacter5.MouseLeave += character_MouseLeave;
-
+            
             //Fill in array of heroes with testers
-            SoftwareEngineer Malane = new SoftwareEngineer("Malane", true);
-            NetworkArchitect Cedric = new NetworkArchitect("Cedric", true);
+            SoftwareEngineer Cedric = new SoftwareEngineer("Cedric", true);
+            NetworkArchitect Malane = new NetworkArchitect("Malane", true);
             InformationSecurity Tom = new InformationSecurity("Tom", true);
             SystemsAnalyst Tyler = new SystemsAnalyst("Tyler", true);
             SupportEngineer Sandy = new SupportEngineer("Sandy", false);
@@ -61,29 +62,36 @@ namespace World_Map
             chosenHeroes[2] = Tom;
             chosenHeroes[3] = Tyler;
             chosenHeroes[4] = Sandy;
-
-            testing(chosenHeroes);
+            
         }
+        //Mock Constructor that takes array of characters
 
-
-     //Constructor that takes array of characters
-     //Should be an array of heroes
-    public void testing(Hero[] h)
-    {
-        InitializeComponent();
-        //Gives setOfHeroes array with passed array of Characters 
-        int i;
-        for(i = 0; i<h.Length; i++){
-        setOfHeroes[i] = h[i];
+        public MainWindow(Hero[] h)
+        {
+            InitializeComponent();
+            //Sets the level/campus building's hoverOver statusmain = title;
+            buildingSetUp();
+            //Apply all five buttons to the MouseLeave event handler
+            //When a the mouse leaves one of the five character buttons the button should be set to hidden
+            btnCharacter1.MouseLeave += character_MouseLeave;
+            btnCharacter2.MouseLeave += character_MouseLeave;
+            btnCharacter3.MouseLeave += character_MouseLeave;
+            btnCharacter4.MouseLeave += character_MouseLeave;
+            btnCharacter5.MouseLeave += character_MouseLeave;
+            //Gives setOfHeroes array with passed array of Characters 
+            int i;
+            for (i = 0; i < h.Length; i++)
+            {
+                setOfHeroes[i] = h[i];
+            }
+            character1image.Source = setOfHeroes[0].CharacterPicture;
+            character2image.Source = setOfHeroes[1].CharacterPicture;
+            character3image.Source = setOfHeroes[2].CharacterPicture;
+            character4image.Source = setOfHeroes[3].CharacterPicture;
+            character5image.Source = setOfHeroes[4].CharacterPicture;
+            //test.Source = chosenHeroes[0].CharacterPicture;
+            //testIMAGE.Source = chosenHeroes[1].CharacterPicture;
         }
-        character1image.Source = setOfHeroes[0].CharacterPicture;
-        character2image.Source = setOfHeroes[1].CharacterPicture;
-        character3image.Source = setOfHeroes[2].CharacterPicture;
-        character4image.Source = setOfHeroes[3].CharacterPicture;
-        character5image.Source = setOfHeroes[4].CharacterPicture;
-        //test.Source = chosenHeroes[0].CharacterPicture;
-        //testIMAGE.Source = chosenHeroes[1].CharacterPicture;
-    }
 
     /***************************************************CHARACTERS***************************************************************/
         //Mouse enters button 1/Character 1
@@ -362,23 +370,23 @@ namespace World_Map
         //Changing the title bar to custom
        private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
        {
-           this.DragMove();
+           //this.DragMove();
        }
 
        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
        {
-           this.DragMove();
+           //this.DragMove();
        }
 
        private void TitleBarButt_MouseDown(object sender, MouseButtonEventArgs e)
        {
-           this.DragMove();
+           //this.DragMove();
        }
 
        //Customized minimize button - Designed in blend using a rectangle component
        private void MinimizeButton_Click_1(object sender, RoutedEventArgs e)
        {
-           WindowState = WindowState.Minimized;
+           //WindowState = WindowState.Minimized;
        }
 
         //Customized close button - Designed in blend using a rectangle component
@@ -389,7 +397,10 @@ namespace World_Map
 
        private void btnLibrary_MouseDoubleClick(object sender, MouseButtonEventArgs e)
        {
+           GameBoard.MainWindow library =
+               new GameBoard.MainWindow("testmap.txt", setOfHeroes);
 
+           this.NavigationService.Navigate(library);
        }
        /********************************************FORMAT CUSTOM WINDOW***********************************************************/
     }
