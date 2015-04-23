@@ -31,6 +31,16 @@ namespace TitleScreen
             EnterLeaveGame();
         }
 
+        private void ExitButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ExitButton.Opacity = 1.0;
+        }
+
+        private void ExitButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ExitButton.Opacity = .10;
+        }
+
         private void XButton_Click(object sender, RoutedEventArgs e)
         {
             EnterLeaveGame();
@@ -51,6 +61,16 @@ namespace TitleScreen
             this.DragMove();
         }
 
+        private void LeftTitleBarPatch_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void RightTitleBarPatch_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -65,10 +85,7 @@ namespace TitleScreen
         private void LeaveGameCancelButton_Click(object sender, RoutedEventArgs e)
         {
             bgm.Volume = 0.5;
-            LeaveGameCancelButton.Visibility = Visibility.Hidden;
-            LeaveGameOkButton.Visibility = Visibility.Hidden;
-            LeaveGameLabel.Visibility = Visibility.Hidden;
-            LeaveGamePopUp.Visibility = Visibility.Hidden;
+            LeaveGameGrid.Visibility = Visibility.Hidden;
             BlackOut.Visibility = Visibility.Hidden;
         }
 
@@ -81,10 +98,7 @@ namespace TitleScreen
         private void EnterLeaveGame()
         {
             BlackOut.Visibility = Visibility.Visible;
-            LeaveGamePopUp.Visibility = Visibility.Visible;
-            LeaveGameLabel.Visibility = Visibility.Visible;
-            LeaveGameOkButton.Visibility = Visibility.Visible;
-            LeaveGameCancelButton.Visibility = Visibility.Visible;
+            LeaveGameGrid.Visibility = Visibility.Visible;
             bgm.Volume = 0.2;
         }
     }
