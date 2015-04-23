@@ -1065,6 +1065,32 @@ namespace Community
 
         public virtual int[,] Ability1(int[,] boardspaces)
         {
+            this.selectedAttackPower = 1.0;
+
+            //up
+            if (row - 1 >= 0 && boardspaces[row - 1, col] == 0)
+            {
+                boardspaces[row - 1, col] = 1;
+            }
+
+            //down
+            if (row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col] == 0)
+            {
+                boardspaces[row + 1, col] = 2;
+            }
+
+            //left
+            if (col - 1 >= 0 && boardspaces[row, col - 1] == 0)
+            {
+                boardspaces[row, col - 1] = 3;
+            }
+
+            //right
+            if (col + 1 < boardspaces.GetLength(1) && boardspaces[row, col + 1] == 0)
+            {
+                boardspaces[row, col + 1] = 4;
+            }
+
             return boardspaces;
         }
 

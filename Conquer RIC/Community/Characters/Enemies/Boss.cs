@@ -18,7 +18,7 @@ namespace Community
         // Second constructor.
         public Boss(int r, int c) : base(r, c)
         {
-            Init();
+            Init("Ravenscroft", true);
             Row = r;
             Col = c;
         }

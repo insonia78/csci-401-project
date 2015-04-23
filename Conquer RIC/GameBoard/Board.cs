@@ -148,71 +148,99 @@ namespace GameBoard
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 66: //Wall_Horizontal2 character: B
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal2.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 67: //Wall_Horizontal_Texture character: C
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal_Texture.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 68: //Wall_Horizontal_Texture2 character: D
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal_Texture2.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 69: //Wall_Verticle character: E
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Veticle.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 70: //Wall_Verticle2 character: F
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Verticle2.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 71: //Wall_Verticle_Texture character: G
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Verticle_Texture.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 72: //Wall_Verticle_Texture2 character: H
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Verticle_Texture2.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 73: //Books character: I
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Books.png", UriKind.Relative)));
                                     boardspaces[r, c].requiredMoveSpeed = 2;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 74: //Chair character: J
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Chair.png", UriKind.Relative)));
                                     boardspaces[r, c].requiredMoveSpeed = 2;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 75: //Desk character: K
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Desk.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 76: //Old_Computer character: L
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Old_Computer.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 77: //Student no face character: M
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Student no face.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 78: //Student character: N
                                     boardspaces[r,c] = setTileByInput(sr.Read());
                                     boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Student.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 79: //character O: special character, signifies that a hero will be placed on the next tile
                                     boardspaces[r, c] = setTileByInput(sr.Read());
@@ -234,6 +262,8 @@ namespace GameBoard
                                             boardspaces[r, c].tileCharacter = hero5;
                                             break;
                                     }
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 case 80: //character P: special character, signifies a enemy will be placed
                                     boardspaces[r, c] = setTileByInput(sr.Read());
@@ -252,6 +282,8 @@ namespace GameBoard
                                             boardspaces[r, c].tileCharacter = new Boss(r,c);
                                             break;
                                     }
+                                    boardspaces[r, c].Row = r;
+                                    boardspaces[r, c].Col = c;
                                     break;
                                 default:
                                     boardspaces[r,c] = setTileByInput(input); //If not a special character, determine what tile in the setTileByInput() method
@@ -264,6 +296,7 @@ namespace GameBoard
                             cells[r, c] = cell;
 
                             refreshBoardSpace(r, c); //Draws the space for the first time
+                            boardspaces[r, c].Click += new RoutedEventHandler(Tile_Click);
                             Board.Children.Add(cell);
                         }
                     }
@@ -285,16 +318,16 @@ namespace GameBoard
                 case 49: //ascii code number for 1, mountain
                     aTile = new Tile(0, 0, 1);
                     break;
-                case 52: //ascii code number for 2, water
+                case 50: //ascii code number for 2, water
                     aTile = new Tile(0, 0, 2);
                     break;
-                case 53: //ascii code for 3, swamp
+                case 51: //ascii code for 3, swamp
                     aTile = new Tile(0, 0, 3);
                     break;
-                case 50: //Tile_Color1 character: 4
+                case 52: //Tile_Color1 character: 4
                     aTile = new Tile(0, 0, 4);
                     break;
-                case 51: //Tile_Color2 character: 5
+                case 53: //Tile_Color2 character: 5
                     aTile = new Tile(0, 0, 5);
                     break;
                 case 54: //Tile_Color3 character: 6
@@ -309,50 +342,6 @@ namespace GameBoard
                 case 57: //Tile_Texture3 character: 9
                     aTile = new Tile(0, 0, 9);
                     break;
-                //Tile images to be placed over another image, a "Ground level" image (need to put a ground tile underneath a wall, otherwise it has transparent sides)
-                case 65: //Wall_Horizontal character: A
-                    aTile = new Tile(0, 0, 10);
-                    break;
-                case 66: //Wall_Horizontal2 character: B
-                    aTile = new Tile(0, 0, 11);
-                    break;
-                case 67: //Wall_Horizontal_Texture character: C
-                    aTile = new Tile(0, 0, 12);
-                    break;
-                case 68: //Wall_Horizontal_Texture2 character: D
-                    aTile = new Tile(0, 0, 13);
-                    break;
-                case 69: //Wall_Verticle character: E
-                    aTile = new Tile(0, 0, 14);
-                    break;
-                case 70: //Wall_Verticle2 character: F
-                    aTile = new Tile(0, 0, 15);
-                    break;
-                case 71: //Wall_Verticle_Texture2 character: G
-                    aTile = new Tile(0, 0, 16);
-                    break;
-                case 72: //Wall_Verticle_Texture character: H
-                    aTile = new Tile(0, 0, 17);
-                    break;
-                case 73: //Books character: I
-                    aTile = new Tile(0, 0, 18);
-                    break;
-                case 74: //Chair character: J
-                    aTile = new Tile(0, 0, 19);
-                    break;
-                case 75: //Desk character: K
-                    aTile = new Tile(0, 0, 20);
-                    break;
-                case 76: //Old_Computer character: L
-                    aTile = new Tile(0, 0, 21);
-                    break;
-                case 77: //Student no face character: M
-                    aTile = new Tile(0, 0, 22);
-                    break;
-                case 78: //Student character: N
-                    aTile = new Tile(0, 0, 23);
-                    break;
-
                 default: //if no input or invalid input found in the file, make a blank grass space instead
                     aTile = new Tile(0, 0);
                     break;
@@ -470,7 +459,7 @@ namespace GameBoard
                         boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
                         //refreshBoardSpace(r, c);
                         boardspaces[r, c].BorderThickness = new Thickness(0);
-                        //boardspaces[r, c].Click += new RoutedEventHandler(Tile_Click);   //Removed 4/21, delete if it's awhile later and caused no bugs
+                        boardspaces[r, c].Click += new RoutedEventHandler(Tile_Click);
 
                         if(boardspaces[r,c].containsCharacter())
                         {
@@ -525,10 +514,42 @@ namespace GameBoard
                     {
                         enemyMoveAI(r, c);
                         boardspaces[r, c].tileCharacter.hasMoved = true;
+                        //enemyAttackAI(r, c);
                     }
                 }
             }
         }
+
+        //private bool enemyAttackAI(int r, int c)
+        //{
+        //    int heroInAttackRangeCount = 0;
+        //    int max_heroesInRange = 0;
+        //    int bestAttack = 0;
+        //    selectedCharacterRow = r;
+        //    selectedCharacterCol = c;
+        //    Ability1_Click(boardspaces[r, c], null);
+        //    foreach(Tile space in area1)
+        //    {
+        //        if(space.containsCharacter() && space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)))
+        //        {
+        //            heroInAttackRangeCount++;
+        //        }
+        //    }
+        //    if(heroInAttackRangeCount > max_heroesInRange)
+        //    {
+
+        //    }
+        //    foreach (Tile space in area2)
+        //    {
+        //        if (space.containsCharacter() && space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)))
+        //        {
+        //            heroInAttackRangeCount++;
+        //        }
+        //    }
+
+        //    AttackOption_Click(boardspaces[r, c], null);
+        //    MessageBox.Show("Attack");
+        //}
 
         /*
          * Temporary, really sucky enemy movement AI and calls the moveCharacter method to move the enemy once a random direction (vertical, horizontal, or diagonal)

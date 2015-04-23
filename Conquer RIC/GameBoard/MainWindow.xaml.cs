@@ -82,6 +82,8 @@ namespace GameBoard
             refreshBoardSpace(5, 3);
             boardspaces[1, 2].tileCharacter = new SystemsAnalyst(1,2);
             refreshBoardSpace(1, 2);
+            boardspaces[2, 2].tileCharacter = new NetworkArchitect(2, 2);
+            refreshBoardSpace(2, 2);
             boardspaces[5, 5].tileCharacter = new CampusPolice(5, 5);
             refreshBoardSpace(5, 5);
             boardspaces[6, 5].tileCharacter = new CampusPolice(6, 5);
@@ -130,7 +132,7 @@ namespace GameBoard
             boardspaces[r, c].Click -= new RoutedEventHandler(Character_Click); //Remove the Hero_Click event from the cell in case there is one (from moving characters off a space). Otherwise, sometimes it remains and do bad stuff.
             boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
             boardspaces[r, c].Click -= new RoutedEventHandler(AttackOption_Click);
-            boardspaces[r, c].Click += new RoutedEventHandler(Tile_Click); //Add the Tile_Click event to the cell's button in case it isn't already on (will sometimes disappear otherwise).
+            //boardspaces[r, c].Click += new RoutedEventHandler(Tile_Click); //Add the Tile_Click event to the cell's button in case it isn't already on (will sometimes disappear otherwise).
 
             backgroundImage = new ImageBrush(boardspaces[r, c].terrainImage.terrainImage);
             boardspaces[r, c].Background = backgroundImage; //Set the background of the tile button to the terrain image.
@@ -337,7 +339,6 @@ namespace GameBoard
 
             //Disable the move button.
             Move.IsEnabled = false;
-
         }
         void timer0_Tick(object sender, EventArgs e)
         {
@@ -515,6 +516,21 @@ namespace GameBoard
             this.IsHitTestVisible = true;
             //Sets the cursor back to the normal one.
             Mouse.OverrideCursor = null;
+
+            if (tutFirstMoveExitClicked)
+            {
+                hero1MoveCheck();
+                End_Turn.IsEnabled = true;
+                clearMoveOptions();
+
+                for (int r = 0; r < numRows; r++)
+                {
+                    for (int c = 0; c < numCols; c++)
+                    {
+                        boardspaces[r, c].BorderThickness = new Thickness(0);
+                    }
+                }
+            }
         }
 
         /*
@@ -704,7 +720,6 @@ namespace GameBoard
                 TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMoveWaitText.Text = "Now that the character has moved to its new location, we need to end the character's turn. to do this, press the Wait Button.";
             }
-            MessageBox.Show("why wont you work?");
         }
                 
         //moves hero 2 to a specific spot.

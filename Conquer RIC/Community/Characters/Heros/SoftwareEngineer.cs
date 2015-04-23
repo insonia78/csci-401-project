@@ -73,5 +73,67 @@ namespace Community
              */
             InstantiateLevel(1);
         }
+
+        //public override int[,] Ability1(int[,] boardspaces)
+        //Ability1 is a basic attack that only attacks spaces directly adjacent, that all characters have, do not override
+
+        public override int[,] Ability2(int[,] boardspaces)
+        {
+            this.selectedAttackPower = 0.5;
+
+            //up
+            if (row - 1 >= 0 && boardspaces[row - 1, col] == 0)
+            {
+                boardspaces[row - 1, col] = 1;
+                if (row - 2 >= 0 && boardspaces[row - 2, col] == 0)
+                {
+                    boardspaces[row - 2, col] = 1;
+                    if (col - 1 >= 0 && boardspaces[row - 2, col - 1] == 0)
+                        boardspaces[row - 2, col - 1] = 1;
+                    if (col + 1 >= 0 && boardspaces[row - 2, col + 1] == 0)
+                        boardspaces[row - 2, col + 1] = 1;
+                }
+            }
+            //down
+            if (row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col] == 0)
+            {
+                boardspaces[row + 1, col] = 2;
+                if (row + 2 < boardspaces.GetLength(0) && boardspaces[row + 2, col] == 0)
+                {
+                    boardspaces[row + 2, col] = 2;
+                    if (col - 1 >= 0 && boardspaces[row + 2, col - 1] == 0)
+                        boardspaces[row + 2, col - 1] = 2;
+                    if (col + 1 < boardspaces.GetLength(1) && boardspaces[row + 2, col + 1] == 0)
+                        boardspaces[row + 2, col + 1] = 2;
+                }
+            }
+            //left
+            if (col - 1 >= 0 && boardspaces[row, col - 1] == 0)
+            {
+                boardspaces[row, col - 1] = 3;
+                if (col - 2 >= 0 && boardspaces[row, col - 2] == 0)
+                {
+                    boardspaces[row, col - 2] = 3;
+                    if (row - 1 >= 0 && boardspaces[row - 1, col - 2] == 0)
+                        boardspaces[row - 1, col - 2] = 3;
+                    if (row + 1 < boardspaces.GetLength(1) && boardspaces[row + 1, col - 2] == 0)
+                        boardspaces[row + 1, col - 2] = 3;
+                }
+            }
+            //right
+            if (col + 1 < boardspaces.GetLength(1) && boardspaces[row, col + 1] == 0)
+            {
+                boardspaces[row, col + 1] = 4;
+                if (col + 2 < boardspaces.GetLength(1) && boardspaces[row, col + 2] == 0)
+                {
+                    boardspaces[row, col + 2] = 4;
+                    if (row - 1 >= 0 && boardspaces[row - 1, col + 2] == 0)
+                        boardspaces[row - 1, col + 2] = 4;
+                    if (row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col + 2] == 0)
+                        boardspaces[row + 1, col + 2] = 4;
+                }
+            }
+            return boardspaces;
+        }
     }
 }

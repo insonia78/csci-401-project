@@ -35,13 +35,13 @@ namespace Community
             if(Male)
             {
                 PortraitFile = "Male_Network_Architect_portrait.png";
-                pictureFile = "Heroes/Network_Architect_MALE.png";
+                pictureFile = "Heroes/Network_Architecture_MALE.png";
                 //CharacterPicture = " "; 
             }
             else
             {
                 PortraitFile = "Male_Network_Architect_portrait.png";
-                pictureFile = "Heroes/Network_Architect_FEMALE.png";
+                pictureFile = "Heroes/Network_Architecture_FEMALE.png";
                 //CharacterPicture = " "; 
             }
             characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
@@ -67,6 +67,41 @@ namespace Community
              * ****************************************************************
              */
             InstantiateLevel(1);
+        }
+
+        public override int[,] Ability2(int[,] boardspaces)
+        {
+            this.selectedAttackPower = 0.2;
+
+            int i = 1;
+            //up
+            while(row - i >= 0 && boardspaces[row - i, col] == 0)
+            {
+                boardspaces[row - i, col] = 1;
+                i++;
+            }
+            i = 1;
+            //down
+            while (row + i < boardspaces.GetLength(0) && boardspaces[row + i, col] == 0)
+            {
+                boardspaces[row + i, col] = 2;
+                i++;
+            }
+            i = 1;
+            //left
+            while (col - i >= 0 && boardspaces[row, col - i] == 0)
+            {
+                boardspaces[row, col - i] = 3;
+                i++;
+            }
+            i = 1;
+            //right
+            while (col + i < boardspaces.GetLength(1) && boardspaces[row, col + i] == 0)
+            {
+                boardspaces[row, col + i] = 4;
+                i++;
+            }
+            return boardspaces;
         }
     }
 }
