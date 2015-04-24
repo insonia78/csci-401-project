@@ -648,6 +648,17 @@ namespace GameBoard
             TutorialIntroductionExit.Visibility = System.Windows.Visibility.Visible;
         }
 
+
+        //exits the tutorial text.
+        //calls the next step in the tutorial
+        public void TutorialIntroductionExit_Click(object sender, RoutedEventArgs e)
+        {
+            tutIntroductionExitClicked = true;
+            TutIntroduction.Visibility = System.Windows.Visibility.Hidden;
+            TutorialIntroductionExit.Visibility = System.Windows.Visibility.Hidden;
+            this.tutorialFirstStep();
+        }
+
         public void tutorialFirstStep()
         {
             End_Turn.IsEnabled = false;
@@ -667,29 +678,46 @@ namespace GameBoard
                 TutFirstMoveExit.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMove.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMove.Text = "now that you've clicked on the highlighted tile, see how there are squares that light up? those squares indicate where the character can go." +
-                "for our purposes, i want you to move to the square thats highlighted purple.";              
+                "for our purposes, i want you to move to the square thats highlighted purple.";
+                
             }
         
         }
 
+        //exits the first move tutorial text.
+        //calls the second step in the tutorial.
+        private void TutFirstMoveExit_Click(object sender, RoutedEventArgs e)
+        {
+            tutFirstMoveExitClicked = true;
+            TutFirstMove.Visibility = System.Windows.Visibility.Hidden;
+            TutFirstMoveExit.Visibility = System.Windows.Visibility.Hidden;
 
+            TutTellMove.Visibility = System.Windows.Visibility.Visible;
+            TutTellMoveExit.Visibility = System.Windows.Visibility.Visible;
+            TutTellMove.Text = "Press the move button and move to the highlighted square.";
+            //TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
+            //this.tutorialFirstStepTwo();
+        }
+
+        //makes the first hero move to a specific square.
         public void tutorialFirstStepTwo()
         {
-
+            
 
             if (tutFirstMoveExitClicked == true)
             {
-                this.Character_Click(boardspaces[1, 2].tileCharacter, null);
+                TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Hidden;
+                this.Character_Click(boardspaces[2, 2].tileCharacter, null);
 
-                //makes the character move to a specific square.
+                
 
-
+                
 
 
                 //checks that its that square.
                 //if not, it reminds them to move the character so they can try again.
 
-                Move_Click(boardspaces[1, 2].tileCharacter, null);
+                Move_Click(boardspaces[2, 2].tileCharacter, null);
                 for (int r = 0; r < numRows; r++)
                 {
                     for (int c = 0; c < numCols; c++)
@@ -718,6 +746,8 @@ namespace GameBoard
             {
                 TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
+                TutFirstMoveWaitText.IsEnabled = false;
+                
                 TutFirstMoveWaitText.Text = "Now that the character has moved to its new location, we need to end the character's turn. to do this, press the Wait Button.";
             }
         }
@@ -725,7 +755,7 @@ namespace GameBoard
         //moves hero 2 to a specific spot.
         //follows the same format as the first, just a different place.
         public void tutorialFirstStepThree() {
-                Move_Click(boardspaces[5, 3].tileCharacter, null);
+                Move_Click(boardspaces[2, 1].tileCharacter, null);
                 for (int r = 0; r < numRows; r++)
                 {
                     for (int c = 0; c < numCols; c++)
@@ -804,31 +834,23 @@ namespace GameBoard
 
         }
 
-        //exits the tutorial text.
-        //calls the next step in the tutorial
-        public void TutorialIntroductionExit_Click(object sender, RoutedEventArgs e)
-        {
-            tutIntroductionExitClicked = true;
-            TutIntroduction.Visibility = System.Windows.Visibility.Hidden;
-            TutorialIntroductionExit.Visibility = System.Windows.Visibility.Hidden;
-            this.tutorialFirstStep();
-        }
+       
     
-        //exits the first move tutorial text.
-        //calls the second step in the tutorial.
-         private void TutFirstMoveExit_Click(object sender, RoutedEventArgs e)
-        {
-            tutFirstMoveExitClicked = true;
-            TutFirstMove.Visibility = System.Windows.Visibility.Hidden;
-            TutFirstMoveExit.Visibility = System.Windows.Visibility.Hidden;
-            this.tutorialFirstStepTwo();
-        }
+        
 
          private void TutFirstMoveWaitTextExit_Click(object sender, RoutedEventArgs e)
          {
              TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Hidden;
              TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Hidden;
              this.makeHeroWait();
+         }
+
+         private void TutTellMoveExit_Click(object sender, RoutedEventArgs e)
+         {
+             TutTellMove.Visibility = System.Windows.Visibility.Hidden;
+             TutTellMoveExit.Visibility = System.Windows.Visibility.Hidden;
+             
+             this.tutorialFirstStepTwo();
          }
         
         //
@@ -939,6 +961,8 @@ namespace GameBoard
             mapBuilder map_maker = new mapBuilder();
             map_maker.Show();
         }
+
+        
 
       
 
