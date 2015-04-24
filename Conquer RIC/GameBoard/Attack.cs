@@ -38,6 +38,10 @@ namespace GameBoard
         private ArrayList area3 = new ArrayList();
         private ArrayList area4 = new ArrayList();
 
+        /*
+         * Calls removeAttackOptions() on every tile in the arraylists for the various attack options, which removes event handlers and visuals associated with the
+         * selecting of attack options so they're back to normal spaces. Then clears the 4 arraylists.
+         */
         private void clearAttackOptions()
         {
             foreach (Tile space in area1)
