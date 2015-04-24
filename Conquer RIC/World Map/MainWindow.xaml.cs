@@ -89,6 +89,13 @@ namespace World_Map
             character3image.Source = setOfHeroes[2].CharacterPicture;
             character4image.Source = setOfHeroes[3].CharacterPicture;
             character5image.Source = setOfHeroes[4].CharacterPicture;
+
+            PortraitImage1.Source = setOfHeroes[0].CharacterPortrait;
+            PortraitImage2.Source = setOfHeroes[1].CharacterPortrait;
+            PortraitImage3.Source = setOfHeroes[2].CharacterPortrait;
+            PortraitImage4.Source = setOfHeroes[3].CharacterPortrait;
+            PortraitImage5.Source = setOfHeroes[4].CharacterPortrait;
+
             //test.Source = chosenHeroes[0].CharacterPicture;
             //testIMAGE.Source = chosenHeroes[1].CharacterPicture;
         }

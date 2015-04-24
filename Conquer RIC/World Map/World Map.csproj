@@ -137,8 +137,12 @@
     <Resource Include="Heroes\Software_Engineer_MALE.png" />
     <Resource Include="Heroes\Support_Engineer_FEMALE.png" />
     <Resource Include="Heroes\Support_Engineer_MALE.png" />
-    <Resource Include="Heroes\System_Anaylst_FEMALE.png" />
-    <Resource Include="Heroes\System_Anaylst_MALE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Heroes\System_Analyst_FEMALE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Heroes\System_Analyst_MALE.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

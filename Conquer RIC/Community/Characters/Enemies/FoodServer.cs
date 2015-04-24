@@ -31,7 +31,7 @@ namespace Community
              */
             JobRole = "Food Server";
 
-            pictureFile = "Pictures/Enemies/Cook.png";
+            pictureFile = "Enemies/Cook.png";
             characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
 
             statEffects = new List<Effect>();

@@ -31,7 +31,7 @@ namespace Community
              */
             JobRole = "Campus Police";
 
-            pictureFile = "Pictures/Enemies/Campus_Police.png";
+            pictureFile = "Enemies/Campus_Police.png";
             characterPicture = new BitmapImage(new Uri(pictureFile, UriKind.Relative));
 
             statEffects = new List<Effect>();

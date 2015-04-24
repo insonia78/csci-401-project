@@ -146,98 +146,98 @@ namespace GameBoard
                                 //The next input character after these special characters defines the background/underlying image
                                 case 65: //Wall_Horizontal character: A
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Walls/Wall_Horizontal.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 66: //Wall_Horizontal2 character: B
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Walls/Wall_Horizontal2.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal2.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 67: //Wall_Horizontal_Texture character: C
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Walls/Wall_Horizontal_Texture.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal_Texture.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 68: //Wall_Horizontal_Texture2 character: D
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Walls/Wall_Horizontal_Texture2.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Horizontal_Texture2.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 69: //Wall_Verticle character: E
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Walls/Wall_Veticle.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Veticle.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 70: //Wall_Verticle2 character: F
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Walls/Wall_Verticle2.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Verticle2.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 71: //Wall_Verticle_Texture character: G
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Walls/Wall_Verticle_Texture.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Verticle_Texture.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 72: //Wall_Verticle_Texture2 character: H
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Walls/Wall_Verticle_Texture2.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Walls/Wall_Verticle_Texture2.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 73: //Books character: I
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Obsticles/Books.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Books.png", UriKind.Relative)));
                                     boardspaces[r, c].requiredMoveSpeed = 2;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 74: //Chair character: J
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Obsticles/Chair.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Chair.png", UriKind.Relative)));
                                     boardspaces[r, c].requiredMoveSpeed = 2;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 75: //Desk character: K
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Obsticles/Desk.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Desk.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 76: //Old_Computer character: L
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Obsticles/Old_Computer.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Old_Computer.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 77: //Student no face character: M
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Obsticles/Student no face.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Student no face.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
                                     break;
                                 case 78: //Student character: N
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Pictures/Board Pieces/Obsticles/Student.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri("Board Pieces/Obsticles/Student.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
@@ -247,11 +247,9 @@ namespace GameBoard
                                     switch (sr.Read())
                                     {
                                         case 49: //1
-                                            hero1.CharacterPicture = new BitmapImage(new Uri("pictures/heroes/network_architecture_male.png", UriKind.Relative));
                                             boardspaces[r, c].tileCharacter = hero1;
                                             break;
                                         case 50: //2
-                                            hero2.CharacterPicture = new BitmapImage(new Uri("pictures/heroes/network_architecture_male.png", UriKind.Relative));
                                             boardspaces[r, c].tileCharacter = hero2;
                                             break;
                                         case 51: //3
@@ -266,6 +264,8 @@ namespace GameBoard
                                     }
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
+                                    boardspaces[r, c].tileCharacter.Row = r;
+                                    boardspaces[r, c].tileCharacter.Col = c;
                                     break;
                                 case 80: //character P: special character, signifies a enemy will be placed
                                     boardspaces[r, c] = setTileByInput(sr.Read());
@@ -286,6 +286,8 @@ namespace GameBoard
                                     }
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
+                                    boardspaces[r, c].tileCharacter.Row = r;
+                                    boardspaces[r, c].tileCharacter.Col = c;
                                     break;
                                 default:
                                     boardspaces[r,c] = setTileByInput(input); //If not a special character, determine what tile in the setTileByInput() method
@@ -354,11 +356,42 @@ namespace GameBoard
 
         //private ImageSource assignHeroPicture(Hero aHero)
         //{
-        //    if(aHero.GetType().IsSubclassOf(typeof(Community.SystemsAnalyst)))
+        //    ImageSource characterImage = null;
+
+        //    if (aHero.GetType().IsSubclassOf(typeof(Community.SystemsAnalyst)))
         //    {
         //        if (aHero.Male == true)
-        //            new BitmapImage(new Uri("pictures/heroes/system_analyst_male.png", UriKind.Relative));
-
+        //            characterImage = new BitmapImage(new Uri("pictures/heroes/system_analyst_male.png", UriKind.Relative));
+        //        else
+        //            characterImage = new BitmapImage(new Uri("pictures/heroes/system_analyst_female.png", UriKind.Relative));
+        //    }
+        //    if (aHero.GetType().IsSubclassOf(typeof(Community.SupportEngineer)))
+        //    {
+        //        if (aHero.Male == true)
+        //            characterImage = new BitmapImage(new Uri("pictures/heroes/support_engineer_male.png", UriKind.Relative));
+        //        else
+        //            characterImage = new BitmapImage(new Uri("pictures/heroes/support_engineer_female.png", UriKind.Relative));
+        //    }
+        //    if (aHero.GetType().IsSubclassOf(typeof(Community.SoftwareEngineer)))
+        //    {
+        //        if (aHero.Male == true)
+        //            characterImage = new BitmapImage(new Uri("pictures/heroes/software_engineer_male.png", UriKind.Relative));
+        //        else
+        //            characterImage = new BitmapImage(new Uri("pictures/heroes/software_engineer_female.png", UriKind.Relative));
+        //    }
+        //    if (aHero.GetType().IsSubclassOf(typeof(Community.NetworkArchitect)))
+        //    {
+        //        if (aHero.Male == true)
+        //            characterImage = new BitmapImage(new Uri("pictures/heroes/network_architecture_male.png", UriKind.Relative));
+        //        else
+        //            characterImage = new BitmapImage(new Uri("pictures/heroes/network_architecture_female.png", UriKind.Relative));
+        //    }
+        //    if (aHero.GetType().IsSubclassOf(typeof(Community.InformationSecurity)))
+        //    {
+        //        if (aHero.Male == true)
+        //            characterImage = new BitmapImage(new Uri("pictures/heroes/information_security_male.png", UriKind.Relative));
+        //        else
+        //            characterImage = new BitmapImage(new Uri("pictures/heroes/information_security_female.png", UriKind.Relative));
         //    }
         //    return characterImage;
         //}

@@ -40,16 +40,16 @@ namespace Community
             if(Male)
             {
 
-                PortraitFile = "/Pictures/MaleSoftwareEngineer.png";
-                PictureFile = "Pictures/Heroes/Software_Engineer_MALE.png";
+                PortraitFile = "Pictures/MaleSoftwareEngineer.png";
+                PictureFile = "Heroes/Software_Engineer_MALE.png";
 
                 //CharacterPicture = " "; 
             }
             else
             {
 
-                PortraitFile = "/Pictures/FemaleSoftwareEngineer.png";
-                PictureFile = "/Heroes/Software_Engineer_FEMALE.png";
+                PortraitFile = "Pictures/FemaleSoftwareEngineer.png";
+                PictureFile = "Heroes/Software_Engineer_FEMALE.png";
 
                 //CharacterPicture = " "; 
             }

@@ -35,37 +35,37 @@ namespace GameBoard
             switch (tileType)
             {
                 case 0: //for grass
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/grass.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/grass.png", UriKind.Relative));
                     break;
                 case 1: //for mountain
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/mountain.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/mountain.png", UriKind.Relative));
                     break;
                 case 2: //for water
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/water.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/water.png", UriKind.Relative));
                     break;
                 case 3: //for swamp
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/swamp.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/swamp.png", UriKind.Relative));
                     break;
                 case 4: //for Tile_Color1
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/Tiles/Tile_Color1.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/Tiles/Tile_Color1.png", UriKind.Relative));
                     break;
                 case 5: //for Tile_Color2
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/Tiles/Tile_Color2.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/Tiles/Tile_Color2.png", UriKind.Relative));
                     break;
                 case 6: //for Tile_Color3
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/Tiles/Tile_Color3.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/Tiles/Tile_Color3.png", UriKind.Relative));
                     break;
                 case 7: //for Tile_Textured
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/Tiles/Tile_Textured.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/Tiles/Tile_Textured.png", UriKind.Relative));
                     break;
                 case 8: //for Tile_Texture2
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/Tiles/Tile_Texture2.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/Tiles/Tile_Texture2.png", UriKind.Relative));
                     break;
                 case 9: //for Tile_Texture3
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/Tiles/Tile_Texture3.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/Tiles/Tile_Texture3.png", UriKind.Relative));
                     break;
                 default:
-                    tileImage = new BitmapImage(new Uri("Pictures/Board Pieces/grass.png", UriKind.Relative));
+                    tileImage = new BitmapImage(new Uri("Board Pieces/grass.png", UriKind.Relative));
                     break;
             }
         }
