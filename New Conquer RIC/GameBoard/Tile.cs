@@ -124,6 +124,7 @@ namespace GameBoard
             col = c;
             canMoveTo = false;
             terrainType = 0;
+            tileTerrain_obj = new Terrain(terrainType);
             speedToMoveThrough = 1;
             aCharacter = null;
             isSolid = false;
