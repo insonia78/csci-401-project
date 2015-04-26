@@ -31,11 +31,11 @@ namespace CharacterCreation
         String[] name_female = new String[]{ "Sally", "Sammy", "Erica", "Amanda", "Caitlyn", "Sandy", 
                                                 "Ashley", "Serena", "Catherine", "Gabby", "Angie", "Lori", 
                                                 "Anna", "Stephanie", "Rachel", "Monica", "Nina", "Rose", 
-                                                "Emily", "LaraCroft" };
+                                                "Emily", "Lara Croft" };
         bool[] gender = new bool[5];
         String[] name_male = new String[]{ "Evan", "Christian", "Joseph", "Bob", "Dylan", "Aaron", "Bill", 
                                               "Chandler", "Joey", "Mark", "Tyler", "Malane", "Thomas", "Cedric", 
-                                              "William", "Devin", "Randy", "Travis", "Leon", "MasterChief" };
+                                              "William", "Devin", "Randy", "Travis", "Leon", "Master Chief" };
         String[] hero_name = new String[5];
         String[] job_type = new String[5];
 
@@ -49,8 +49,18 @@ namespace CharacterCreation
         public bool hero4WasClicked = false;
         public bool hero5WasClicked = false;
 
-        Style green;
+        // confirm button color swapping
+        Style green;  
         Style grey;
+
+        // individual creations
+        String tempName;
+        bool tempGender;
+        String tempJobRole;
+        Hero tempHero;
+        int heroSlot;
+        Style red;
+        Style blank;
 
         public CharacterCreationPage(Window title, MediaElement bgM)
         {
@@ -58,9 +68,13 @@ namespace CharacterCreation
             music = bgM;
            
             InitializeComponent();
+            heroes = new Hero[5];
             green = ConfirmButton.Style;          // holds the green button style for the confirmation button
             grey = MinimizeButton.Style;          // holds the blank button style from the minimize button.
+            red = MaleButton.Style;
+            blank = FemaleButton.Style;
             ConfirmButton.Style = grey;
+            MaleButton.Style = blank;
         }
 
         //allows the array to be accessed in individual heros class
@@ -107,12 +121,6 @@ namespace CharacterCreation
             BlackOut.Visibility = Visibility.Visible;
             LeaveGameGrid.Visibility = Visibility.Visible;
             music.Volume = 0.2;
-        }
-
-        private void CustomAppear()
-        {
-            BlackOut.Visibility = Visibility.Visible;
-            CustomizeWindowGrid.Visibility = Visibility.Visible;
         }
 
         /// <the Boolean Gender() creates a random number generator that determines if the  heros are male or female. it puts them into the array
@@ -354,7 +362,6 @@ namespace CharacterCreation
 
         public void placeCharacter()
         {
-            heroes = new Hero[5];
             for (int i = 0; i < 5; i++)
             {
                 switch (job_type[i])
@@ -427,11 +434,11 @@ namespace CharacterCreation
             Herocharacter();
             placeCharacter();
 
-            if (!ConfirmButton.IsEnabled)
+            if(!ConfirmButton.IsEnabled)
             {
-                ConfirmButton.IsEnabled = true;
-                ConfirmButton.Style = green;
+                confirmButtonSwitch();
             }
+            
         }
 
         private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
@@ -682,165 +689,195 @@ namespace CharacterCreation
             HeroTwoHighlight.Opacity = 1;
         }
 
-        private void SoftwareEngineerButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void CustomizeXButton_Click(object sender, RoutedEventArgs e)
         {
             CustomizeWindowGrid.Visibility = Visibility.Hidden;
             BlackOut.Visibility = Visibility.Hidden;
+
+            tempName = null;
+            tempGender = false;
+            tempJobRole = null;
+            tempHero = null;
         }
 
         private void HeroOneFrame_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 0;
+            IndividualCharacter();
         }
 
         private void HeroOneAura_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 0;
+            IndividualCharacter();
         }
 
         private void HeroOneHighlight_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 0;
+            IndividualCharacter();
         }
 
         private void HeroTwoHighlight_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 1;
+            IndividualCharacter();
         }
 
         private void HeroTwoAura_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 1;
+            IndividualCharacter();
         }
 
         private void HeroTwoFrame_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 1;
+            IndividualCharacter();
         }
 
         private void HeroThreeHighlight_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 2;
+            IndividualCharacter();
         }
 
         private void HeroThreeAura_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 2;
+            IndividualCharacter();
         }
 
         private void HeroThreeFrame_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 2;
+            IndividualCharacter();
         }
 
         private void HeroFourHighlight_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 3;
+            IndividualCharacter();
         }
 
         private void HeroFourAura_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 3;
+            IndividualCharacter();
         }
 
         private void HeroFourFrame_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 3;
+            IndividualCharacter();
         }
 
         private void HeroFiveHighlight_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 4;
+            IndividualCharacter();
         }
 
         private void HeroFiveAura_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 4;
+            IndividualCharacter();
         }
 
         private void HeroFiveFrame_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 4;
+            IndividualCharacter();
         }
 
         private void jobLabelOne_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 0;
+            IndividualCharacter();
         }
 
         private void genderLabelOne_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 0;
+            IndividualCharacter();
         }
 
         private void nameLabelOne_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 0;
+            IndividualCharacter();
         }
 
         private void nameLabelTwo_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 1;
+            IndividualCharacter();
         }
 
         private void genderLabelTwo_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 1;
+            IndividualCharacter();
         }
 
         private void jobLabelTwo_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 1;
+            IndividualCharacter();
         }
 
         private void nameLabelThree_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 2;
+            IndividualCharacter();
         }
 
         private void genderLabelThree_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 2;
+            IndividualCharacter();
         }
 
         private void jobLabelThree_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 2;
+            IndividualCharacter();
         }
 
         private void nameLabelFour_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 3;
+            IndividualCharacter();
         }
 
         private void genderLabelFour_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 3;
+            IndividualCharacter();
         }
 
         private void jobLabelFour_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 3;
+            IndividualCharacter();
         }
 
         private void nameLabelFive_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 4;
+            IndividualCharacter();
         }
 
         private void genderLabelFive_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 4;
+            IndividualCharacter();
         }
 
         private void jobLabelFive_Click(object sender, RoutedEventArgs e)
         {
-            CustomAppear();
+            heroSlot = 4;
+            IndividualCharacter();
         }
 
         private void nameLabelOne_MouseEnter(object sender, MouseEventArgs e)
@@ -1026,8 +1063,331 @@ namespace CharacterCreation
                 new World_Map.MainWindow(heroes, music, main);
 
             this.NavigationService.Navigate(map);
+        }
 
+        private void checker()
+        {
+            int count = 0;
+            Hero aHero;
 
+            for (int index = 0; index < 5; index++)
+            {
+                aHero = heroes[index];
+
+                if (aHero is Hero)
+                {
+                    count++;
+                }
+            }
+
+            if(count == 5)
+            {
+                confirmButtonSwitch();
+            }
+        }
+
+        private void confirmButtonSwitch()
+        {
+            ConfirmButton.IsEnabled = true;
+            ConfirmButton.Style = green;
+        }
+
+        private void IndividualCharacter()
+        {
+            BlackOut.Visibility = Visibility.Visible;
+            CustomizeWindowGrid.Visibility = Visibility.Visible;
+
+            tempName = NameBox.Text = "";
+            tempGender = true;
+            tempJobRole = "Software Engineer";
+            tempHero = new SoftwareEngineer(tempName, tempGender);
+
+            tempPhoto.Source = tempHero.CharacterPortrait;
+
+            MaleButton.Style = red;
+            FemaleButton.Style = blank;
+
+            SoftwareEngineerButton.Style = red;
+            SupportEngineerButton.Style = blank;
+            SystemsAnalystButton.Style = blank;
+            NetworkArchitectButton.Style = blank;
+            InformationSecurityButton.Style = blank;
+        }
+
+        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        {
+            tempName = NameBox.Text;
+
+            if(!((tempName == "") || (tempName == "Enter Name.")))
+            {
+                switch (tempJobRole)
+                {
+                    case "Software Engineer":
+                        {
+                            heroes[heroSlot] = new SoftwareEngineer(tempName, tempGender);
+                            break;
+                        }
+                    case "Support Engineer":
+                        {
+                            heroes[heroSlot] = new SupportEngineer(tempName, tempGender);
+                            break;
+                        }
+                    case "Systems Analyst":
+                        {
+                            heroes[heroSlot] = new SystemsAnalyst(tempName, tempGender);
+                            break;
+                        }
+                    case "Network Architect":
+                        {
+                            heroes[heroSlot] = new NetworkArchitect(tempName, tempGender);
+                            break;
+                        }
+                    case "Information Security":
+                        {
+                            heroes[heroSlot] = new InformationSecurity(tempName, tempGender);
+                            break;
+                        }
+
+                    default:
+                        {
+                            break;
+                        }
+                }
+                checker();
+                CustomizeWindowGrid.Visibility = Visibility.Hidden;
+                BlackOut.Visibility = Visibility.Hidden;
+
+                switch (heroSlot)
+                {
+                    case 0:
+                        {
+                            heroOneSlot.Source = heroes[heroSlot].CharacterPortrait;
+                            nameLabelOne.Content = heroes[heroSlot].Name;
+                            jobLabelOne.Content = heroes[heroSlot].JobRole;
+                            genderLabelOne.Content = heroes[heroSlot].Male;
+                            break;
+                        }
+                    case 1:
+                        {
+                            heroTwoSlot.Source = heroes[heroSlot].CharacterPortrait;
+                            nameLabelTwo.Content = heroes[heroSlot].Name;
+                            jobLabelTwo.Content = heroes[heroSlot].JobRole;
+                            genderLabelTwo.Content = heroes[heroSlot].Male;
+                            break;
+                        }
+                    case 2:
+                        {
+                            heroThreeSlot.Source = heroes[heroSlot].CharacterPortrait;
+                            nameLabelThree.Content = heroes[heroSlot].Name;
+                            jobLabelThree.Content = heroes[heroSlot].JobRole;
+                            genderLabelThree.Content = heroes[heroSlot].Male;
+                            break;
+                        }
+                    case 3:
+                        {
+                            heroFourSlot.Source = heroes[heroSlot].CharacterPortrait;
+                            nameLabelFour.Content = heroes[heroSlot].Name;
+                            jobLabelFour.Content = heroes[heroSlot].JobRole;
+                            genderLabelFour.Content = heroes[heroSlot].Male;
+                            break;
+                        }
+                    case 4:
+                        {
+                            heroFiveSlot.Source = heroes[heroSlot].CharacterPortrait;
+                            nameLabelFive.Content = heroes[heroSlot].Name;
+                            jobLabelFive.Content = heroes[heroSlot].JobRole;
+                            genderLabelFive.Content = heroes[heroSlot].Male;
+                            break;
+                        }
+
+                    default:
+                        {
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                NameBox.Text = "Enter Name.";
+            }
+        }
+
+        private void MaleButton_Click(object sender, RoutedEventArgs e)
+        {
+            tempGender = true;
+            MaleButton.Style = red;
+            FemaleButton.Style = blank;
+
+            switch (tempJobRole)
+            {
+                case "Software Engineer":
+                {
+                    tempHero = new SoftwareEngineer(tempName, tempGender);
+                    break;
+                }
+                case "Support Engineer":
+                {
+                    tempHero = new SupportEngineer(tempName, tempGender);
+
+                    break;
+                }
+                case "Systems Analyst":
+                {
+                    tempHero = new SystemsAnalyst(tempName, tempGender);
+
+                    break;
+                }
+                case "Network Architect":
+                {
+                    tempHero = new NetworkArchitect(tempName, tempGender);
+
+                    break;
+                }
+                case "Information Security":
+                {
+                    tempHero = new InformationSecurity(tempName, tempGender);
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+
+            }
+            tempPhoto.Source = tempHero.CharacterPortrait;
+           
+        }
+
+        private void FemaleButton_Click(object sender, RoutedEventArgs e)
+        {
+            tempGender = false;
+            MaleButton.Style = blank;
+            FemaleButton.Style = red;
+
+            switch (tempJobRole)
+            {
+                case "Software Engineer":
+                    {
+                        tempHero = new SoftwareEngineer(tempName, tempGender);
+                        break;
+                    }
+                case "Support Engineer":
+                    {
+                        tempHero = new SupportEngineer(tempName, tempGender);
+
+                        break;
+                    }
+                case "Systems Analyst":
+                    {
+                        tempHero = new SystemsAnalyst(tempName, tempGender);
+
+                        break;
+                    }
+                case "Network Architect":
+                    {
+                        tempHero = new NetworkArchitect(tempName, tempGender);
+
+                        break;
+                    }
+                case "Information Security":
+                    {
+                        tempHero = new InformationSecurity(tempName, tempGender);
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+
+            }
+            tempPhoto.Source = tempHero.CharacterPortrait;
+        }
+
+        private void SoftwareEngineerButton_Click(object sender, RoutedEventArgs e)
+        {
+            tempJobRole = "Software Engineer";
+            SoftwareEngineerButton.Style = red;
+            SupportEngineerButton.Style = blank;
+            SystemsAnalystButton.Style = blank;
+            NetworkArchitectButton.Style = blank;
+            InformationSecurityButton.Style = blank;
+
+            tempHero = new SoftwareEngineer(tempName, tempGender);
+
+            tempPhoto.Source = tempHero.CharacterPortrait;
+
+            JobDescription.SelectAll();
+            JobDescription.Selection.Text = ("Software Engineer:\nThey have the highest health and defense in the game." +
+                                        "They have the slowest movement in the game.");
+        }
+
+        private void SupportEngineerButton_Click(object sender, RoutedEventArgs e)
+        {
+            tempJobRole = "Support Engineer";
+            SoftwareEngineerButton.Style = blank;
+            SupportEngineerButton.Style = red;
+            SystemsAnalystButton.Style = blank;
+            NetworkArchitectButton.Style = blank;
+            InformationSecurityButton.Style = blank;
+
+            tempHero = new SupportEngineer(tempName, tempGender);
+
+            tempPhoto.Source = tempHero.CharacterPortrait;
+
+            JobDescription.SelectAll();
+            JobDescription.Selection.Text = ("Support Engineer:\nHolds moderate stats. This hero sacrifices offense for a more supportive role.");
+        }
+
+        private void SystemsAnalystButton_Click(object sender, RoutedEventArgs e)
+        {
+            tempJobRole = "Systems Analyst";
+            SoftwareEngineerButton.Style = blank;
+            SupportEngineerButton.Style = blank;
+            SystemsAnalystButton.Style = red;
+            NetworkArchitectButton.Style = blank;
+            InformationSecurityButton.Style = blank;
+
+            tempHero = new SystemsAnalyst(tempName, tempGender);
+
+            tempPhoto.Source = tempHero.CharacterPortrait;
+
+            JobDescription.SelectAll();
+            JobDescription.Selection.Text = ("Systems Analyst:\nModerate range and damage. This hero can attack groups of enemies.");
+        }
+
+        private void NetworkArchitectButton_Click(object sender, RoutedEventArgs e)
+        {
+            tempJobRole = "Network Architect";
+            SoftwareEngineerButton.Style = blank;
+            SupportEngineerButton.Style = blank;
+            SystemsAnalystButton.Style = blank;
+            NetworkArchitectButton.Style = red;
+            InformationSecurityButton.Style = blank;
+
+            tempHero = new NetworkArchitect(tempName, tempGender);
+
+            tempPhoto.Source = tempHero.CharacterPortrait;
+
+            JobDescription.SelectAll();
+            JobDescription.Selection.Text = ("Network Architect:\nFarthest range in the game with great offense as well.");
+        }
+
+        private void InformationSecurityButton_Click(object sender, RoutedEventArgs e)
+        {
+            tempJobRole = "Information Security";
+            SoftwareEngineerButton.Style = blank;
+            SupportEngineerButton.Style = blank;
+            SystemsAnalystButton.Style = blank;
+            NetworkArchitectButton.Style = blank;
+            InformationSecurityButton.Style = red;
+
+            tempHero = new InformationSecurity(tempName, tempGender);
+
+            tempPhoto.Source = tempHero.CharacterPortrait;
+
+            JobDescription.SelectAll();
+            JobDescription.Selection.Text = ("Information Security:\nWeakest defense in the game but make up for it in" +
+                                        "movement speed and evasion.");
         }
     }
 }

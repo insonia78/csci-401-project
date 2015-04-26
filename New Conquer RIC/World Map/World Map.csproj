@@ -100,6 +100,16 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Pictures\FemaleInformationSecurity.png" />
+    <Resource Include="Pictures\FemaleNetworkArchitect.png" />
+    <Resource Include="Pictures\FemaleSoftwareEngineer.png" />
+    <Resource Include="Pictures\FemaleSupportEngineer.png" />
+    <Resource Include="Pictures\FemaleSystemsAnalyst.png" />
+    <Resource Include="Pictures\MaleInformationSecurity.png" />
+    <Resource Include="Pictures\MaleNetworkArchitect.png" />
+    <Resource Include="Pictures\MaleSoftwareEngineer.png" />
+    <Resource Include="Pictures\MaleSupportEngineer.png" />
+    <Resource Include="Pictures\MaleSystemsAnalyst.png" />
     <Resource Include="pro.png" />
   </ItemGroup>
   <ItemGroup>
@@ -116,18 +126,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pictures\FemaleInformationSecurity.png" />
-    <Resource Include="Pictures\FemaleNetworkArchitect.png" />
-    <Resource Include="Pictures\FemaleSoftwareEngineer.png" />
-    <Resource Include="Pictures\FemaleSupportEngineer.png" />
-    <Resource Include="Pictures\FemaleSystemsAnalyst.png" />
-    <Resource Include="Pictures\MaleInformationSecurity.png" />
-    <Resource Include="Pictures\MaleNetworkArchitect.png" />
-    <Resource Include="Pictures\MaleSoftwareEngineer.png" />
-    <Resource Include="Pictures\MaleSupportEngineer.png" />
-    <Resource Include="Pictures\MaleSystemsAnalyst.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Heroes\Information_Security_FEMALE.png" />
     <Resource Include="Heroes\Information_Security_MALE.png" />
     <Resource Include="Heroes\Network_Architecture_FEMALE.png" />
@@ -141,6 +139,10 @@
   <ItemGroup>
     <Resource Include="Heroes\System_Analyst_FEMALE.png" />
     <Resource Include="Heroes\System_Analyst_MALE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Missingno.png" />
+    <Resource Include="Pictures\MissingnoPortrait.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -488,6 +488,7 @@ namespace World_Map
        private void ReturnOkButton_Click(object sender, RoutedEventArgs e)
        {
            this.NavigationService.RemoveBackEntry();
+           music.Volume = 0.5;
 
            if (this.NavigationService.CanGoBack)
            {

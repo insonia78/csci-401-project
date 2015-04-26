@@ -588,7 +588,7 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label x:Name="LeaveGameLabel" Content="Leave Game?" HorizontalAlignment="Left" Margin="96,64,0,0" VerticalAlignment="Top" Width="244" Height="48" FontFamily="SketchFlow Print" FontSize="36" Foreground="White" Visibility="Visible"/>
+            <Label x:Name="LeaveGameLabel" Content="Leave Game?&#xD;&#xA; Progress will be lost." HorizontalAlignment="Left" Margin="68,36,0,0" VerticalAlignment="Top" Width="307" Height="76" FontFamily="SketchFlow Print" FontSize="26" Foreground="White" Visibility="Visible"/>
             <Button x:Name="LeaveGameOkButton" Content="Ok" HorizontalAlignment="Left" Height="65" Margin="96,131,0,0" Style="{DynamicResource ButtonStyle110}" VerticalAlignment="Top" Width="115" Cursor="Hand" Click="LeaveGameOkButton_Click" Visibility="Visible" FontFamily="Segoe UI Symbol" FontSize="18"/>
             <Button x:Name="LeaveGameCancelButton" Content="Cancel" HorizontalAlignment="Left" Height="65" Margin="225,131,0,0" Style="{DynamicResource ButtonStyle111}" VerticalAlignment="Top" Width="115" Cursor="Hand" Visibility="Visible" Click="LeaveGameCancelButton_Click" FontFamily="Segoe UI Symbol" FontSize="18"/>
         </Grid>
@@ -601,7 +601,7 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label x:Name="WarningLabel" Content="All progess will be lost.&#x0d;&#x0a; Do you want to continue?" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="408" Height="76" FontFamily="SketchFlow Print" FontSize="30" Foreground="White" Visibility="Visible"/>
+            <Label x:Name="WarningLabel" Content="All progess will be lost.&#x0d;&#x0a; Do you want to continue?" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="408" Height="76" FontFamily="Segoe UI Symbol" FontSize="26" Foreground="White" Visibility="Visible"/>
             <Button x:Name="ReturnOkButton" Content="Ok" HorizontalAlignment="Left" Height="65" Margin="96,131,0,0" Style="{DynamicResource ButtonStyle110}" VerticalAlignment="Top" Width="115" Cursor="Hand"  Visibility="Visible" FontFamily="Segoe UI Symbol" FontSize="18" Click="ReturnOkButton_Click"/>
             <Button x:Name="ReturnCancelButton" Content="Cancel" HorizontalAlignment="Left" Height="65" Margin="225,131,0,0" Style="{DynamicResource ButtonStyle111}" VerticalAlignment="Top" Width="115" Cursor="Hand" Visibility="Visible"  FontFamily="Segoe UI Symbol" FontSize="18" Click="ReturnCancelButton_Click"/>
         </Grid>

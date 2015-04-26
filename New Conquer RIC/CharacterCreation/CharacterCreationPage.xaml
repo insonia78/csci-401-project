@@ -1237,7 +1237,7 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label x:Name="LeaveGameLabel" Content="Leave Game?" HorizontalAlignment="Left" Margin="96,64,0,0" VerticalAlignment="Top" Width="244" Height="48" FontFamily="SketchFlow Print" FontSize="36" Foreground="White" Visibility="Visible"/>
+            <Label x:Name="LeaveGameLabel" Content="Leave Game? Progress will be lost." HorizontalAlignment="Left" Margin="96,64,0,0" VerticalAlignment="Top" Width="244" Height="48" FontFamily="SketchFlow Print" FontSize="36" Foreground="White" Visibility="Visible"/>
             <Button x:Name="LeaveGameOkButton" Content="Ok" HorizontalAlignment="Left" Height="65" Margin="96,131,0,0" Style="{DynamicResource ButtonStyle3}" VerticalAlignment="Top" Width="115" FontFamily="Segoe UI Symbol" FontSize="18" Cursor="Hand" Click="LeaveGameOkButton_Click" Visibility="Visible"/>
             <Button x:Name="LeaveGameCancelButton" Content="Cancel" HorizontalAlignment="Left" Height="65" Margin="225,131,0,0" Style="{DynamicResource ButtonStyle4}" VerticalAlignment="Top" Width="115" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18" Click="LeaveGameCancelButton_Click" Visibility="Visible"/>
         </Grid>
@@ -1263,20 +1263,20 @@
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Image HorizontalAlignment="Left" Height="187" Margin="9,10,0,0" VerticalAlignment="Top" Width="172" Source="Silhouette Portrait.png"/>
+                <Image x:Name="tempPhoto" HorizontalAlignment="Left" Height="187" Margin="9,10,0,0" VerticalAlignment="Top" Width="172" Source="Silhouette Portrait.png"/>
             </Grid>
             <Rectangle HorizontalAlignment="Left" Height="1" Margin="46,143,0,0" RadiusY="5" RadiusX="5" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="160" Fill="Black"/>
-            <TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="49" Margin="46,89,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="160" FontSize="30" FontFamily="Segoe UI Symbol" TextOptions.TextHintingMode="Animated"/>
+            <TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="49" Margin="46,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" FontSize="20" FontFamily="Segoe UI Symbol" TextOptions.TextHintingMode="Animated"/>
             <WrapPanel HorizontalAlignment="Left" Height="100" Margin="46,196,0,0" VerticalAlignment="Top" Width="201">
-                <Button x:Name="MaleButton" Content="Male" Height="100" Style="{DynamicResource ButtonStyle27}" Width="100" FontFamily="Segoe UI Symbol" FontSize="20" Cursor="Hand"/>
-                <Button x:Name="FemaleButton" Content="Female" Height="100" Style="{DynamicResource ButtonStyle28}" Width="100" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="20" Foreground="White"/>
+                <Button x:Name="MaleButton" Content="Male" Height="100" Style="{DynamicResource ButtonStyle27}" Width="100" FontFamily="Segoe UI Symbol" FontSize="20" Cursor="Hand" Click="MaleButton_Click"/>
+                <Button x:Name="FemaleButton" Content="Female" Height="100" Style="{DynamicResource ButtonStyle28}" Width="100" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="20" Foreground="White" Click="FemaleButton_Click"/>
             </WrapPanel>
-            <Button x:Name="SoftwareEngineerButton" Content="Software&#xD;&#xA; Engineer" HorizontalAlignment="Left" Height="100" Margin="24,436,0,0" Style="{DynamicResource ButtonStyle29}" VerticalAlignment="Top" Width="100" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18" Click="SoftwareEngineerButton_Click" Foreground="White"/>
-            <Button x:Name="SupportEngineerButton" Content="Support&#xD;&#xA; Engineer" HorizontalAlignment="Left" Height="100" Margin="129,436,0,0" Style="{DynamicResource ButtonStyle30}" VerticalAlignment="Top" Width="100" Foreground="White" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18"/>
-            <Button x:Name="SystemsAnalystButton" Content="Systems&#xD;&#xA; Analyst" HorizontalAlignment="Left" Height="100" Margin="234,436,0,0" Style="{DynamicResource ButtonStyle31}" VerticalAlignment="Top" Width="100" Foreground="White" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18"/>
-            <Button x:Name="NetworkArchitectButton" Content="Network&#xD;&#xA; Architect" HorizontalAlignment="Left" Height="100" Margin="339,436,0,0" Style="{DynamicResource ButtonStyle32}" VerticalAlignment="Top" Width="100" Foreground="White" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18"/>
-            <Button x:Name="InformationSecurityButton" Content="Information&#xD;&#xA; Security" HorizontalAlignment="Left" Height="100" Margin="444,436,0,0" Style="{DynamicResource ButtonStyle33}" VerticalAlignment="Top" Width="100" Foreground="White" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18"/>
-            <Button x:Name="AcceptButton" Content="Accept&#xD;&#xA; Changes" HorizontalAlignment="Left" Height="100" Margin="799,436,0,0" Style="{DynamicResource ButtonStyle34}" VerticalAlignment="Top" Width="100" Foreground="White" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18"/>
+            <Button x:Name="SoftwareEngineerButton" Content="Software&#xD;&#xA; Engineer" HorizontalAlignment="Left" Height="100" Margin="24,436,0,0" Style="{DynamicResource ButtonStyle28}" VerticalAlignment="Top" Width="100" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18" Click="SoftwareEngineerButton_Click" Foreground="White"/>
+            <Button x:Name="SupportEngineerButton" Content="Support&#xD;&#xA; Engineer" HorizontalAlignment="Left" Height="100" Margin="129,436,0,0" Style="{DynamicResource ButtonStyle28}" VerticalAlignment="Top" Width="100" Foreground="White" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18" Click="SupportEngineerButton_Click"/>
+            <Button x:Name="SystemsAnalystButton" Content="Systems&#xD;&#xA; Analyst" HorizontalAlignment="Left" Height="100" Margin="234,436,0,0" Style="{DynamicResource ButtonStyle28}" VerticalAlignment="Top" Width="100" Foreground="White" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18" Click="SystemsAnalystButton_Click"/>
+            <Button x:Name="NetworkArchitectButton" Content="Network&#xD;&#xA; Architect" HorizontalAlignment="Left" Height="100" Margin="339,436,0,0" Style="{DynamicResource ButtonStyle28}" VerticalAlignment="Top" Width="100" Foreground="White" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18" Click="NetworkArchitectButton_Click"/>
+            <Button x:Name="InformationSecurityButton" Content="Information&#xD;&#xA; Security" HorizontalAlignment="Left" Height="100" Margin="444,436,0,0" Style="{DynamicResource ButtonStyle28}" VerticalAlignment="Top" Width="100" Foreground="White" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18" Click="InformationSecurityButton_Click"/>
+            <Button x:Name="AcceptButton" Content="Accept&#xD;&#xA; Changes" HorizontalAlignment="Left" Height="100" Margin="799,436,0,0" Style="{DynamicResource ButtonStyle34}" VerticalAlignment="Top" Width="100" Foreground="White" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18" Click="AcceptButton_Click"/>
             <RichTextBox x:Name="JobDescription" HorizontalAlignment="Left" Height="255" Margin="562,117,0,0" VerticalAlignment="Top" Width="337" FontFamily="Segoe UI Symbol" FontSize="22" AcceptsReturn="False" IsReadOnly="True" Cursor="Arrow">
                 <RichTextBox.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
