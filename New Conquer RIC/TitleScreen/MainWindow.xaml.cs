@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CharacterCreation;
 
 namespace TitleScreen
 {
@@ -21,94 +20,26 @@ namespace TitleScreen
     /// </summary>
     public partial class MainWindow : Window
     {
+        TitleScreenPage tsPage;
+
         public MainWindow()
         {
             InitializeComponent();
+            init();
+        }
+
+        public void init()
+        {
             bgm.Play();
-        }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            EnterLeaveGame();
-        }
-
-        private void ExitButton_MouseEnter(object sender, MouseEventArgs e)
-        {
-            ExitButton.Opacity = 1.0;
-        }
-
-        private void ExitButton_MouseLeave(object sender, MouseEventArgs e)
-        {
-            ExitButton.Opacity = .10;
-        }
-
-        private void XButton_Click(object sender, RoutedEventArgs e)
-        {
-            EnterLeaveGame();
-        }
-
-        private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
-
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
-
-        private void TitleBarButt_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
-
-        private void LeftTitleBarPatch_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
-
-        private void RightTitleBarPatch_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
-
-        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        private void LeaveGameOkButton_Click(object sender, RoutedEventArgs e)
-        {
-            // shuts down the instance of the wpf application.
-            Application.Current.Shutdown();
-        }
-
-        private void LeaveGameCancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            bgm.Volume = 0.5;
-            LeaveGameGrid.Visibility = Visibility.Hidden;
-            BlackOut.Visibility = Visibility.Hidden;
+            tsPage = new TitleScreenPage((Window)this, bgm);
+            startTitle.Navigate(tsPage);
         }
 
         private void bgm_MediaEnded(object sender, RoutedEventArgs e)
         {
             bgm.Position = TimeSpan.Zero;
             bgm.Play();
-        }
-
-        private void EnterLeaveGame()
-        {
-            BlackOut.Visibility = Visibility.Visible;
-            LeaveGameGrid.Visibility = Visibility.Visible;
-            bgm.Volume = 0.2;
-        }
-
-        private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
-            CharacterCreation.CharacterCreationPage create = 
-                new CharacterCreation.CharacterCreationPage((Window)this, bgm);
-
-            startTitle.NavigationService.Navigate(create);
         }
     }
 }

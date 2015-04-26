@@ -28,12 +28,12 @@ namespace CharacterCreation
 
 
         int[] heroType = new int[5];
-        String[] name_female = new String[20] { "Sally", "Sammy", "Erica", "Amanda", "Caitlyn", "Sandy", 
+        String[] name_female = new String[]{ "Sally", "Sammy", "Erica", "Amanda", "Caitlyn", "Sandy", 
                                                 "Ashley", "Serena", "Catherine", "Gabby", "Angie", "Lori", 
                                                 "Anna", "Stephanie", "Rachel", "Monica", "Nina", "Rose", 
                                                 "Emily", "LaraCroft" };
         bool[] gender = new bool[5];
-        String[] name_male = new String[20] { "Evan", "Christian", "Joseph", "Bob", "Dylan", "Aaron", "Bill", 
+        String[] name_male = new String[]{ "Evan", "Christian", "Joseph", "Bob", "Dylan", "Aaron", "Bill", 
                                               "Chandler", "Joey", "Mark", "Tyler", "Malane", "Thomas", "Cedric", 
                                               "William", "Devin", "Randy", "Travis", "Leon", "MasterChief" };
         String[] hero_name = new String[5];
@@ -106,7 +106,7 @@ namespace CharacterCreation
         {
             BlackOut.Visibility = Visibility.Visible;
             LeaveGameGrid.Visibility = Visibility.Visible;
-            //bgm.Volume = 0.2;
+            music.Volume = 0.2;
         }
 
         private void CustomAppear()
@@ -477,7 +477,7 @@ namespace CharacterCreation
 
         private void LeaveGameCancelButton_Click(object sender, RoutedEventArgs e)
         {
-            //bgm.Volume = 0.5;
+            music.Volume = 0.5;
             LeaveGameGrid.Visibility = Visibility.Hidden;
             BlackOut.Visibility = Visibility.Hidden;
         }

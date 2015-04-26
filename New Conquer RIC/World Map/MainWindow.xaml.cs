@@ -69,6 +69,16 @@ namespace World_Map
             character3image.Source = setOfHeroes[2].CharacterPicture;
             character4image.Source = setOfHeroes[3].CharacterPicture;
             character5image.Source = setOfHeroes[4].CharacterPicture;
+
+            if (music.IsMuted)
+            {
+                Style red = Sound_Off_Button.Style;         // holds the red button style from the off button.
+                Style black = Sound_On_Button.Style;        // holds the blank button style from the on button.
+
+                // swaps color styles with on and off.
+                Sound_On_Button.Style = red;
+                Sound_Off_Button.Style = black;
+            }
         }
 
     /***************************************************CHARACTERS***************************************************************/
@@ -373,7 +383,7 @@ namespace World_Map
         //Customized close button - Designed in blend using a rectangle component
        private void XButton_Click(object sender, RoutedEventArgs e)
        {
-           Application.Current.Shutdown();
+           EnterLeaveGame();
        }
 
        private void btnLibrary_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -384,5 +394,115 @@ namespace World_Map
            this.NavigationService.Navigate(library);
        }
        /********************************************FORMAT CUSTOM WINDOW***********************************************************/
+       
+        /**********************************************************************
+         * Options menu EventListeners
+         **********************************************************************
+         */
+
+       /**
+        * This event hides the Options screen from view when the player clicks on the Exit Button in the corner.
+        */
+       private void Exit_Button_Click(object sender, RoutedEventArgs e)
+       {
+           // hides the window from view.
+           optionsGrid.Visibility = Visibility.Hidden;
+           BlackOut.Visibility = Visibility.Hidden;
+           music.Volume = 0.5;
+       }
+
+       /**
+        * This event mutes the bgm. It also toggles the color of the button to red when muting the sound.
+        * It takes the red button style from the on button since the on button will always be red when music is not muted.
+        */
+       private void Sound_Off_Button_Click(object sender, RoutedEventArgs e)
+       {
+           // if statement, makes changes to the window only if the music hasnt been muted.
+           if (!music.IsMuted)
+           {
+               music.IsMuted = true;
+               Style red = Sound_On_Button.Style;          // holds the red button style from the on button.
+               Style black = Sound_Off_Button.Style;       // holds the blank button style from the off button.
+
+               // swaps color styles with on and off.
+               Sound_Off_Button.Style = red;
+               Sound_On_Button.Style = black;
+           }
+       }
+
+       /**
+        * This event unmutes the bgm. It also toggles the color of the button to red when unmuting the sound.
+        * It takes the red button style from the off button since the off button will always be red when music is muted.
+        */
+       private void Sound_On_Button_Click(object sender, RoutedEventArgs e)
+       {
+           // if statement, makes changes to the window only if the music hasnt been muted.
+           if (music.IsMuted)
+           {
+               music.IsMuted = false;
+               Style red = Sound_Off_Button.Style;         // holds the red button style from the off button.
+               Style black = Sound_On_Button.Style;        // holds the blank button style from the on button.
+
+               // swaps color styles with on and off.
+               Sound_On_Button.Style = red;
+               Sound_Off_Button.Style = black;
+           }
+       }
+
+       /*
+        * This event returns the player to the main Title Screen.
+        */
+       private void Return_Main_Menu_Click(object sender, RoutedEventArgs e)
+       {
+           optionsGrid.Visibility = Visibility.Hidden;
+           ReturnGrid.Visibility = Visibility.Visible;
+       }
+
+       private void btnOption_Click(object sender, RoutedEventArgs e)
+       {
+           BlackOut.Visibility = Visibility.Visible;
+           optionsGrid.Visibility = Visibility.Visible;
+           music.Volume = 0.2;
+       }
+
+       private void EnterLeaveGame()
+       {
+           BlackOut.Visibility = Visibility.Visible;
+           LeaveGameGrid.Visibility = Visibility.Visible;
+           music.Volume = 0.2;
+       }
+
+       private void LeaveGameOkButton_Click(object sender, RoutedEventArgs e)
+       {
+           // shuts down the instance of the wpf application.
+           Application.Current.Shutdown();
+       }
+
+       private void LeaveGameCancelButton_Click(object sender, RoutedEventArgs e)
+       {
+           music.Volume = 0.5;
+           LeaveGameGrid.Visibility = Visibility.Hidden;
+           BlackOut.Visibility = Visibility.Hidden;
+       }
+
+       private void ReturnOkButton_Click(object sender, RoutedEventArgs e)
+       {
+           this.NavigationService.RemoveBackEntry();
+
+           if (this.NavigationService.CanGoBack)
+           {
+               this.NavigationService.GoBack();
+           }
+           else
+           {
+               MessageBox.Show("No entries in back navigation history.");
+           }
+       }
+
+       private void ReturnCancelButton_Click(object sender, RoutedEventArgs e)
+       {
+           ReturnGrid.Visibility = Visibility.Hidden;
+           optionsGrid.Visibility = Visibility.Visible;
+       }
     }
 }
