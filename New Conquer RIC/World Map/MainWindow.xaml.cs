@@ -43,8 +43,10 @@ namespace World_Map
         {
             music = song;
             main = create;
-
+            music.Source = new Uri("../../Menu.wav", UriKind.Relative);
+            music.Play();
             InitializeComponent();
+
 
             //Sets the level/campus building's hoverOver statusmain = title;
             buildingSetUp();
