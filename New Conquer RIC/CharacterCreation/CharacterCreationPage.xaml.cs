@@ -1112,6 +1112,10 @@ namespace CharacterCreation
             SystemsAnalystButton.Style = blank;
             NetworkArchitectButton.Style = blank;
             InformationSecurityButton.Style = blank;
+
+            JobDescription.SelectAll();
+            JobDescription.Selection.Text = ("Software Engineer:\nThey have the highest health and defense in the game." +
+                                        "They have the slowest movement in the game.");
         }
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
