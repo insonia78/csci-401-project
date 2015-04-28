@@ -844,12 +844,11 @@ namespace GameBoard
             {
                 //values won't be null, just not sure where I want them to move yet.
 
-                //forceMoveCharacter(5, 5, null, null);
-                //forceMoveCharacter(6, 5, null, null);
-                //forceMoveCharacter(5, 1, null, null);
-                //forceMoveCharacter(11, 9, null, null);
-                //forceMoveCharacter(13, 8, null, null);
-                //forceMoveCharacter(14, 3, null, null);
+                forceMoveCharacter(2, 7, 0, 4);
+                //forceMoveCharacter(5, 7, null, null);
+                //forceMoveCharacter(8, 7, null, null);
+                //forceMoveCharacter(14, 6, null, null);
+
             }
         }
 
