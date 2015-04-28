@@ -1,7 +1,7 @@
 ﻿<Page x:Name="WorldMap" x:Class="World_Map.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Conquer RIC - Campus" Height="694.588" Width="1110.448" Background="{x:Null}">
+        Title="Conquer RIC - Campus" Height="694.588" Width="1110.448" Background="{x:Null}" Loaded="WorldMap_Loaded">
     <Page.Resources>
         <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -557,7 +557,7 @@
         <Button x:Name="btnCharacter5" Grid.Column="8" HorizontalAlignment="Left" Margin="184,95,0,0" VerticalAlignment="Top" Width="119" RenderTransformOrigin="0.387,1.318" Grid.RowSpan="2" Height="162" MouseEnter="btnCharacter5_MouseEnter" Opacity="0"/>
         <Button x:Name="btnCharacter4" Grid.Column="8" HorizontalAlignment="Left" Margin="35,95,0,0" VerticalAlignment="Top" Width="119" Grid.RowSpan="2" Height="162" MouseEnter="btnCharacter4_MouseEnter" Opacity="0"/>
 
-        <Rectangle x:Name="BlackOut" HorizontalAlignment="Left" Height="675" Margin="10,-25,0,0" RadiusY="5" RadiusX="5" Stroke="#FF0E0C0C" StrokeThickness="0" VerticalAlignment="Top" Width="1090" Fill="#CC000000" Visibility="Hidden" Grid.ColumnSpan="9" Grid.RowSpan="2"/>
+        <Rectangle x:Name="BlackOut" HorizontalAlignment="Left" Height="645" Margin="10,5,0,0" RadiusY="5" RadiusX="5" Stroke="#FF0E0C0C" StrokeThickness="0" VerticalAlignment="Top" Width="1082" Fill="#CC000000" Visibility="Hidden" Grid.ColumnSpan="9" Grid.RowSpan="2"/>
         <Grid x:Name="optionsGrid" Grid.ColumnSpan="8" Grid.Column="1" Margin="22,127,311,228" Grid.RowSpan="2" Visibility="Hidden">
             <Rectangle x:Name="Menu_Window" HorizontalAlignment="Left" Height="330" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="505" RadiusX="9" RadiusY="9">
                 <Rectangle.Fill>
@@ -588,7 +588,7 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label x:Name="LeaveGameLabel" Content="Leave Game?&#xD;&#xA; Progress will be lost." HorizontalAlignment="Left" Margin="68,36,0,0" VerticalAlignment="Top" Width="307" Height="76" FontFamily="SketchFlow Print" FontSize="26" Foreground="White" Visibility="Visible"/>
+            <Label x:Name="LeaveGameLabel" Content="Leave Game?&#xD;&#xA; Progress will be lost." HorizontalAlignment="Left" Margin="68,36,0,0" VerticalAlignment="Top" Width="307" Height="81" FontFamily="Segoe UI Symbol" FontSize="26" Foreground="White" Visibility="Visible"/>
             <Button x:Name="LeaveGameOkButton" Content="Ok" HorizontalAlignment="Left" Height="65" Margin="96,131,0,0" Style="{DynamicResource ButtonStyle110}" VerticalAlignment="Top" Width="115" Cursor="Hand" Click="LeaveGameOkButton_Click" Visibility="Visible" FontFamily="Segoe UI Symbol" FontSize="18"/>
             <Button x:Name="LeaveGameCancelButton" Content="Cancel" HorizontalAlignment="Left" Height="65" Margin="225,131,0,0" Style="{DynamicResource ButtonStyle111}" VerticalAlignment="Top" Width="115" Cursor="Hand" Visibility="Visible" Click="LeaveGameCancelButton_Click" FontFamily="Segoe UI Symbol" FontSize="18"/>
         </Grid>

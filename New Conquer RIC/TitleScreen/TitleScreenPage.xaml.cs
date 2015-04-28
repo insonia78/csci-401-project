@@ -109,5 +109,11 @@ namespace TitleScreen
 
             this.NavigationService.Navigate(create);
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            music.Source = new Uri("../../Rage of the Champions.wav", UriKind.Relative);
+            music.Play();
+        }
     }
 }

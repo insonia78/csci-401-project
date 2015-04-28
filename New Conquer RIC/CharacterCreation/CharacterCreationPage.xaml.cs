@@ -443,13 +443,14 @@ namespace CharacterCreation
         /// after it calls the hero one, it calls the name.
         private void RandomButton_Click(object sender, RoutedEventArgs e)
         {
+
             ///<does this before it does everything else.this.Gender();
             Gender();
             HeroNames();
             Herocharacter();
             placeCharacter();
 
-            if(!ConfirmButton.IsEnabled)
+            if(Checker())
             {
                 confirmButtonSwitch();
             }
@@ -1072,17 +1073,28 @@ namespace CharacterCreation
 
         }
 
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        private async void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            World_Map.MainWindow map =
+            if (Checker())
+            {
+                World_Map.MainWindow map =
                 new World_Map.MainWindow(heroes, music, main);
 
-            this.NavigationService.Navigate(map);
+                this.NavigationService.Navigate(map);
+            }
+            else
+            {
+                MessageLabel.Content = "Create 5 Characters then click Confirm to continue.";
+                MessageLabel.Visibility = Visibility.Visible;
+                await Task.Delay(2000);
+                MessageLabel.Visibility = Visibility.Hidden;
+            }
         }
 
-        private void checker()
+        private bool Checker()
         {
             int count = 0;
+            bool status = false;
             Hero aHero;
 
             for (int index = 0; index < 5; index++)
@@ -1098,12 +1110,14 @@ namespace CharacterCreation
             if(count == 5)
             {
                 confirmButtonSwitch();
+                status = true;
             }
+
+            return status;
         }
 
         private void confirmButtonSwitch()
         {
-            ConfirmButton.IsEnabled = true;
             ConfirmButton.Style = green;
         }
 
@@ -1172,7 +1186,10 @@ namespace CharacterCreation
                             break;
                         }
                 }
-                checker();
+                if (Checker())
+                {
+                    confirmButtonSwitch();
+                }
                 CustomizeWindowGrid.Visibility = Visibility.Hidden;
                 BlackOut.Visibility = Visibility.Hidden;
 
@@ -1183,7 +1200,10 @@ namespace CharacterCreation
                             heroOneSlot.Source = heroes[heroSlot].CharacterPortrait;
                             nameLabelOne.Content = heroes[heroSlot].Name;
                             jobLabelOne.Content = heroes[heroSlot].JobRole;
-                            genderLabelOne.Content = heroes[heroSlot].Male;
+                            if (heroes[heroSlot].Male)
+                                genderLabelOne.Content = "Male";
+                            else
+                                genderLabelOne.Content = "Female";
                             break;
                         }
                     case 1:
@@ -1191,7 +1211,10 @@ namespace CharacterCreation
                             heroTwoSlot.Source = heroes[heroSlot].CharacterPortrait;
                             nameLabelTwo.Content = heroes[heroSlot].Name;
                             jobLabelTwo.Content = heroes[heroSlot].JobRole;
-                            genderLabelTwo.Content = heroes[heroSlot].Male;
+                            if (heroes[heroSlot].Male)
+                                genderLabelTwo.Content = "Male";
+                            else
+                                genderLabelTwo.Content = "Female";
                             break;
                         }
                     case 2:
@@ -1199,7 +1222,10 @@ namespace CharacterCreation
                             heroThreeSlot.Source = heroes[heroSlot].CharacterPortrait;
                             nameLabelThree.Content = heroes[heroSlot].Name;
                             jobLabelThree.Content = heroes[heroSlot].JobRole;
-                            genderLabelThree.Content = heroes[heroSlot].Male;
+                            if (heroes[heroSlot].Male)
+                                genderLabelThree.Content = "Male";
+                            else
+                                genderLabelThree.Content = "Female";
                             break;
                         }
                     case 3:
@@ -1207,7 +1233,10 @@ namespace CharacterCreation
                             heroFourSlot.Source = heroes[heroSlot].CharacterPortrait;
                             nameLabelFour.Content = heroes[heroSlot].Name;
                             jobLabelFour.Content = heroes[heroSlot].JobRole;
-                            genderLabelFour.Content = heroes[heroSlot].Male;
+                            if (heroes[heroSlot].Male)
+                                genderLabelFour.Content = "Male";
+                            else
+                                genderLabelFour.Content = "Female";
                             break;
                         }
                     case 4:
@@ -1215,7 +1244,10 @@ namespace CharacterCreation
                             heroFiveSlot.Source = heroes[heroSlot].CharacterPortrait;
                             nameLabelFive.Content = heroes[heroSlot].Name;
                             jobLabelFive.Content = heroes[heroSlot].JobRole;
-                            genderLabelFive.Content = heroes[heroSlot].Male;
+                            if (heroes[heroSlot].Male)
+                                genderLabelFive.Content = "Male";
+                            else
+                                genderLabelFive.Content = "Female";
                             break;
                         }
 

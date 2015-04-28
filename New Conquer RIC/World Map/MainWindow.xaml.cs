@@ -43,10 +43,8 @@ namespace World_Map
         {
             music = song;
             main = create;
-            //music.
-            //music.Source = new Uri("../../Menu.wav", UriKind.Relative);
-            InitializeComponent();
 
+            InitializeComponent();
 
             //Sets the level/campus building's hoverOver statusmain = title;
             buildingSetUp();
@@ -95,9 +93,7 @@ namespace World_Map
 
             lstCharacterStats.Items.Clear();
             lstCharacterStats.Visibility = System.Windows.Visibility.Visible;
-            lstCharacterStats.Items.Add(setOfHeroes[0].ToStringScreen());//(setOfHeroes[0].ToStringScreen());
-           //    imageTEST.Source = setOfHeroes[0].CharacterPicture;//new BitmapImage(new Uri(@"/Pictures/FemaleInformationSecurity.png", UriKind.Relative));
-           // imageTEST.Source = setOfHeroes[0].CharacterPortrait;
+            lstCharacterStats.Items.Add(setOfHeroes[0].ToStringScreen());
 
             portrait1.Source = setOfHeroes[0].CharacterPortrait;
 
@@ -391,7 +387,7 @@ namespace World_Map
        private void btnLibrary_MouseDoubleClick(object sender, MouseButtonEventArgs e)
        {
            GameBoard.MainWindow library =
-               new GameBoard.MainWindow("testmap.txt", setOfHeroes);
+               new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
 
            this.NavigationService.Navigate(library);
        }
@@ -506,6 +502,12 @@ namespace World_Map
        {
            ReturnGrid.Visibility = Visibility.Hidden;
            optionsGrid.Visibility = Visibility.Visible;
+       }
+
+       private void WorldMap_Loaded(object sender, RoutedEventArgs e)
+       {
+           music.Source = new Uri("../../Menu.wav", UriKind.Relative);
+           music.Play();
        }
     }
 }

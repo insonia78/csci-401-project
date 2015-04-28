@@ -63,6 +63,10 @@ namespace GameBoard
         public bool waitIsClicked;
         public bool TutFirstMoveWaitTextExitIsClicked;
 
+        // control frame
+        Window main;
+        MediaElement music;
+
         /*
          * Initializes the GUI components, creates the cells 2d array, and sets up the board/tiles/characters, etc.
          */
@@ -100,8 +104,11 @@ namespace GameBoard
             refreshBoardSpace(14, 3);
         }
 
-        public MainWindow(String levelFile, Hero[] heroes)
+        public MainWindow(String levelFile, Hero[] heroes, Window frame, MediaElement bgm)
         {
+            main = frame;
+            music = bgm;
+
             InitializeComponent();
 
             hero1 = heroes[0];
@@ -211,7 +218,8 @@ namespace GameBoard
 
         private void Board_Loaded(object sender, RoutedEventArgs e)
         {
-
+            music.Source = new Uri("../../LevelOneBgm.wav", UriKind.Relative);
+            music.Play();
         }
 
         /*

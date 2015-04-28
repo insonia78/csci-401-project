@@ -117,6 +117,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="LevelOneBgm.wav" />
+    <Content Include="Menu.wav" />
     <Content Include="Rage of the Champions.wav" />
     <Content Include="Winter Bliss.wav" />
   </ItemGroup>
