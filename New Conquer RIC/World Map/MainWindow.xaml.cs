@@ -43,8 +43,8 @@ namespace World_Map
         {
             music = song;
             main = create;
-            music.Source = new Uri("../../Menu.wav", UriKind.Relative);
-            music.Play();
+            //music.
+            //music.Source = new Uri("../../Menu.wav", UriKind.Relative);
             InitializeComponent();
 
 
