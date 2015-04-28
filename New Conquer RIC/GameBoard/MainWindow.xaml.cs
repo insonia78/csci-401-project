@@ -137,6 +137,7 @@ namespace GameBoard
             //boardspaces[r, c].Click += new RoutedEventHandler(Tile_Click); //Add the Tile_Click event to the cell's button in case it isn't already on (will sometimes disappear otherwise).
 
             backgroundImage = new ImageBrush(boardspaces[r, c].terrainImage.terrainImage);
+            backgroundImage.Stretch = Stretch.Fill;
             boardspaces[r, c].Background = backgroundImage; //Set the background of the tile button to the terrain image.
             boardspaces[r, c].BorderThickness = new Thickness(0); //Remove the tile button's border
             cells[r,c].Children.Add(boardspaces[r, c]); //Add the tile button to the Grid cell
@@ -144,6 +145,7 @@ namespace GameBoard
             if (boardspaces[r, c].containsCharacter() == true) //For both heroes and enemies.
             {
                 ImageBrush characterbrush = new ImageBrush(boardspaces[r, c].tileCharacter.CharacterPicture);
+                characterbrush.Stretch = Stretch.Fill;
                 boardspaces[r,c].tileCharacter.Background = characterbrush; //Character's image added onto character button in the same way the tile's image was
                 boardspaces[r, c].tileCharacter.BorderThickness = new Thickness(0); //Remove the character button's border
 
@@ -751,18 +753,23 @@ namespace GameBoard
         {
             if (tutFirstMoveExitClicked == true)
             {
-                this.Character_Click(boardspaces[4, 2].tileCharacter, null);
+                this.Character_Click(boardspaces[2, 4].tileCharacter, null);
 
                 //makes the character move to a specific square.
                 //checks that its that square.
                 //if not, it reminds them to move the character so they can try again.
 
-                Move_Click(boardspaces[4, 2].tileCharacter, null);
+                Move_Click(boardspaces[2, 4].tileCharacter, null);
                 for (int r = 0; r < numRows; r++)
                 {
                     for (int c = 0; c < numCols; c++)
                     {
-                        if (boardspaces[r, c].isMoveOption && (r != 2 || c != 4))
+                        boardspaces[r, c].Click -= new RoutedEventHandler(Tile_Click);
+                        if(boardspaces[r,c].containsCharacter())
+                        {
+                            boardspaces[r, c].tileCharacter.Click -= new RoutedEventHandler(Character_Click);
+                        }
+                        if (boardspaces[r, c].isMoveOption && (r != 4 || c != 2))
                         {
                             boardspaces[r, c].isMoveOption = false;
                             boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
@@ -770,6 +777,7 @@ namespace GameBoard
                         hero1move1 = true;                       
                     }
                 }
+                Move.IsEnabled = false;
                 End_Turn.IsEnabled = false;
                 Attack.IsEnabled = false;
                 Defend.IsEnabled = false;
@@ -818,7 +826,15 @@ namespace GameBoard
                 Attack.IsEnabled = false;
                 Defend.IsEnabled = false;
                 Use_Item.IsEnabled = false;
-            }           
+            }
+
+            for (int r = 0; r < numRows; r++)
+            {
+                for (int c = 0; c < numCols; c++)
+                {
+                    refreshBoardSpace(r, c);
+                }
+            }
         }
 
 
@@ -872,7 +888,7 @@ namespace GameBoard
             {
                 //values won't be null, just not sure where I want them to move yet.
                 //MessageBox.Show("its sort of working");
-                forceMoveCharacter(2, 7, 0, 4);
+                forceMoveCharacter(7, 2, 4, 0);
                 //forceMoveCharacter(5, 7, null, null);
                 //forceMoveCharacter(8, 7, null, null);
                 //forceMoveCharacter(14, 6, null, null);

@@ -482,9 +482,13 @@ namespace GameBoard
          * resets certain attributes for players/enemies that are only for that specific turn (hasMoved, for example), and decreases the amount of turns any effects on them will last.
          * Also increments the turn counter.
          */
-        public void nextTurn()
+        public async void nextTurn()
         {
-            enemyTurn();
+            //Disables the mouse from clicking on anything so the user can't click something else mid animation (bad things would happen)
+            this.IsHitTestVisible = false;
+            //Changes the cursor to a loading/waiting cursor for the duration of the animation to help let the user know they can't use the mouse
+            Mouse.OverrideCursor = Cursors.Wait;
+            await enemyTurn();
             for (int r = 0; r < numRows; r++)
             {
                 for (int c = 0; c < numCols; c++)
@@ -504,6 +508,10 @@ namespace GameBoard
             //Make sure there's no leftover move/attack events on the board (caused bugs occassionally without this).
             clearMoveOptions();
             clearAttackOptions();
+            //Reenables the mouse once the animation is done and the user can't screw things up.
+            this.IsHitTestVisible = true;
+            //Sets the cursor back to the normal one.
+            Mouse.OverrideCursor = null;
         }
 
         /*
@@ -511,7 +519,7 @@ namespace GameBoard
          * to the right, the for loops won't encounter those enemies again and move them again) and then calls the enemyMoveAI method for that enemy to determine 
          * where to move them.
          */
-        public void enemyTurn()
+        public async Task enemyTurn()
         {
             for(int r = 0; r < numRows; r++)
             {
@@ -519,7 +527,7 @@ namespace GameBoard
                 {
                     if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy)) && boardspaces[r, c].tileCharacter.hasMoved == false)
                     {
-                        if (enemyAttackAI(r, c))
+                        if (enemyAttackAI(r, c).Equals("true"))
                         {
                             boardspaces[r, c].tileCharacter.hasMoved = true;
                         }
@@ -529,12 +537,13 @@ namespace GameBoard
                             enemyAttackAI(r, c); //NEEDS TO USE THE NEW ROW, COL, not r, c, don't know if/where that's stored yet.
                         }
                         boardspaces[r, c].tileCharacter.hasMoved = true; //NEEDS TO USE THE NEW ROW, COL, not r, c, don't know if/where that's stored yet.
+                        await Task.Delay(5000);
                     }
                 }
             }
         }
 
-        private bool enemyAttackAI(int r, int c)
+        private async Task<string> enemyAttackAI(int r, int c)
         {
             int heroInAttackRangeCount = 0;
             int max_heroesInRange = 0;
@@ -577,6 +586,7 @@ namespace GameBoard
                 max_heroesInRange = heroInAttackRangeCount;
             }
 
+            await Task.Delay(1000);
             Ability2_Click(boardspaces[r, c], null);
 
             heroInAttackRangeCount = countHeroesInArea(area1);
@@ -611,6 +621,7 @@ namespace GameBoard
                 max_heroesInRange = heroInAttackRangeCount;
             }
 
+            await Task.Delay(1000);
             Ability3_Click(boardspaces[r, c], null);
 
             heroInAttackRangeCount = countHeroesInArea(area1);
@@ -645,29 +656,30 @@ namespace GameBoard
                 max_heroesInRange = heroInAttackRangeCount;
             }
 
+            await Task.Delay(1000);
             switch(bestAttack)
             {
                 case 0:
-                    clearAttackOptions();
-                    return false;
+                    await clearAttackOptions();
+                    return "false";
                 case 1:
                     Ability1_Click(boardspaces[r, c], null);
                     switch(bestAttackArea)
                     {
                         case 0:
-                            clearAttackOptions();
-                            return false;
+                            await clearAttackOptions();
+                            return "false";
                         case 1:
-                            applyAbilityToArea(area1);
+                            await applyAbilityToArea(area1);
                             break;
                         case 2:
-                            applyAbilityToArea(area2);
+                            await applyAbilityToArea(area2);
                             break;
                         case 3:
-                            applyAbilityToArea(area3);
+                            await applyAbilityToArea(area3);
                             break;
                         case 4:
-                            applyAbilityToArea(area4);
+                            await applyAbilityToArea(area4);
                             break;
                     }
                     break;
@@ -676,19 +688,19 @@ namespace GameBoard
                     switch (bestAttackArea)
                     {
                         case 0:
-                            clearAttackOptions();
-                            return false;
+                            await clearAttackOptions();
+                            return "false";
                         case 1:
-                            applyAbilityToArea(area1);
+                            await applyAbilityToArea(area1);
                             break;
                         case 2:
-                            applyAbilityToArea(area2);
+                            await applyAbilityToArea(area2);
                             break;
                         case 3:
-                            applyAbilityToArea(area3);
+                            await applyAbilityToArea(area3);
                             break;
                         case 4:
-                            applyAbilityToArea(area4);
+                            await applyAbilityToArea(area4);
                             break;
                     }
                     break;
@@ -697,25 +709,25 @@ namespace GameBoard
                     switch (bestAttackArea)
                     {
                         case 0:
-                            clearAttackOptions();
-                            return false;
+                            await clearAttackOptions();
+                            return "false";
                         case 1:
-                            applyAbilityToArea(area1);
+                            await applyAbilityToArea(area1);
                             break;
                         case 2:
-                            applyAbilityToArea(area2);
+                            await applyAbilityToArea(area2);
                             break;
                         case 3:
-                            applyAbilityToArea(area3);
+                            await applyAbilityToArea(area3);
                             break;
                         case 4:
-                            applyAbilityToArea(area4);
+                            await applyAbilityToArea(area4);
                             break;
                     }
                     break;
             }
 
-            return true;
+            return "true";
         }
 
         public int countHeroesInArea(ArrayList area)
@@ -753,7 +765,7 @@ namespace GameBoard
             selectedCharacterCol = oldCol;
             boardspaces[oldRow, oldCol].tileCharacter.hasMoved = false;
             MoveOption_Click(boardspaces[newRow, newCol], null);
-            boardspaces[newRow, newCol].tileCharacter.hasMoved = false;
+            //boardspaces[newRow, newCol].tileCharacter.hasMoved = false;
         }
 
         /*
