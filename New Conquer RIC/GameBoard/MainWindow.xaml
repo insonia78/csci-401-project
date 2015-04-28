@@ -10,7 +10,6 @@
             <Label x:Name="TurnCounter" Content="Turn 1" HorizontalAlignment="Left" Margin="216,520,0,0" VerticalAlignment="Top" Height="49" Width="106" FontWeight="Bold" FontSize="24" FontFamily="Segoe UI Black"/>
             <ListBox x:Name="Info_Panel" HorizontalAlignment="Left" Height="328" Margin="596,76,-30,0" VerticalAlignment="Top" Width="114">
                 <Image x:Name="Tile_Info_Image" Height="100" Width="100"/>
-                <Label x:Name="Health_Label" Content="Label"/>
                 <Label x:Name="Defense_Label" Content="Label"/>
                 <Label x:Name="SpDefense_Label" Content="Label"/>
                 <Label x:Name="testlabel" Content="Label" RenderTransformOrigin="1.868,10.462"/>
@@ -38,6 +37,8 @@
         <TextBox x:Name ="TutFirstMoveWaitText" Height="72" Canvas.Left="310" TextWrapping="Wrap" Text="" Canvas.Top="271" Width="146" Visibility="Hidden"/>
         <Button x:Name ="TutFirstMoveWaitTextExit" Content="Ok" Height="23" Canvas.Left="394" Canvas.Top="320" Width="62" Click="TutFirstMoveWaitTextExit_Click" Visibility="Hidden"/>
         <Button Content="X" Canvas.Left="1040" Canvas.Top="36" Width="66" Height="65" Click="XButton_Click"/>
+        <ProgressBar x:Name ="HealthBar" Height="10" Canvas.Left="912" Canvas.Top="176" Width="100"/>
+        <Label x:Name="Health_Label" Content="Label" Canvas.Left="1070" Canvas.Top="176"/>
 
     </Canvas>
 </Page>

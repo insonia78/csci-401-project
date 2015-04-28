@@ -164,7 +164,7 @@ namespace GameBoard
             updateAvailableOptionButtons();
         }
 
-        public void applyAbilityToArea(ArrayList area)
+        public async void applyAbilityToArea(ArrayList area)
         {
             foreach(Tile space in area)
             {
@@ -184,11 +184,11 @@ namespace GameBoard
                     if(damage != "MISS")
                     {
                         space.tileCharacter.DecreaseHealth(Convert.ToInt32(damage));
-                        attackAnimation(space.tileCharacter, "test_explosion_spritesheet.png");
+                        await attackAnimation(space.tileCharacter, ".../.../Pictures/test_explosion_spritesheet.png");
                     }
                     else
                     {
-                        attackAnimation(space.tileCharacter, "miss_spritesheet.png");
+                        await attackAnimation(space.tileCharacter, ".../.../Pictures/miss_spritesheet.png");
                     }
 
                     if (space.tileCharacter.Status == "KNOCKED OUT")
@@ -204,7 +204,7 @@ namespace GameBoard
                             updateCharacterCountDisplay();
                         }
 
-                        attackAnimation(space, "test_explosion_spritesheet.png");
+                        await attackAnimation(space, ".../.../Pictures/test_explosion_spritesheet.png");
                         space.tileCharacter = null;
                         refreshBoardSpace(space.Row, space.Col);
                     }
@@ -259,6 +259,7 @@ namespace GameBoard
 
         public void Ability1_Click(object sender, RoutedEventArgs e)
         {
+            clearAttackOptions();
             int[,] attackAreas = new int[numRows, numCols];
             attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability1(mapSolidSpaces()); //Determines the different spaces the character can attack
             decodeAttackAreas(attackAreas);
@@ -267,6 +268,7 @@ namespace GameBoard
 
         public void Ability2_Click(object sender, RoutedEventArgs e)
         {
+            clearAttackOptions();
             int[,] attackAreas = new int[numRows, numCols];
             attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability2(mapSolidSpaces()); //Determines the different spaces the character can attack
             decodeAttackAreas(attackAreas);
@@ -275,6 +277,7 @@ namespace GameBoard
 
         public void Ability3_Click(object sender, RoutedEventArgs e)
         {
+            clearAttackOptions();
             int[,] attackAreas = new int[numRows, numCols];
             attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability3(mapSolidSpaces()); //Determines the different spaces the character can attack
             decodeAttackAreas(attackAreas);
@@ -283,6 +286,7 @@ namespace GameBoard
 
         public void Ability4_Click(object sender, RoutedEventArgs e)
         {
+            clearAttackOptions();
             int[,] attackAreas = new int[numRows, numCols];
             attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability4(mapSolidSpaces()); //Determines the different spaces the character can attack
             decodeAttackAreas(attackAreas);
@@ -537,7 +541,7 @@ namespace GameBoard
             }
         }
 
-        private void attackAnimation(Button space, String spritesheetSource)
+        private async Task attackAnimation(Button space, String spritesheetSource)
         {
             animationContainer = new Grid();
 
@@ -563,6 +567,8 @@ namespace GameBoard
 
             currentFrame = 0;
             dispatcherTimer.Start();
+
+            await Task.Delay(1000);
         }
 
         private void onUpdate(object sender, object e)

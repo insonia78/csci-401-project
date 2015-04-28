@@ -180,11 +180,27 @@ namespace GameBoard
                 {
                     testlabel.Content = "Hero";
                 }
+                if(boardspaces[row, col].tileCharacter.MaxHealth/2 > boardspaces[row, col].tileCharacter.CurrentHealth)
+                {
+                    HealthBar.Foreground = moveOption; //Yellow
+                }
+                if (boardspaces[row, col].tileCharacter.MaxHealth / 4 > boardspaces[row, col].tileCharacter.CurrentHealth)
+                {
+                    HealthBar.Foreground = attackOption; //Red
+                }
+                else
+                    HealthBar.Foreground = new SolidColorBrush(Colors.Green);
+
+                HealthBar.Visibility = Visibility.Visible;
+                HealthBar.Maximum = boardspaces[row, col].tileCharacter.MaxHealth;
+                HealthBar.Minimum = 0;
+                HealthBar.Value = boardspaces[row, col].tileCharacter.CurrentHealth;
                 Health_Label.Content = boardspaces[row, col].tileCharacter.CurrentHealth;
                 Defense_Label.Content = boardspaces[row, col].tileCharacter.CurrentDefense;
                 SpDefense_Label.Content = boardspaces[row, col].tileCharacter.CurrentSpecialDefense;
             }
             else
+                HealthBar.Visibility = Visibility.Hidden;
                 Character_Info_Image.Source = null;
         }
 

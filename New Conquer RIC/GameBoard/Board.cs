@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Collections;
 using Community;
 
 namespace GameBoard
@@ -518,44 +519,214 @@ namespace GameBoard
                 {
                     if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy)) && boardspaces[r, c].tileCharacter.hasMoved == false)
                     {
-                        enemyMoveAI(r, c);
-                        boardspaces[r, c].tileCharacter.hasMoved = true;
-                        //enemyAttackAI(r, c);
+                        if (enemyAttackAI(r, c))
+                        {
+                            boardspaces[r, c].tileCharacter.hasMoved = true;
+                        }
+                        else
+                        {
+                            enemyMoveAI(r, c);
+                            enemyAttackAI(r, c); //NEEDS TO USE THE NEW ROW, COL, not r, c, don't know if/where that's stored yet.
+                        }
+                        boardspaces[r, c].tileCharacter.hasMoved = true; //NEEDS TO USE THE NEW ROW, COL, not r, c, don't know if/where that's stored yet.
                     }
                 }
             }
         }
 
-        //private bool enemyAttackAI(int r, int c)
-        //{
-        //    int heroInAttackRangeCount = 0;
-        //    int max_heroesInRange = 0;
-        //    int bestAttack = 0;
-        //    selectedCharacterRow = r;
-        //    selectedCharacterCol = c;
-        //    Ability1_Click(boardspaces[r, c], null);
-        //    foreach(Tile space in area1)
-        //    {
-        //        if(space.containsCharacter() && space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)))
-        //        {
-        //            heroInAttackRangeCount++;
-        //        }
-        //    }
-        //    if(heroInAttackRangeCount > max_heroesInRange)
-        //    {
+        private bool enemyAttackAI(int r, int c)
+        {
+            int heroInAttackRangeCount = 0;
+            int max_heroesInRange = 0;
+            int bestAttack = 0;
+            int bestAttackArea = 0;
+            selectedCharacterRow = r;
+            selectedCharacterCol = c;
 
-        //    }
-        //    foreach (Tile space in area2)
-        //    {
-        //        if (space.containsCharacter() && space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)))
-        //        {
-        //            heroInAttackRangeCount++;
-        //        }
-        //    }
+            Ability1_Click(boardspaces[r, c], null);
 
-        //    AttackOption_Click(boardspaces[r, c], null);
-        //    MessageBox.Show("Attack");
-        //}
+            heroInAttackRangeCount = countHeroesInArea(area1);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 1;
+                bestAttackArea = 1;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area2);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 1;
+                bestAttackArea = 2;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area3);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 1;
+                bestAttackArea = 3;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area4);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 1;
+                bestAttackArea = 4;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            Ability2_Click(boardspaces[r, c], null);
+
+            heroInAttackRangeCount = countHeroesInArea(area1);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 2;
+                bestAttackArea = 1;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area2);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 2;
+                bestAttackArea = 2;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area3);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 2;
+                bestAttackArea = 3;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area4);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 2;
+                bestAttackArea = 4;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            Ability3_Click(boardspaces[r, c], null);
+
+            heroInAttackRangeCount = countHeroesInArea(area1);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 3;
+                bestAttackArea = 1;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area2);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 3;
+                bestAttackArea = 2;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area3);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 3;
+                bestAttackArea = 3;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area4);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 3;
+                bestAttackArea = 4;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            switch(bestAttack)
+            {
+                case 0:
+                    return false;
+                case 1:
+                    Ability1_Click(boardspaces[r, c], null);
+                    switch(bestAttackArea)
+                    {
+                        case 0:
+                            return false;
+                        case 1:
+                            applyAbilityToArea(area1);
+                            break;
+                        case 2:
+                            applyAbilityToArea(area2);
+                            break;
+                        case 3:
+                            applyAbilityToArea(area3);
+                            break;
+                        case 4:
+                            applyAbilityToArea(area4);
+                            break;
+                    }
+                    break;
+                case 2:
+                    Ability2_Click(boardspaces[r, c], null);
+                    switch (bestAttackArea)
+                    {
+                        case 0:
+                            return false;
+                        case 1:
+                            applyAbilityToArea(area1);
+                            break;
+                        case 2:
+                            applyAbilityToArea(area2);
+                            break;
+                        case 3:
+                            applyAbilityToArea(area3);
+                            break;
+                        case 4:
+                            applyAbilityToArea(area4);
+                            break;
+                    }
+                    break;
+                case 3:
+                    Ability3_Click(boardspaces[r, c], null);
+                    switch (bestAttackArea)
+                    {
+                        case 0:
+                            return false;
+                        case 1:
+                            applyAbilityToArea(area1);
+                            break;
+                        case 2:
+                            applyAbilityToArea(area2);
+                            break;
+                        case 3:
+                            applyAbilityToArea(area3);
+                            break;
+                        case 4:
+                            applyAbilityToArea(area4);
+                            break;
+                    }
+                    break;
+            }
+
+            return true;
+        }
+
+        public int countHeroesInArea(ArrayList area)
+        {
+            int heroCount = 0;
+            foreach (Tile space in area)
+            {
+                if (space.containsCharacter() && space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)))
+                {
+                    heroCount++;
+                }
+            }
+
+            return heroCount;
+        }
 
         /*
          * Temporary, really sucky enemy movement AI and calls the moveCharacter method to move the enemy once a random direction (vertical, horizontal, or diagonal)

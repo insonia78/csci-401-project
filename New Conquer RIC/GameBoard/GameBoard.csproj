@@ -74,21 +74,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Attack.cs" />
-    <Compile Include="Boss.cs" />
-    <Compile Include="Effect.cs" />
-    <Compile Include="Enemy_Healer.cs" />
-    <Compile Include="Enemy_Hunter.cs" />
-    <Compile Include="Enemy_Warrior.cs" />
-    <Compile Include="Healer.cs" />
-    <Compile Include="Hunter.cs" />
-    <Compile Include="Mage.cs" />
     <Compile Include="mapBuilder.xaml.cs">
       <DependentUpon>mapBuilder.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlotRoot.cs" />
-    <Compile Include="Rogue.cs" />
     <Compile Include="Terrain.cs" />
-    <Compile Include="Warrior.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,15 +92,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Board.cs" />
-    <Compile Include="Character.cs" />
-    <Compile Include="Enemy.cs" />
     <Page Include="mapBuilder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hero.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
