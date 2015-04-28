@@ -410,11 +410,26 @@ namespace CharacterCreation
             nameLabelFour.Content = heroes[3].Name;
             nameLabelFive.Content = heroes[4].Name;
 
-            genderLabelOne.Content = heroes[0].Male;
-            genderLabelTwo.Content = heroes[1].Male;
-            genderLabelThree.Content = heroes[2].Male;
-            genderLabelFour.Content = heroes[3].Male;
-            genderLabelFive.Content = heroes[4].Male;
+            if(heroes[0].Male)
+                genderLabelOne.Content = "Male";
+            else
+                genderLabelOne.Content = "Female";
+            if (heroes[1].Male)
+                genderLabelTwo.Content = "Male";
+            else
+                genderLabelTwo.Content = "Female";
+            if (heroes[2].Male)
+                genderLabelThree.Content = "Male";
+            else
+                genderLabelThree.Content = "Female";
+            if (heroes[3].Male)
+                genderLabelFour.Content = "Male";
+            else
+                genderLabelFour.Content = "Female";
+            if (heroes[4].Male)
+                genderLabelFive.Content = "Male";
+            else
+                genderLabelFive.Content = "Female";
 
             jobLabelOne.Content = heroes[0].JobRole;
             jobLabelTwo.Content = heroes[1].JobRole;

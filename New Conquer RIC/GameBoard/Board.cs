@@ -648,12 +648,14 @@ namespace GameBoard
             switch(bestAttack)
             {
                 case 0:
+                    clearAttackOptions();
                     return false;
                 case 1:
                     Ability1_Click(boardspaces[r, c], null);
                     switch(bestAttackArea)
                     {
                         case 0:
+                            clearAttackOptions();
                             return false;
                         case 1:
                             applyAbilityToArea(area1);
@@ -674,6 +676,7 @@ namespace GameBoard
                     switch (bestAttackArea)
                     {
                         case 0:
+                            clearAttackOptions();
                             return false;
                         case 1:
                             applyAbilityToArea(area1);
@@ -694,6 +697,7 @@ namespace GameBoard
                     switch (bestAttackArea)
                     {
                         case 0:
+                            clearAttackOptions();
                             return false;
                         case 1:
                             applyAbilityToArea(area1);
