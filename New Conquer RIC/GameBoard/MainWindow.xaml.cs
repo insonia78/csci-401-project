@@ -60,6 +60,8 @@ namespace GameBoard
         public bool highlightedFirstClick;
         public bool tutFirstMoveExitClicked;
         public bool hero1move1;
+        public bool waitIsClicked;
+        public bool TutFirstMoveWaitTextExitIsClicked;
 
         /*
          * Initializes the GUI components, creates the cells 2d array, and sets up the board/tiles/characters, etc.
@@ -626,12 +628,27 @@ namespace GameBoard
          */
         private void End_Turn_Click(object sender, RoutedEventArgs e)
         {
-            boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
-            refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
-            disableAllOptionButtons();
-            if (checkAllPlayersInactive())
+            waitIsClicked = true;
+            if (tutorialWasClicked == true)
             {
-                nextTurn();
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
+                refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
+                disableAllOptionButtons();
+                if (checkAllPlayersInactive())
+                {
+                    nextTurn();
+                }
+                this.inbetweenStep();
+            }
+            else
+            {
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
+                refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
+                disableAllOptionButtons();
+                if (checkAllPlayersInactive())
+                {
+                    nextTurn();
+                }
             }
         }
 
@@ -707,6 +724,7 @@ namespace GameBoard
             {              
                 TutFirstMoveExit.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMove.Visibility = System.Windows.Visibility.Visible;
+                
                 TutFirstMove.Text = "now that you've clicked on the highlighted tile, see how there are squares that light up? those squares indicate where the character can go." +
                 "for our purposes, i want you to move to the square thats highlighted purple.";              
             }       
@@ -767,24 +785,25 @@ namespace GameBoard
             if (boardspaces[4, 2].containsCharacter() == true)
             {
                 TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Visible;
-                TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
+                //TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMoveWaitText.IsEnabled = false;
                 TutFirstMoveWaitText.Text = "Now that the character has moved to its new location, we need to end the character's turn. to do this, press the Wait Button.";
             }
+            this.makeHeroWait();
         }
 
 
         private void TutFirstMoveWaitTextExit_Click(object sender, RoutedEventArgs e)
         {
+            TutFirstMoveWaitTextExitIsClicked = true;
             TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Hidden;
             TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Hidden;
-            this.makeHeroWait();
+            this.tutorialFirstStepThree();
         }
 
         //makes the hero wait at the spot they are at in the tutorial level
         public void makeHeroWait()
         {
-
             if (hero1move1 == true)
             {
                 End_Turn.IsEnabled = true;
@@ -798,9 +817,12 @@ namespace GameBoard
                 Attack.IsEnabled = false;
                 Defend.IsEnabled = false;
                 Use_Item.IsEnabled = false;
-            }
-            this.tutorialFirstStepThree();
+            }           
         }
+
+
+
+
         //moves hero 2 to a specific spot.
         //follows the same format as the first, just a different place.
         public void tutorialFirstStepThree() {
@@ -816,10 +838,8 @@ namespace GameBoard
                         }
                     }
                 }
-                this.inbetweenStep();
+                this.inbetweenStepTwo();
             }
-
-
 
        
 
@@ -829,13 +849,20 @@ namespace GameBoard
             //7 4
            //11  3
               //9   2
-            //end all characters turns.
-            //its not working
 
-            End_Heroes_Turn_Click(null, null);
-            this.tutorialEnemyMoveOne();
+                TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
         }
+            
+                     
+        
 
+    public void inbetweenStepTwo() {
+        if(TutFirstMoveWaitTextExitIsClicked == true)
+                {
+                End_Heroes_Turn_Click(null, null);
+                this.tutorialEnemyMoveOne();
+                }
+}
 
         //forces the enemy to move a certain way for turn 1.
         public void tutorialEnemyMoveOne()
@@ -843,7 +870,7 @@ namespace GameBoard
             if (tutorialWasClicked == true && turnNumber == 2)
             {
                 //values won't be null, just not sure where I want them to move yet.
-
+                //MessageBox.Show("its sort of working");
                 forceMoveCharacter(2, 7, 0, 4);
                 //forceMoveCharacter(5, 7, null, null);
                 //forceMoveCharacter(8, 7, null, null);
