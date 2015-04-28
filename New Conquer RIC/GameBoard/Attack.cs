@@ -38,8 +38,10 @@ namespace GameBoard
         private ArrayList area3 = new ArrayList();
         private ArrayList area4 = new ArrayList();
 
-        private void clearAttackOptions()
+        private async Task clearAttackOptions()
         {
+            await Task.Delay(2000);
+
             foreach (Tile space in area1)
             {
                 removeAttackOption(space);
@@ -168,8 +170,8 @@ namespace GameBoard
         {
             foreach(Tile space in area)
             {
-                //String position = space.Row + ", " + space.Col;
-                //MessageBox.Show(position + " was attacked.");
+                String position = space.Row + ", " + space.Col;
+                MessageBox.Show(position + " was attacked.");
 
                 if (space.containsCharacter() && (((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)) || 
                     ((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))))))
@@ -211,7 +213,7 @@ namespace GameBoard
                 }
             }
 
-            clearAttackOptions();
+            await clearAttackOptions();
         }
 
         public int[,] mapSolidSpaces()

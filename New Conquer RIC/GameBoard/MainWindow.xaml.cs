@@ -776,6 +776,7 @@ namespace GameBoard
                 Use_Item.IsEnabled = false;
             }
             boardspaces[4, 2].BorderBrush = new SolidColorBrush(Colors.Purple);
+            boardspaces[4, 2].BorderThickness = new Thickness(2);
         }
 
         //sees if the hero has moved to the specified place.
