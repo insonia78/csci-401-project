@@ -648,6 +648,37 @@ namespace GameBoard
             TutorialIntroductionExit.Visibility = System.Windows.Visibility.Visible;
         }
 
+
+
+        //exits the tutorial text.
+        //calls the next step in the tutorial
+        public void TutorialIntroductionExit_Click(object sender, RoutedEventArgs e)
+        {
+            tutIntroductionExitClicked = true;
+            TutIntroduction.Visibility = System.Windows.Visibility.Hidden;
+            TutorialIntroductionExit.Visibility = System.Windows.Visibility.Hidden;
+            this.intermStep();
+        }
+
+
+        public void intermStep()
+        {
+            TutFirstMove0Text.IsEnabled = false;
+            TutFirstMove0Text.Visibility = System.Windows.Visibility.Visible;
+            TutFirstMove0TextExit.Visibility = System.Windows.Visibility.Visible;
+            TutFirstMove0Text.Text = "click on the character to move it.";           
+        }
+
+
+        private void TutFirstMove0TextExit_Click(object sender, RoutedEventArgs e)
+        {
+            TutFirstMove0Text.Visibility = System.Windows.Visibility.Hidden;
+            TutFirstMove0TextExit.Visibility = System.Windows.Visibility.Hidden;
+            //highlight the spot the character is on
+            this.tutorialFirstStep();
+        }
+
+
         public void tutorialFirstStep()
         {
             End_Turn.IsEnabled = false;
@@ -655,46 +686,49 @@ namespace GameBoard
             Attack.IsEnabled = false;
             Defend.IsEnabled = false;
             Use_Item.IsEnabled = false;
-
+            
             if (tutIntroductionExitClicked == true)
-            {
-               
-                //"Clicking on a character allows you to move, attack, defend, or to use items.
-                //"Click on the highlighted square to move that character." ;
-                //this teaches you how to move the character. select the highlighted square.
-                //boolean for if the square highlighted was clicked.
-
+            {              
                 TutFirstMoveExit.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMove.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMove.Text = "now that you've clicked on the highlighted tile, see how there are squares that light up? those squares indicate where the character can go." +
                 "for our purposes, i want you to move to the square thats highlighted purple.";              
-            }
-        
+            }       
         }
 
 
+        //exits the first move tutorial text.
+        //calls the second step in the tutorial.
+        private void TutFirstMoveExit_Click(object sender, RoutedEventArgs e)
+        {
+            tutFirstMoveExitClicked = true;
+            TutFirstMove.Visibility = System.Windows.Visibility.Hidden;
+            TutFirstMoveExit.Visibility = System.Windows.Visibility.Hidden;
+            this.tutorialFirstStepTwo();
+        }
+
+        //
+        //
+        //
+        //highlight the character so it can be clicked on
+        //
+        //
         public void tutorialFirstStepTwo()
         {
-
-
             if (tutFirstMoveExitClicked == true)
             {
-                this.Character_Click(boardspaces[1, 2].tileCharacter, null);
+                this.Character_Click(boardspaces[4, 2].tileCharacter, null);
 
                 //makes the character move to a specific square.
-
-
-
-
                 //checks that its that square.
                 //if not, it reminds them to move the character so they can try again.
 
-                Move_Click(boardspaces[1, 2].tileCharacter, null);
+                Move_Click(boardspaces[4, 2].tileCharacter, null);
                 for (int r = 0; r < numRows; r++)
                 {
                     for (int c = 0; c < numCols; c++)
                     {
-                        if (boardspaces[r, c].isMoveOption && (r != 4 || c != 2))
+                        if (boardspaces[r, c].isMoveOption && (r != 2 || c != 4))
                         {
                             boardspaces[r, c].isMoveOption = false;
                             boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
@@ -718,33 +752,23 @@ namespace GameBoard
             {
                 TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
+                TutFirstMoveWaitText.IsEnabled = false;
                 TutFirstMoveWaitText.Text = "Now that the character has moved to its new location, we need to end the character's turn. to do this, press the Wait Button.";
             }
         }
-                
-        //moves hero 2 to a specific spot.
-        //follows the same format as the first, just a different place.
-        public void tutorialFirstStepThree() {
-                Move_Click(boardspaces[5, 3].tileCharacter, null);
-                for (int r = 0; r < numRows; r++)
-                {
-                    for (int c = 0; c < numCols; c++)
-                    {
-                        if (boardspaces[r, c].isMoveOption && (r != 7 || c != 1))
-                        {
-                            boardspaces[r, c].isMoveOption = false;
-                            boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
-                        }
-                    }
-                }
-             
-            }
 
+
+        private void TutFirstMoveWaitTextExit_Click(object sender, RoutedEventArgs e)
+        {
+            TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Hidden;
+            TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Hidden;
+            this.makeHeroWait();
+        }
 
         //makes the hero wait at the spot they are at in the tutorial level
         public void makeHeroWait()
         {
-            
+
             if (hero1move1 == true)
             {
                 End_Turn.IsEnabled = true;
@@ -759,7 +783,57 @@ namespace GameBoard
                 Defend.IsEnabled = false;
                 Use_Item.IsEnabled = false;
             }
-   
+            this.tutorialFirstStepThree();
+        }
+        //moves hero 2 to a specific spot.
+        //follows the same format as the first, just a different place.
+        public void tutorialFirstStepThree() {
+                Move_Click(boardspaces[2, 5].tileCharacter, null);
+                for (int r = 0; r < numRows; r++)
+                {
+                    for (int c = 0; c < numCols; c++)
+                    {
+                        if (boardspaces[r, c].isMoveOption && (r != 0 || c != 4))
+                        {
+                            boardspaces[r, c].isMoveOption = false;
+                            boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
+                        }
+                    }
+                }
+                this.inbetweenStep();
+            }
+
+
+
+       
+
+
+        public void inbetweenStep()
+        {
+            //7 4
+           //11  3
+              //9   2
+            //end all characters turns.
+            //its not working
+            End_Heroes_Turn.PerformClick();
+            this.tutorialEnemyMoveOne();
+        }
+
+
+        //forces the enemy to move a certain way for turn 1.
+        public void tutorialEnemyMoveOne()
+        {
+            if (tutorialWasClicked == true && turnNumber == 2)
+            {
+                //values won't be null, just not sure where I want them to move yet.
+
+                //forceMoveCharacter(5, 5, null, null);
+                //forceMoveCharacter(6, 5, null, null);
+                //forceMoveCharacter(5, 1, null, null);
+                //forceMoveCharacter(11, 9, null, null);
+                //forceMoveCharacter(13, 8, null, null);
+                //forceMoveCharacter(14, 3, null, null);
+            }
         }
 
 
@@ -782,21 +856,7 @@ namespace GameBoard
             }
         }
 
-        //forces the enemy to move a certain way for turn 1.
-        public void tutorialEnemyMoveOne()
-        {
-            if(tutorialWasClicked == true && turnNumber == 2)
-            {
-          //values won't be null, just not sure where I want them to move yet.
-           
-            //forceMoveCharacter(5, 5, null, null);
-            //forceMoveCharacter(6, 5, null, null);
-            //forceMoveCharacter(5, 1, null, null);
-            //forceMoveCharacter(11, 9, null, null);
-            //forceMoveCharacter(13, 8, null, null);
-            //forceMoveCharacter(14, 3, null, null);
-        }
-        }
+    
 
         //forces the enemy to move a certain way for turn 2.
         public void tutorialEnemyMoveTwo()
@@ -804,32 +864,11 @@ namespace GameBoard
 
         }
 
-        //exits the tutorial text.
-        //calls the next step in the tutorial
-        public void TutorialIntroductionExit_Click(object sender, RoutedEventArgs e)
-        {
-            tutIntroductionExitClicked = true;
-            TutIntroduction.Visibility = System.Windows.Visibility.Hidden;
-            TutorialIntroductionExit.Visibility = System.Windows.Visibility.Hidden;
-            this.tutorialFirstStep();
-        }
-    
-        //exits the first move tutorial text.
-        //calls the second step in the tutorial.
-         private void TutFirstMoveExit_Click(object sender, RoutedEventArgs e)
-        {
-            tutFirstMoveExitClicked = true;
-            TutFirstMove.Visibility = System.Windows.Visibility.Hidden;
-            TutFirstMoveExit.Visibility = System.Windows.Visibility.Hidden;
-            this.tutorialFirstStepTwo();
-        }
 
-         private void TutFirstMoveWaitTextExit_Click(object sender, RoutedEventArgs e)
-         {
-             TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Hidden;
-             TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Hidden;
-             this.makeHeroWait();
-         }
+    
+ 
+
+       
         
         //
         //
@@ -939,6 +978,8 @@ namespace GameBoard
             mapBuilder map_maker = new mapBuilder();
             map_maker.Show();
         }
+
+
 
       
 
