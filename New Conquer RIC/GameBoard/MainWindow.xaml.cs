@@ -127,6 +127,61 @@ namespace GameBoard
             dispatcherTimer.Interval = TimePerFrame;
         }
 
+        private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            main.DragMove();
+        }
+
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            main.DragMove();
+        }
+
+        private void TitleBarButt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            main.DragMove();
+        }
+
+        private void LeftTitleBarPatch_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            main.DragMove();
+        }
+
+        private void RightTitleBarPatch_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            main.DragMove();
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            main.WindowState = WindowState.Minimized;
+        }
+
+        private void XButton_Click(object sender, RoutedEventArgs e)
+        {
+            EnterLeaveGame();
+        }
+
+        private void EnterLeaveGame()
+        {
+            BlackOut.Visibility = Visibility.Visible;
+            LeaveGameGrid.Visibility = Visibility.Visible;
+            music.Volume = 0.2;
+        }
+
+        private void LeaveGameOkButton_Click(object sender, RoutedEventArgs e)
+        {
+            // shuts down the instance of the wpf application.
+            Application.Current.Shutdown();
+        }
+
+        private void LeaveGameCancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            music.Volume = 0.5;
+            LeaveGameGrid.Visibility = Visibility.Hidden;
+            BlackOut.Visibility = Visibility.Hidden;
+        }
+
         /*
          * Clears, then re-adds the elements to be displayed on the specified space based on the tile's data. Used to remove elements that were added to the space that can't be
          * removed directly, restoring the tile to the state it's supposed to be in.
@@ -616,7 +671,7 @@ namespace GameBoard
             //NEEDS TO BE ADDED: Show list of usable items
 
             //NEEDS TO BE ADDED: if item is selected and used, do the following:
-            Use_Item.IsEnabled = false;
+            //Use_Item.IsEnabled = false;
             boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasUsedItem = true;
             if (!boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive)
             {
@@ -728,7 +783,7 @@ namespace GameBoard
             Move.IsEnabled = false;
             Attack.IsEnabled = false;
             Defend.IsEnabled = false;
-            Use_Item.IsEnabled = false;
+            //Use_Item.IsEnabled = false;
             
             if (tutIntroductionExitClicked == true)
             {              
@@ -789,7 +844,7 @@ namespace GameBoard
                 End_Turn.IsEnabled = false;
                 Attack.IsEnabled = false;
                 Defend.IsEnabled = false;
-                Use_Item.IsEnabled = false;
+                //Use_Item.IsEnabled = false;
             }
             boardspaces[4, 2].BorderBrush = new SolidColorBrush(Colors.Purple);
             boardspaces[4, 2].BorderThickness = new Thickness(2);
@@ -826,14 +881,14 @@ namespace GameBoard
                 End_Turn.IsEnabled = true;
                 Attack.IsEnabled = false;
                 Defend.IsEnabled = false;
-                Use_Item.IsEnabled = false;
+                //Use_Item.IsEnabled = false;
             }
             else
             {
                 End_Turn.IsEnabled = false;
                 Attack.IsEnabled = false;
                 Defend.IsEnabled = false;
-                Use_Item.IsEnabled = false;
+                //Use_Item.IsEnabled = false;
             }
 
             for (int r = 0; r < numRows; r++)
@@ -911,7 +966,7 @@ namespace GameBoard
             Move.IsEnabled = false;
             Attack.IsEnabled = false;
             Defend.IsEnabled = false;
-            Use_Item.IsEnabled = false;
+            //Use_Item.IsEnabled = false;
 
             if(turnNumber == 2)
             {
@@ -982,11 +1037,11 @@ namespace GameBoard
                     Defend.IsEnabled = true;
                     if (boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasUsedItem == false)
                     {
-                        Use_Item.IsEnabled = true;
+                        //Use_Item.IsEnabled = true;
                     }
                     else
                     {
-                        Use_Item.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could use an item (activates the item button) and then click one that can't, the item button stays active
+                        //Use_Item.IsEnabled = false; //Must do this because otherwise, if you clicked a character that could use an item (activates the item button) and then click one that can't, the item button stays active
                     }
                     if (boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasAttacked == false)
                     {
@@ -1032,13 +1087,8 @@ namespace GameBoard
             Ability3.IsEnabled = false;
             Ability4.IsEnabled = false;
             Defend.IsEnabled = false;
-            Use_Item.IsEnabled = false;
+            //Use_Item.IsEnabled = false;
             End_Turn.IsEnabled = false;
-        }
-
-        private void XButton_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
 
         private void Map_Maker_Click(object sender, RoutedEventArgs e)
