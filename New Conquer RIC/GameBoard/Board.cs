@@ -269,6 +269,7 @@ namespace GameBoard
                                     boardspaces[r, c].Col = c;
                                     boardspaces[r, c].tileCharacter.Row = r;
                                     boardspaces[r, c].tileCharacter.Col = c;
+                                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click); //Add Hero_Click event handler to the character button
                                     break;
                                 case 80: //character P: special character, signifies a enemy will be placed
                                     boardspaces[r, c] = setTileByInput(sr.Read());
@@ -291,6 +292,7 @@ namespace GameBoard
                                     boardspaces[r, c].Col = c;
                                     boardspaces[r, c].tileCharacter.Row = r;
                                     boardspaces[r, c].tileCharacter.Col = c;
+                                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click); //Add Enemy_Click event handler to the character button
                                     break;
                                 default:
                                     boardspaces[r,c] = setTileByInput(input); //If not a special character, determine what tile in the setTileByInput() method
@@ -484,6 +486,10 @@ namespace GameBoard
          */
         public async void nextTurn()
         {
+          
+
+
+
             //Disables the mouse from clicking on anything so the user can't click something else mid animation (bad things would happen)
             this.IsHitTestVisible = false;
             //Changes the cursor to a loading/waiting cursor for the duration of the animation to help let the user know they can't use the mouse
@@ -765,7 +771,8 @@ namespace GameBoard
             selectedCharacterCol = oldCol;
             boardspaces[oldRow, oldCol].tileCharacter.hasMoved = false;
             MoveOption_Click(boardspaces[newRow, newCol], null);
-            //boardspaces[newRow, newCol].tileCharacter.hasMoved = false;
+            //boardspaces[newRow, newCol].tileCharacter.hasMoved = true;
+           MessageBox.Show("does this work?");
         }
 
         /*

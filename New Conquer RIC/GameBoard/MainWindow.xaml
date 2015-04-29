@@ -455,21 +455,12 @@
                 <Label x:Name="SpDefense_Label" Content="Label"/>
                 <Label x:Name="testlabel" Content="Label" RenderTransformOrigin="1.868,10.462"/>
             </ListBox>
+            <Button Content="Return to World Map" HorizontalAlignment="Left" Margin="678,316,-113,0" VerticalAlignment="Top" Width="114" Click="ReturnToWorldMap_Click"/>
         </Grid>
-        <Image x:Name="Character_Info_Image" Height="100" Canvas.Left="912" Canvas.Top="82" Width="100"/>
+        <Image x:Name="Character_Info_Image" Height="106" Canvas.Left="976" Canvas.Top="73" Width="112"/>
         <Button x:Name="Map_Maker" Content="Map Maker" Canvas.Left="1022" Canvas.Top="528" Width="78" Height="41" Visibility ="Hidden" IsEnabled="True" Click="Map_Maker_Click"/>
         <Grid x:Name="TestGrid" Height="20" Canvas.Left="214" Canvas.Top="53" Width="20"/>
-        <Button x:Name ="TutorialLevel" Content="Tutorial" Height="20" Canvas.Left="-780" Canvas.Top="502" Width="65" Click="TutorialLevel_Click"/>
-        <TextBox x:Name ="TutFirstMove" Height="154" Canvas.Left="688" TextWrapping="Wrap" Canvas.Top="143" Width="173" Visibility="Hidden"/>
-        <TextBox x:Name ="TutIntroduction" Height="128" Canvas.Left="260" TextWrapping="Wrap" Text="welcome to the tutorial level. here we will teach you awesome stuff about the game so you can kick ass." Canvas.Top="10" Width="601" Visibility="Hidden"/>
-        <Button x:Name= "TutorialIntroductionExit" Content="Exit" Height="28" Canvas.Left="774" Canvas.Top="99" Width="77" Click="TutorialIntroductionExit_Click" Visibility="Hidden"/>
-        <TextBox x:Name ="TutSecondMove" Height="179" Canvas.Left="761" TextWrapping="Wrap" Canvas.Top="205" Width="100" Visibility="Hidden"/>
-        <Button x:Name ="TutFirstMoveExit" Content="Exit" Height="26" Canvas.Left="774" Canvas.Top="271" Width="87" Click="TutFirstMoveExit_Click" Visibility="Hidden"/>
-        <TextBox x:Name ="TutFirstMoveWaitText" Height="72" Canvas.Left="310" TextWrapping="Wrap" Text="" Canvas.Top="271" Width="146" Visibility="Hidden"/>
-        <Button x:Name ="TutFirstMoveWaitTextExit" Content="Ok" Height="23" Canvas.Left="394" Canvas.Top="320" Width="62" Click="TutFirstMoveWaitTextExit_Click" Visibility="Hidden"/>
-        <TextBox x:Name = "TutFirstMove0Text" Height="124" Canvas.Left="617" TextWrapping="Wrap" Text="" Canvas.Top="127" Width="121" Visibility="Hidden"/>
-        <Button x:Name = "TutFirstMove0TextExit" Content="Ok" Height="30" Canvas.Left="645" Canvas.Top="221" Width="93" Click="TutFirstMove0TextExit_Click" Visibility="Hidden"/>
-        <Label x:Name="Health_Label" Content="Label" Canvas.Left="-172" Canvas.Top="203"/>
+
         <StackPanel Height="618" Canvas.Left="40" Canvas.Top="57" Width="172">
             <StackPanel.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -514,6 +505,18 @@
             <Button x:Name="LeaveGameOkButton" Content="Ok" HorizontalAlignment="Left" Height="65" Margin="96,131,0,0" Style="{DynamicResource ButtonStyle3}" VerticalAlignment="Top" Width="115" FontFamily="Segoe UI Symbol" FontSize="18" Cursor="Hand" Click="LeaveGameOkButton_Click" Visibility="Visible"/>
             <Button x:Name="LeaveGameCancelButton" Content="Cancel" HorizontalAlignment="Left" Height="65" Margin="225,131,0,0" Style="{DynamicResource ButtonStyle4}" VerticalAlignment="Top" Width="115" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="18" Click="LeaveGameCancelButton_Click" Visibility="Visible"/>
         </Grid>
+        <Button x:Name ="TutorialLevel" Content="Tutorial" Height="20" Canvas.Left="1035" Canvas.Top="342" Width="65" Click="TutorialLevel_Click" />
+        <TextBox x:Name ="TutFirstMove" Height="225" Canvas.Left="688" TextWrapping="Wrap" Canvas.Top="143" Width="173" Visibility="Hidden"/>
+        <TextBox x:Name ="TutIntroduction" Height="72" Canvas.Left="260" TextWrapping="Wrap" Text="Welcome to the tutorial level. Here we will teach you awesome stuff about the game so you can understand the basics and be on your way to becoming a conqueror of RIC." Canvas.Top="10" Width="601" Visibility="Hidden"/>
+        <Button x:Name= "TutorialIntroductionExit" Content="Ok" Height="28" Canvas.Left="784" Canvas.Top="54" Width="77" Click="TutorialIntroductionExit_Click"  Visibility="Hidden"/>
+        <TextBox x:Name ="TutSecondMove" Height="201" Canvas.Left="742" TextWrapping="Wrap" Canvas.Top="205" Width="119" Visibility="Hidden"/>
+        <Button x:Name ="TutFirstMoveExit" Content="Ok" Height="26" Canvas.Left="774" Canvas.Top="342" Width="87" Click="TutFirstMoveExit_Click" Visibility="Hidden"/>
+        <TextBox x:Name ="TutFirstMoveWaitText" Height="117" Canvas.Left="310" TextWrapping="Wrap" Text="" Canvas.Top="271" Width="146"  Visibility="Hidden"/>
+        <Button x:Name ="TutFirstMoveWaitTextExit" Content="Ok" Height="23" Canvas.Left="394" Canvas.Top="365" Width="62" Click="TutFirstMoveWaitTextExit_Click" Visibility="Hidden"/>
+        <TextBox x:Name = "TutFirstMove0Text" Height="148" Canvas.Left="617" TextWrapping="Wrap" Text="" Canvas.Top="127" Width="139" Visibility="Hidden" />
+        <Button x:Name = "TutFirstMove0TextExit" Content="Ok" Height="30" Canvas.Left="683" Canvas.Top="245" Width="73" Click="TutFirstMove0TextExit_Click" Visibility="Hidden"/>
+
+
     </Canvas>
 </Page>
 
