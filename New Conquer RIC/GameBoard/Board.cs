@@ -772,7 +772,7 @@ namespace GameBoard
             boardspaces[oldRow, oldCol].tileCharacter.hasMoved = false;
             MoveOption_Click(boardspaces[newRow, newCol], null);
             //boardspaces[newRow, newCol].tileCharacter.hasMoved = true;
-           MessageBox.Show("does this work?");
+           //MessageBox.Show("does this work?");
         }
 
         /*
