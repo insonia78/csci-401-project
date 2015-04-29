@@ -63,6 +63,7 @@ namespace GameBoard
         public bool waitIsClicked;
         public bool TutFirstMoveWaitTextExitIsClicked;
         public bool hero1move2;
+        public bool nonHeroTurn;
 
         // control frame
         Window main;
@@ -372,6 +373,10 @@ namespace GameBoard
             //Disable the move button.
             Move.IsEnabled = false;
         }
+
+
+
+
         void timer0_Tick(object sender, EventArgs e)
         {
             //MessageBox.Show("hello");
@@ -532,6 +537,8 @@ namespace GameBoard
             }
 
         }
+
+
         private void Clear()
         {
             selectedCharacterRow = moveRow;
@@ -654,7 +661,7 @@ namespace GameBoard
                // }
                this.inbetweenStep();
             }
-            else if(tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == true)
+            else if(tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == true && nonHeroTurn == false)
             {
                 boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
                 refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
@@ -664,6 +671,12 @@ namespace GameBoard
                 //  nextTurn();
                 //}
                 this.inbetweenStep();
+            }
+            else if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == true && nonHeroTurn == true)
+            {
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
+                refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
+                disableAllOptionButtons();
             }
             else
             {
@@ -689,8 +702,8 @@ namespace GameBoard
                 End_Heroes_Turn.IsEnabled = false;
  
                 //nextTurn() resets the inactive, hasMoved, etc properties for each hero, so it doesn't need to be done here.
-                nextTurn();
-
+               // nextTurn();
+                this.tutorialEnemyMoveOne();
                 End_Heroes_Turn.IsEnabled = true;
                 
             }
@@ -789,13 +802,13 @@ namespace GameBoard
         {
             if (tutFirstMoveExitClicked == true && TutFirstMoveWaitTextExitIsClicked == false)
             {
-                this.Character_Click(boardspaces[2, 4].tileCharacter, null);
+                this.Character_Click(boardspaces[2, 2].tileCharacter, null);
 
                 //makes the character move to a specific square.
                 //checks that its that square.
                 //if not, it reminds them to move the character so they can try again.
 
-                Move_Click(boardspaces[2, 4].tileCharacter, null);
+                Move_Click(boardspaces[2, 2].tileCharacter, null);
                 for (int r = 0; r < numRows; r++)
                 {
                     for (int c = 0; c < numCols; c++)
@@ -805,7 +818,7 @@ namespace GameBoard
                         {
                             boardspaces[r, c].tileCharacter.Click -= new RoutedEventHandler(Character_Click);
                         }
-                        if (boardspaces[r, c].isMoveOption && (r != 4 || c != 2))
+                        if (boardspaces[r, c].isMoveOption && (r != 5 || c != 1))
                         {
                             boardspaces[r, c].isMoveOption = false;
                             boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
@@ -818,23 +831,23 @@ namespace GameBoard
                 Attack.IsEnabled = false;
                 Defend.IsEnabled = false;
                 Use_Item.IsEnabled = false;
-
-                boardspaces[4, 2].BorderBrush = new SolidColorBrush(Colors.DeepPink);
-                boardspaces[4, 2].BorderThickness = new Thickness(2);
+                //[y,x]
+                boardspaces[5, 1].BorderBrush = new SolidColorBrush(Colors.DeepPink);
+                boardspaces[5, 1].BorderThickness = new Thickness(2);
               
                
             }
             else if  (tutFirstMoveExitClicked == true && TutFirstMoveWaitTextExitIsClicked == true) 
             {
-                this.Character_Click(boardspaces[5, 2].tileCharacter, null);
+                this.Character_Click(boardspaces[1, 3].tileCharacter, null);
 
 
-                Move_Click(boardspaces[5, 2].tileCharacter, null);
+                Move_Click(boardspaces[1, 3].tileCharacter, null);
                 for (int r = 0; r < numRows; r++)
                 {
                     for (int c = 0; c < numCols; c++)
                     {
-                        if (boardspaces[r, c].isMoveOption && (r != 3 || c != 0))
+                        if (boardspaces[r, c].isMoveOption && (r != 3 || c != 1))
                         {
                             boardspaces[r, c].isMoveOption = false;
                             boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
@@ -848,8 +861,8 @@ namespace GameBoard
                 Defend.IsEnabled = false;
                 Use_Item.IsEnabled = false;
 
-                boardspaces[3, 0].BorderBrush = new SolidColorBrush(Colors.DeepPink);
-                boardspaces[3, 0].BorderThickness = new Thickness(2);
+                boardspaces[3, 1].BorderBrush = new SolidColorBrush(Colors.DeepPink);
+                boardspaces[3, 1].BorderThickness = new Thickness(2);
               
             }
         }
@@ -867,14 +880,14 @@ namespace GameBoard
         //it doesnt work yet. this stuff pops up before the hero moves...
         public void hero1MoveCheck()
         {
-            if (boardspaces[4, 2].containsCharacter() == true && hero1move1 == true)
+            if (boardspaces[5, 1].containsCharacter() == true && hero1move1 == true && nonHeroTurn == false)
             {
                 TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Visible;
                
                 TutFirstMoveWaitText.IsEnabled = false;
                 TutFirstMoveWaitText.Text = "Now that the character has moved to its new location, we need to end the character's turn. to do this, press the Wait Button.";
             }
-            else if (boardspaces[5, 2].containsCharacter() == true && hero1move2 == true)
+            else if (boardspaces[3, 1].containsCharacter() == true && hero1move2 == true && nonHeroTurn == false)
             {
                 TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Visible;
                 
@@ -937,9 +950,7 @@ namespace GameBoard
 
 
 
-
-
-        
+      
         //moves hero 2 to a specific spot.
         //follows the same format as the first, just a different place.
         public void tutorialFirstStepThree() {
@@ -965,9 +976,6 @@ namespace GameBoard
 
         public void inbetweenStep()
         {
-            //7 4
-           //11  3
-              //9   2
 
                 TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
         }
@@ -1001,32 +1009,50 @@ namespace GameBoard
         //forces the enemy to move a certain way for turn 1.
         public void tutorialEnemyMoveOne()
         {
-            
-                //values won't be null, just not sure where I want them to move yet.
-                //MessageBox.Show("its sort of working");
-            for (int i = 0; i < 5; i++)
+            nonHeroTurn = true;
+            for (int i = 0; i < 6; i++)
             {
                 if (i == 0)
                 {
-                    forceMoveCharacter(7, 2, 4, 0);
+                    forceMoveCharacter(13, 4, 13, 7);
                 }
                 
                  else if (i == 1)
                 {
-                    forceMoveCharacter(7, 5, 6, 5);
+                    forceMoveCharacter(11, 4, 11, 6);
                 }
                  else if (i == 2)
                 {
-                    forceMoveCharacter(7, 8, 7, 6);
+                    forceMoveCharacter(12, 9, 11, 9);
                 }
                 else if (i == 3)
                 {
-                    forceMoveCharacter(7, 9, 7, 8);
+                    forceMoveCharacter(13, 12, 13, 13);
                 }
-                if (i == 4)
+                else if (i == 4)
                 {
-                    forceMoveCharacter(6, 14, 7, 11);
+                    forceMoveCharacter(10, 11, 8, 11);
                 }
+                else if (i == 5)
+                {
+               //here is where we need to increment the turn.
+                    //there also has to be a way to gray out the characters before here
+
+
+
+                    // numTurns++;
+                    //TurnCounter.Content = ("Turn " + turnNumber);
+
+                    //Make sure there's no leftover move/attack events on the board (caused bugs occassionally without this).
+                    //clearMoveOptions();
+                    //clearAttackOptions();
+                    //Reenables the mouse once the animation is done and the user can't screw things up.
+                   // this.IsHitTestVisible = true;
+                    //Sets the cursor back to the normal one.
+                   // Mouse.OverrideCursor = null; 
+                   // this.tutorialSecondStep();
+                }
+
             }
 
                 // numTurns++;
@@ -1038,16 +1064,13 @@ namespace GameBoard
                 //Reenables the mouse once the animation is done and the user can't screw things up.
                 //this.IsHitTestVisible = true;
                 //Sets the cursor back to the normal one.
-                //Mouse.OverrideCursor = null;
-                this.tutorialSecondStep();
-            
-              //  MessageBox.Show("enemies aren't moving.");
-            
+                //Mouse.OverrideCursor = null;         
         }
 
 
         public void tutorialSecondStep()
         {
+            //ungray the characters and make them mobile again
             End_Turn.IsEnabled = false;
             Move.IsEnabled = false;
             Attack.IsEnabled = false;
@@ -1057,10 +1080,11 @@ namespace GameBoard
             if(turnNumber == 2)
             {
                 TutSecondMove.Visibility = System.Windows.Visibility.Visible;
-                TutSecondMove.Text = "This step will show you what happens when a character needs to defend themselves from a stronger enemy." +
-                    "For this situation, we are showing what will happen if your character can't move to get away." +
-                    "attacking the enemy would result in your character's death, so that isn't a viable option either." +
-                    "The solution to this is the defend button." +
+                TutSecondMove.IsEnabled = false;
+                TutSecondMove.Text = "This step will show you what happens when a character needs to defend themselves from a stronger enemy. " +
+                    "For this situation, we are showing what will happen if your character can't move to get away. " +
+                    "Attacking the enemy would result in your character's death, so that isn't a viable option either. " +
+                    "The solution to this is the defend button. " +
                     "The defend button will raise the selected hero's defense for one turn.";
             }
         }

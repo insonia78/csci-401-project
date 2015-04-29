@@ -771,8 +771,8 @@ namespace GameBoard
             selectedCharacterCol = oldCol;
             boardspaces[oldRow, oldCol].tileCharacter.hasMoved = false;
             MoveOption_Click(boardspaces[newRow, newCol], null);
-            //boardspaces[newRow, newCol].tileCharacter.hasMoved = false;
-            MessageBox.Show("got to forceMoveCharacter");
+            //boardspaces[newRow, newCol].tileCharacter.hasMoved = true;
+           MessageBox.Show("does this work?");
         }
 
         /*
