@@ -990,7 +990,7 @@ namespace GameBoard
 
 
         //forces the enemy to move a certain way for turn 1.
-        public void tutorialEnemyMoveOne()
+        public async Task tutorialEnemyMoveOne()
         {
             nonHeroTurn = true;
             for (int i = 0; i < 6; i++)
@@ -998,23 +998,28 @@ namespace GameBoard
                 if (i == 0)
                 {
                     forceMoveCharacter(13, 4, 13, 7);
+                    await Task.Delay(1000);
                 }
                 
                  else if (i == 1)
                 {
                     forceMoveCharacter(11, 4, 11, 6);
+                    await Task.Delay(1000);
                 }
                  else if (i == 2)
                 {
                     forceMoveCharacter(12, 9, 11, 9);
+                    await Task.Delay(1000);
                 }
                 else if (i == 3)
                 {
                     forceMoveCharacter(13, 12, 13, 13);
+                    await Task.Delay(1000);
                 }
                 else if (i == 4)
                 {
                     forceMoveCharacter(10, 11, 8, 11);
+                    await Task.Delay(1000);
                 }
                 else if (i == 5)
                 {
@@ -1023,31 +1028,16 @@ namespace GameBoard
 
 
 
-                    // numTurns++;
-                    //TurnCounter.Content = ("Turn " + turnNumber);
+                    numTurns++;
+                    TurnCounter.Content = ("Turn " + turnNumber);
 
                     //Make sure there's no leftover move/attack events on the board (caused bugs occassionally without this).
-                    //clearMoveOptions();
-                    //clearAttackOptions();
-                    //Reenables the mouse once the animation is done and the user can't screw things up.
-                   // this.IsHitTestVisible = true;
-                    //Sets the cursor back to the normal one.
-                   // Mouse.OverrideCursor = null; 
-                   // this.tutorialSecondStep();
+                    clearMoveOptions();
+                    clearAttackOptions();
+                   this.tutorialSecondStep();
                 }
 
-            }
-
-                // numTurns++;
-                 //TurnCounter.Content = ("Turn " + turnNumber);
-
-                //Make sure there's no leftover move/attack events on the board (caused bugs occassionally without this).
-                //clearMoveOptions();
-                //clearAttackOptions();
-                //Reenables the mouse once the animation is done and the user can't screw things up.
-                //this.IsHitTestVisible = true;
-                //Sets the cursor back to the normal one.
-                //Mouse.OverrideCursor = null;         
+            }    
         }
 
 
