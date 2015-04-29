@@ -257,24 +257,55 @@ namespace World_Map
        //Resets the labels over each building to show level number
        private void reset()
        {
-           btnMurray.FontSize = 60;
-           btnCraigLee.FontSize = 60;
-           btnClark.FontSize = 60;
+           //Resets original content over button
            btnCafeteria.Content = "TUTORIAL";
            btnLibrary.Content = "LVL 1";
            btnMurray.Content = "LVL 2";
            btnCraigLee.Content = "LVL 3";
            btnClark.Content = "LVL 4";
            btnGaige.Content = "LVL 5";
+
+          
+           
+           //Resets cafeteria
+           btnCafeteria.FontSize = 50;
+           btnCafeteria.Opacity = 0;
+
+           //Resets Library
+           btnLibrary.FontSize = 60;
+           btnLibrary.Opacity = 0;
+
+           //Resets Murray Center
+           btnMurray.FontSize = 60;
+           btnMurray.Opacity = 0;
+
+           //Resets Craiglee
+           btnCraigLee.FontSize = 60;
+           btnCraigLee.Opacity = 0;
+
+           //Resets Clark
+  	       btnClark.Height = 101;
+           btnClark.Width = 182;
+           btnClark.Opacity = 0;
+           btnClark.FontSize = 60;
+
+           //Resets Gaige
+           btnGaige.Height = 135;
+           btnGaige.Width = 259;
+           btnGaige.FontSize = 60;
+           btnGaige.Opacity = 0;
        }
 
 
         //Displays a lvl status message by updating the labels over the cafeteria button -- States if they are locked or unlocked
        private void btnCafeteria_Click(object sender, RoutedEventArgs e)
        {
+        
            if (cafeteriaUnlocked == true)
            {
-               btnCafeteria.Content = "BEGIN";
+               btnCafeteria.FontSize = 35;
+               btnCafeteria.Opacity = .75;
+               btnCafeteria.Content = "DOUBLE\nCLICK \nTO BEGIN";
            }
            else
            {
@@ -287,7 +318,10 @@ namespace World_Map
        {
            if (libraryUnlocked == true)
            {
-               btnLibrary.Content = "BEGIN";
+               btnLibrary.FontSize = 35;
+               btnLibrary.Opacity = .75;
+               btnLibrary.Content = "DOUBLE\nCLICK \nTO BEGIN!";
+              
            }
            else
            {
@@ -301,7 +335,10 @@ namespace World_Map
        {
            if (murrayUnlocked == true)
            {
-               btnMurray.Content = "BEGIN";
+ 
+               btnMurray.FontSize = 35;
+               btnMurray.Opacity = .75;
+               btnMurray.Content = "DOUBLE\nCLICK \nTO BEGIN!";
            }
            else
            {
@@ -314,9 +351,13 @@ namespace World_Map
        //Displays a lvl status message by updating the labels over the Craiglee buttons -- States if they are locked or unlocked
        private void btnCraigLee_Click(object sender, RoutedEventArgs e)
        {
+
            if (craigLeeUnlocked == true)
            {
-               btnCraigLee.Content = "BEGIN";
+              
+               btnCraigLee.FontSize = 35;
+               btnCraigLee.Opacity = .75;
+               btnCraigLee.Content = "DOUBLE\nCLICK \nTO BEGIN!";
            }
            else
            {
@@ -328,9 +369,14 @@ namespace World_Map
        //Displays a lvl status message by updating the labels over the Clark button -- States if they are locked or unlocked
        private void btnClark_Click(object sender, RoutedEventArgs e)
        {
+        
            if (clarkUnlocked == true)
            {
-               btnClark.Content = "BEGIN";
+               btnClark.Height = 145;
+               btnClark.Width = 190;
+               btnClark.FontSize = 35;
+               btnClark.Opacity = .75;
+               btnClark.Content = "DOUBLE\nCLICK \nTO BEGIN!";
            }
            else
            {
@@ -341,9 +387,15 @@ namespace World_Map
        //Displays a lvl status message by updating the labels over the gaige button -- States if they are locked or unlocked
        private void btnGaige_Click(object sender, RoutedEventArgs e)
        {
+
            if (gaigeUnlocked == true)
            {
-               btnGaige.Content = "BEGIN";
+               btnGaige.Height = 145;
+               btnGaige.Width = 259;
+               btnGaige.FontSize = 35;
+               btnGaige.Opacity = .75;
+               btnGaige.Content = "DOUBLE\nCLICK \nTO BEGIN!";
+   
            }
            else
            {
@@ -384,13 +436,83 @@ namespace World_Map
            EnterLeaveGame();
        }
 
+       /********************************************LAUNCH BOARD***********************************************************/
+
+       //Open cafeteria/tutorial board
+       private void btnCafeteria_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+       {
+
+           if (cafeteriaUnlocked == true)
+           {
+               GameBoard.MainWindow library =
+                   new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+
+               this.NavigationService.Navigate(library);
+           }
+
+       }
+
+       //Open library/lvl 1 board
        private void btnLibrary_MouseDoubleClick(object sender, MouseButtonEventArgs e)
        {
-           GameBoard.MainWindow library =
-               new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+           if (libraryUnlocked == true)
+           {
+               GameBoard.MainWindow library =
+                   new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
 
-           this.NavigationService.Navigate(library);
+               this.NavigationService.Navigate(library);
+           }
        }
+
+        //Open Murray/lvl 2 board
+       private void btnMurray_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+       {
+           if (murrayUnlocked == true)
+           {
+               GameBoard.MainWindow library =
+                   new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+
+               this.NavigationService.Navigate(library);
+           }
+       }
+
+        //Open Craiglee/lvl 3 board
+       private void btnCraigLee_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+       {
+           if (craigLeeUnlocked == true)
+           {
+               GameBoard.MainWindow library =
+                   new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+
+               this.NavigationService.Navigate(library);
+           }
+       }
+
+        //Open Clark/lvl 4 board
+       private void btnClark_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+       {
+           if (clarkUnlocked == true)
+           {
+               GameBoard.MainWindow library =
+                   new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+
+               this.NavigationService.Navigate(library);
+           }
+       }
+
+        //Open gaige/final lvl board
+       private void btnGaige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+       {
+           if (gaigeUnlocked == true)
+           {
+               GameBoard.MainWindow library =
+                   new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+
+               this.NavigationService.Navigate(library);
+           }
+       }
+
+   
        /********************************************FORMAT CUSTOM WINDOW***********************************************************/
        
         /**********************************************************************
