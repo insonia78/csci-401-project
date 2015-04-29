@@ -484,6 +484,10 @@ namespace GameBoard
          */
         public async void nextTurn()
         {
+          
+
+
+
             //Disables the mouse from clicking on anything so the user can't click something else mid animation (bad things would happen)
             this.IsHitTestVisible = false;
             //Changes the cursor to a loading/waiting cursor for the duration of the animation to help let the user know they can't use the mouse
@@ -766,6 +770,7 @@ namespace GameBoard
             boardspaces[oldRow, oldCol].tileCharacter.hasMoved = false;
             MoveOption_Click(boardspaces[newRow, newCol], null);
             //boardspaces[newRow, newCol].tileCharacter.hasMoved = false;
+            MessageBox.Show("got to forceMoveCharacter");
         }
 
         /*
