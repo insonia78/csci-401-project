@@ -391,9 +391,17 @@ namespace World_Map
        private void btnLibrary_MouseDoubleClick(object sender, MouseButtonEventArgs e)
        {
            GameBoard.MainWindow library =
-               new GameBoard.MainWindow("testmap.txt", setOfHeroes);
+               new GameBoard.MainWindow("Level1.txt", setOfHeroes);
 
            this.NavigationService.Navigate(library);
+       }
+
+       private void btnCafeteria_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+       {
+           GameBoard.MainWindow cafeteria =
+               new GameBoard.MainWindow("testmap.txt", setOfHeroes);
+
+           this.NavigationService.Navigate(cafeteria);
        }
        /********************************************FORMAT CUSTOM WINDOW***********************************************************/
        

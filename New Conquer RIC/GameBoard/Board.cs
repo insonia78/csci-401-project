@@ -269,6 +269,7 @@ namespace GameBoard
                                     boardspaces[r, c].Col = c;
                                     boardspaces[r, c].tileCharacter.Row = r;
                                     boardspaces[r, c].tileCharacter.Col = c;
+                                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click); //Add Hero_Click event handler to the character button
                                     break;
                                 case 80: //character P: special character, signifies a enemy will be placed
                                     boardspaces[r, c] = setTileByInput(sr.Read());
@@ -291,6 +292,7 @@ namespace GameBoard
                                     boardspaces[r, c].Col = c;
                                     boardspaces[r, c].tileCharacter.Row = r;
                                     boardspaces[r, c].tileCharacter.Col = c;
+                                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click); //Add Enemy_Click event handler to the character button
                                     break;
                                 default:
                                     boardspaces[r,c] = setTileByInput(input); //If not a special character, determine what tile in the setTileByInput() method

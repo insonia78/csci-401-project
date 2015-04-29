@@ -78,7 +78,7 @@ namespace GameBoard
                 DrawingContext dc = dv.RenderOpen();
                 dc.DrawImage(tileImage, new Rect(new Size(tileImage.Width, tileImage.Height)));
                 dc.DrawImage(foregroundImage, new Rect(new Size(tileImage.Width, tileImage.Height)));
-                RenderTargetBitmap bmp = new RenderTargetBitmap((int)tileImage.Width, (int)tileImage.Height, 120, 96, PixelFormats.Pbgra32);
+                RenderTargetBitmap bmp = new RenderTargetBitmap((int)tileImage.Width, (int)tileImage.Height, 96, 96, PixelFormats.Pbgra32);
                 dc.Close();
                 bmp.Render(dv);
 

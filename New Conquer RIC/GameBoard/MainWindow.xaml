@@ -14,6 +14,7 @@
                 <Label x:Name="SpDefense_Label" Content="Label"/>
                 <Label x:Name="testlabel" Content="Label" RenderTransformOrigin="1.868,10.462"/>
             </ListBox>
+            <Button Content="Return to World Map" HorizontalAlignment="Left" Margin="596,33,-30,0" VerticalAlignment="Top" Width="114" Click="ReturnToWorldMap_Click"/>
         </Grid>
         <Button x:Name="Move" Content="Move" Canvas.Left="50" Canvas.Top="118" Width="145" Height="41" IsEnabled="False" Click="Move_Click"/>
         <Button x:Name="Attack" Content="Attack" Canvas.Left="50" Canvas.Top="164" Width="145" Height="41" IsEnabled="False" Click="Attack_Click"/>
@@ -41,7 +42,7 @@
 
         <Button Content="X" Canvas.Left="1040" Canvas.Top="36" Width="66" Height="65" Click="XButton_Click"/>
         <ProgressBar x:Name ="HealthBar" Height="10" Canvas.Left="912" Canvas.Top="176" Width="100"/>
-            <Label x:Name="Health_Label" Content="Label" Canvas.Left="1070" Canvas.Top="176"/>
+        <Label x:Name="Health_Label" Content="Label" Canvas.Left="1070" Canvas.Top="176"/>
     </Canvas>
 </Page>
 

@@ -151,7 +151,7 @@ namespace GameBoard
 
                 if (boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)))
                 {
-                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click); //Add Hero_Click event handler to the character button
+                    //boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click); //Add Hero_Click event handler to the character button
                     if (!boardspaces[r, c].tileCharacter.isActive)
                     {
                         boardspaces[r, c].tileCharacter.Opacity = 0.5; //Reduce the opacity of the character button if the character is inactive to make the character look faded.
@@ -161,10 +161,10 @@ namespace GameBoard
                         boardspaces[r, c].tileCharacter.Opacity = 1; //If the method comes across a hero whose opacity was lowered previously but is once again active, raise it back to 1
                     }
                 }
-                else
-                {
-                    boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click); //Add Enemy_Click event handler to the character button (character but not a hero = enemy)
-                }
+                //else
+                //{
+                    //boardspaces[r, c].tileCharacter.Click += new RoutedEventHandler(Character_Click); //Add Enemy_Click event handler to the character button (character but not a hero = enemy)
+                //}
                 cells[r, c].Children.Add(boardspaces[r, c].tileCharacter); //Add the character button to the cell (covers the tile button)
             }
         }
@@ -221,6 +221,7 @@ namespace GameBoard
          */
         private void Character_Click(object sender, RoutedEventArgs e)
         {
+            //MessageBox.Show("Character Click");
             clearMoveOptions(); //If not done here, you can click on one hero to bring up their options, then click on another, the highlighted tiles for the first will remain, and you can move the second.
             clearAttackOptions();
             try
@@ -1039,7 +1040,38 @@ namespace GameBoard
             map_maker.Show();
         }
 
+        private void ReturnToWorldMap_Click(object sender, RoutedEventArgs e)
+        {
+            for (int r = 0; r < numRows; r++)
+            {
+                for (int c = 0; c < numCols; c++)
+                {
+                    if (boardspaces[r, c].containsCharacter() == true)
+                    {
+                        boardspaces[r, c].tileCharacter.decrementEffectDurations();
+                        boardspaces[r, c].tileCharacter.isActive = true;
+                        boardspaces[r, c].tileCharacter.Opacity = 1;
+                    }
+                }
+            }
+            for (int r = 0; r < numRows; r++)
+            {
+                for (int c = 0; c < numCols; c++)
+                {
+                    if(boardspaces[r,c].containsCharacter())
+                        boardspaces[r, c].tileCharacter.Click -= new RoutedEventHandler(Character_Click);
+                    Board.Children.Remove(cells[r, c]);
+                }
+            }
 
+            cells[hero1.Row, hero1.Col].Children.Clear();
+            cells[hero2.Row, hero2.Col].Children.Clear();
+            cells[hero3.Row, hero3.Col].Children.Clear();
+            cells[hero4.Row, hero4.Col].Children.Clear();
+            cells[hero5.Row, hero5.Col].Children.Clear();
+
+            this.NavigationService.GoBack();
+        }
 
       
 
