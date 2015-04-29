@@ -945,30 +945,13 @@ namespace GameBoard
                //     refreshBoardSpace(r, c);
               //  }
           //  }
-            //this.tutorialEnemyMoveOne();
+ 
         }
 
 
 
       
-        //moves hero 2 to a specific spot.
-        //follows the same format as the first, just a different place.
-        public void tutorialFirstStepThree() {
 
-                Move_Click(boardspaces[5, 2].tileCharacter, null);
-                for (int r = 0; r < numRows; r++)
-                {
-                    for (int c = 0; c < numCols; c++)
-                    {
-                        if (boardspaces[r, c].isMoveOption && (r != 4 || c != 0))
-                        {
-                            boardspaces[r, c].isMoveOption = false;
-                            boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
-                        }
-                    }
-                }
-                this.inbetweenStepTwo();
-            }
 
 
        
@@ -1092,9 +1075,36 @@ namespace GameBoard
     
 
         //forces the enemy to move a certain way for turn 2.
+        //will be fixed once the turn counter issue is resolved.
         public void tutorialEnemyMoveTwo()
         {
-
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    if (i == 0)
+             //   {
+             //       forceMoveCharacter(13, 7, null, null);
+             //   }
+            
+               // else if (i == 1)
+               // {
+               //     forceMoveCharacter(11, 6, null, null);
+               // }
+               // else if (i == 2)
+               // {
+               //     forceMoveCharacter(11, 9, null, null);
+               // }
+              //  else if (i == 3)
+              //  {
+              //      forceMoveCharacter(13, 13, null, null);
+               // }
+               // else if (i == 4)
+              //  {
+               //     forceMoveCharacter(8, 11, null, null);
+               // }
+               // else if (i == 5)
+               // {
+              //  }
+           // }
         }
 
 
