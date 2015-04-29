@@ -192,7 +192,7 @@ namespace GameBoard
                 {
                     testlabel.Content = "Hero";
                 }
-                if(boardspaces[row, col].tileCharacter.MaxHealth/2 > boardspaces[row, col].tileCharacter.CurrentHealth)
+                if (boardspaces[row, col].tileCharacter.MaxHealth / 2 > boardspaces[row, col].tileCharacter.CurrentHealth)
                 {
                     HealthBar.Foreground = moveOption; //Yellow
                 }
@@ -212,8 +212,10 @@ namespace GameBoard
                 SpDefense_Label.Content = boardspaces[row, col].tileCharacter.CurrentSpecialDefense;
             }
             else
+            {
                 HealthBar.Visibility = Visibility.Hidden;
                 Character_Info_Image.Source = null;
+            }
         }
 
 
