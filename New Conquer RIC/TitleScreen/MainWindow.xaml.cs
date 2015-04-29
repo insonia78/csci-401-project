@@ -30,8 +30,6 @@ namespace TitleScreen
 
         public void init()
         {
-            bgm.Play();
-
             tsPage = new TitleScreenPage((Window)this, bgm);
             startTitle.Navigate(tsPage);
         }

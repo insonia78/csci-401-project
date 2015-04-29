@@ -62,6 +62,11 @@ namespace GameBoard
         public bool hero1move1;
         public bool waitIsClicked;
         public bool TutFirstMoveWaitTextExitIsClicked;
+        public bool hero1move2;
+
+        // control frame
+        Window main;
+        MediaElement music;
 
         /*
          * Initializes the GUI components, creates the cells 2d array, and sets up the board/tiles/characters, etc.
@@ -100,8 +105,11 @@ namespace GameBoard
             refreshBoardSpace(14, 3);
         }
 
-        public MainWindow(String levelFile, Hero[] heroes)
+        public MainWindow(String levelFile, Hero[] heroes, Window frame, MediaElement bgm)
         {
+            main = frame;
+            music = bgm;
+
             InitializeComponent();
 
             hero1 = heroes[0];
@@ -211,7 +219,8 @@ namespace GameBoard
 
         private void Board_Loaded(object sender, RoutedEventArgs e)
         {
-
+            music.Source = new Uri("../../LevelOneBgm.wav", UriKind.Relative);
+            music.Play();
         }
 
         /*
@@ -632,15 +641,26 @@ namespace GameBoard
         private void End_Turn_Click(object sender, RoutedEventArgs e)
         {
             waitIsClicked = true;
-            if (tutorialWasClicked == true)
+            if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == false)
             {
                 boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
                 refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
                 disableAllOptionButtons();
-                if (checkAllPlayersInactive())
-                {
-                    nextTurn();
-                }
+                //if (checkAllPlayersInactive())
+               //{
+               //     nextTurn();
+               // }
+               this.inbetweenStep();
+            }
+            else if(tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == true)
+            {
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
+                refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
+                disableAllOptionButtons();
+                //if (checkAllPlayersInactive())
+                //{
+                //  nextTurn();
+                //}
                 this.inbetweenStep();
             }
             else
@@ -660,13 +680,28 @@ namespace GameBoard
          */
         private void End_Heroes_Turn_Click(object sender, RoutedEventArgs e)
         {
-            disableAllOptionButtons();
-            End_Heroes_Turn.IsEnabled = false;
+          
+            if (tutFirstMoveExitClicked == true && TutFirstMoveWaitTextExitIsClicked == true)
+            {
+                disableAllOptionButtons();
+                End_Heroes_Turn.IsEnabled = false;
+ 
+                //nextTurn() resets the inactive, hasMoved, etc properties for each hero, so it doesn't need to be done here.
+                nextTurn();
 
-            //nextTurn() resets the inactive, hasMoved, etc properties for each hero, so it doesn't need to be done here.
-            nextTurn();
+                End_Heroes_Turn.IsEnabled = true;
+                
+            }
+            else
+            {
+                disableAllOptionButtons();
+                End_Heroes_Turn.IsEnabled = false;
 
-            End_Heroes_Turn.IsEnabled = true;
+                //nextTurn() resets the inactive, hasMoved, etc properties for each hero, so it doesn't need to be done here.
+                nextTurn();
+
+                End_Heroes_Turn.IsEnabled = true;
+            }
         }
 
         //
@@ -696,16 +731,17 @@ namespace GameBoard
             this.intermStep();
         }
 
-
+        //talks about clicking on a character to get it to move.
         public void intermStep()
         {
             TutFirstMove0Text.IsEnabled = false;
             TutFirstMove0Text.Visibility = System.Windows.Visibility.Visible;
             TutFirstMove0TextExit.Visibility = System.Windows.Visibility.Visible;
-            TutFirstMove0Text.Text = "click on the character to move it.";           
+            TutFirstMove0Text.Text = "For the tutorial, we clicked on the character you needed to move. When you play the levels, you will click on the one you want to move or interact with";           
         }
 
-
+        //exits TutFirstMove0Text text
+        //calls the first step in the tutorial
         private void TutFirstMove0TextExit_Click(object sender, RoutedEventArgs e)
         {
             TutFirstMove0Text.Visibility = System.Windows.Visibility.Hidden;
@@ -714,7 +750,7 @@ namespace GameBoard
             this.tutorialFirstStep();
         }
 
-
+        //explains what happens when a character is clicked on and the move button is clicked
         public void tutorialFirstStep()
         {
             End_Turn.IsEnabled = false;
@@ -728,13 +764,14 @@ namespace GameBoard
                 TutFirstMoveExit.Visibility = System.Windows.Visibility.Visible;
                 TutFirstMove.Visibility = System.Windows.Visibility.Visible;
                 
-                TutFirstMove.Text = "now that you've clicked on the highlighted tile, see how there are squares that light up? those squares indicate where the character can go." +
-                "for our purposes, i want you to move to the square thats highlighted purple.";              
+                TutFirstMove.Text = "Now that we've clicked on the highlighted tile, see how there are squares that light up? those squares indicate where the character can go." +
+                "for our purposes, I want you to move to the square thats highlighted pink. " +
+                "We clicked the move button for you. When you play in the game you will have to click the move button then move to the desired square.";              
             }       
         }
 
 
-        //exits the first move tutorial text.
+        //exits the TutFirstMove text.
         //calls the second step in the tutorial.
         private void TutFirstMoveExit_Click(object sender, RoutedEventArgs e)
         {
@@ -746,13 +783,9 @@ namespace GameBoard
 
         //
         //
-        //
-        //highlight the character so it can be clicked on
-        //
-        //
         public void tutorialFirstStepTwo()
         {
-            if (tutFirstMoveExitClicked == true)
+            if (tutFirstMoveExitClicked == true && TutFirstMoveWaitTextExitIsClicked == false)
             {
                 this.Character_Click(boardspaces[2, 4].tileCharacter, null);
 
@@ -783,33 +816,72 @@ namespace GameBoard
                 Attack.IsEnabled = false;
                 Defend.IsEnabled = false;
                 Use_Item.IsEnabled = false;
+
+                boardspaces[4, 2].BorderBrush = new SolidColorBrush(Colors.DeepPink);
+                boardspaces[4, 2].BorderThickness = new Thickness(2);
+              
+               
             }
-            boardspaces[4, 2].BorderBrush = new SolidColorBrush(Colors.Purple);
-            boardspaces[4, 2].BorderThickness = new Thickness(2);
+            else if  (tutFirstMoveExitClicked == true && TutFirstMoveWaitTextExitIsClicked == true) 
+            {
+                this.Character_Click(boardspaces[5, 2].tileCharacter, null);
+
+
+                Move_Click(boardspaces[5, 2].tileCharacter, null);
+                for (int r = 0; r < numRows; r++)
+                {
+                    for (int c = 0; c < numCols; c++)
+                    {
+                        if (boardspaces[r, c].isMoveOption && (r != 3 || c != 0))
+                        {
+                            boardspaces[r, c].isMoveOption = false;
+                            boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
+                        }
+                        hero1move2 = true;
+                    }
+                }
+                Move.IsEnabled = false;
+                End_Turn.IsEnabled = false;
+                Attack.IsEnabled = false;
+                Defend.IsEnabled = false;
+                Use_Item.IsEnabled = false;
+
+                boardspaces[3, 0].BorderBrush = new SolidColorBrush(Colors.DeepPink);
+                boardspaces[3, 0].BorderThickness = new Thickness(2);
+              
+            }
         }
+
+        //ends all the hero's turns.
+         public void inbetweenStepTwo() {
+        if(TutFirstMoveWaitTextExitIsClicked == true)
+                {
+                End_Heroes_Turn_Click(null, null);             
+                }  
+         }
+
 
         //sees if the hero has moved to the specified place.
         //it doesnt work yet. this stuff pops up before the hero moves...
         public void hero1MoveCheck()
         {
-            if (boardspaces[4, 2].containsCharacter() == true)
+            if (boardspaces[4, 2].containsCharacter() == true && hero1move1 == true)
             {
                 TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Visible;
-                //TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
+               
+                TutFirstMoveWaitText.IsEnabled = false;
+                TutFirstMoveWaitText.Text = "Now that the character has moved to its new location, we need to end the character's turn. to do this, press the Wait Button.";
+            }
+            else if (boardspaces[5, 2].containsCharacter() == true && hero1move2 == true)
+            {
+                TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Visible;
+                
                 TutFirstMoveWaitText.IsEnabled = false;
                 TutFirstMoveWaitText.Text = "Now that the character has moved to its new location, we need to end the character's turn. to do this, press the Wait Button.";
             }
             this.makeHeroWait();
         }
 
-
-        private void TutFirstMoveWaitTextExit_Click(object sender, RoutedEventArgs e)
-        {
-            TutFirstMoveWaitTextExitIsClicked = true;
-            TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Hidden;
-            TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Hidden;
-            this.tutorialFirstStepThree();
-        }
 
         //makes the hero wait at the spot they are at in the tutorial level
         public void makeHeroWait()
@@ -820,36 +892,62 @@ namespace GameBoard
                 Attack.IsEnabled = false;
                 Defend.IsEnabled = false;
                 Use_Item.IsEnabled = false;
+
+                for (int r = 0; r < numRows; r++)
+                {
+                    for (int c = 0; c < numCols; c++)
+                    {
+                        refreshBoardSpace(r, c);
+                    }
+                }
+                
             }
-            else
+            else if (hero1move2 == true)
             {
+                End_Turn.IsEnabled = true;
+                Attack.IsEnabled = false;
+                Defend.IsEnabled = false;
+                Use_Item.IsEnabled = false;
+
+                for (int r = 0; r < numRows; r++)
+                {
+                    for (int c = 0; c < numCols; c++)
+                    {
+                        refreshBoardSpace(r, c);
+                    }
+                }
+            } else {
                 End_Turn.IsEnabled = false;
                 Attack.IsEnabled = false;
                 Defend.IsEnabled = false;
                 Use_Item.IsEnabled = false;
             }
 
-            for (int r = 0; r < numRows; r++)
-            {
-                for (int c = 0; c < numCols; c++)
-                {
-                    refreshBoardSpace(r, c);
-                }
-            }
+            //for (int r = 0; r < numRows; r++)
+           // {
+               // for (int c = 0; c < numCols; c++)
+               // {
+               //     refreshBoardSpace(r, c);
+              //  }
+          //  }
+            //this.tutorialEnemyMoveOne();
         }
 
 
 
 
+
+        
         //moves hero 2 to a specific spot.
         //follows the same format as the first, just a different place.
         public void tutorialFirstStepThree() {
-                Move_Click(boardspaces[2, 5].tileCharacter, null);
+
+                Move_Click(boardspaces[5, 2].tileCharacter, null);
                 for (int r = 0; r < numRows; r++)
                 {
                     for (int c = 0; c < numCols; c++)
                     {
-                        if (boardspaces[r, c].isMoveOption && (r != 0 || c != 4))
+                        if (boardspaces[r, c].isMoveOption && (r != 4 || c != 0))
                         {
                             boardspaces[r, c].isMoveOption = false;
                             boardspaces[r, c].Click -= new RoutedEventHandler(MoveOption_Click);
@@ -858,6 +956,7 @@ namespace GameBoard
                 }
                 this.inbetweenStepTwo();
             }
+
 
        
 
@@ -870,31 +969,78 @@ namespace GameBoard
 
                 TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
         }
+
+
+        //
+        //
+        private void TutFirstMoveWaitTextExit_Click(object sender, RoutedEventArgs e)
+        {
+            if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == false)
+            {
+                TutFirstMoveWaitTextExitIsClicked = true;
+                TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Hidden;
+                TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Hidden;
+                this.intermStep();
+            }
+            else if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == true)
+            {
+                TutFirstMoveWaitText.Visibility = System.Windows.Visibility.Hidden;
+                TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Hidden;
+                this.inbetweenStepTwo();
+               
+            }
             
-                     
+        }       
         
 
-    public void inbetweenStepTwo() {
-        if(TutFirstMoveWaitTextExitIsClicked == true)
-                {
-                End_Heroes_Turn_Click(null, null);
-                this.tutorialEnemyMoveOne();
-                }
-}
+   
+
 
         //forces the enemy to move a certain way for turn 1.
         public void tutorialEnemyMoveOne()
         {
-            if (tutorialWasClicked == true && turnNumber == 2)
-            {
+            
                 //values won't be null, just not sure where I want them to move yet.
                 //MessageBox.Show("its sort of working");
-                forceMoveCharacter(7, 2, 4, 0);
-                //forceMoveCharacter(5, 7, null, null);
-                //forceMoveCharacter(8, 7, null, null);
-                //forceMoveCharacter(14, 6, null, null);
-
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == 0)
+                {
+                    forceMoveCharacter(7, 2, 4, 0);
+                }
+                
+                 else if (i == 1)
+                {
+                    forceMoveCharacter(7, 5, 6, 5);
+                }
+                 else if (i == 2)
+                {
+                    forceMoveCharacter(7, 8, 7, 6);
+                }
+                else if (i == 3)
+                {
+                    forceMoveCharacter(7, 9, 7, 8);
+                }
+                if (i == 4)
+                {
+                    forceMoveCharacter(6, 14, 7, 11);
+                }
             }
+
+                // numTurns++;
+                 //TurnCounter.Content = ("Turn " + turnNumber);
+
+                //Make sure there's no leftover move/attack events on the board (caused bugs occassionally without this).
+                //clearMoveOptions();
+                //clearAttackOptions();
+                //Reenables the mouse once the animation is done and the user can't screw things up.
+                //this.IsHitTestVisible = true;
+                //Sets the cursor back to the normal one.
+                //Mouse.OverrideCursor = null;
+                this.tutorialSecondStep();
+            
+              //  MessageBox.Show("enemies aren't moving.");
+            
         }
 
 

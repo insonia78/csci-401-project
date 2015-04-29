@@ -244,7 +244,7 @@
     <DockPanel>
         <Frame x:Name="startTitle" NavigationUIVisibility="Hidden"/>
         <Grid>
-            <MediaElement x:Name="bgm" Margin="98,574,1012,121" Stretch="Fill" Source="../../Rage of the Champions.wav" LoadedBehavior="Manual" MediaEnded="bgm_MediaEnded"/>
+            <MediaElement x:Name="bgm" Margin="98,574,1012,121" Stretch="Fill" LoadedBehavior="Manual" MediaEnded="bgm_MediaEnded" UnloadedBehavior="Stop"/>
         </Grid>
     </DockPanel>
 </Window>

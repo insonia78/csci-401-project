@@ -1189,7 +1189,7 @@
             <Image x:Name="heroTwoSlot" HorizontalAlignment="Left" Height="120" Margin="42,61,0,0" VerticalAlignment="Top" Width="120" Stretch="Fill" Source="Silhouette Portrait.png" MouseEnter="heroTwoSlot_MouseEnter" MouseLeave="heroTwoSlot_MouseLeave"/>
         </Grid>
         <Button x:Name="RandomButton" Content="Randomize" HorizontalAlignment="Left" Height="100" Margin="64,551,0,0" Style="{DynamicResource ButtonStyle5}" VerticalAlignment="Top" Width="180" Cursor="Hand" FontFamily="Segoe UI Symbol" FontSize="22" IsDefault="True" Click="RandomButton_Click"/>
-        <Button x:Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Left" Height="100" Margin="858,551,0,0" Style="{DynamicResource ButtonStyle6}" VerticalAlignment="Top" Width="175" FontFamily="Segoe UI Symbol" FontSize="22" Cursor="Hand" Click="ConfirmButton_Click" IsEnabled="False"/>
+        <Button x:Name="ConfirmButton" Content="Confirm" HorizontalAlignment="Left" Height="100" Margin="858,551,0,0" Style="{DynamicResource ButtonStyle6}" VerticalAlignment="Top" Width="175" FontFamily="Segoe UI Symbol" FontSize="22" Cursor="Hand" Click="ConfirmButton_Click" ToolTip=""/>
         <Grid x:Name="char1Grid" Margin="55,83,858,168">
             <Button x:Name="HeroOneHighlight" Content="" HorizontalAlignment="Left" Height="444" Style="{DynamicResource ButtonStyle22}" VerticalAlignment="Top" Width="197" Cursor="Hand" MouseEnter="HeroOneHighlight_MouseEnter" MouseLeave="HeroOneHighlight_MouseLeave" Click="HeroOneHighlight_Click"/>
             <Button x:Name="HeroOneAura" HorizontalAlignment="Left" Height="374" Margin="9,26,0,0" Style="{DynamicResource ButtonStyle13}" VerticalAlignment="Top" Width="180" MouseEnter="HeroOneAura_MouseEnter" MouseLeave="HeroOneAura_MouseLeave" Cursor="Hand" Click="HeroOneAura_Click"/>
@@ -1288,5 +1288,6 @@
             </RichTextBox>
             <Button x:Name="CustomizeXButton" Content="X" HorizontalAlignment="Left" Height="45" Margin="861,0,0,0" Style="{DynamicResource ButtonStyle36}" VerticalAlignment="Top" Width="50" Foreground="White" Cursor="Hand" FontFamily="Verdana" FontSize="20" Click="CustomizeXButton_Click"/>
         </Grid>
+        <Label x:Name="MessageLabel" Content="test" HorizontalAlignment="Left" Margin="252,551,0,0" VerticalAlignment="Top" Height="100" Width="591" FontFamily="Segoe WP Light" FontSize="24" Foreground="Red" Visibility="Hidden"/>
     </Grid>
 </Page>
