@@ -22,7 +22,10 @@ namespace GameBoard
         ArrayList targetHeroCol = new ArrayList();
         ArrayList targetEnemyRow = new ArrayList();
         ArrayList targetEnemyCol = new ArrayList();
-        
+        ArrayList targetHeroAttack = new ArrayList();
+        ArrayList targetHeroHealth = new ArrayList();
+        ArrayList targetEnemyAttack = new ArrayList();
+        ArrayList targetEnemyHealth = new ArrayList();
           
         public void localizeHero()
         {
@@ -52,6 +55,10 @@ namespace GameBoard
                         
                             targetHeroRow.Add( temp);
                             targetHeroCol.Add((int)heroCol[coldh]);
+                            targetHeroHealth.Add((int)HeroHealthLevel[coldh]);
+                            targetHeroAttack.Add((int)HeroAttackLevel[coldh]);
+                            HeroAttackLevel.RemoveAt(coldh);
+                            HeroHealthLevel.RemoveAt(coldh); 
                             heroCol.RemoveAt(coldh);
                             heroRow.RemoveAt(coldh);
                             dummyCountHero--;
@@ -87,6 +94,10 @@ namespace GameBoard
                         
                             targetEnemyRow.Add(temp);
                             targetEnemyCol.Add((int)enemyCol[coldh]);
+                            targetEnemyAttack.Add((int)EnemyAttackLevel[coldh]);
+                            targetEnemyHealth.Add((int)EnemyHealthLevel[coldh]);
+                            EnemyHealthLevel.RemoveAt(coldh);
+                            EnemyAttackLevel.RemoveAt(coldh);
                             enemyCol.RemoveAt(coldh);
                             enemyRow.RemoveAt(coldh);
                             dummyCountEnemy--;
