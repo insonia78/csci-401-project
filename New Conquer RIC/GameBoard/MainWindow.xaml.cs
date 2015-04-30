@@ -64,6 +64,7 @@ namespace GameBoard
         public bool TutFirstMoveWaitTextExitIsClicked;
         public bool hero1move2;
         public bool nonHeroTurn;
+        public bool tutSecondMoveExitClicked;
 
         // control frame
         Window main;
@@ -104,6 +105,8 @@ namespace GameBoard
             refreshBoardSpace(13, 8);
             boardspaces[14, 3].tileCharacter = new Gardener(14,3);
             refreshBoardSpace(14, 3);
+
+            
         }
 
         public MainWindow(String levelFile, Hero[] heroes, Window frame, MediaElement bgm)
@@ -127,6 +130,17 @@ namespace GameBoard
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += onUpdate;
             dispatcherTimer.Interval = TimePerFrame;
+
+            Objective();
+        }
+
+        private async void Objective()
+        {
+            DialogueMessage.Content = "Objective: Elimination";
+            DialogueBox.Visibility = Visibility.Visible;
+            await Task.Delay(3000);
+            DialogueBox.Visibility = Visibility.Hidden;
+            DialogueMessage.Content = "";
         }
 
         private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
@@ -159,8 +173,9 @@ namespace GameBoard
             main.WindowState = WindowState.Minimized;
         }
 
-        private void XButton_Click(object sender, RoutedEventArgs e)
+        private async void XButton_Click(object sender, RoutedEventArgs e)
         {
+
             EnterLeaveGame();
         }
 
@@ -171,14 +186,16 @@ namespace GameBoard
             music.Volume = 0.2;
         }
 
-        private void LeaveGameOkButton_Click(object sender, RoutedEventArgs e)
+        private async void LeaveGameOkButton_Click(object sender, RoutedEventArgs e)
         {
+
             // shuts down the instance of the wpf application.
             Application.Current.Shutdown();
         }
 
-        private void LeaveGameCancelButton_Click(object sender, RoutedEventArgs e)
+        private async void LeaveGameCancelButton_Click(object sender, RoutedEventArgs e)
         {
+
             music.Volume = 0.5;
             LeaveGameGrid.Visibility = Visibility.Hidden;
             BlackOut.Visibility = Visibility.Hidden;
@@ -630,7 +647,7 @@ namespace GameBoard
         /*
          * If the move button was clicked, find the move options, then show them on the board/give those spaces moveoption_click event handlers.
          */
-        private void Move_Click(object sender, RoutedEventArgs e)
+        private async void Move_Click(object sender, RoutedEventArgs e)
         {
             clearAttackOptions();
             moveOptions(boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.CurrentSpeed, selectedCharacterRow, selectedCharacterCol);
@@ -659,13 +676,49 @@ namespace GameBoard
          * and lasts for one turn. Then, it ends the hero's turn (last action they can potentially do), fades the hero, and disables their 
          * buttons. Ends the player turn if all heros are done.
          */
-        private void Defend_Click(object sender, RoutedEventArgs e)
+        private async void Defend_Click(object sender, RoutedEventArgs e)
         {
-            //NEEDS TO BE ADDED: Add Effect to character stateffect list that boosts defense stat for 1 turn.
-            boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
 
-            //End the turn for the selected hero using the wait button's event handler (does the same thing)
-            End_Turn_Click(null, null);
+            waitIsClicked = true;
+            if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == false)
+            {
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
+                refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
+                disableAllOptionButtons();
+                //if (checkAllPlayersInactive())
+               //{
+               //     nextTurn();
+               // }
+               this.inbetweenStep();
+            }
+            else if(tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == true && nonHeroTurn == false)
+            {
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
+                refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
+                disableAllOptionButtons();
+                //if (checkAllPlayersInactive())
+                //{
+                //  nextTurn();
+                //}
+                this.inbetweenStep();
+            }
+            else if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == true && nonHeroTurn == true)
+            {
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
+                refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
+                disableAllOptionButtons();
+            }
+            else
+            {
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
+                refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
+                disableAllOptionButtons();
+                if (checkAllPlayersInactive())
+                {
+                    nextTurn();
+                }
+            }
+        
         }
 
         /*
@@ -702,8 +755,12 @@ namespace GameBoard
          * Ends their turn by disabling all buttons for any actions, and setting the hero to inactive.
          * Refreshs the hero so they appear faded, and then checks if all heroes are now inactive. If so, starts the next turn.
          */
-        private void End_Turn_Click(object sender, RoutedEventArgs e)
+        private async void End_Turn_Click(object sender, RoutedEventArgs e)
         {
+            //BackgroundMessageBox.Fill = Brush.Equals(FF3A1010);
+            //ForegroundMessageBox
+            DialogueMessage.Content = "Enemy's Turn";
+
             waitIsClicked = true;
             if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == false)
             {
@@ -748,9 +805,9 @@ namespace GameBoard
         /*
          * Immediately ends the player's turn for all heros.
          */
-        private void End_Heroes_Turn_Click(object sender, RoutedEventArgs e)
+        private async void End_Heroes_Turn_Click(object sender, RoutedEventArgs e)
         {
-          
+
             if (tutFirstMoveExitClicked == true && TutFirstMoveWaitTextExitIsClicked == true)
             {
                 disableAllOptionButtons();
@@ -759,6 +816,17 @@ namespace GameBoard
                 //nextTurn() resets the inactive, hasMoved, etc properties for each hero, so it doesn't need to be done here.
                // nextTurn();
                 this.tutorialEnemyMoveOne();
+                End_Heroes_Turn.IsEnabled = true;
+
+            }
+            else if (TutFirstMoveWaitTextExitIsClicked == true && tutSecondMoveExitClicked == true)
+            {
+                disableAllOptionButtons();
+                End_Heroes_Turn.IsEnabled = false;
+
+                //nextTurn() resets the inactive, hasMoved, etc properties for each hero, so it doesn't need to be done here.
+                // nextTurn();
+                this.tutorialEnemyMoveTwo();
                 End_Heroes_Turn.IsEnabled = true;
                 
             }
@@ -779,8 +847,9 @@ namespace GameBoard
         //
         //
         //
-        public void TutorialLevel_Click(object sender, RoutedEventArgs e)
+        public async void TutorialLevel_Click(object sender, RoutedEventArgs e)
         {
+
             tutorialWasClicked = true;
             TutFirstMove.IsEnabled = false;
             TutIntroduction.IsEnabled = false;
@@ -924,10 +993,14 @@ namespace GameBoard
 
         //ends all the hero's turns.
          public void inbetweenStepTwo() {
-        if(TutFirstMoveWaitTextExitIsClicked == true)
+             if (TutFirstMoveWaitTextExitIsClicked == true && tutSecondMoveExitClicked == false)
                 {
-                End_Heroes_Turn_Click(null, null);             
-                }  
+                End_Heroes_Turn_Click(null, null);
+                }
+             else if (TutFirstMoveWaitTextExitIsClicked == true && tutSecondMoveExitClicked == true)
+        {
+            End_Heroes_Turn_Click(null, null);
+                }
          }
 
 
@@ -1040,36 +1113,22 @@ namespace GameBoard
         public async Task tutorialEnemyMoveOne()
         {
             nonHeroTurn = true;
-            for (int i = 0; i < 6; i++)
-            {
-                if (i == 0)
-                {
-                    forceMoveCharacter(13, 4, 13, 7);
+
+                    await forceMoveCharacter(6, 4, 6, 1);
                     await Task.Delay(1000);
-                }
+               
+                    await forceMoveCharacter(6, 7, 6, 6);
+                    await Task.Delay(1000);
                 
-                 else if (i == 1)
-                {
-                    forceMoveCharacter(11, 4, 11, 6);
+                    await forceMoveCharacter(6, 8, 5, 8);
                     await Task.Delay(1000);
-                }
-                 else if (i == 2)
-                {
-                    forceMoveCharacter(12, 9, 11, 9);
+                
+                    await forceMoveCharacter(6, 11, 6, 10);
                     await Task.Delay(1000);
-                }
-                else if (i == 3)
-                {
-                    forceMoveCharacter(13, 12, 13, 13);
+              
+                    await forceMoveCharacter(6, 13, 5, 13);
                     await Task.Delay(1000);
-                }
-                else if (i == 4)
-                {
-                    forceMoveCharacter(10, 11, 8, 11);
-                    await Task.Delay(1000);
-                }
-                else if (i == 5)
-                {
+              
                //here is where we need to increment the turn.
                     //there also has to be a way to gray out the characters before here
 
@@ -1082,15 +1141,19 @@ namespace GameBoard
                     clearMoveOptions();
                     clearAttackOptions();
                    this.tutorialSecondStep();
-                }
+                //}
 
-            }    
+            //}    
         }
 
 
         public void tutorialSecondStep()
         {
             //ungray the characters and make them mobile again
+            boardspaces[5, 1].tileCharacter.Opacity = 1;
+            boardspaces[5, 1].tileCharacter.isActive = true;
+            boardspaces[3, 1].tileCharacter.Opacity = 1;
+            boardspaces[3, 1].tileCharacter.isActive = true;
             End_Turn.IsEnabled = false;
             Move.IsEnabled = false;
             Attack.IsEnabled = false;
@@ -1099,6 +1162,7 @@ namespace GameBoard
 
             if(turnNumber == 2)
             {
+                //tutPressDefend.Visibility = System.Windows.Visibility.Visible;
                 TutSecondMove.Visibility = System.Windows.Visibility.Visible;
                 TutSecondMove.IsEnabled = false;
                 TutSecondMove.Text = "This step will show you what happens when a character needs to defend themselves from a stronger enemy. " +
@@ -1119,24 +1183,24 @@ namespace GameBoard
             //{
             //    if (i == 0)
              //   {
-             //       forceMoveCharacter(13, 7, null, null);
+             //       forceMoveCharacter(6, 1, null, null);
              //   }
             
                // else if (i == 1)
                // {
-               //     forceMoveCharacter(11, 6, null, null);
+               //     forceMoveCharacter(5, 2, null, null);
                // }
                // else if (i == 2)
                // {
-               //     forceMoveCharacter(11, 9, null, null);
+               //     forceMoveCharacter(3, 7, null, null);
                // }
               //  else if (i == 3)
               //  {
-              //      forceMoveCharacter(13, 13, null, null);
+              //      forceMoveCharacter(3, 10, null, null);
                // }
                // else if (i == 4)
               //  {
-               //     forceMoveCharacter(8, 11, null, null);
+               //     forceMoveCharacter(4, 13, null, null);
                // }
                // else if (i == 5)
                // {
@@ -1144,7 +1208,34 @@ namespace GameBoard
            // }
         }
 
+        //exits the second tutorial step.
+        private void TutSecondMoveExit_Click(object sender, RoutedEventArgs e)
+        {
+            tutSecondMoveExitClicked = true;
+            tutPressDefend.Visibility = System.Windows.Visibility.Visible;
+            tutPressDefend.Text = "Now that we've clicked on the highlighted tile" +
+                "I want you to click the defend button. " +
+                "Clicking the defend buttong will increase the defense for one turn."; 
 
+
+            if (tutSecondMoveExitClicked == true)
+            {
+                this.Character_Click(boardspaces[5, 1].tileCharacter, null);
+
+           
+
+                Move.IsEnabled = false;
+                End_Turn.IsEnabled = false;
+                Attack.IsEnabled = false;
+                Defend.IsEnabled = true;
+                //Use_Item.IsEnabled = false;
+                //[y,x]
+                boardspaces[5, 1].BorderBrush = new SolidColorBrush(Colors.DeepPink);
+                boardspaces[5, 1].BorderThickness = new Thickness(2);
+            }
+
+            this.inbetweenStepTwo();
+        }
     
  
 
@@ -1162,6 +1253,7 @@ namespace GameBoard
          */
         private void Tile_Click(object sender, RoutedEventArgs e)
         {
+
             //MessageBox.Show("Tile click");
             disableAllOptionButtons();
             clearMoveOptions();
@@ -1254,8 +1346,14 @@ namespace GameBoard
             map_maker.Show();
         }
 
-        private void ReturnToWorldMap_Click(object sender, RoutedEventArgs e)
+        private async void ReturnMap_Click(object sender, RoutedEventArgs e)
         {
+            Style realColor = ReturnMap.Style;
+            Move.SetResourceReference(Control.StyleProperty, "ButtonStyle1");
+            await Task.Delay(50);
+            Move.Style = realColor;
+
+
             for (int r = 0; r < numRows; r++)
             {
                 for (int c = 0; c < numCols; c++)
@@ -1286,6 +1384,8 @@ namespace GameBoard
 
             this.NavigationService.GoBack();
         }
+
+      
 
       
 

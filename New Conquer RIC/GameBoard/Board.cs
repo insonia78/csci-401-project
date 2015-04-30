@@ -765,7 +765,7 @@ namespace GameBoard
         /*
          * For tutorial level scripting of animated character movement (when you want to move them to a specific tile)
          */
-        private void forceMoveCharacter(int oldRow, int oldCol, int newRow, int newCol)
+        private async Task forceMoveCharacter(int oldRow, int oldCol, int newRow, int newCol)
         {
             selectedCharacterRow = oldRow;
             selectedCharacterCol = oldCol;

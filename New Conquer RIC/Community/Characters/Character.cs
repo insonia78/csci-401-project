@@ -68,7 +68,7 @@ namespace Community
         private double energyMulti;
         private double attackMulti;
         private double defenseMulti;
-        private int    speedMulti;
+        private double speedMulti;
         private double agilityMulti;
         private double attackRangeMulti;
         private double specialAttackMulti;
@@ -511,7 +511,7 @@ namespace Community
         }
 
         // get and set for the speedMulti variable.
-        public int SpeedMulti
+        public double SpeedMulti
         {
             get
             {
@@ -1010,7 +1010,7 @@ namespace Community
 
             // if the first characters aim is better than the second characters dodge
             // the attack will go through.
-            if ((BattleChance() - aCharacter.BattleChance()) > 0)
+            if ((BattleChance() - BattleChance(aCharacter)) >= 0)
             {
                 damage = SpecialBattleDamage(aCharacter);
             }
@@ -1059,6 +1059,14 @@ namespace Community
         {
             Random random = new Random();
             int chance = random.Next((50 + currentAgility), 101);
+
+            return chance;
+        }
+
+        private int BattleChance(Character opponent)
+        {
+            Random random = new Random();
+            int chance = random.Next((75 + currentAgility), 101);
 
             return chance;
         }
@@ -1153,7 +1161,7 @@ namespace Community
                 (defenseMulti * currentLevel)));
             currentDefense = maxDefense;
 
-            maxSpeed = (baseSpeed * (speedMulti));
+            maxSpeed = (int)(baseSpeed * (speedMulti));
             currentSpeed = maxSpeed;
 
             maxAgility = (int)(baseAgility + (baseAgility *

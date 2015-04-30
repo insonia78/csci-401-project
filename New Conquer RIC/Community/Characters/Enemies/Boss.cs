@@ -40,7 +40,7 @@ namespace Community
             EnergyMulti = 3.00;
             AttackMulti = 2.00;
             DefenseMulti = 3.00;
-            SpeedMulti = 2;
+            SpeedMulti = 1.25;
             AgilityMulti = 2;
             AttackRangeMulti = 1.00;
             SpecialAttackMulti = 3.00;

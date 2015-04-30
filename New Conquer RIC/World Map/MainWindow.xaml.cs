@@ -444,10 +444,10 @@ namespace World_Map
 
            if (cafeteriaUnlocked == true)
            {
-               GameBoard.MainWindow library =
-                   new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+               GameBoard.MainWindow tutorial =
+                   new GameBoard.MainWindow("tutorial.txt", setOfHeroes, main, music);
 
-               this.NavigationService.Navigate(library);
+               this.NavigationService.Navigate(tutorial);
            }
 
        }
