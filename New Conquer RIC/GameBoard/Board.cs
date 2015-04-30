@@ -486,6 +486,10 @@ namespace GameBoard
          */
         public async void nextTurn()
         {
+          
+
+
+
             //Disables the mouse from clicking on anything so the user can't click something else mid animation (bad things would happen)
             this.IsHitTestVisible = false;
             //Changes the cursor to a loading/waiting cursor for the duration of the animation to help let the user know they can't use the mouse
@@ -529,16 +533,6 @@ namespace GameBoard
                 {
                     if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy)) && boardspaces[r, c].tileCharacter.hasMoved == false)
                     {
-                        //ask<string> attackResult = enemyAttackAI(r, c);
-                        //if (!attackResult.Equals("false"))
-                        //{
-                        //    boardspaces[r, c].tileCharacter.hasMoved = true;
-                        //}
-                        //else
-                        //{
-                        //    enemyMoveAI(r, c);
-                        //    enemyAttackAI(r, c); //NEEDS TO USE THE NEW ROW, COL, not r, c, don't know if/where that's stored yet.
-                        //}
                         if (enemyAttackAI(r, c).Equals("true"))
                         {
                             boardspaces[r, c].tileCharacter.hasMoved = true;
@@ -549,7 +543,6 @@ namespace GameBoard
                             enemyAttackAI(r, c); //NEEDS TO USE THE NEW ROW, COL, not r, c, don't know if/where that's stored yet.
                         }
                         boardspaces[r, c].tileCharacter.hasMoved = true; //NEEDS TO USE THE NEW ROW, COL, not r, c, don't know if/where that's stored yet.
-
                         await Task.Delay(5000);
                     }
                 }
@@ -566,7 +559,6 @@ namespace GameBoard
             selectedCharacterCol = c;
 
             Ability1_Click(boardspaces[r, c], null);
-            hideOptions();
 
             heroInAttackRangeCount = countHeroesInArea(area1);
             if (heroInAttackRangeCount > max_heroesInRange)
@@ -600,9 +592,8 @@ namespace GameBoard
                 max_heroesInRange = heroInAttackRangeCount;
             }
 
-            await Task.Delay(50);
+            await Task.Delay(1000);
             Ability2_Click(boardspaces[r, c], null);
-            hideOptions();
 
             heroInAttackRangeCount = countHeroesInArea(area1);
             if (heroInAttackRangeCount > max_heroesInRange)
@@ -636,9 +627,8 @@ namespace GameBoard
                 max_heroesInRange = heroInAttackRangeCount;
             }
 
-            await Task.Delay(50);
+            await Task.Delay(1000);
             Ability3_Click(boardspaces[r, c], null);
-            hideOptions();
 
             heroInAttackRangeCount = countHeroesInArea(area1);
             if (heroInAttackRangeCount > max_heroesInRange)
@@ -672,7 +662,7 @@ namespace GameBoard
                 max_heroesInRange = heroInAttackRangeCount;
             }
 
-            await Task.Delay(50);
+            await Task.Delay(1000);
             switch(bestAttack)
             {
                 case 0:
@@ -687,19 +677,15 @@ namespace GameBoard
                             return "false";
                         case 1:
                             await applyAbilityToArea(area1);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                         case 2:
                             await applyAbilityToArea(area2);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                         case 3:
                             await applyAbilityToArea(area3);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                         case 4:
                             await applyAbilityToArea(area4);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                     }
                     break;
@@ -712,19 +698,15 @@ namespace GameBoard
                             return "false";
                         case 1:
                             await applyAbilityToArea(area1);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                         case 2:
                             await applyAbilityToArea(area2);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                         case 3:
                             await applyAbilityToArea(area3);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                         case 4:
                             await applyAbilityToArea(area4);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                     }
                     break;
@@ -737,23 +719,20 @@ namespace GameBoard
                             return "false";
                         case 1:
                             await applyAbilityToArea(area1);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                         case 2:
                             await applyAbilityToArea(area2);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                         case 3:
                             await applyAbilityToArea(area3);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                         case 4:
                             await applyAbilityToArea(area4);
-                            await Task.Delay(1000 * max_heroesInRange);
                             break;
                     }
                     break;
             }
+
             return "true";
         }
 

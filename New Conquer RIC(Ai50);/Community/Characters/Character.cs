@@ -45,7 +45,7 @@ namespace Community
         private String status;
         protected List<Effect> statEffects;
         protected double selectedAttackPower;
-        protected bool isSelectedAttackTypeSpecial = false;
+        private bool isSelectedAttackTypeSpecial = false;
 
         // base stats.
         // all characters will have the same base stats.
@@ -1096,7 +1096,6 @@ namespace Community
 
         public virtual int[,] Ability2(int[,] boardspaces)
         {
-            this.isSelectedAttackTypeSpecial = false;
             return boardspaces;
         }
 

@@ -248,19 +248,16 @@ namespace GameBoard
                 {
                     testlabel.Content = "Hero";
                 }
-
                 if (boardspaces[row, col].tileCharacter.MaxHealth / 2 > boardspaces[row, col].tileCharacter.CurrentHealth)
                 {
                     HealthBar.Foreground = moveOption; //Yellow
                 }
-                else if (boardspaces[row, col].tileCharacter.MaxHealth / 4 > boardspaces[row, col].tileCharacter.CurrentHealth)
+                if (boardspaces[row, col].tileCharacter.MaxHealth / 4 > boardspaces[row, col].tileCharacter.CurrentHealth)
                 {
                     HealthBar.Foreground = attackOption; //Red
                 }
                 else
-                {
                     HealthBar.Foreground = new SolidColorBrush(Colors.Green);
-                }
 
                 HealthBar.Visibility = Visibility.Visible;
                 HealthBar.Maximum = boardspaces[row, col].tileCharacter.MaxHealth;
@@ -595,6 +592,8 @@ namespace GameBoard
             }
 
         }
+
+
         private void Clear()
         {
             selectedCharacterRow = moveRow;
@@ -775,6 +774,11 @@ namespace GameBoard
             }
         }
 
+        //
+        //
+        //
+        //
+        //
         public void TutorialLevel_Click(object sender, RoutedEventArgs e)
         {
             tutorialWasClicked = true;
@@ -835,6 +839,7 @@ namespace GameBoard
                 "We clicked the move button for you. When you play in the game you will have to click the move button then move to the desired square.";              
             }       
         }
+
 
         //exits the TutFirstMove text.
         //calls the second step in the tutorial.
@@ -990,11 +995,21 @@ namespace GameBoard
  
         }
 
+
+
+      
+
+
+
+       
+
+
         public void inbetweenStep()
         {
 
                 TutFirstMoveWaitTextExit.Visibility = System.Windows.Visibility.Visible;
         }
+
 
         //
         //
@@ -1017,6 +1032,10 @@ namespace GameBoard
             
         }       
         
+
+   
+
+
         //forces the enemy to move a certain way for turn 1.
         public async Task tutorialEnemyMoveOne()
         {
@@ -1090,6 +1109,8 @@ namespace GameBoard
             }
         }
 
+    
+
         //forces the enemy to move a certain way for turn 2.
         //will be fixed once the turn counter issue is resolved.
         public void tutorialEnemyMoveTwo()
@@ -1122,6 +1143,18 @@ namespace GameBoard
               //  }
            // }
         }
+
+
+    
+ 
+
+       
+        
+        //
+        //
+        //
+        //
+        //
 
         /*
          * For when the player clicks on any board spaces, brings up info about the tile, and its picture, and displays it on the side (stats location).
@@ -1254,15 +1287,13 @@ namespace GameBoard
             this.NavigationService.GoBack();
         }
 
-        private void hideOptions()
-        {
-            for (int r = 0; r < numRows; r++)
-            {
-                for (int c = 0; c < numCols; c++)
-                {
-                    boardspaces[r, c].BorderThickness = new Thickness(0);
-                }
-            }
-        }
+      
+
+       
+
+        
+
+       
+
     }
 }
