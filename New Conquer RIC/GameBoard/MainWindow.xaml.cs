@@ -55,6 +55,7 @@ namespace GameBoard
         DispatcherTimer timer = new DispatcherTimer();
         ArrayList rowPlot = new ArrayList();
         ArrayList colPlot = new ArrayList();
+        Tile[,] position;
 
         //For tutorial
         private string test;
@@ -137,16 +138,35 @@ namespace GameBoard
             dispatcherTimer.Tick += onUpdate;
             dispatcherTimer.Interval = TimePerFrame;
 
-            Objective();
+            DialoguePop("Objective: Elimination");
         }
 
-        private async void Objective()
+        private async void DialoguePop(String Dialogue)
         {
-            DialogueMessage.Content = "Objective: Elimination";
+            DialogueMessage.Content = Dialogue;
             DialogueBox.Visibility = Visibility.Visible;
             await Task.Delay(3000);
             DialogueBox.Visibility = Visibility.Hidden;
             DialogueMessage.Content = "";
+        }
+
+        private void ToggleDialogueBackground()
+        {
+            String faction = "Heroes";
+
+            if(faction == "Heroes")
+            {
+                BackgroundMessageBox.Fill = new SolidColorBrush(Color.FromRgb(58, 16, 16));
+                ForegroundMessageBox.Fill = new SolidColorBrush(Color.FromRgb(166, 30, 30));
+                faction = "Enemies";
+            }
+            else
+            {
+                BackgroundMessageBox.Fill = new SolidColorBrush(Color.FromRgb(15, 19, 44));
+                ForegroundMessageBox.Fill = new SolidColorBrush(Color.FromRgb(38, 53, 147));
+                faction = "Heroes";
+            }
+            
         }
 
         private void TitleBarTip_MouseDown(object sender, MouseButtonEventArgs e)
@@ -465,6 +485,7 @@ namespace GameBoard
                         
                     }
                 }
+                Move.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
             }
         }
 
@@ -525,7 +546,7 @@ namespace GameBoard
                     nextTurn();
                 }
             }
-        
+            Move.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
         }
 
         /*
@@ -604,6 +625,8 @@ namespace GameBoard
                     nextTurn();
                 }
             }
+            End_Turn.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
+
         }
 
         /*
@@ -611,15 +634,30 @@ namespace GameBoard
          */
         private async void End_Heroes_Turn_Click(object sender, RoutedEventArgs e)
         {
-            //BackgroundMessageBox.Fill = Brush.Equals(FF3A1010);
-            //ForegroundMessageBox
-            BackgroundMessageBox.Fill = new SolidColorBrush(Color.FromRgb(58, 16, 16));
-            ForegroundMessageBox.Fill = new SolidColorBrush(Color.FromRgb(166, 30, 30));
-            DialogueMessage.Content = "Enemy's Turn";
-            DialogueBox.Visibility = Visibility.Visible;
-            await Task.Delay(3000);
-            DialogueBox.Visibility = Visibility.Hidden;
+            ToggleDialogueBackground();
+            DialoguePop("Enemy's Turn");
 
+            // grey the buttons
+            Move.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
+            Move.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            Attack.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
+            Attack.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            Defend.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
+            Defend.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            End_Turn.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
+            End_Turn.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            Ability1.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
+            Ability1.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            Ability2.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
+            Ability2.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            Ability3.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
+            Ability3.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            Ability4.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
+            Ability4.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            End_Heroes_Turn.SetResourceReference(Button.StyleProperty, "ButtonStyle1");
+
+
+            
             disableAllOptionButtons();
             End_Heroes_Turn.IsEnabled = false;
             ok = true;
@@ -987,7 +1025,7 @@ namespace GameBoard
             //forceMoveCharacter(6, 13, 5, 13);
             moveCharacter(6, 13, 5, 13);
             await Task.Delay(1000);
-              
+
                //here is where we need to increment the turn.
                     //there also has to be a way to gray out the characters before here
             for (int r = 0; r < numRows; r++)
@@ -1211,6 +1249,9 @@ namespace GameBoard
             //Use_Item.IsEnabled = false;
             End_Turn.IsEnabled = false;
         }
+
+        //Allows worldmap access to tutorial button
+        public Button TutorialButton { get { return TutorialLevel; } }
 
         private void Map_Maker_Click(object sender, RoutedEventArgs e)
         {

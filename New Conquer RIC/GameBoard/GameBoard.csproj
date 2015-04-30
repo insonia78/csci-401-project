@@ -73,18 +73,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AI\EnemyAttakOption.cs" />
-    <Compile Include="AI\enemyMove.cs" />
-    <Compile Include="AI\enemyMoveAI.cs" />
-    <Compile Include="AI\EnemyMoveOption.cs" />
-    <Compile Include="AI\localizeHero.cs" />
-    <Compile Include="AI\plotRoot1.cs" />
-    <Compile Include="AI\progressMap.cs" />
-    <Compile Include="AI\targetAndMoveToHero.cs" />
     <Compile Include="Attack.cs" />
+    <Compile Include="EnemyAttakOption.cs" />
+    <Compile Include="enemyMove.cs" />
+    <Compile Include="enemyMoveAI.cs" />
+    <Compile Include="EnemyMoveOption.cs" />
+    <Compile Include="localizeHero.cs" />
     <Compile Include="mapBuilder.xaml.cs">
       <DependentUpon>mapBuilder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="plotRoot1.cs" />
+    <Compile Include="progressMap.cs" />
+    <Compile Include="targetAndMoveToHero.cs" />
     <Compile Include="Terrain.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <SubType>Code</SubType>

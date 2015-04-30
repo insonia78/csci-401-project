@@ -27,6 +27,10 @@ namespace GameBoard
         ArrayList enemyCol = new ArrayList();
         ArrayList heroRow = new ArrayList();
         ArrayList heroCol = new ArrayList();
+        ArrayList HeroAttackLevel = new ArrayList();
+        ArrayList HeroHealthLevel = new ArrayList();
+        ArrayList EnemyAttackLevel = new ArrayList();
+        ArrayList EnemyHealthLevel = new ArrayList();
         public void progressMap()
         {
             countHero = 0;
@@ -46,6 +50,8 @@ namespace GameBoard
                             countHero++;
                             heroRow.Add(r);
                             heroCol.Add(c);
+                            HeroAttackLevel.Add(boardspaces[r,c].tileCharacter.MaxAttack);
+                            HeroHealthLevel.Add(boardspaces[r,c].tileCharacter.MaxHealth);
                         }
                         else //is an enemy
                         {
@@ -54,8 +60,10 @@ namespace GameBoard
                             enemyLocated[r, c] = boardspaces[r, c].tileCharacter.GetType();
                             enemyRow.Add(r);
                             enemyCol.Add(c);
+                            EnemyAttackLevel.Add(boardspaces[r,c].tileCharacter.MaxAttack);
+                            EnemyHealthLevel.Add(boardspaces[r,c].tileCharacter.MaxHealth);
                         }   
-                    }
+                   }
                     else
                         mapping[r, c] = 0;
                 }

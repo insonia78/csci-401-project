@@ -166,6 +166,7 @@ namespace GameBoard
 
         public void applyAbilityToArea(ArrayList area)
         {
+
             foreach(Tile space in area)
             {
                 //String position = space.Row + ", " + space.Col;
@@ -188,6 +189,9 @@ namespace GameBoard
                         damage = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.InitiateSpecialAttack(space.tileCharacter);
                     else
                         damage = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.InitiateAttack(space.tileCharacter);
+
+                    DialoguePop(boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Name + "\nhas attacked \n" +
+                        space.tileCharacter + "\nfor " + damage + ".");
 
                     if(damage != "MISS")
                     {

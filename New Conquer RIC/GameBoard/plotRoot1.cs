@@ -205,8 +205,7 @@ namespace GameBoard
                         if (tempCol == moveToCol && tempRow == moveToRow)
                         {
 
-                            rowPlot.Add(tempRow);
-                            colPlot.Add(tempCol);
+
                             ClearArrayList();
                         }
                         if (tempCol != moveToCol && tempRow != moveToRow)
@@ -385,8 +384,7 @@ namespace GameBoard
                         if (tempCol == moveToCol && tempRow == moveToRow)
                         {
 
-                            rowPlot.Add(tempRow);
-                            colPlot.Add(tempCol);
+
                             ClearArrayList();
                         }
                         if (tempCol != moveToCol && tempRow != moveToRow)
@@ -557,8 +555,7 @@ namespace GameBoard
                         if (tempCol == moveToCol && tempRow == moveToRow)
                         {
 
-                            rowPlot.Add(tempRow);
-                            colPlot.Add(tempCol);
+
                             ClearArrayList();
                         }
                         if (tempCol != moveToCol && tempRow != moveToRow)
@@ -731,8 +728,7 @@ namespace GameBoard
                         if (tempCol == moveToCol && tempRow == moveToRow)
                         {
 
-                            rowPlot.Add(tempRow);
-                            colPlot.Add(tempCol);
+
                             ClearArrayList();
                         }
                         if (tempCol != moveToCol && tempRow != moveToRow)
@@ -756,7 +752,6 @@ namespace GameBoard
                             colPlot.Add(tempCol);
                             ClearArrayList();
                         }
-
                     }// end of selectedCharacterRow > moveToRow)
 
                 }//endof selectedCharacterCol == moveToCol
@@ -885,15 +880,14 @@ namespace GameBoard
                         }
 
                     }
-                   
+
 
 
 
                     if (tempCol == moveToCol && tempRow == moveToRow)
                     {
 
-                        rowPlot.Add(tempRow);
-                        colPlot.Add(tempCol);
+
                         ClearArrayList();
                     }
                     if (tempCol != moveToCol && tempRow != moveToRow)
@@ -917,7 +911,6 @@ namespace GameBoard
                         colPlot.Add(tempCol);
                         ClearArrayList();
                     }
-
 
                 }// selectedCharacterCol < moveToCol && selectedCharacterRow < moveToRow)
                 else if (tempCol < moveToCol && tempRow > moveToRow)
@@ -1053,8 +1046,7 @@ namespace GameBoard
                     if (tempCol == moveToCol && tempRow == moveToRow)
                     {
 
-                        rowPlot.Add(tempRow);
-                        colPlot.Add(tempCol);
+
                         ClearArrayList();
                     }
                     if (tempCol != moveToCol && tempRow != moveToRow)
@@ -1078,8 +1070,6 @@ namespace GameBoard
                         colPlot.Add(tempCol);
                         ClearArrayList();
                     }
-
-
 
 
                   
@@ -1149,34 +1139,34 @@ namespace GameBoard
                         {
                             tempRowPlus++;
 
-                            if (boardspaces[tempRow - 1, tempCol].isMoveOption == false)
+                            if (boardspaces[tempRow, tempCol + 1].isMoveOption == false)
                             {
                                 tempRowPlus++;
-                                if (boardspaces[tempRow - 1, tempCol - 1].isMoveOption == false)
+                                if (boardspaces[tempRow, tempCol + 2].isMoveOption == false)
                                 {
                                     tempRowPlus++;
-                                    if (boardspaces[tempRow - 1, tempCol - 2].isMoveOption == false)
+                                    if (boardspaces[tempRow - 1, tempCol + 2].isMoveOption == false)
                                     {
                                         tempRowPlus++;
                                     }
                                     else
                                     {
-                                        colPlus.Add(tempCol -= 2);
+                                        colPlus.Add(tempCol += 2);
                                         rowPlus.Add(tempRow -= 1);
                                         break;
                                     }
                                 }
                                 else
                                 {
-                                    colPlus.Add(tempCol -= 1);
-                                    rowPlus.Add(tempRow -=1);
+                                    colPlus.Add(tempCol += 2);
+                                    rowPlus.Add(tempRow );
                                     break;
                                 }
                             }
                             else
                             {
-                                colPlus.Add(tempCol);
-                                rowPlus.Add(tempRow -=1);
+                                colPlus.Add(tempCol +=1);
+                                rowPlus.Add(tempRow);
                                 break;
                                 
                             }
@@ -1226,8 +1216,7 @@ namespace GameBoard
                     if (tempCol == moveToCol && tempRow == moveToRow)
                     {
 
-                        rowPlot.Add(tempRow);
-                        colPlot.Add(tempCol);
+
                         ClearArrayList();
                     }
                     if (tempCol != moveToCol && tempRow != moveToRow)
@@ -1251,7 +1240,6 @@ namespace GameBoard
                         colPlot.Add(tempCol);
                         ClearArrayList();
                     }
-
 
                     
 
@@ -1323,29 +1311,29 @@ namespace GameBoard
                                     }
                                     else
                                     {
-                                        colMinus.Add(tempCol += 2);
-                                        rowMinus.Add(tempRow -= 1);
+                                        colPlus.Add(tempCol += 2);
+                                        rowPlus.Add(tempRow -= 1);
                                         break;
                                     }
                                 }
                                 else
                                 {
-                                    colMinus.Add(tempCol += 2);
-                                    rowMinus.Add(tempRow);
+                                    colPlus.Add(tempCol += 2);
+                                    rowPlus.Add(tempRow);
                                     break;
                                  }
                             }
                             else
                             {
-                                colMinus.Add(tempCol);
-                                rowMinus.Add(tempRow += 1);
+                                colPlus.Add(tempCol +=1);
+                                rowPlus.Add(tempRow);
                                 break;
                             }
                         }
                         else
                         {
-                            colMinus.Add(tempCol);
-                            rowMinus.Add(tempRow);
+                            colPlus.Add(tempCol);
+                            rowPlus.Add(tempRow);
                         }
                     }
 
@@ -1387,8 +1375,7 @@ namespace GameBoard
                     if (tempCol == moveToCol && tempRow == moveToRow)
                     {
 
-                        rowPlot.Add(tempRow);
-                        colPlot.Add(tempCol);
+                       
                         ClearArrayList();
                     }
                     if (tempCol != moveToCol && tempRow != moveToRow)
@@ -1421,6 +1408,8 @@ namespace GameBoard
                 }// end of selectedCharacterCol > moveToCol && selectedCharacterRow < moveToRow)
                 if(tempCol == moveToCol && tempRow == moveToRow)
                 {
+                    rowPlot.Add(tempRow);
+                    colPlot.Add(tempCol);
                     acontinue = true;
                 }
             } while (acontinue == false);// end of tempCol != moveToCol && tempRow != moveToRow)

@@ -37,7 +37,7 @@ namespace GameBoard
                 {
 
                     closestPath[r, c] = -1;
-                    
+                    position[r, c] = boardspaces[r, c];
                     if (boardspaces[r, c].isMoveOption) //display buttons for the user to click to chose where to move the selected player.
                     {
                         if(inside == false)
@@ -52,8 +52,8 @@ namespace GameBoard
                         }
                        
                         closestPath[r, c] = (Math.Abs(r - aheroRow) + Math.Abs(c - aheroCol));
-                       // position[r, c] = boardspaces[r, c];
-                       // position[r, c].isMoveOption = true;
+                        position[r, c] = boardspaces[r, c];
+                        position[r, c].isMoveOption = true;
                         row = r;
                         col = c;
                         boardspaces[r, c].BorderBrush = moveOption;
