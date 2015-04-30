@@ -555,10 +555,7 @@ namespace GameBoard
          */
         private async void End_Turn_Click(object sender, RoutedEventArgs e)
         {
-            //BackgroundMessageBox.Fill = Brush.Equals(FF3A1010);
-            //ForegroundMessageBox
-            DialogueMessage.Content = "Enemy's Turn";
-
+            
             waitIsClicked = true;
             if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == false)
             {
@@ -605,6 +602,15 @@ namespace GameBoard
          */
         private async void End_Heroes_Turn_Click(object sender, RoutedEventArgs e)
         {
+            //BackgroundMessageBox.Fill = Brush.Equals(FF3A1010);
+            //ForegroundMessageBox
+            BackgroundMessageBox.Fill = new SolidColorBrush(Color.FromRgb(58, 16, 16));
+            ForegroundMessageBox.Fill = new SolidColorBrush(Color.FromRgb(166, 30, 30));
+            DialogueMessage.Content = "Enemy's Turn";
+            DialogueBox.Visibility = Visibility.Visible;
+            await Task.Delay(3000);
+            DialogueBox.Visibility = Visibility.Hidden;
+
             disableAllOptionButtons();
             End_Heroes_Turn.IsEnabled = false;
             ok = true;
@@ -943,19 +949,19 @@ namespace GameBoard
         {
             nonHeroTurn = true;
 
-                    await forceMoveCharacter(6, 4, 6, 1);
-                    await Task.Delay(1000);
+                     forceMoveCharacter(6, 4, 6, 1);
+                    await Task.Delay(8000);
                
-                    await forceMoveCharacter(6, 7, 6, 6);
+                     forceMoveCharacter(6, 7, 6, 6);
                     await Task.Delay(1000);
                 
-                    await forceMoveCharacter(6, 8, 5, 8);
+                     forceMoveCharacter(6, 8, 5, 8);
                     await Task.Delay(1000);
                 
-                    await forceMoveCharacter(6, 11, 6, 10);
+                     forceMoveCharacter(6, 11, 6, 10);
                     await Task.Delay(1000);
               
-                    await forceMoveCharacter(6, 13, 5, 13);
+                     forceMoveCharacter(6, 13, 5, 13);
                     await Task.Delay(1000);
               
                //here is where we need to increment the turn.
