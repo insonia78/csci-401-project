@@ -17,10 +17,20 @@ using System.Collections;
 
 namespace GameBoard
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
+        int countHero ;
+        int countEnemy ;
+        object[,] heroLocated = new object[15, 15];
+        object[,] enemyLocated = new object[15, 15];
+        ArrayList enemyRow = new ArrayList();
+        ArrayList enemyCol = new ArrayList();
+        ArrayList heroRow = new ArrayList();
+        ArrayList heroCol = new ArrayList();
         public void progressMap()
         {
+            countHero = 0;
+            countEnemy = 0;
             mapping = null;
             mapping = new int[numRows, numCols];
             for (int r = 0; r < numRows; r++)
@@ -30,9 +40,21 @@ namespace GameBoard
                     if (boardspaces[r, c].containsCharacter())
                     {
                         if (boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)))
+                        {
                             mapping[r, c] = 1;
+                            heroLocated[r, c] = boardspaces[r, c].tileCharacter.GetType();
+                            countHero++;
+                            heroRow.Add(r);
+                            heroCol.Add(c);
+                        }
                         else //is an enemy
+                        {
                             mapping[r, c] = 2;
+                            countEnemy++;
+                            enemyLocated[r, c] = boardspaces[r, c].tileCharacter.GetType();
+                            enemyRow.Add(r);
+                            enemyCol.Add(c);
+                        }   
                     }
                     else
                         mapping[r, c] = 0;

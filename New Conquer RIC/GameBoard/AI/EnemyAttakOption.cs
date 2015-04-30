@@ -18,30 +18,226 @@ using System.Collections;
 
 namespace GameBoard
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
-        public void EnemyAttachOption()
+
+
+
+        public void EAttachTimer_Tick(object sender, EventArgs e)
         {
-          boardspaces = boardspaces[selectedHeroRow, selectedHeroCol].tileCharacter.Attack1(boardspaces, numRows, numCols); //Determines the different spaces the character can attack
+            int heroInAttackRangeCount = 0;
+            int max_heroesInRange = 0;
+            int bestAttack = 0;
+            int bestAttackArea = 0;
+            int r = selectedCharacterRow;
+            int c = selectedCharacterCol;
 
-            for (int r = 0; r < numRows; r++)
+            Ability1_Click(boardspaces[r, c], null);
+
+            heroInAttackRangeCount = countHeroesInArea(area1);
+            if (heroInAttackRangeCount > max_heroesInRange)
             {
-                for (int c = 0; c < numCols; c++)
-                {
-                    if (boardspaces[r, c].attackOption != 0) //display buttons fof the different spaces the user can attack
-                    {
-                        boardspaces[r, c].Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
-                        boardspaces[r, c].Click += new RoutedEventHandler(AttackOption_Click); //Add a AttackOption_Click event handler to the tile button
-                        boardspaces[r, c].MouseEnter += new MouseEventHandler(AttackOption_MouseEnter);
-                        boardspaces[r, c].MouseLeave += new MouseEventHandler(AttackOption_MouseLeave);
-                        //Make a colored border around attackOption spaces to signify which ones they are to the user.
-                        boardspaces[r, c].BorderBrush = attackOption;
-                        boardspaces[r, c].BorderThickness = new Thickness(1);
-
-                    }
-                }
+                bestAttack = 1;
+                bestAttackArea = 1;
+                max_heroesInRange = heroInAttackRangeCount;
             }
+
+            heroInAttackRangeCount = countHeroesInArea(area2);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 1;
+                bestAttackArea = 2;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area3);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 1;
+                bestAttackArea = 3;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area4);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 1;
+                bestAttackArea = 4;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+
+            Ability2_Click(boardspaces[r, c], null);
+
+            heroInAttackRangeCount = countHeroesInArea(area1);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 2;
+                bestAttackArea = 1;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area2);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 2;
+                bestAttackArea = 2;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area3);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 2;
+                bestAttackArea = 3;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area4);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 2;
+                bestAttackArea = 4;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+
+            Ability3_Click(boardspaces[r, c], null);
+
+            heroInAttackRangeCount = countHeroesInArea(area1);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 3;
+                bestAttackArea = 1;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area2);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 3;
+                bestAttackArea = 2;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area3);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 3;
+                bestAttackArea = 3;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+            heroInAttackRangeCount = countHeroesInArea(area4);
+            if (heroInAttackRangeCount > max_heroesInRange)
+            {
+                bestAttack = 3;
+                bestAttackArea = 4;
+                max_heroesInRange = heroInAttackRangeCount;
+            }
+
+
+            switch (bestAttack)
+            {
+                case 0:
+                    clearAttackOptions();
+                    test = "false";
+                    break;
+                case 1:
+                    Ability1_Click(boardspaces[r, c], null);
+                    switch (bestAttackArea)
+                    {
+                        case 0:
+                            clearAttackOptions();
+                            test = "false";
+                            break;
+                        case 1:
+                            applyAbilityToArea(area1);
+                            break;
+                        case 2:
+                            applyAbilityToArea(area2);
+                            break;
+                        case 3:
+                            applyAbilityToArea(area3);
+                            break;
+                        case 4:
+                            applyAbilityToArea(area4);
+                            break;
+                    }
+                    break;
+                case 2:
+                    Ability2_Click(boardspaces[r, c], null);
+                    switch (bestAttackArea)
+                    {
+                        case 0:
+                            clearAttackOptions();
+                            test = "false";
+                            break;
+                        case 1:
+                            applyAbilityToArea(area1);
+                            break;
+                        case 2:
+                            applyAbilityToArea(area2);
+                            break;
+                        case 3:
+                            applyAbilityToArea(area3);
+                            break;
+                        case 4:
+                            applyAbilityToArea(area4);
+                            break;
+                    }
+                    break;
+                case 3:
+                    Ability3_Click(boardspaces[r, c], null);
+                    switch (bestAttackArea)
+                    {
+                        case 0:
+                            clearAttackOptions();
+                            test = "false";
+                            break;
+                        case 1:
+                            applyAbilityToArea(area1);
+                            break;
+                        case 2:
+                            applyAbilityToArea(area2);
+                            break;
+                        case 3:
+                            applyAbilityToArea(area3);
+                            break;
+                        case 4:
+                            applyAbilityToArea(area4);
+                            break;
+                    }
+                    break;
+            }
+
+           
+
+            if (test == "true")
+            {
+                MessageBox.Show("true");
+            }
+            else
+            {
+                //MessageBox.Show("false");
+                EnemyAttachtimer.Stop();
+                EnemyAttachtimer.Tick -= EAttachTimer_Tick;
+
+
+                if (ok == true)
+                {
+                    enemyMove();
+                    EnemyMoveOption();
+                    boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasMoved = false;
+                }
+                EnemyAttachtimer.Tick += EAttachTimer_Tick;
+                EnemyAttachtimer.Start();
+
+
+            }
+
+
         }
-        
     }
 }
+

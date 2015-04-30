@@ -73,11 +73,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AI\EnemyAttakOption.cs" />
+    <Compile Include="AI\enemyMove.cs" />
+    <Compile Include="AI\enemyMoveAI.cs" />
+    <Compile Include="AI\EnemyMoveOption.cs" />
+    <Compile Include="AI\localizeHero.cs" />
+    <Compile Include="AI\plotRoot1.cs" />
+    <Compile Include="AI\progressMap.cs" />
+    <Compile Include="AI\targetAndMoveToHero.cs" />
     <Compile Include="Attack.cs" />
     <Compile Include="mapBuilder.xaml.cs">
       <DependentUpon>mapBuilder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PlotRoot.cs" />
     <Compile Include="Terrain.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <SubType>Code</SubType>
@@ -147,6 +154,7 @@
       <Name>Community</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
