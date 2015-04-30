@@ -177,7 +177,7 @@ namespace GameBoard
                                     break;
                                 case 69: //Wall_Verticle character: E
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri(".../.../Pictures/Board Pieces/Walls/Wall_Verticle.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri(".../.../Pictures/Board Pieces/Walls/Wall_Veticle.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
@@ -598,13 +598,12 @@ namespace GameBoard
         /*
          * For tutorial level scripting of animated character movement (when you want to move them to a specific tile)
          */
-        private async Task forceMoveCharacter(int oldRow, int oldCol, int newRow, int newCol)
+        private void forceMoveCharacter(int oldRow, int oldCol, int newRow, int newCol)
         {
             selectedCharacterRow = oldRow;
             selectedCharacterCol = oldCol;
             boardspaces[oldRow, oldCol].tileCharacter.hasMoved = false;
             MoveOption_Click(boardspaces[newRow, newCol], null);
-            await Task.Delay(1000);
             //boardspaces[newRow, newCol].tileCharacter.hasMoved = true;
            //MessageBox.Show("does this work?");
         }
@@ -653,8 +652,6 @@ namespace GameBoard
             }
             return true;
         }
-
-     
 
     }
 }

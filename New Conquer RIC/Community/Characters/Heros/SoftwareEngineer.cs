@@ -88,7 +88,6 @@ namespace Community
         public override int[,] Ability2(int[,] boardspaces)
         {
             this.selectedAttackPower = 0.5;
-            this.isSelectedAttackTypeSpecial = false;
 
             //up
             if (row - 1 >= 0 && boardspaces[row - 1, col] == 0)
@@ -140,50 +139,6 @@ namespace Community
                         boardspaces[row - 1, col + 2] = 4;
                     if (row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col + 2] == 0)
                         boardspaces[row + 1, col + 2] = 4;
-                }
-            }
-            return boardspaces;
-        }
-
-        public override int[,] Ability3(int[,] boardspaces)
-        {
-            this.selectedAttackPower = 0.8;
-            this.isSelectedAttackTypeSpecial = false;
-
-            //up
-            if (row - 1 >= 0 && boardspaces[row - 1, col] == 0)
-            {
-                boardspaces[row - 1, col] = 1;
-                if (row - 2 >= 0 && boardspaces[row - 2, col] == 0)
-                {
-                    boardspaces[row - 2, col] = 1;
-                }
-            }
-            //down
-            if (row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col] == 0)
-            {
-                boardspaces[row + 1, col] = 1;
-                if (row + 2 < boardspaces.GetLength(0) && boardspaces[row + 2, col] == 0)
-                {
-                    boardspaces[row + 2, col] = 1;
-                }
-            }
-            //left
-            if (col - 1 >= 0 && boardspaces[row, col - 1] == 0)
-            {
-                boardspaces[row, col - 1] = 2;
-                if (col - 2 >= 0 && boardspaces[row, col - 2] == 0)
-                {
-                    boardspaces[row, col - 2] = 2;
-                }
-            }
-            //right
-            if (col + 1 < boardspaces.GetLength(1) && boardspaces[row, col + 1] == 0)
-            {
-                boardspaces[row, col + 1] = 2;
-                if (col + 2 < boardspaces.GetLength(1) && boardspaces[row, col + 2] == 0)
-                {
-                    boardspaces[row, col + 2] = 2;
                 }
             }
             return boardspaces;

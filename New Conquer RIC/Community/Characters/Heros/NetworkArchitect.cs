@@ -54,8 +54,8 @@ namespace Community
             HealthMulti = 1.75;
             EnergyMulti = 1.50;
             AttackMulti = 3.00;
-            DefenseMulti = 2;
-            SpeedMulti = 1.25;
+            DefenseMulti = 1.50;
+            SpeedMulti = 3;
             AgilityMulti = 3;
             AttackRangeMulti = 3.00;
             SpecialAttackMulti = 2.00;
@@ -68,38 +68,9 @@ namespace Community
             InstantiateLevel(1);
         }
 
-        public override int[,] Ability1(int[,] boardspaces)
-        {
-            this.selectedAttackPower = 1;
-            this.isSelectedAttackTypeSpecial = false;
-
-            //up
-            if (row - 4 >= 0 && boardspaces[row - 4, col] == 0)
-            {
-                boardspaces[row - 4, col] = 1;
-            }
-            //down
-            if (row + 4 < boardspaces.GetLength(0) && boardspaces[row + 4, col] == 0)
-            {
-                boardspaces[row + 4, col] = 2;
-            }
-            //left
-            if (col - 4 >= 0 && boardspaces[row, col - 4] == 0)
-            {
-                boardspaces[row, col - 4] = 3;
-            }
-            //right
-            if (col + 4 < boardspaces.GetLength(1) && boardspaces[row, col + 4] == 0)
-            {
-                boardspaces[row, col + 4] = 4;
-            }
-            return boardspaces;
-        }
-
         public override int[,] Ability2(int[,] boardspaces)
         {
             this.selectedAttackPower = 0.2;
-            this.isSelectedAttackTypeSpecial = false;
 
             int i = 1;
             //up
@@ -128,85 +99,6 @@ namespace Community
             {
                 boardspaces[row, col + i] = 4;
                 i++;
-            }
-            return boardspaces;
-        }
-
-        public override int[,] Ability3(int[,] boardspaces)
-        {
-            this.selectedAttackPower = 1;
-            this.isSelectedAttackTypeSpecial = true;
-
-            //makes a circle that can go throught walls, radius 3
-            //up three spaces, and the two up corners
-            if(row - 3 >= 0 && boardspaces[row - 3, col] == 0)
-            {
-                boardspaces[row - 3, col] = 1;
-            }
-            if (row - 3 >= 0 && col - 1 >= 0 && boardspaces[row - 3, col - 1] == 0)
-            {
-                boardspaces[row - 3, col- 1] = 1;
-            }
-            if (row - 3 >= 0 && col + 1 < boardspaces.GetLength(1) && boardspaces[row - 3, col + 1] == 0)
-            {
-                boardspaces[row - 3, col + 1] = 1;
-            }
-            if (row - 2 >= 0 && col - 2 >= 0 && boardspaces[row - 2, col - 2] == 0)
-            {
-                boardspaces[row - 2, col - 2] = 1;
-            }
-            if (row - 2 >= 0 && col + 2 < boardspaces.GetLength(1) && boardspaces[row - 2, col + 2] == 0)
-            {
-                boardspaces[row - 2, col + 2] = 1;
-            }
-            //down three and the two down corners
-            if(row + 3 < boardspaces.GetLength(0) && boardspaces[row + 3, col] == 0)
-            {
-                boardspaces[row + 3, col] = 1;
-            }
-            if (row + 3 < boardspaces.GetLength(0) && col - 1 >= 0 && boardspaces[row + 3, col - 1] == 0)
-            {
-                boardspaces[row + 3, col - 1] = 1;
-            }
-            if (row + 3 < boardspaces.GetLength(0) && col + 1 < boardspaces.GetLength(1) && boardspaces[row + 3, col + 1] == 0)
-            {
-                boardspaces[row + 3, col + 1] = 1;
-            }
-            if (row + 2 < boardspaces.GetLength(0) && col - 2 >= 0 && boardspaces[row + 2, col - 2] == 0)
-            {
-                boardspaces[row + 2, col - 2] = 1;
-            }
-            if (row + 2 < boardspaces.GetLength(0) && col + 2 < boardspaces.GetLength(1) && boardspaces[row + 2, col + 2] == 0)
-            {
-                boardspaces[row + 2, col + 2] = 1;
-            }
-
-            //left 3
-            if (col - 3 >= 0 && boardspaces[row, col - 3] == 0)
-            {
-                boardspaces[row, col - 3] = 1;
-            }
-            if (col - 3 >= 0 && row - 1 >= 0 && boardspaces[row - 1, col - 3] == 0)
-            {
-                boardspaces[row - 1, col - 3] = 1;
-            }
-            if (col - 3 >= 0 && row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col - 3] == 0)
-            {
-                boardspaces[row + 1, col - 3] = 1;
-            }
-
-            //right 3
-            if (col + 3 < boardspaces.GetLength(1) && boardspaces[row, col + 3] == 0)
-            {
-                boardspaces[row, col + 3] = 1;
-            }
-            if (col + 3 < boardspaces.GetLength(1) && row - 1 >= 0 && boardspaces[row - 1, col + 3] == 0)
-            {
-                boardspaces[row - 1, col + 3] = 1;
-            }
-            if (col + 3 < boardspaces.GetLength(1) && row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col + 3] == 0)
-            {
-                boardspaces[row + 1, col + 3] = 1;
             }
             return boardspaces;
         }

@@ -444,11 +444,10 @@ namespace World_Map
 
            if (cafeteriaUnlocked == true)
            {
-               GameBoard.MainWindow tutorial =
-                   new GameBoard.MainWindow("tutorial.txt", setOfHeroes, main, music);
-               this.NavigationService.Navigate(tutorial);
-               //Load tutorial button
-               tutorial.TutorialLevel_Click(null, null);
+               GameBoard.MainWindow library =
+                   new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+
+               this.NavigationService.Navigate(library);
            }
 
        }
@@ -459,45 +458,49 @@ namespace World_Map
            if (libraryUnlocked == true)
            {
                GameBoard.MainWindow library =
-                   new GameBoard.MainWindow("Level2.txt", setOfHeroes, main, music);
+                   new GameBoard.MainWindow("Level1.txt", setOfHeroes, main, music);
+
                this.NavigationService.Navigate(library);
            }
        }
 
-       //Open Murray/lvl 2 board
+        //Open Murray/lvl 2 board
        private void btnMurray_MouseDoubleClick(object sender, MouseButtonEventArgs e)
        {
            if (murrayUnlocked == true)
            {
                GameBoard.MainWindow library =
-                   new GameBoard.MainWindow("Level2.txt", setOfHeroes, main, music);
+                   new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+
                this.NavigationService.Navigate(library);
            }
        }
 
-       //Open Craiglee/lvl 3 board
+        //Open Craiglee/lvl 3 board
        private void btnCraigLee_MouseDoubleClick(object sender, MouseButtonEventArgs e)
        {
            if (craigLeeUnlocked == true)
            {
                GameBoard.MainWindow library =
                    new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+
                this.NavigationService.Navigate(library);
            }
        }
 
-       //Open Clark/lvl 4 board
+        //Open Clark/lvl 4 board
        private void btnClark_MouseDoubleClick(object sender, MouseButtonEventArgs e)
        {
            if (clarkUnlocked == true)
            {
                GameBoard.MainWindow library =
                    new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+
                this.NavigationService.Navigate(library);
            }
        }
 
-       //Open gaige/final lvl board
+        //Open gaige/final lvl board
        private void btnGaige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
        {
            if (gaigeUnlocked == true)

@@ -166,21 +166,12 @@ namespace GameBoard
 
         public void applyAbilityToArea(ArrayList area)
         {
-
             foreach(Tile space in area)
             {
                 //String position = space.Row + ", " + space.Col;
                 //MessageBox.Show(position + " was attacked.");
-                if(boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.AttackPower < 0)
-                {
-                    if(space.containsCharacter() && (((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy)) || 
-                    ((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero))))))
-                    {
-                        space.tileCharacter.IncreaseHealth((int)(boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.AttackPower * -1));
-                        attackAnimation(space.tileCharacter, ".../.../Pictures/heal_spritesheet.png");
-                    }
-                }
-                else if (space.containsCharacter() && (((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)) || 
+
+                if (space.containsCharacter() && (((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)) || 
                     ((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))))))
                 {
                     String damage;
@@ -190,12 +181,9 @@ namespace GameBoard
                     else
                         damage = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.InitiateAttack(space.tileCharacter);
 
-                    DialoguePop(boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Name + "\nhas attacked \n" +
-                        space.tileCharacter + "\nfor " + damage + ".");
-
                     if(damage != "MISS")
                     {
-                        space.tileCharacter.DecreaseHealth((int)(Convert.ToInt32(damage) * boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.AttackPower));
+                        space.tileCharacter.DecreaseHealth(Convert.ToInt32(damage));
                         attackAnimation(space.tileCharacter, ".../.../Pictures/test_explosion_spritesheet.png");
                     }
                     else
