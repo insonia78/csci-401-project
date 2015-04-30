@@ -604,6 +604,7 @@ namespace GameBoard
             selectedCharacterCol = oldCol;
             boardspaces[oldRow, oldCol].tileCharacter.hasMoved = false;
             MoveOption_Click(boardspaces[newRow, newCol], null);
+            await Task.Delay(1000);
             //boardspaces[newRow, newCol].tileCharacter.hasMoved = true;
            //MessageBox.Show("does this work?");
         }
@@ -652,6 +653,8 @@ namespace GameBoard
             }
             return true;
         }
+
+     
 
     }
 }
