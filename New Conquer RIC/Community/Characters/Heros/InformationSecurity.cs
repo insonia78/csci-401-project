@@ -69,5 +69,92 @@ namespace Community
              */
             InstantiateLevel(1);
         }
+        public override int[,] Ability2(int[,] boardspaces)
+        {
+            this.selectedAttackPower = 0.8;
+            this.isSelectedAttackTypeSpecial = true;
+
+            //up
+            if (row - 1 >= 0 && boardspaces[row - 1, col] == 0)
+            {
+                boardspaces[row - 1, col] = 1;
+            }
+            //down
+            if (row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col] == 0)
+            {
+                boardspaces[row + 1, col] = 1;
+            }
+            //left
+            if (col - 1 >= 0 && boardspaces[row, col - 1] == 0)
+            {
+                boardspaces[row, col - 1] = 1;
+            }
+            //right
+            if (col + 1 < boardspaces.GetLength(1) && boardspaces[row, col + 1] == 0)
+            {
+                boardspaces[row, col + 1] = 1;
+            }
+            return boardspaces;
+        }
+
+        public override int[,] Ability3(int[,] boardspaces)
+        {
+            this.selectedAttackPower = 1.2;
+            this.isSelectedAttackTypeSpecial = true;
+
+            //up
+            if (row - 1 >= 0 && boardspaces[row - 1, col] == 0)
+            {
+                boardspaces[row - 1, col] = 1;
+            }
+            if (row - 2 >= 0 && boardspaces[row - 2, col] == 0)
+            {
+                boardspaces[row - 2, col] = 1;
+            }
+            if (row - 3 >= 0 && boardspaces[row - 3, col] == 0)
+            {
+                boardspaces[row - 3, col] = 1;
+            }
+            //down
+            if (row + 1 < boardspaces.GetLength(0) && boardspaces[row + 1, col] == 0)
+            {
+                boardspaces[row + 1, col] = 2;
+            }
+            if (row + 2 < boardspaces.GetLength(0) && boardspaces[row + 2, col] == 0)
+            {
+                boardspaces[row + 2, col] = 2;
+            }
+            if (row + 3 < boardspaces.GetLength(0) && boardspaces[row + 3, col] == 0)
+            {
+                boardspaces[row + 3, col] = 2;
+            }
+            //left
+            if (col - 1 >= 0 && boardspaces[row, col - 1] == 0)
+            {
+                boardspaces[row, col - 1] = 3;
+            }
+            if (col - 2 >= 0 && boardspaces[row, col - 2] == 0)
+            {
+                boardspaces[row, col - 2] = 3;
+            }
+            if (col - 3 >= 0 && boardspaces[row, col - 3] == 0)
+            {
+                boardspaces[row, col - 3] = 3;
+            }
+            //right
+            if (col + 1 < boardspaces.GetLength(1) && boardspaces[row, col + 1] == 0)
+            {
+                boardspaces[row, col + 1] = 4;
+            }
+            if (col + 2 < boardspaces.GetLength(1) && boardspaces[row, col + 2] == 0)
+            {
+                boardspaces[row, col + 2] = 4;
+            }
+            if (col + 3 < boardspaces.GetLength(1) && boardspaces[row, col + 3] == 0)
+            {
+                boardspaces[row, col + 3] = 4;
+            }
+            return boardspaces;
+        }
     }
 }

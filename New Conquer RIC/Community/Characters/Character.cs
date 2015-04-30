@@ -1074,6 +1074,7 @@ namespace Community
         public virtual int[,] Ability1(int[,] boardspaces)
         {
             this.selectedAttackPower = 1.0;
+            this.isSelectedAttackTypeSpecial = false;
 
             //up
             if (row - 1 >= 0 && boardspaces[row - 1, col] == 0)

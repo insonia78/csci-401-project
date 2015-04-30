@@ -170,8 +170,16 @@ namespace GameBoard
             {
                 //String position = space.Row + ", " + space.Col;
                 //MessageBox.Show(position + " was attacked.");
-
-                if (space.containsCharacter() && (((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)) || 
+                if(boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.AttackPower < 0)
+                {
+                    if(space.containsCharacter() && (((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy)) || 
+                    ((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero))))))
+                    {
+                        space.tileCharacter.IncreaseHealth((int)(boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.AttackPower * -1));
+                        attackAnimation(space.tileCharacter, ".../.../Pictures/heal_spritesheet.png");
+                    }
+                }
+                else if (space.containsCharacter() && (((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero)) || 
                     ((space.tileCharacter.GetType().IsSubclassOf(typeof(Community.Hero))) && boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy))))))
                 {
                     String damage;
