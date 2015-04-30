@@ -458,7 +458,7 @@ namespace World_Map
            if (libraryUnlocked == true)
            {
                GameBoard.MainWindow library =
-                   new GameBoard.MainWindow("Level1.txt", setOfHeroes, main, music);
+                   new GameBoard.MainWindow("Level2.txt", setOfHeroes, main, music);
 
                this.NavigationService.Navigate(library);
            }
@@ -470,7 +470,7 @@ namespace World_Map
            if (murrayUnlocked == true)
            {
                GameBoard.MainWindow library =
-                   new GameBoard.MainWindow("testmap.txt", setOfHeroes, main, music);
+                   new GameBoard.MainWindow("Level2.txt", setOfHeroes, main, music);
 
                this.NavigationService.Navigate(library);
            }
