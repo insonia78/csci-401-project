@@ -38,7 +38,7 @@ namespace GameBoard
         private ArrayList area3 = new ArrayList();
         private ArrayList area4 = new ArrayList();
 
-        private async Task clearAttackOptions()
+        private void clearAttackOptions()
         {
             foreach (Tile space in area1)
             {
@@ -164,7 +164,7 @@ namespace GameBoard
             updateAvailableOptionButtons();
         }
 
-        public async Task applyAbilityToArea(ArrayList area)
+        public void applyAbilityToArea(ArrayList area)
         {
             foreach(Tile space in area)
             {
@@ -209,11 +209,11 @@ namespace GameBoard
                         refreshBoardSpace(space.Row, space.Col);
                     }
 
-                    await Task.Delay(1000);
+                   
                 }
             }
 
-            await clearAttackOptions();
+             clearAttackOptions();
         }
 
         public int[,] mapSolidSpaces()
@@ -259,27 +259,27 @@ namespace GameBoard
             }
         }
 
-        public async void Ability1_Click(object sender, RoutedEventArgs e)
+        public void Ability1_Click(object sender, RoutedEventArgs e)
         {
-            await clearAttackOptions();
+            clearAttackOptions();
             int[,] attackAreas = new int[numRows, numCols];
             attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability1(mapSolidSpaces()); //Determines the different spaces the character can attack
             decodeAttackAreas(attackAreas);
             displayAttackAreas();
         }
 
-        public async void Ability2_Click(object sender, RoutedEventArgs e)
+        public  void Ability2_Click(object sender, RoutedEventArgs e)
         {
-            await clearAttackOptions();
+            clearAttackOptions();
             int[,] attackAreas = new int[numRows, numCols];
             attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability2(mapSolidSpaces()); //Determines the different spaces the character can attack
             decodeAttackAreas(attackAreas);
             displayAttackAreas();
         }
 
-        public async void Ability3_Click(object sender, RoutedEventArgs e)
+        public void Ability3_Click(object sender, RoutedEventArgs e)
         {
-            await clearAttackOptions();
+            clearAttackOptions();
             int[,] attackAreas = new int[numRows, numCols];
             attackAreas = boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.Ability3(mapSolidSpaces()); //Determines the different spaces the character can attack
             decodeAttackAreas(attackAreas);

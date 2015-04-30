@@ -529,6 +529,9 @@ namespace GameBoard
                 {
                     if (boardspaces[r, c].containsCharacter() == true && boardspaces[r, c].tileCharacter.GetType().IsSubclassOf(typeof(Community.Enemy)) && boardspaces[r, c].tileCharacter.hasMoved == false)
                     {
+
+                        /*
+=======
                         //ask<string> attackResult = enemyAttackAI(r, c);
                         //if (!attackResult.Equals("false"))
                         //{
@@ -539,6 +542,7 @@ namespace GameBoard
                         //    enemyMoveAI(r, c);
                         //    enemyAttackAI(r, c); //NEEDS TO USE THE NEW ROW, COL, not r, c, don't know if/where that's stored yet.
                         //}
+>>>>>>> origin/master
                         if (enemyAttackAI(r, c).Equals("true"))
                         {
                             boardspaces[r, c].tileCharacter.hasMoved = true;
@@ -548,214 +552,22 @@ namespace GameBoard
                             enemyMoveAI(r, c);
                             enemyAttackAI(r, c); //NEEDS TO USE THE NEW ROW, COL, not r, c, don't know if/where that's stored yet.
                         }
+                         * */
                         boardspaces[r, c].tileCharacter.hasMoved = true; //NEEDS TO USE THE NEW ROW, COL, not r, c, don't know if/where that's stored yet.
 
+                        
+
+
                         await Task.Delay(5000);
+
                     }
                 }
             }
         }
 
-        private async Task<string> enemyAttackAI(int r, int c)
-        {
-            int heroInAttackRangeCount = 0;
-            int max_heroesInRange = 0;
-            int bestAttack = 0;
-            int bestAttackArea = 0;
-            selectedCharacterRow = r;
-            selectedCharacterCol = c;
 
-            Ability1_Click(boardspaces[r, c], null);
-            hideOptions();
-
-            heroInAttackRangeCount = countHeroesInArea(area1);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 1;
-                bestAttackArea = 1;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            heroInAttackRangeCount = countHeroesInArea(area2);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 1;
-                bestAttackArea = 2;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            heroInAttackRangeCount = countHeroesInArea(area3);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 1;
-                bestAttackArea = 3;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            heroInAttackRangeCount = countHeroesInArea(area4);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 1;
-                bestAttackArea = 4;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            await Task.Delay(50);
-            Ability2_Click(boardspaces[r, c], null);
-            hideOptions();
-
-            heroInAttackRangeCount = countHeroesInArea(area1);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 2;
-                bestAttackArea = 1;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            heroInAttackRangeCount = countHeroesInArea(area2);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 2;
-                bestAttackArea = 2;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            heroInAttackRangeCount = countHeroesInArea(area3);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 2;
-                bestAttackArea = 3;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            heroInAttackRangeCount = countHeroesInArea(area4);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 2;
-                bestAttackArea = 4;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            await Task.Delay(50);
-            Ability3_Click(boardspaces[r, c], null);
-            hideOptions();
-
-            heroInAttackRangeCount = countHeroesInArea(area1);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 3;
-                bestAttackArea = 1;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            heroInAttackRangeCount = countHeroesInArea(area2);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 3;
-                bestAttackArea = 2;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            heroInAttackRangeCount = countHeroesInArea(area3);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 3;
-                bestAttackArea = 3;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            heroInAttackRangeCount = countHeroesInArea(area4);
-            if (heroInAttackRangeCount > max_heroesInRange)
-            {
-                bestAttack = 3;
-                bestAttackArea = 4;
-                max_heroesInRange = heroInAttackRangeCount;
-            }
-
-            await Task.Delay(50);
-            switch(bestAttack)
-            {
-                case 0:
-                    await clearAttackOptions();
-                    return "false";
-                case 1:
-                    Ability1_Click(boardspaces[r, c], null);
-                    switch(bestAttackArea)
-                    {
-                        case 0:
-                            await clearAttackOptions();
-                            return "false";
-                        case 1:
-                            await applyAbilityToArea(area1);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                        case 2:
-                            await applyAbilityToArea(area2);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                        case 3:
-                            await applyAbilityToArea(area3);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                        case 4:
-                            await applyAbilityToArea(area4);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                    }
-                    break;
-                case 2:
-                    Ability2_Click(boardspaces[r, c], null);
-                    switch (bestAttackArea)
-                    {
-                        case 0:
-                            await clearAttackOptions();
-                            return "false";
-                        case 1:
-                            await applyAbilityToArea(area1);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                        case 2:
-                            await applyAbilityToArea(area2);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                        case 3:
-                            await applyAbilityToArea(area3);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                        case 4:
-                            await applyAbilityToArea(area4);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                    }
-                    break;
-                case 3:
-                    Ability3_Click(boardspaces[r, c], null);
-                    switch (bestAttackArea)
-                    {
-                        case 0:
-                            await clearAttackOptions();
-                            return "false";
-                        case 1:
-                            await applyAbilityToArea(area1);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                        case 2:
-                            await applyAbilityToArea(area2);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                        case 3:
-                            await applyAbilityToArea(area3);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                        case 4:
-                            await applyAbilityToArea(area4);
-                            await Task.Delay(1000 * max_heroesInRange);
-                            break;
-                    }
-                    break;
-            }
-            return "true";
-        }
+       
+       
 
         public int countHeroesInArea(ArrayList area)
         {

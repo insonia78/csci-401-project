@@ -25,9 +25,9 @@ namespace GameBoard
     public partial class MainWindow : Page
     {
         private Grid[,] cells; //2D array of containers to add to the Board uniformGrid to hold the tiles
-        SolidColorBrush moveOption = new SolidColorBrush(Colors.Yellow);
+        SolidColorBrush moveOption = new SolidColorBrush(Colors.Red); 
         SolidColorBrush attackOption = new SolidColorBrush(Colors.Red);
-
+       
         //The input heroes:
         private Hero hero1;
         private Hero hero2;
@@ -40,6 +40,7 @@ namespace GameBoard
         private int selectedCharacterCol;
 
         //For the animated movement
+        private bool ok = true;
         private int moveToRow;
         private int moveToCol;
         private int indexOfCol;
@@ -47,13 +48,16 @@ namespace GameBoard
         private int dummyRow;
         private int dummyCol;
         private int index = 0;
+        public int countEnemiesForloop = 0;
         private int moveRow = 0, moveCol = 0;
-        private object[,] position = new object[15, 15];
+        DispatcherTimer Enemytimer = new DispatcherTimer();
+        DispatcherTimer EnemyAttachtimer = new DispatcherTimer();
         DispatcherTimer timer = new DispatcherTimer();
         ArrayList rowPlot = new ArrayList();
         ArrayList colPlot = new ArrayList();
 
         //For tutorial
+        private string test;
         private bool isTutorial;
         public bool tutorialWasClicked; 
         public bool tutIntroductionExitClicked;
@@ -74,6 +78,7 @@ namespace GameBoard
          */
         public MainWindow()
         {
+            
             InitializeComponent();
             setupBoard("testmap.txt");
             selectedCharacterRow = 0;
@@ -280,8 +285,8 @@ namespace GameBoard
 
         private void Board_Loaded(object sender, RoutedEventArgs e)
         {
-            music.Source = new Uri("../../LevelOneBgm.wav", UriKind.Relative);
-            music.Play();
+           // music.Source = new Uri("../../LevelOneBgm.wav", UriKind.Relative);
+          //  music.Play();
         }
 
         /*
@@ -349,179 +354,29 @@ namespace GameBoard
 
                 dummyRow = selectedCharacterRow;
                 dummyCol = selectedCharacterCol;
-                moveRow = moveToRow;
-                if (selectedCharacterRow == moveToRow)
-                {
-                    if (selectedCharacterCol < moveToCol)
-                    {
-                        type = 0;
-                        PlotRoot(type);
-
-                        timer.Tick += timer0_Tick;
-                        timer.Start();
-
-                    }
-                    if (selectedCharacterCol > moveToCol)
-                    {
-                        type = 1;
-                        PlotRoot(type);
-                        timer.Tick += timer1_Tick;
-                        timer.Start();
-
-                    }
-
-                }
-                else if (selectedCharacterCol == moveToCol)
-                {
-                    if (selectedCharacterRow < moveToRow)
-                    {
-                        type = 2;
-                        PlotRoot(type);
-                        timer.Tick += timer2_Tick;
-                        timer.Start();
-
-                    }
-                    if (selectedCharacterRow > moveToRow)
-                    {
-                        type = 3;
-                        PlotRoot(type);
-                        timer.Tick += timer3_Tick;
-                        timer.Start();
-
-                    }
-
-                }
-                else if (selectedCharacterCol < moveToCol && selectedCharacterRow < moveToRow)
-                {
-                    type = 4;
-                    PlotRoot(type);
-                    timer.Tick += timer4_Tick;
-                    timer.Start();
-
-                }
-                else if (selectedCharacterCol < moveToCol && selectedCharacterRow > moveToRow)
-                {
-                    type = 5;
-                    PlotRoot(type);
-                    timer.Tick += timer5_Tick;
-                    timer.Start();
 
 
-                }
-                else if (selectedCharacterCol > moveToCol && selectedCharacterRow > moveToRow)
-                {
-                    type = 6;
-                    PlotRoot(type);
-                    timer.Tick += timer6_Tick;
-                    timer.Start();
+                PlotRoot(0);
+
+                timer.Tick += timer_Tick;
+                timer.Start();
 
 
-                }
-                else if (selectedCharacterCol > moveToCol && selectedCharacterRow < moveToRow)
-                {
-                    type = 7;
-                    PlotRoot(type);
-                    timer.Tick += timer7_Tick;
-                    timer.Start();
-
-                }
-
+                //Disable the move button.
+                Move.IsEnabled = false;
             }
-
-            //Disable the move button.
-            Move.IsEnabled = false;
         }
 
 
 
 
-        void timer0_Tick(object sender, EventArgs e)
-        {
-            //MessageBox.Show("hello");
-            if (dummyCol == moveToCol)
-            {
-                timer.Stop();
-                timer.Tick -= timer0_Tick;
-                Clear();
-            }
-            else
-            {
-                moveRow = (int)rowPlot[index];
-                moveCol = (int)colPlot[index];
-                moveCharacter(dummyRow, dummyCol, moveRow, moveCol);
-                dummyCol = moveCol;
-                dummyRow = moveRow;
-                index++;
-            }
-
-        }
-        void timer1_Tick(object sender, EventArgs e)
-        {
-            //MessageBox.Show("hello");
-            if (dummyCol == moveToCol)
-            {
-                timer.Stop();
-                timer.Tick -= timer1_Tick;
-                Clear();
-            }
-            else
-            {
-                moveRow = (int)rowPlot[index];
-                moveCol = (int)colPlot[index];
-                moveCharacter(dummyRow, dummyCol, moveRow, moveCol);
-                dummyCol = moveCol;
-                dummyRow = moveRow;
-                index++;
-            }
-
-        }
-        void timer2_Tick(object sender, EventArgs e)
-        {
-            //MessageBox.Show("hello");
-            if (dummyRow == moveToRow)
-            {
-                timer.Stop();
-                timer.Tick -= timer2_Tick;
-                Clear();
-            }
-            else
-            {
-                moveRow = (int)rowPlot[index];
-                moveCol = (int)colPlot[index];
-                moveCharacter(dummyRow, dummyCol, moveRow, moveCol);
-                dummyCol = moveCol;
-                dummyRow = moveRow;
-                index++;
-            }
-
-        }
-        void timer3_Tick(object sender, EventArgs e)
-        {
-            //MessageBox.Show("hello");
-            if (dummyRow == moveToRow)
-            {
-                timer.Stop();
-                timer.Tick -= timer3_Tick;
-                Clear();
-            }
-            else
-            {
-                moveRow = (int)rowPlot[index];
-                moveCol = (int)colPlot[index];
-                moveCharacter(dummyRow, dummyCol, moveRow, moveCol);
-                dummyCol = moveCol;
-                dummyRow = moveRow;
-                index++;
-            }
-
-        }
-        void timer4_Tick(object sender, EventArgs e)
+        void timer_Tick(object sender, EventArgs e)
         {
             //MessageBox.Show("hello");
             if (dummyCol == moveToCol && dummyRow == moveToRow)
             {
                 timer.Stop();
-                timer.Tick -= timer4_Tick;
+                timer.Tick -= timer_Tick;
                 Clear();
             }
             else
@@ -535,66 +390,9 @@ namespace GameBoard
             }
 
         }
-        void timer5_Tick(object sender, EventArgs e)
-        {
-            //MessageBox.Show("hello");
-            if (dummyCol == moveToCol && dummyRow == moveToRow)
-            {
-                timer.Stop();
-                timer.Tick -= timer5_Tick;
-                Clear();
-            }
-            else
-            {
-                moveRow = (int)rowPlot[index];
-                moveCol = (int)colPlot[index];
-                moveCharacter(dummyRow, dummyCol, moveRow, moveCol);
-                dummyCol = moveCol;
-                dummyRow = moveRow;
-                index++;
-            }
 
-        }
-        void timer6_Tick(object sender, EventArgs e)
-        {
-            //MessageBox.Show("hello");
-            if (dummyCol == moveToCol && dummyRow == moveToRow)
-            {
-                timer.Stop();
-                timer.Tick -= timer6_Tick;
-                Clear();
-            }
-            else
-            {
-                moveRow = (int)rowPlot[index];
-                moveCol = (int)colPlot[index];
-                moveCharacter(dummyRow, dummyCol, moveRow, moveCol);
-                dummyCol = moveCol;
-                dummyRow = moveRow;
-                index++;
-            }
+        
 
-        }
-        void timer7_Tick(object sender, EventArgs e)
-        {
-            //MessageBox.Show("hello");
-            if (dummyCol == moveToCol && dummyRow == moveToRow)
-            {
-                timer.Stop();
-                timer.Tick -= timer7_Tick;
-                Clear();
-            }
-            else
-            {
-                moveRow = (int)rowPlot[index];
-                moveCol = (int)colPlot[index];
-                moveCharacter(dummyRow, dummyCol, moveRow, moveCol);
-                dummyCol = moveCol;
-                dummyRow = moveRow;
-                index++;
-            }
-
-        }
         private void Clear()
         {
             selectedCharacterRow = moveRow;
@@ -604,8 +402,7 @@ namespace GameBoard
             rowPlot.Clear();
             colPlot.Clear();
             index = 0;
-            position = null;
-            position = new object[15, 15];
+            
 
             //Reenables the mouse once the animation is done and the user can't screw things up.
             this.IsHitTestVisible = true;
@@ -641,7 +438,7 @@ namespace GameBoard
                 {
                     if (boardspaces[r, c].isMoveOption) //display buttons for the user to click to chose where to move the selected player.
                     {
-                        position[r, c] = boardspaces[r, c];
+                       
                         boardspaces[r, c].Click -= new RoutedEventHandler(Tile_Click); //Remove the Tile_Click event handler from the tile button
                         boardspaces[r, c].Click += new RoutedEventHandler(MoveOption_Click); //Add a MoveOption_Click event handler to the tile button
                         //Make a colored border around moveOption spaces to signify which ones they are to the user.
@@ -751,6 +548,15 @@ namespace GameBoard
          */
         private void End_Heroes_Turn_Click(object sender, RoutedEventArgs e)
         {
+            disableAllOptionButtons();
+            End_Heroes_Turn.IsEnabled = false;
+            ok = true;
+            countEnemies();
+            countEnemiesForloop = numEnemies;
+            disableAllOptionButtons();
+            End_Heroes_Turn.IsEnabled = false;
+            timer.Interval = TimeSpan.FromSeconds(3);
+            EnemyAttachtimer.Interval = TimeSpan.FromSeconds(2);
           
             if (tutFirstMoveExitClicked == true && TutFirstMoveWaitTextExitIsClicked == true)
             {
@@ -765,15 +571,52 @@ namespace GameBoard
             }
             else
             {
+                progressMap();
+                localizeHero();
                 disableAllOptionButtons();
                 End_Heroes_Turn.IsEnabled = false;
+                Enemytimer.Tick += Etimer_Tick;
+                Enemytimer.Start();
+
 
                 //nextTurn() resets the inactive, hasMoved, etc properties for each hero, so it doesn't need to be done here.
-                nextTurn();
+                //nextTurn();
 
                 End_Heroes_Turn.IsEnabled = true;
             }
         }
+        public void Etimer_Tick(object sender, EventArgs e)
+        {
+
+
+            Enemytimer.Stop();
+            Enemytimer.Tick -= Etimer_Tick;
+            targetAndMoveToHero();
+
+            if (ok == true)
+            {
+                enemyMove();
+                EnemyMoveOption();
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasMoved = false;
+            }
+           // EnemyAttachtimer.Tick += EAttachTimer_Tick;
+           // EnemyAttachtimer.Start();
+            
+         
+            
+                
+            
+
+            // enemyMoveAI();
+            //nextTurn() resets the inactive, hasMoved, etc properties for each hero, so it doesn't need to be done here.
+
+
+
+            countEnemiesForloop--;
+
+
+        }
+       
 
         public void TutorialLevel_Click(object sender, RoutedEventArgs e)
         {
