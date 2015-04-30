@@ -70,7 +70,8 @@ namespace GameBoard
         public bool hero1move2;
         public bool nonHeroTurn;
         public bool tutSecondMoveExitClicked;
-        
+        public bool defendWasClicked;
+
 
         // control frame
         Window main;
@@ -498,7 +499,7 @@ namespace GameBoard
          */
         private async void Defend_Click(object sender, RoutedEventArgs e)
         {
-
+            defendWasClicked = true;
             waitIsClicked = true;
             if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == false)
             {
@@ -522,11 +523,19 @@ namespace GameBoard
                 //}
                 this.inbetweenStep();
             }
-            else if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == true && nonHeroTurn == true)
+            else if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == true && nonHeroTurn == true && defendWasClicked == false)
             {
                 boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
                 refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
                 disableAllOptionButtons();
+            }
+            else if (tutorialWasClicked == true && TutFirstMoveWaitTextExitIsClicked == true && defendWasClicked == true)
+            {
+                //tutPressDefendExit.Visibility = System.Windows.Visibility.Visible;
+                boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.isActive = false;
+                refreshBoardSpace(selectedCharacterRow, selectedCharacterCol);
+                disableAllOptionButtons();
+                this.DefendPress();
             }
             else
             {
@@ -844,7 +853,7 @@ namespace GameBoard
                 Defend.IsEnabled = false;
                 //Use_Item.IsEnabled = false;
                 //[y,x]
-                boardspaces[5, 1].BorderBrush = new SolidColorBrush(Colors.DeepPink);
+                boardspaces[5, 1].BorderBrush = new SolidColorBrush(Colors.Lime);
                 boardspaces[5, 1].BorderThickness = new Thickness(2);
               
                
@@ -873,7 +882,7 @@ namespace GameBoard
                 Defend.IsEnabled = false;
                 //Use_Item.IsEnabled = false;
 
-                boardspaces[3, 1].BorderBrush = new SolidColorBrush(Colors.DeepPink);
+                boardspaces[3, 1].BorderBrush = new SolidColorBrush(Colors.Lime);
                 boardspaces[3, 1].BorderThickness = new Thickness(2);
               
             }
@@ -883,11 +892,14 @@ namespace GameBoard
          public void inbetweenStepTwo() {
              if (TutFirstMoveWaitTextExitIsClicked == true && tutSecondMoveExitClicked == false)
                 {
-                End_Heroes_Turn_Click(null, null);
+                //End_Heroes_Turn_Click(null, null);
+                 tutorialEnemyMoveOne();
                 }
              else if (TutFirstMoveWaitTextExitIsClicked == true && tutSecondMoveExitClicked == true)
         {
-            End_Heroes_Turn_Click(null, null);
+            //End_Heroes_Turn_Click(null, null);
+                 
+                 this.DefendPress();
                 }
          }
 
@@ -986,38 +998,57 @@ namespace GameBoard
         //forces the enemy to move a certain way for turn 1.
         public async Task tutorialEnemyMoveOne()
         {
+            BackgroundMessageBox.Fill = new SolidColorBrush(Color.FromRgb(58, 16, 16));
+            ForegroundMessageBox.Fill = new SolidColorBrush(Color.FromRgb(166, 30, 30));
+            DialogueMessage.Content = "Enemy's Turn";
+            DialogueBox.Visibility = Visibility.Visible;
+            await Task.Delay(3000);
+            DialogueBox.Visibility = Visibility.Hidden;
+
             nonHeroTurn = true;
 
-                    await forceMoveCharacter(6, 4, 6, 1);
-                    await Task.Delay(8000);
+            //forceMoveCharacter(6, 4, 6, 1);
+            moveCharacter(6, 4, 6, 1);
+            await Task.Delay(1000);
                
-                    await forceMoveCharacter(6, 7, 6, 6);
-                    await Task.Delay(1000);
+            //forceMoveCharacter(6, 7, 6, 6);
+            moveCharacter(6, 7, 6, 6);
+            await Task.Delay(1000);
                 
-                    await forceMoveCharacter(6, 8, 5, 8);
-                    await Task.Delay(1000);
+            //forceMoveCharacter(6, 8, 5, 8);
+            moveCharacter(6, 8, 5, 8);
+            await Task.Delay(1000);
                 
-                    await forceMoveCharacter(6, 11, 6, 10);
-                    await Task.Delay(1000);
+            //forceMoveCharacter(6, 11, 6, 10);
+            moveCharacter(6, 11, 6, 10);
+            await Task.Delay(1000);
               
-                    await forceMoveCharacter(6, 13, 5, 13);
-                    await Task.Delay(1000);
-              
+            //forceMoveCharacter(6, 13, 5, 13);
+            moveCharacter(6, 13, 5, 13);
+            await Task.Delay(1000);
+
                //here is where we need to increment the turn.
                     //there also has to be a way to gray out the characters before here
+            for (int r = 0; r < numRows; r++)
+            {
+                for (int c = 0; c < numCols; c++)
+                {
+                    if (boardspaces[r, c].containsCharacter() == true)
+                    {
+                        boardspaces[r, c].tileCharacter.decrementEffectDurations();
+                        boardspaces[r, c].tileCharacter.isActive = true;
+                        boardspaces[r, c].tileCharacter.Opacity = 1;
+                    }
+                }
+            }
 
+            numTurns++;
+            TurnCounter.Content = ("Turn " + turnNumber);
 
-
-                    numTurns++;
-                    TurnCounter.Content = ("Turn " + turnNumber);
-
-                    //Make sure there's no leftover move/attack events on the board (caused bugs occassionally without this).
-                    clearMoveOptions();
-                    clearAttackOptions();
-                   this.tutorialSecondStep();
-                //}
-
-            //}    
+            //Make sure there's no leftover move/attack events on the board (caused bugs occassionally without this).
+            clearMoveOptions();
+            clearAttackOptions();
+            this.tutorialSecondStep();
         }
 
 
@@ -1038,6 +1069,7 @@ namespace GameBoard
             {
                 //tutPressDefend.Visibility = System.Windows.Visibility.Visible;
                 TutSecondMove.Visibility = System.Windows.Visibility.Visible;
+                TutSecondMoveExit.Visibility = System.Windows.Visibility.Visible;
                 TutSecondMove.IsEnabled = false;
                 TutSecondMove.Text = "This step will show you what happens when a character needs to defend themselves from a stronger enemy. " +
                     "For this situation, we are showing what will happen if your character can't move to get away. " +
@@ -1083,11 +1115,13 @@ namespace GameBoard
         //exits the second tutorial step.
         private void TutSecondMoveExit_Click(object sender, RoutedEventArgs e)
         {
+            
             tutSecondMoveExitClicked = true;
             tutPressDefend.Visibility = System.Windows.Visibility.Visible;
+            tutPressDefend.IsEnabled = false;
             tutPressDefend.Text = "Now that we've clicked on the highlighted tile" +
                 "I want you to click the defend button. " +
-                "Clicking the defend buttong will increase the defense for one turn."; 
+                "Clicking the defend button will increase the defense for one turn."; 
 
 
             if (tutSecondMoveExitClicked == true)
@@ -1102,16 +1136,20 @@ namespace GameBoard
                 Defend.IsEnabled = true;
                 //Use_Item.IsEnabled = false;
                 //[y,x]
-                boardspaces[5, 1].BorderBrush = new SolidColorBrush(Colors.DeepPink);
+                boardspaces[5, 1].BorderBrush = new SolidColorBrush(Colors.Lime);
                 boardspaces[5, 1].BorderThickness = new Thickness(2);
             }
-
-            this.inbetweenStepTwo();
+            TutSecondMove.Visibility = System.Windows.Visibility.Hidden;
+            TutSecondMoveExit.Visibility = System.Windows.Visibility.Hidden;
+            
         }
-    
- 
 
-       
+
+
+        public void DefendPress()
+        {
+            tutPressDefendExit.Visibility = System.Windows.Visibility.Visible;
+        }
         
         //
         //
@@ -1271,6 +1309,12 @@ namespace GameBoard
                     boardspaces[r, c].BorderThickness = new Thickness(0);
                 }
             }
+        }
+
+        private void tutPressDefendExit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Congratulations, you have completed the tutorial.");
+            ReturnMap_Click(null, null);
         }
     }
 }

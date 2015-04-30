@@ -195,7 +195,7 @@ namespace GameBoard
 
                     if(damage != "MISS")
                     {
-                        space.tileCharacter.DecreaseHealth(Convert.ToInt32(damage));
+                        space.tileCharacter.DecreaseHealth((int)(Convert.ToInt32(damage) * boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.AttackPower));
                         attackAnimation(space.tileCharacter, ".../.../Pictures/test_explosion_spritesheet.png");
                     }
                     else

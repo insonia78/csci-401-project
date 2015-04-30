@@ -504,6 +504,7 @@
         <TextBox x:Name = "TutFirstMove0Text" Height="148" Canvas.Left="617" TextWrapping="Wrap" Text="" Canvas.Top="127" Width="139" Visibility="Hidden" />
         <Button x:Name = "TutFirstMove0TextExit" Content="Ok" Height="30" Canvas.Left="683" Canvas.Top="245" Width="73" Click="TutFirstMove0TextExit_Click" Visibility="Hidden"/>
         <TextBox x:Name= "tutPressDefend" Height="173" Canvas.Left="683" TextWrapping="Wrap" Text="TextBox" Canvas.Top="143" Width="161" Visibility="Hidden"/>
+        <Button x:Name="tutPressDefendExit" Content="Ok" Canvas.Left="761" Canvas.Top="296" Width="75" Click="tutPressDefendExit_Click" Visibility="Hidden"/>
 
         <Rectangle x:Name="BlackOut" HorizontalAlignment="Left" Height="695" RadiusY="5" RadiusX="5" Stroke="#FF0E0C0C" StrokeThickness="0" VerticalAlignment="Top" Width="1110" Fill="#CC000000" Visibility="Hidden"/>
         <Grid x:Name="LeaveGameGrid" Margin="329,163,354,263" Visibility="Hidden">
@@ -522,8 +523,9 @@
         <Grid x:Name="DialogueBox" Height="163" Canvas.Left="329" Canvas.Top="82" Visibility="Hidden" Width="494">
             <Rectangle x:Name="BackgroundMessageBox" HorizontalAlignment="Left" Height="163" RadiusY="10" RadiusX="10" Stroke="#FF0E0C0C" StrokeThickness="0" VerticalAlignment="Top" Width="494" Fill="#FF0F132C"/>
             <Rectangle x:Name="ForegroundMessageBox" HorizontalAlignment="Left" Height="143" Margin="10,10,0,0" Stroke="#FF0E0C0C" StrokeThickness="0" VerticalAlignment="Top" Width="474" Fill="#FF263593"/>
-            <Label x:Name="DialogueMessage" Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="143" Width="474" FontSize="15" FontFamily="Segoe UI Symbol" Foreground="#FFDECECE"/>
+            <Label x:Name="DialogueMessage" Content="" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Height="74" Width="474" FontSize="36" FontFamily="Segoe UI Symbol" Foreground="#FFDECECE"/>
         </Grid>
+        
 
 
     </Canvas>
