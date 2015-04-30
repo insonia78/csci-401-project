@@ -74,9 +74,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Attack.cs" />
+    <Compile Include="EnemyAttakOption.cs" />
+    <Compile Include="enemyMove.cs" />
+    <Compile Include="enemyMoveAI.cs" />
+    <Compile Include="EnemyMoveOption.cs" />
+    <Compile Include="localizeHero.cs" />
     <Compile Include="mapBuilder.xaml.cs">
       <DependentUpon>mapBuilder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="plotRoot1.cs" />
+    <Compile Include="progressMap.cs" />
+    <Compile Include="targetAndMoveToHero.cs" />
     <Compile Include="Terrain.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <SubType>Code</SubType>

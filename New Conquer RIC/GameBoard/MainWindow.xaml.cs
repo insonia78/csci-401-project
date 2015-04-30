@@ -55,6 +55,7 @@ namespace GameBoard
         DispatcherTimer timer = new DispatcherTimer();
         ArrayList rowPlot = new ArrayList();
         ArrayList colPlot = new ArrayList();
+        Tile[,] position;
 
         //For tutorial
         private string test;
@@ -69,6 +70,7 @@ namespace GameBoard
         public bool hero1move2;
         public bool nonHeroTurn;
         public bool tutSecondMoveExitClicked;
+        
 
         // control frame
         Window main;
