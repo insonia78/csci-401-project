@@ -295,7 +295,7 @@ namespace GameBoard
                 //int Erow = Math.Abs((int)targetEnemyRow[done] - (int)targetHeroRow[done]);
                 //int Ecol = Math.Abs((int)targetEnemyCol[done] - (int)targetHeroCol[done]);
                 
-             heroHealthEnemyAttachWeight.Add(((0.30)*((int)targetHeroHealth[(int)selectHeroHealt[done]]/(int)targetEnemyAttack[(int)selectEnemyAttack[done]])) +((0.10)*((int)targetEnemyHealth[(int)selectEnemyHealt[done]]/(int)targetHeroAttack[(int)selectHeroAttack[done]])) + (0.25 * (Hrow + Hcol) )+ (0.35 * (Erow + Ecol)));
+             heroHealthEnemyAttachWeight.Add(((0.30)*((int)targetHeroHealth[(int)selectHeroHealt[done]]/(int)targetEnemyAttack[(int)selectEnemyAttack[done]])) +((0.10)*((int)targetEnemyHealth[(int)selectEnemyHealt[done]]/(int)targetHeroAttack[(int)selectHeroAttack[done]])) + (0.20 * (Hrow + Hcol) )+ (0.40 * (Erow + Ecol)));
                 //heroHealthEnemyAttachWeight.Add(Erow + Ecol);
                 
                targetEnemyRow1.Add((int)targetEnemyRow[(int)selectEnemyAttack[done]]);
