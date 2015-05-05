@@ -16,6 +16,14 @@ using System.Windows.Threading;
 using System.Collections;
 using Community;
 
+/*
+ * 
+ * It perfroms a deepfirst search for the plotting the root 
+ * */
+
+
+
+
 namespace GameBoard
 {
     public partial class MainWindow : Page
@@ -187,8 +195,7 @@ namespace GameBoard
                             }
 
                         }
-                        else
-                        {
+                        else                        {
                             if (tempRowPlus == 4)
                             {
                             }
@@ -365,7 +372,7 @@ namespace GameBoard
                             }
 
                         }
-                        else
+                        else 
                         {
                             if (tempRowPlus == 4)
                             {
@@ -538,8 +545,7 @@ namespace GameBoard
                             }
 
                         }
-                        else
-                        {
+                        else                         {
                             if (tempRowPlus == 4)
                             {
                             }
@@ -710,7 +716,7 @@ namespace GameBoard
                             }
 
                         }
-                        else
+                        else 
                         {
                             if (tempRowPlus == 4)
                             {
@@ -869,7 +875,7 @@ namespace GameBoard
                         }
 
                     }
-                    else
+                    else 
                     {
                         if (tempRowPlus == 4)
                         {
@@ -1031,7 +1037,7 @@ namespace GameBoard
                         }
 
                     }
-                    else
+                    else 
                     {
                         if (tempRowPlus == 4)
                         {
@@ -1201,7 +1207,7 @@ namespace GameBoard
                         }
 
                     }
-                    else
+                    else 
                     {
                         if (tempRowPlus == 4)
                         {
@@ -1360,7 +1366,7 @@ namespace GameBoard
                         }
 
                     }
-                    else
+                    else 
                     {
                         if (tempRowPlus == 4)
                         {

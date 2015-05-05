@@ -15,6 +15,13 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Collections;
 using Community;
+/*
+ * It has the game theory for the strategy and selects which Enemy attachs the Hero
+ * 
+ * */
+
+
+
 
 namespace GameBoard
 {
@@ -50,7 +57,8 @@ namespace GameBoard
             ArrayList targetHeroCol1 = new ArrayList();
             ArrayList targetEnemyRow1 = new ArrayList();
             ArrayList targetEnemyCol1 = new ArrayList();
-          /* 
+          if (targetEnemyRow.Count > 0 && countEnemiesForloop > 0)
+          { 
             int tempEnemyAttack = (int)targetEnemyAttack[0];
             while (done < targetEnemyAttack.Count)
             {
@@ -66,20 +74,24 @@ namespace GameBoard
                 done++;
             }
             done = 0;
-            Hero skip = new Hero();
+            int skip = -1;
             while (targetEnemyCount < targetEnemyAttack.Count)
             {
                 while (done < dummyTargetEnemyAttack.Count)
                 {
-                    if (dummyTargetEnemyAttack[done].Equals(skip))
+                    if (tempEnemyAttack == -1)
                     {
+                        done++;
+                        continue;
+                        
+                        
                     }
                     else
                     {
-                        if (tempEnemyAttack > (int)dummyTargetEnemyAttack[done])
+                        if (tempEnemyAttack < (int)dummyTargetEnemyAttack[done] && (int)dummyTargetEnemyAttack[done] != -1)
                         {
                             tempEnemyAttack = (int)dummyTargetEnemyAttack[done];
-                            index = done;
+                                              
                             done = 0;
                         }
                         
@@ -87,41 +99,51 @@ namespace GameBoard
                     done++;
 
                 }
+
                 targetEnemyCount++;
-                selectEnemyAttack.Add(index);
-                
-                dummyTargetEnemyAttack.RemoveAt(index);
-                dummyTargetEnemyAttack.Insert(index, skip);
-                int check = 0;
-                if (dummyTargetEnemyAttack[check].Equals(skip))
+                if (tempEnemyAttack != -1)
                 {
-                    while (dummyTargetEnemyAttack[check].Equals(skip))
+                    index = dummyTargetEnemyAttack.IndexOf(tempEnemyAttack);
+                    selectEnemyAttack.Add(index);
+
+                    dummyTargetEnemyAttack.RemoveAt(index);
+                    dummyTargetEnemyAttack.Insert(index, skip);
+                    tempEnemyAttack = (int)dummyTargetEnemyAttack[0];
+                }
+                int check = 0;
+                if (tempEnemyAttack == -1)
+                {
+                    while (check < dummyTargetEnemyAttack.Count && tempEnemyAttack == -1)
                     {
-                        
+                        tempEnemyAttack = (int)dummyTargetEnemyAttack[check];
                         check++;
                     }
+                }
+                else
+                {
                     tempEnemyAttack = (int)dummyTargetEnemyAttack[check];
                 }
-               
                 index = 0;
                 done = 0;
             }
             targetEnemyCount = 0;
            int tempHeroHealth = (int)targetHeroHealth[0];
             done = 0;
-            while (targetEnemyCount < dummyTargetHeroHealth.Count)
+            while (targetEnemyCount < targetHeroHealth.Count)
             {
                 while (done < dummyTargetHeroHealth.Count)
                 {
-                    if (dummyTargetHeroHealth[done].Equals(skip))
+                    if ((int)dummyTargetHeroHealth[done] == -1)
                     {
+                        done++;
+                        continue;
                     }
                     else
                     {
-                        if (tempHeroHealth > (int)dummyTargetHeroHealth[done])
+                        if (tempHeroHealth > (int)dummyTargetHeroHealth[done] && (int)dummyTargetHeroHealth[done] != 1)
                         {
                             tempHeroHealth = (int)dummyTargetHeroHealth[done];
-                            index = done;
+                            
                             done = 0;
                         }
                         
@@ -130,18 +152,27 @@ namespace GameBoard
                     
                 }
                 targetEnemyCount++;
-                selectHeroHealt.Add(index);
-                
-                dummyTargetHeroHealth.RemoveAt(index);
-                dummyTargetHeroHealth.Insert(index, skip);
-                int check = 0;
-                if (dummyTargetHeroHealth[check].Equals(skip))
+                if (tempHeroHealth != -1)
                 {
-                    while (dummyTargetHeroHealth[check].Equals(skip))
+                    index = dummyTargetHeroHealth.IndexOf(tempHeroHealth);
+                    selectHeroHealt.Add(index);
+
+                    dummyTargetHeroHealth.RemoveAt(index);
+                    dummyTargetHeroHealth.Insert(index, skip);
+                    tempHeroHealth = (int)dummyTargetHeroHealth[0];
+                }
+                int check = 0;
+                if (tempHeroHealth == -1)
+                {
+                    while (check < dummyTargetHeroHealth.Count && tempHeroHealth == -1)
                     {
-                        
+                        tempHeroHealth = (int)dummyTargetHeroHealth[check];
                         check++;
                     }
+
+                }
+                else
+                {
                     tempHeroHealth = (int)dummyTargetHeroHealth[check];
                 }
                 index = 0;
@@ -150,19 +181,21 @@ namespace GameBoard
             done = 0;
             targetEnemyCount = 0;
             int tempEnemyHealth = (int)targetEnemyHealth[0];
-            while (targetEnemyCount < dummyTargetEnemyHealth.Count)
+            while (targetEnemyCount < targetEnemyHealth.Count)
             {
                 while (done < dummyTargetEnemyHealth.Count)
                 {
-                    if (dummyTargetEnemyHealth[done].Equals(skip))
+                    if ((int)dummyTargetEnemyHealth[done] == -1)
                     {
+                        done++;
+                        continue;
                     }
                     else
                     {
-                        if (tempEnemyAttack < (int)dummyTargetEnemyHealth[done])
+                        if (tempEnemyHealth > (int)dummyTargetEnemyHealth[done])
                         {
-                            tempEnemyAttack = (int)dummyTargetEnemyHealth[done];
-                            index = done;
+                            tempEnemyHealth = (int)dummyTargetEnemyHealth[done];
+                           
                             done = 0;
                         }
                         
@@ -171,19 +204,28 @@ namespace GameBoard
 
                 }
                 targetEnemyCount++;
-                selectEnemyHealt.Add(index + targetEnemyCount);
-              
-                dummyTargetEnemyHealth.RemoveAt(index);
-                dummyTargetEnemyHealth.Insert(index, skip);
-                int check = 0;
-                if (dummyTargetEnemyHealth[check].Equals(skip))
+                if (tempEnemyHealth != 1)
                 {
-                    while (dummyTargetEnemyHealth[check].Equals(skip))
+                    index = dummyTargetEnemyHealth.IndexOf(tempEnemyHealth);
+                    selectEnemyHealt.Add(index);
+
+                    dummyTargetEnemyHealth.RemoveAt(index);
+                    dummyTargetEnemyHealth.Insert(index, skip);
+                    tempEnemyHealth = (int)dummyTargetEnemyHealth[0];
+                }
+                int check = 0;
+                if (tempHeroHealth == -1)
+                {
+                    while (check < dummyTargetEnemyHealth.Count && tempHeroHealth == -1)
                     {
-                       
+                        tempEnemyHealth = (int)dummyTargetEnemyHealth[check];
                         check++;
                     }
-                    tempHeroHealth = (int)dummyTargetEnemyHealth[check];
+
+                }
+                else
+                {
+                    tempEnemyHealth = (int)dummyTargetEnemyHealth[check];
                 }
                 index = 0;
                 done = 0;
@@ -195,15 +237,16 @@ namespace GameBoard
             {
                 while (done < dummyTargetHeroAttack.Count)
                 {
-                    if (dummyTargetHeroAttack[done].Equals(skip))
+                    if ((int)dummyTargetHeroAttack[done] == -1)
                     {
+                        done++;
+                        continue;
                     }
                     else
                     {
-                        if (tempHeroHealth > (int)dummyTargetHeroAttack[done])
+                        if (tempHeroAttack < (int)dummyTargetHeroAttack[done])
                         {
-                            tempHeroHealth = (int)dummyTargetHeroAttack[done];
-                            index = done;
+                            tempHeroAttack = (int)dummyTargetHeroAttack[done];
                             done = 0;
                         }
                         
@@ -212,38 +255,59 @@ namespace GameBoard
 
                 }
                 targetEnemyCount++;
-                selectHeroAttack.Add(index + targetEnemyCount);
-              
-                dummyTargetHeroAttack.RemoveAt(index);
-                dummyTargetHeroAttack.Insert(index, skip);
-                int check = 0;
-                if (dummyTargetHeroAttack[check].Equals(skip))
+                if (tempHeroAttack != -1)
                 {
-                    while (dummyTargetHeroAttack[check].Equals(skip))
+                    index = dummyTargetHeroAttack.IndexOf(tempHeroAttack);
+                    selectHeroAttack.Add(index);
+
+                    dummyTargetHeroAttack.RemoveAt(index);
+                    dummyTargetHeroAttack.Insert(index, skip);
+                    tempHeroAttack = (int)dummyTargetHeroAttack[0];
+                }
+                int check = 0;
+                if (tempHeroAttack == -1)
+                {
+                    while (check < dummyTargetHeroAttack.Count && tempHeroAttack == -1)
                     {
-                        
+                        tempHeroAttack = (int)dummyTargetHeroAttack[check];
                         check++;
                     }
-                    tempHeroHealth = (int)dummyTargetHeroAttack[check];
+
+                }
+                else
+                {
+                    tempHeroAttack = (int)dummyTargetHeroAttack[check];
                 }
                 index = 0;
                 done = 0;
 
-            }*/
+            }
             done = 0;
             // to consider if enemy < hero or hero < enemy
             while (done < targetEnemyRow.Count)
             {
-                int Erow = Math.Abs((int)targetEnemyRow[done] - (int)targetHeroRow[done]);
-                int Ecol = Math.Abs((int)targetEnemyCol[done] - (int)targetHeroCol[done]);
-                int Hrow = Math.Abs((int)targetEnemyRow[done] - (int)targetHeroRow[done]);
-                int Hcol = Math.Abs((int)targetEnemyCol[done] - (int)targetHeroCol[done]);
+              
+                int Erow = Math.Abs((int)targetEnemyRow[(int)selectEnemyAttack[done]] - (int)targetHeroRow[(int)selectHeroHealt[done]]);
+                int Ecol = Math.Abs((int)targetEnemyCol[(int)selectEnemyAttack[done]] - (int)targetHeroCol[(int)selectHeroHealt[done]]);
+                int Hrow = Math.Abs((int)targetEnemyRow[(int)selectEnemyHealt[done]] - (int)targetHeroRow[(int)selectHeroAttack[done]]);
+                int Hcol = Math.Abs((int)targetEnemyCol[(int)selectEnemyHealt[done]] - (int)targetHeroCol[(int)selectHeroAttack[done]]);
                 
-               heroHealthEnemyAttachWeight.Add( (0.35 * (Hrow + Hcol) )+ (0.75 * (Erow + Ecol)));
+                //int Erow = Math.Abs((int)targetEnemyRow[done] - (int)targetHeroRow[done]);
+                //int Ecol = Math.Abs((int)targetEnemyCol[done] - (int)targetHeroCol[done]);
+                
+             heroHealthEnemyAttachWeight.Add(((0.30)*((int)targetHeroHealth[(int)selectHeroHealt[done]]/(int)targetEnemyAttack[(int)selectEnemyAttack[done]])) +((0.10)*((int)targetEnemyHealth[(int)selectEnemyHealt[done]]/(int)targetHeroAttack[(int)selectHeroAttack[done]])) + (0.25 * (Hrow + Hcol) )+ (0.35 * (Erow + Ecol)));
+                //heroHealthEnemyAttachWeight.Add(Erow + Ecol);
+                
+               targetEnemyRow1.Add((int)targetEnemyRow[(int)selectEnemyAttack[done]]);
+               targetEnemyCol1.Add((int)targetEnemyCol[(int)selectEnemyAttack[done]]);
+               targetHeroRow1.Add((int)targetHeroRow[(int)selectHeroHealt[done]]);
+               targetHeroCol1.Add((int)targetHeroCol[(int)selectHeroHealt[done]]);
+               /* 
                targetEnemyRow1.Add((int)targetEnemyRow[done]);
                targetEnemyCol1.Add((int)targetEnemyCol[done]);
-               targetHeroRow1.Add((int)targetHeroRow[done]);
                targetHeroCol1.Add((int)targetHeroCol[done]);
+               targetHeroRow1.Add((int)targetHeroRow[done]);
+                * */
                done++;
             }
             done = 0;
@@ -253,10 +317,11 @@ namespace GameBoard
                 dummyIndex = 0;
                 while (done < heroHealthEnemyAttachWeight.Count)
                 {
-                    if (dummyTemp > (double)heroHealthEnemyAttachWeight[done])
+                    if (dummyTemp < (double)heroHealthEnemyAttachWeight[done])
                     {
-                        dummyIndex = done;
+                         
                         dummyTemp = (double)heroHealthEnemyAttachWeight[done];
+                        dummyIndex = heroHealthEnemyAttachWeight.IndexOf(dummyTemp);
                         done = 0;
                     }
                     done++;
@@ -272,8 +337,7 @@ namespace GameBoard
             }
                       
 
-            if (targetEnemyRow.Count > 0 && countEnemiesForloop > 0)
-            {
+            
                 try
                 {
                     aheroRow = (int)targetHeroRow1[dummyIndex];
@@ -295,10 +359,10 @@ namespace GameBoard
                 }
                 try
                 {
-                    targetEnemyRow.RemoveAt(dummyIndex);
-                    targetEnemyCol.RemoveAt(dummyIndex);
-                    targetEnemyAttack.RemoveAt(dummyIndex);
-                    targetEnemyHealth.RemoveAt(dummyIndex);
+                    targetEnemyRow.RemoveAt(targetEnemyRow.IndexOf(targetEnemyRow1[dummyIndex]));
+                    targetEnemyCol.RemoveAt(targetEnemyCol.IndexOf(targetEnemyCol1[dummyIndex]));
+                    targetEnemyAttack.RemoveAt((int)selectEnemyAttack[dummyIndex]);
+                    targetEnemyHealth.RemoveAt((int)selectEnemyAttack[dummyIndex]);
                     
                     
                     selectHeroHealt.Clear();
@@ -314,6 +378,7 @@ namespace GameBoard
                     targetHeroCol1.Clear();
                     targetEnemyRow1.Clear();
                     targetEnemyCol1.Clear();
+                    ok = true;
                 }
                 catch
                 {

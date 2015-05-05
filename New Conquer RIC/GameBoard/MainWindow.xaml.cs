@@ -567,6 +567,18 @@ namespace GameBoard
                // nextTurn();
                 this.tutorialEnemyMoveOne();
                 End_Heroes_Turn.IsEnabled = true;
+                progressMap();
+                localizeHero();
+                disableAllOptionButtons();
+                End_Heroes_Turn.IsEnabled = false;
+                Enemytimer.Tick += Etimer_Tick;
+                Enemytimer.Start();
+
+
+                //nextTurn() resets the inactive, hasMoved, etc properties for each hero, so it doesn't need to be done here.
+                //nextTurn();
+
+                End_Heroes_Turn.IsEnabled = true;
                 
             }
             else
@@ -593,8 +605,8 @@ namespace GameBoard
             Enemytimer.Tick -= Etimer_Tick;
             targetAndMoveToHero();
 
-
             EnemyAttach();
+            
                 //MessageBox.Show("false");
             if (test == "true")
             {
@@ -603,13 +615,14 @@ namespace GameBoard
             {
                 if (ok == true)
                 {
-                    
+
                     enemyMove();
                     EnemyMoveOption();
                     boardspaces[selectedCharacterRow, selectedCharacterCol].tileCharacter.hasMoved = false;
                 }
                 EnemyAttach();
-            }        
+            }
+            
          
             
                 

@@ -14,7 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Collections;
-
+/*
+ * Enemy attack option enables the enemy to peform a attack
+ * it chooces 4 ability and then  returns true or false if the attack was performed after the movement or before the movment 
+ * */
 
 namespace GameBoard
 {

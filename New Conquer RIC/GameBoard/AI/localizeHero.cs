@@ -14,6 +14,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Collections;
+
+
+
+/*
+ * It sort's the enemies with the lowest row and the Hero with the Highest Row
+ * */
 namespace GameBoard
 {
     public partial class MainWindow: Page

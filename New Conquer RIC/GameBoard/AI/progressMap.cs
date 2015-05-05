@@ -15,6 +15,13 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Collections;
 
+
+/*
+ * It scanes the board and it stores in it the apposite array tipe
+ * 
+ * */
+
+
 namespace GameBoard
 {
     public partial class MainWindow : Page

@@ -16,6 +16,9 @@ using System.Windows.Threading;
 using System.Collections;
 using Community;
 using GameBoard;
+/*
+ * It activates the timer for the single enemy move option 
+ * */
 namespace GameBoard
 {
     public partial class MainWindow : Page

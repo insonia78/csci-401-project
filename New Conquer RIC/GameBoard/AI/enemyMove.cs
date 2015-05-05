@@ -14,7 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Collections;
-
+/*
+ * It plots the root where to direct the enemy 
+ * */
 
 namespace GameBoard
 {
