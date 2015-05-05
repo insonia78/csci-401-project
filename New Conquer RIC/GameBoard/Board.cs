@@ -177,7 +177,7 @@ namespace GameBoard
                                     break;
                                 case 69: //Wall_Verticle character: E
                                     boardspaces[r,c] = setTileByInput(sr.Read());
-                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri(".../.../Pictures/Board Pieces/Walls/Wall_Veticle.png", UriKind.Relative)));
+                                    boardspaces[r, c].terrainImage.placeImageOver(new BitmapImage(new Uri(".../.../Pictures/Board Pieces/Walls/Wall_Verticle.png", UriKind.Relative)));
                                     boardspaces[r, c].isUnpassable = true;
                                     boardspaces[r, c].Row = r;
                                     boardspaces[r, c].Col = c;
